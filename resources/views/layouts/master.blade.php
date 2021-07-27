@@ -23,16 +23,6 @@
 
         @stack('css')
 
-        <style>
-            .navbar-collapse {
-                height: 194.97px;
-                left: 2344px;
-                top: -20px;
-
-                background: #222222;
-                border-radius: 20px;
-            }
-        </style>
     </head>
 
     <body data-topbar="dark" data-layout="horizontal">
