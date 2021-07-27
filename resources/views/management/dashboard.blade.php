@@ -215,8 +215,14 @@ body{width:100%;
                         <p class="text-muted">Last Month</p>
                     </div>
                 </div>
-
-                <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div>
+                    <div class="col-6">
+                        <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="float-right">
+                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
