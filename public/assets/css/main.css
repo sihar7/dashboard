@@ -1,0 +1,151 @@
+.cardTele {
+    /* Rectangle 33 */
+    position: absolute;
+    width: 608px;
+    height: 852px;
+    left: 71px;
+    top: 225px;
+    background: #222222;
+    border-radius: 20px;
+}
+
+.textTele {
+    width: 222px;
+    height: 26px;
+    left: 258px;
+    top: 248px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.boxTeleOnline {
+    width: 530px;
+    height: 79px;
+    left: 106px;
+    top: 325px;
+    background: #00C637;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
+
+.namaTele {
+    height: 26px;
+    left: 126px;
+    top: 339px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+
+.statusTele {
+    height: 21px;
+    left: 126px;
+    top: 375px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+.boxTeleOffline {
+    /* Rectangle 42 */
+    width: 527px;
+    height: 79px;
+    left: 106px;
+    top: 592px;
+    background: #DE0000;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
+
+.justify-between {
+    width: 11.31px;
+    height: 11.31px;
+    background: #FFFFFF;
+    border-radius: 0.5px;
+    transform: matrix(0, 1, 1, 0, 0, 0);
+}
+
+.textTanggal {
+    /* Senin, 18 July 2021 */
+    width: 316.28px;
+    height: 41.88px;
+    left: 2884.72px;
+    top: 31.99px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.textJam {
+    /* 12 : 21 : 12 */
+    position: absolute;
+    width: 326.39px;
+    height: 76.54px;
+    left: 2878.94px;
+    top: 88.32px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 59px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.cardTop10 {
+    /* Rectangle 45 */
+    position: absolute;
+    width: 2134px;
+    height: 852px;
+    left: 729px;
+    top: 225px;
+    background: #222222;
+    border-radius: 20px;
+}
+
+.textTop10 {
+    width: 222px;
+    height: 26px;
+    left: 1685px;
+    top: 248px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.cardTopTele {
+    width: 274px;
+    height: 480px;
+    left: 746px;
+    top: 458px;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
+
+.img_tele {
+    /* portrait-confident-beautiful-young-smiling-happy-business-woman-with-thumbs-up-yellow-wall 1 */
+    position: fixed;
+    width: 162px;
+    height: 108px;
+    left: 790px;
+    top: 481px;
+}
