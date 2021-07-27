@@ -26,7 +26,7 @@ body{width:100%;
 
 <div class="row">
     <div class="col-xl-3 col-sm-6">
-        <div class="card">
+        <div class="card" style="height:582px;">
             <div class="card-body">
                 <center><h4 class="card-title">Telemarketing</h4></center>
 
@@ -63,7 +63,7 @@ body{width:100%;
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col-md-6">
-                                <select class="form-control" style="width:335px; height:44px;">
+                                <select class="form-control" style="width:175px; height:44px;">
                                     <option>Select</option>
                                     <option>Monthly</option>
                                     <option>Yearly</option>
@@ -72,7 +72,7 @@ body{width:100%;
                         </div>
                         <div class="col-md-6">
                             <div class="col-md-6">
-                                <select class="form-control" style="width:335px; height:44px;">
+                                <select class="form-control" style="width:175px; height:44px;">
                                     <option>Select</option>
                                     <option>All</option>
                                 </select>
