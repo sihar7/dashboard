@@ -13,11 +13,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 class LoginController extends Controller
 {
     function postLogin(Request $request)
     {
+
         Log::info('Proses login dengan username : '.$request->username);
+
+
+        DB::beginTransaction();
 
         $username = $request->username;
         $password = $request->password;
@@ -41,7 +47,7 @@ class LoginController extends Controller
                         $user->last_login_at  = Carbon::now()->toDateTimeString();
                         $user->last_login_ip  = $request->ip();
                         $user->status         = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(60)));
+                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
                         $user->save();
 
                         Log::info('Berhasil Login Dengan Role Management dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->remember_token);
@@ -52,7 +58,7 @@ class LoginController extends Controller
                         $user->last_login_at = Carbon::now()->toDateTimeString();
                         $user->last_login_ip = $request->ip();
                         $user->status        = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(60)));
+                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
                         $user->save();
 
                         Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->remember_token);
@@ -69,8 +75,12 @@ class LoginController extends Controller
                 return response()->json( [ 'status' => 3, 'message' => 'username atau Password Salah !' ], 203 );
             }
           } catch (\Exception $e) {
+
+                DB::rollback();
               return response()->json([ 'error' => $e->getMessage() ]);
           }
+
+        DB::commit();
 
     }
 
@@ -109,6 +119,4 @@ class LoginController extends Controller
             return redirect('loginPartner');
         }
     }
-
-
 }
