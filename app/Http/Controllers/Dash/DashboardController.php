@@ -17,8 +17,9 @@ class DashboardController extends Controller
      function __construct(TeleRepo $tele)
      {
         $this->tele = $tele;
-         
-        $this->middleware(['has_login','SecureHeaders', 'XSS']);
+
+        $this->middleware('has_login');
+        // $this->middleware(['has_login','SecureHeaders', 'XSS']);
     }
 
     function index(Request $request)
@@ -26,7 +27,7 @@ class DashboardController extends Controller
 
         if($request->user()->hasRole('management'))
         {
-           
+
             $data['tele'] = $this->tele->getHistoryTele();
             return view('management.dashboard', $data);
         }

@@ -19,9 +19,7 @@ class LoginController extends Controller
 {
     function postLogin(Request $request)
     {
-
         Log::info('Proses login dengan username : '.$request->username);
-
 
         DB::beginTransaction();
 
@@ -66,16 +64,15 @@ class LoginController extends Controller
                         return response()->json(['message' => 2 ], 201);
                     }
                 } else {
-
-                Log::info('User Already Login : '.$request->username);
-                return response()->json( [ 'status' => 6, 'message' => 'User Already Login !' ], 203 );
+                    Log::info('User Already Login : '.$request->username);
+                    return response()->json( [ 'status' => 6, 'message' => 'User Already Login !' ], 203 );
                 }
             } else {
                 Log::info('Gagal Login : '.$request->username);
                 return response()->json( [ 'status' => 3, 'message' => 'username atau Password Salah !' ], 203 );
             }
-          } catch (\Exception $e) {
 
+          } catch (\Exception $e) {
                 DB::rollback();
               return response()->json([ 'error' => $e->getMessage() ]);
           }
