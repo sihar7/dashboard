@@ -7,16 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Spaj;
-use App\Repository\TeleRepo;
+// use App\Repository\TeleRepo;
 
 class DashboardController extends Controller
 {
 
     protected $tele;
 
-     function __construct(TeleRepo $tele)
+     function __construct()
      {
-        $this->tele = $tele;
 
         $this->middleware('has_login');
         // $this->middleware(['has_login','SecureHeaders', 'XSS']);
@@ -28,8 +27,9 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
 
-            $data['tele'] = $this->tele->getHistoryTele();
-            return view('management.dashboard', $data);
+            // $data['tele'] = $this->tele->getHistoryTele();
+            // return view('management.dashboard', $data);
+            return view('management.dashboard');
         }
           else if($request->user()->hasRole('partner'))
         {

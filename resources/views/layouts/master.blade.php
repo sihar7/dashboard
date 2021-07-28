@@ -25,7 +25,7 @@
 
     </head>
 
-    <body data-topbar="dark" data-layout="horizontal">
+    <body data-topbar="dark" data-layout="horizontal" style="padding: 0!important;">
 
         <!-- Begin page -->
         <div id="layout-wrapper">
@@ -36,8 +36,8 @@
             <!-- ============================================================== -->
             <div class="main-content">
 
-                <div class="page-content">
-                    <div class="container-fluid">
+                <div class="page-content" style="background-color:black;margin:0;padding-top: 100px;">
+                    <div style="width: 100vw;">
 
                         @yield('content')
 
