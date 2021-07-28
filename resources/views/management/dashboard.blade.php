@@ -6,31 +6,8 @@
 
 
 @push('css')
-<style>
-@media print {
 
-    @page {size: A4 landscape;max-height:100%; max-width:100%}
-
-    /* use width if in portrait (use the smaller size to try
-       and prevent image from overflowing page... */
-    img { height: 90%; margin: 0; padding: 0; }
-
-body{width:100%;
-    background-color:black;
-    height:100%;
-    -webkit-transform: rotate(-90deg) scale(.68,.68);
-    -moz-transform:rotate(-90deg) scale(.58,.58) }    }
-
-    .card::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.card {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-</style>
+<link href="{{ asset('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -251,7 +228,8 @@ body{width:100%;
                         <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-6">
-                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+
+                        <div id="overlapping-bars" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -331,13 +309,13 @@ body{width:100%;
                 </div>
                 <div class="row">
                     <div class="col-4 bg-info">
-                        <canvas id="lineChart" height="300"></canvas>
+                        <div id="simple-line-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                     <div class="col-4 bg-warning">
                             <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-4 bg-danger">
-                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="chart-with-area" class="ct-chart ct-golden-section" dir="ltr"></div>
                 </div>
                 </div>
             </div>
@@ -370,7 +348,7 @@ body{width:100%;
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-3">
                             <div class="card text-white bg-warning" style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
                                 <div class="card-body">
@@ -381,7 +359,7 @@ body{width:100%;
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-3">
                             <div class="card text-white bg-danger"  style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
                                 <div class="card-body">
@@ -422,13 +400,13 @@ body{width:100%;
                 </div>
                 <div class="row">
                     <div class="col-4 bg-info">
-                        <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
+                        <div id="smil-animations" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                     <div class="col-4 bg-warning">
-                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="animating-donut" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                     <div class="col-4 bg-danger">
-                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="stacked-bar-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
                 </div>
                 </div>
             </div>
@@ -440,5 +418,9 @@ body{width:100%;
 
 
 @push('js')
+<script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
+<script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
 
 @endpush
