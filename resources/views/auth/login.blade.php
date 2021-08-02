@@ -136,8 +136,18 @@
                                 $('#button_login').html("Log In");
                                 $('#button_login').removeAttr('disabled');
                                 if (response.message == 1) {
+                                    Swal.fire({
+                                        icon:  'success',
+                                        title: 'Berhasil',
+                                        text:  'Berhasil Login Management!',
+                                    });
                                     window.location.href = `{{url('management/dashboard')}}`;
                                 } else if (response.message == 2) {
+                                    Swal.fire({
+                                        icon:  'success',
+                                        title: 'Berhasil',
+                                        text:  'Berhasil Login Partner!',
+                                    });
                                     window.location.href = `{{url('partner/dashboard')}}`;
                                 } else if (response.status == 3) {
                                     Toast.fire({

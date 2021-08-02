@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;height: 100px;text-align: center;">
-                        <h1 style="color: blue;">ARWICS LOGO</h1>
+                        <img src="{{ asset('property/arwics.png') }}" alt="">
                     </div>
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;">
@@ -18,11 +18,19 @@
                         <h3>12 : 12 : 12</h3>
                     </div>
                     </div>
+                    @if(session('logo_asuransi'))
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;">
-                        <h1 style="color: blue;">CAR LOGO</h1>
+                        <img src="{{ asset('property/', session()->get('nama_asuransi')) }}" alt="">
+                    </div>
+                    @else
+
+                    <div class="col col-lg-4"
+                        style="margin: 0px;display: flex;justify-content: center;align-items: center;">
+                        <img src="{{ asset('property/car.png') }}" alt="">
                     </div>
 
+                    @endif
                 </div>
 
             </div>
