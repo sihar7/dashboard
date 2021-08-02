@@ -6,8 +6,31 @@
 
 
 @push('css')
+<style>
+@media print {
 
-<link href="{{ asset('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
+    @page {size: A4 landscape;max-height:100%; max-width:100%}
+
+    /* use width if in portrait (use the smaller size to try
+       and prevent image from overflowing page... */
+    img { height: 90%; margin: 0; padding: 0; }
+
+body{width:100%;
+    background-color:black;
+    height:100%;
+    -webkit-transform: rotate(-90deg) scale(.68,.68);
+    -moz-transform:rotate(-90deg) scale(.58,.58) }    }
+
+    .card::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.card {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
 @endpush
 
 @section('content')
@@ -179,28 +202,9 @@
                         <div class="card text-white " style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
                             <div class="card-body">
                                 <p>Daily</p>
-                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;" data-bs-toggle="modal" data-bs-target=".daily-spaj">Detail</button>
+                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
                                 <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
                             </div>
-                            <div class="modal fade daily-spaj" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title mt-0">Center modal</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                            <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
                         </div>
                     </div>
 
@@ -247,8 +251,7 @@
                         <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-6">
-
-                        <div id="overlapping-bars" class="ct-chart ct-golden-section" dir="ltr"></div>
+                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                     </div>
                 </div>
             </div>
@@ -327,14 +330,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 bg-info">
-                        <div id="simple-line-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
+                    <div class="col-4 ">
+                        <canvas id="lineChart" height="300"></canvas>
                     </div>
-                    <div class="col-4 bg-warning">
+                    <div class="col-4 ">
                             <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                     </div>
-                    <div class="col-4 bg-danger">
-                        <div id="chart-with-area" class="ct-chart ct-golden-section" dir="ltr"></div>
+                    <div class="col-4 ">
+                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                 </div>
                 </div>
             </div>
@@ -367,7 +370,7 @@
                                 </div>
                             </div>
                         </div>
-
+    
                         <div class="col-lg-3">
                             <div class="card text-white bg-warning" style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
                                 <div class="card-body">
@@ -378,13 +381,14 @@
                                 </div>
                             </div>
                         </div>
-
+    
                         <div class="col-lg-3">
                             <div class="card text-white bg-danger"  style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
                                 <div class="card-body">
                                     <p>Monthly</p>
                                     <h1>14</h1>
-                                    <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
+                                    <b
+                                    \utton type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
                                     <i class="ion ion-md-download"></i>
                                 </div>
                             </div>
@@ -419,13 +423,13 @@
                 </div>
                 <div class="row">
                     <div class="col-4 bg-info">
-                        <div id="smil-animations" class="ct-chart ct-golden-section" dir="ltr"></div>
+                        <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-4 bg-warning">
-                        <div id="animating-donut" class="ct-chart ct-golden-section" dir="ltr"></div>
+                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-4 bg-danger">
-                        <div id="stacked-bar-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
+                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                 </div>
                 </div>
             </div>
@@ -437,9 +441,5 @@
 
 
 @push('js')
-<script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
-<script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
-
-<script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
 
 @endpush
