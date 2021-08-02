@@ -11,9 +11,6 @@ use App\Models\Spaj;
 use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
-
-    protected $tele;
-
      function __construct()
      {
         $this->middleware(['has_login', 'XSS']);

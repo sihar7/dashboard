@@ -21,7 +21,7 @@
                     @if(session('logo_asuransi'))
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;">
-                        <img src="{{ asset('property/', session()->get('nama_asuransi')) }}" alt="">
+                        <img src="{{ asset('property/', session()->get('logo_asuransi')) }}" alt="">
                     </div>
                     @else
 
