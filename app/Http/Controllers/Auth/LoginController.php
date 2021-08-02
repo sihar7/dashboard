@@ -35,8 +35,10 @@ class LoginController extends Controller
         }
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         try {
-            if (Auth::attempt( [ 'username' => $username, 'password' => $password ], $remember_me ) ) {
+            if (Auth::attempt( [ 'username' => $username, 'password' => $password ]) ) {
                 $cek_online = User::cekUsername($username);
+
+                Auth::login($cek_online, $remember_me);
                 $status = $cek_online->status;
 
                 if( $status == '0' || $status == null ) {

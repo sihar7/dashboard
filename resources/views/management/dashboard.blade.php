@@ -179,9 +179,28 @@
                         <div class="card text-white " style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
                             <div class="card-body">
                                 <p>Daily</p>
-                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
+                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;" data-bs-toggle="modal" data-bs-target=".daily-spaj">Detail</button>
                                 <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
                             </div>
+                            <div class="modal fade daily-spaj" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title mt-0">Center modal</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                            <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                         </div>
                     </div>
 

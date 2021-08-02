@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+
     <style>
         body {
             position: fixed;
@@ -58,9 +58,9 @@ display: none;
 
     <div class="top_bar">
         <div>
-            <img src="assets/images/logo.png" style="width:150px;height:90px;object-fit: contain;"/>
+            <img src="{{ asset('assets/images/logo.png') }}" style="width:150px;height:90px;object-fit: contain;"/>
         </div>
-     
+
     </div>
     <div class="row">
         <div class="col-7 col-sm-12 col-lg-7 col-left" style="height:88vh;justify-content:start;align-items:flex-start;display: flex;">
@@ -74,13 +74,12 @@ display: none;
 
                             </div>
                             <div style="width: 100%;height: 50%;display: flex;justify-content: space-around;align-items: center;">
-                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
-                                        Login Management
-                                </div>
-                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                               <a href="{{ url('/loginManagement') }}" style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white; text-decoration: none;">
+                                    Login Management
+                                </a>
+                               <a href="{{ url('/loginPartner') }}" style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white; text-decoration: none;">
                                     Login Partner
-                            </div>
-                              
+                                </a>
 
                             </div>
                         <div>
