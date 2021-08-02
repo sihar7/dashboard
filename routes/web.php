@@ -15,8 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::group(['middleware' => ['has_login', 'SecureHeaders', 'XSS']], function () {
-    Route::group(['middleware' => ['has_login']], function () {
+Route::group(['middleware' => ['has_login', 'XSS']], function () {
     Route::prefix('management')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::get('/filterMingguSpajSubmitted', [SpajSubmittedController::class, 'filterMingguSpajSubmitted']);

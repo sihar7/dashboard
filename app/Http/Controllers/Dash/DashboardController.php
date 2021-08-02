@@ -8,32 +8,31 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Spaj;
 // use App\Repository\TeleRepo;
-
+use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
-
-    protected $tele;
-
      function __construct()
      {
-
-        $this->middleware('has_login');
-        // $this->middleware(['has_login','SecureHeaders', 'XSS']);
+        $this->middleware(['has_login', 'XSS']);
     }
 
     function index(Request $request)
     {
-
         if($request->user()->hasRole('management'))
         {
-
-            // $data['tele'] = $this->tele->getHistoryTele();
-            // return view('management.dashboard', $data);
-            return view('management.dashboard');
+            if (Auth()->user()->api_token) {
+                return view('management.dashboard');
+            } else {
+                abort(404);
+            }
         }
           else if($request->user()->hasRole('partner'))
         {
-            return view('partner.dashboard');
+            if (Auth()->user()->api_token) {
+                return view('partner.dashboard');
+            } else {
+                abort(404);
+            }
         } else {
             abort(403);
         }

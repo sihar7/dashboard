@@ -1,217 +1,179 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $judul }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/loginForm.css') }}">
 
+        <meta charset="utf-8" />
+        <title>{{ $judul }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://arwics.com/favicon.png">
 
-    <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-    <style>
-        body {
-            background: #020202;
-            border-radius: 10px;
-        }
+        <!-- Bootstrap Css -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-    </style>
-       {!! NoCaptcha::renderJs() !!}
-</head>
+        {!! NoCaptcha::renderJs() !!}
+        <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+    </head>
 
-<body>
-    <div class='login'>
-        <div class='login_title'>
-            <span>Login to your account {{ $nama }}</span>
-        </div>
+    <body data-topbar="dark" style="background-color:#000000;">
+        <div class="account-pages my-5 pt-sm-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card overflow-hidden" style="background-color:#222222;">
+                            <div class="card-body pt-0">
 
-        <form id="formLogin">
-            @csrf
-            <div class='login_fields'>
-                <div class='login_fields__user'>
-                    <div class='icon'>
-                        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/user_icon_copy.png'>
+                                <h3 class="text-center mt-5 mb-4">
+                                    <a href="#" class="d-block auth-logo">
+                                        <img src="{{ asset('assets/images/logo.png') }}" alt="" height="30" class="auth-logo-dark">
+                                        <img src="{{ asset('assets/images/logo.png') }}" alt="" height="30" class="auth-logo-light">
+                                    </a>
+                                </h3>
+
+                                <div class="p-3">
+                                    <center><h4 style="color:#ffffff;">Welcome Back !</h4></center>
+                                    <center><p style="color:#ffffff;">Sign in to continue to {{ $nama }}.</p></center>
+                                    <form class="form-horizontal mt-4" id="formLogin">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="username" style="color:#ffffff;">Username</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userpassword" style="color:#ffffff;">Password</label>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userpassword" style="color:#ffffff;">Captcha</label>
+                                            {!! app('captcha')->display() !!}
+                                        </div>
+
+                                        <div class="mb-3 row mt-4">
+                                            <div class="col-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="remember_me" id="customControlInline">
+                                                    <label class="form-check-label" for="customControlInline" style="color:#ffffff;">Remember me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit" id="button_login">Log In</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0 row">
+                                            <div class="col-12 mt-4">
+                                                <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center">
+                            © <script>document.write(new Date().getFullYear())</script> ARWICS</span>
+                        </div>
                     </div>
-                    <input placeholder='Username' type='text' id="username" name="username" required>
-                    <div class='validation'>
-                        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
-                    </div>
-                </div>
-                <div class='login_fields__password'>
-                    <div class='icon'>
-                        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/lock_icon_copy.png'>
-                    </div>
-                    <input placeholder='Password' type='password' id="password" name="password" required>
-                    <div class='validation'>
-                        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
-                    </div>
-                </div>
-                <br><br>
-                <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                    <div class="col-md-6">
-                        {!! app('captcha')->display() !!}
-                    </div>
-                </div>
-
-                <div class='login_fields__submit'>
-                    <input type='submit' value='Log In' id="button_login">
-
                 </div>
             </div>
-        </form>
-    </div>
-    <div class='authent'>
-        <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg'>
-        <p>Authenticating...</p>
-    </div>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+        </div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 10000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-            });
+        <!-- JAVASCRIPT -->
+        <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
 
-            function input() {
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+        <!-- App js -->
+        <script src="{{ asset('assets/js/app.js') }}"></script>
 
-                $('#username, #password').focus(function () {
-                    $(this).prev().animate({
-                        'opacity': '1'
-                    }, 200)
-                });
-                $('#username, #password').blur(function () {
-                    $(this).prev().animate({
-                        'opacity': '.5'
-                    }, 200)
-                });
-
-                $('#username, #password').keyup(function () {
-                    if (!$(this).val() == '') {
-                        $(this).next().animate({
-                            'opacity': '1',
-                            'right': '30'
-                        }, 200)
-                    } else {
-                        $(this).next().animate({
-                            'opacity': '0',
-                            'right': '20'
-                        }, 200)
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
-                });
+                    });
 
-                var open = 0;
-                $('.tab').click(function () {
-                    $(this).fadeOut(200, function () {
-                        $(this).parent().animate({
-                            'left': '0'
-                        })
+                    function reset() {
+                        $("input").val('');
+                    }
+                    $("#formLogin").on('submit', function (e) {
+                        e.preventDefault();
+                        let form = $("#formLogin").serialize();
+                        $.ajax({
+                            type: "post",
+                            url: `{{ url('postLogin') }}`,
+                            data: form,
+                            dataType: "json",
+                            beforeSend: function () {
+                                $('#button_login').html("Memproses....");
+                                $('#button_login').attr('disabled', true);
+                            },
+                            success: function (response) {
+                                $('#button_login').html("Log In");
+                                $('#button_login').removeAttr('disabled');
+                                if (response.message == 1) {
+                                    Swal.fire({
+                                        icon:  'success',
+                                        title: 'Berhasil',
+                                        text:  'Berhasil Login Management!',
+                                    });
+                                    window.location.href = `{{url('management/dashboard')}}`;
+                                } else if (response.message == 2) {
+                                    Swal.fire({
+                                        icon:  'success',
+                                        title: 'Berhasil',
+                                        text:  'Berhasil Login Partner!',
+                                    });
+                                    window.location.href = `{{url('partner/dashboard')}}`;
+                                } else if (response.status == 3) {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: 'Username Atau Password Tidak Valid !'
+                                    })
+                                } else if (response.status == 6) {
+                                    Toast.fire({
+                                        icon: 'warning',
+                                        title: 'User Already Login !'
+                                    })
+                                } else {
+                                    Toast.fire({
+                                        icon: 'warning',
+                                        title: 'Harap Isi Captcha Terlebih Dahulu !'
+                                    })
+                                }
+                            },
+                            complete: function () {
+                                $('#button_login').removeAttr('disabled');
+                                $('#button_login').html("Log In");
+                            }
+                        });
                     });
                 });
-            }
-            $("#formLogin").on('submit', function (e) {
-                e.preventDefault();
-                input();
-                let form = $("#formLogin").serialize();
-                $.ajax({
-                    type: "post",
-                    url: `{{ url('postLogin') }}`,
-                    data: form,
-                    dataType: "json",
-                    beforeSend: function () {
-                        $('.login').addClass('test')
-                        setTimeout(function () {
-                            $('.login').addClass('testtwo')
-                        }, 300);
-                        setTimeout(function () {
-                            $(".authent").show().animate({
-                                right: -320
-                            }, {
-                                easing: 'easeOutQuint',
-                                duration: 600,
-                                queue: false
-                            });
-                            $(".authent").animate({
-                                opacity: 1
-                            }, {
-                                duration: 200,
-                                queue: false
-                            }).addClass('visible');
-                        }, 500);
-                        setTimeout(function () {
-                            $(".authent").show().animate({
-                                right: 90
-                            }, {
-                                easing: 'easeOutQuint',
-                                duration: 600,
-                                queue: false
-                            });
-                            $(".authent").animate({
-                                opacity: 0
-                            }, {
-                                duration: 200,
-                                queue: false
-                            }).addClass('visible');
-                            $('.login').removeClass('testtwo')
-                        }, 2500);
-                        setTimeout(function () {
-                            $('.login').removeClass('test')
-                            $('.login div').fadeIn();
-                        }, 2800);
-                        $('#button_login').html("Memproses....");
-                        $('#button_login').attr('disabled', true);
-                    },
-                    success: function (response) {
-                        $('#button_login').html("Log In");
-                        $('#button_login').removeAttr('disabled');
-                        if (response.message == 1) {
-                            window.location.href = `{{url('management/dashboard')}}`;
-                        } else if (response.message == 2) {
-                            window.location.href = `{{url('partner/dashboard')}}`;
-                        } else if (response.status == 3) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Username Atau Password Tidak Valid !'
-                            })
-                        } else if (response.status == 6) {
-                            Toast.fire({
-                                icon: 'warning',
-                                title: 'User Already Login !'
-                            })
-                        } else {
-                            Toast.fire({
-                                icon: 'warning',
-                                title: 'Harap Isi Captcha Terlebih Dahulu !'
-                            })
-                        }
-                    },
-                    complete: function () {
-                        input();
-                        $('#button_login').removeAttr('disabled');
-                    }
-                });
-            });
-        });
-
-    </script>
-</body>
-
+        </script>
+    </body>
 </html>
+

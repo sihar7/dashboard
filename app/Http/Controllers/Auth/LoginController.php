@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Asuransi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -19,9 +20,8 @@ class LoginController extends Controller
 {
     function postLogin(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
         Log::info('Proses login dengan username : '.$request->username);
-
-        DB::beginTransaction();
 
         $username = $request->username;
         $password = $request->password;
@@ -35,32 +35,57 @@ class LoginController extends Controller
         }
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         try {
-            if (Auth::attempt( [ 'username' => $username, 'password' => $password ], $remember_me ) ) {
+            if (Auth::attempt( [ 'username' => $username, 'password' => $password ]) ) {
                 $cek_online = User::cekUsername($username);
-                $status = $cek_online->status;
-
-                if( $status == '0' || $status == null ) {
+                $islogin = $cek_online->islogin;
+                $newtoken  = $this->generateRandomString();
+                if( $islogin == 0 || $islogin == null ) {
                     if ( $request->user()->hasRole('management') ) {
-                        $user = User::cekUsername($username);
+                        $user                 = User::cekUsername($username);
                         $user->last_login_at  = Carbon::now()->toDateTimeString();
                         $user->last_login_ip  = $request->ip();
-                        $user->status         = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
+                        $user->islogin        = 1;
+                        $user->api_token      = 'TOKEN-AUTH-'.$newtoken;
                         $user->save();
 
-                        Log::info('Berhasil Login Dengan Role Management dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->remember_token);
+                        Auth::login($user, $remember_me);
+                        Log::info('Berhasil Login Dengan Role Management dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->api_token);
 
                         return response()->json(['message' => 1 ], 201);
+
                     } elseif( $request->user()->hasRole('partner') ) {
-                        $user = User::cekUsername($username);
-                        $user->last_login_at = Carbon::now()->toDateTimeString();
-                        $user->last_login_ip = $request->ip();
-                        $user->status        = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
-                        $user->save();
+                        if ($cek_online->id_asuransi != null && $cek_online->id_asuransi != 0) {
+                            $get_asuransi = User::join('mst_asuransi', 'mst_user.id_asuransi', '=', 'mst_asuransi.id')
+                            ->where('mst_user.username', $cek_online->username)
+                            ->select('mst_user.*', 'mst_asuransi.nama as nama_asuransi', 'mst_asuransi.logo as logo_asuransi', 'mst_asuransi.id as asuransi_id')->first();
 
-                        Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->remember_token);
+                            $user                = User::cekUsername($username);
+                            $user->last_login_at = Carbon::now()->toDateTimeString();
+                            $user->last_login_ip = $request->ip();
+                            $user->islogin       = 1;
+                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->save();
 
+                            $data_session = [
+                                'nama_asuransi' => $get_asuransi->nama_asuransi,
+                                'logo_asuransi' => $get_asuransi->logo_asuransi
+                            ];
+
+                            $request->session()->put($data_session);
+                            Log::info('Berhasil Login Dengan Role Partner dan Username serta asuransi : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token . 'Asuransi' . $get_asuransi->nama_asuransi);
+
+                        } else {
+                            $user                = User::cekUsername($username);
+                            $user->last_login_at = Carbon::now()->toDateTimeString();
+                            $user->last_login_ip = $request->ip();
+                            $user->islogin       = 1;
+                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->save();
+                        }
+                        Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token);
+
+
+                        Auth::login($user, $remember_me);
                         return response()->json(['message' => 2 ], 201);
                     }
                 } else {
@@ -73,12 +98,21 @@ class LoginController extends Controller
             }
 
           } catch (\Exception $e) {
-                DB::rollback();
               return response()->json([ 'error' => $e->getMessage() ]);
           }
 
-        DB::commit();
 
+    }
+
+    function generateRandomString($length = 80)
+    {
+        $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $panjang_karakter = strlen($karakkter);
+        $str = '';
+        for ($i = 0; $i < $length; $i++) {
+            $str .= $karakkter[rand(0, $panjang_karakter - 1)];
+        }
+        return $str;
     }
 
     function loginManagement()
@@ -102,14 +136,14 @@ class LoginController extends Controller
     {
         if($request->user()->hasRole('management')) {
             $user = User::whereId(Auth::id())->first();
-            $user->status = 0;
+            $user->status = '0';
             $user->save();
 
             Auth::logout();
             return redirect('loginManagement');
         } else {
             $user = User::whereId(Auth::id())->first();
-            $user->status = 0;
+            $user->status = '0';
             $user->save();
 
             Auth::logout();
