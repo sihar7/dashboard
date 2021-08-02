@@ -74,10 +74,11 @@ display: none;
 
                             </div>
                             <div style="width: 100%;height: 50%;display: flex;justify-content: space-around;align-items: center;">
-                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                         Login Management
                                 </div>
-                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                            </a>
+                                <div style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     Login Partner
                             </div>
                               
