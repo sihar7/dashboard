@@ -46,11 +46,11 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label for="username" style="color:#ffffff;">Username</label>
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="userpassword" style="color:#ffffff;">Password</label>
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="userpassword" style="color:#ffffff;">Captcha</label>

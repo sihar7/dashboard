@@ -37,28 +37,29 @@ class LoginController extends Controller
         try {
             if (Auth::attempt( [ 'username' => $username, 'password' => $password ]) ) {
                 $cek_online = User::cekUsername($username);
-
-                Auth::login($cek_online, $remember_me);
                 $status = $cek_online->status;
 
                 if( $status == '0' || $status == null ) {
                     if ( $request->user()->hasRole('management') ) {
                         $user = User::cekUsername($username);
+                        Auth::login($user, $remember_me);
                         $user->last_login_at  = Carbon::now()->toDateTimeString();
                         $user->last_login_ip  = $request->ip();
                         $user->status         = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
+                        $user->api_token      = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
                         $user->save();
 
                         Log::info('Berhasil Login Dengan Role Management dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->remember_token);
 
                         return response()->json(['message' => 1 ], 201);
+
                     } elseif( $request->user()->hasRole('partner') ) {
                         $user = User::cekUsername($username);
+                        Auth::login($user, $remember_me);
                         $user->last_login_at = Carbon::now()->toDateTimeString();
                         $user->last_login_ip = $request->ip();
                         $user->status        = '1';
-                        $user->remember_token = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
+                        $user->api_token     = 'TOKEN-AUTH-'.str_replace('/', '',  Hash::make(Str::random(20)));
                         $user->save();
 
                         Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->remember_token);
@@ -104,14 +105,14 @@ class LoginController extends Controller
     {
         if($request->user()->hasRole('management')) {
             $user = User::whereId(Auth::id())->first();
-            $user->status = 0;
+            $user->status = '0';
             $user->save();
 
             Auth::logout();
             return redirect('loginManagement');
         } else {
             $user = User::whereId(Auth::id())->first();
-            $user->status = 0;
+            $user->status = '0';
             $user->save();
 
             Auth::logout();
