@@ -7,8 +7,7 @@
                 <div class="row">
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;height: 100px;text-align: center;">
-                        {{-- <img src="{{ asset('property/arwics.png') }}" alt=""> --}}
-                        <h1 style="color:blue">LOGO ARWICS</h1>
+                        <img src="{{ asset('property/arwics.png') }}" style="width: 100px;height: 100px;object-fit: contain;" alt="">
                     </div>
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;">
@@ -24,24 +23,22 @@
                     </div>
                     </div>
                     @if(session('logo_asuransi'))
-                    <div class="col col-lg-4"
+                    <div class="col col-lg-4 "
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;">
-                        <img src="{{ asset('property/', session()->get('logo_asuransi')) }}" alt="">
+                        <img src="{{ asset('property/', session()->get('logo_asuransi')) }}" style="width: 100px;height: 100px;object-fit: contain;" alt="">
                     </div>
-                    @else
-
-                    <div class="col col-lg-4"
+                  @else
+                    <div class="col col-lg-4 "
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;">
-                        {{-- <img src="{{ asset('property/car.png') }}" alt=""> --}}
-                        <h1 style="color:blue">LOGO CAR</h1>
+                        <img src="{{ asset('property/car.png') }}" style="width: 100px;height: 100px;object-fit: contain;" alt="">
                     </div>
-
                     @endif
                 </div>
 
             </div>
         </div>
     </div>
+
 
 
 </header>
