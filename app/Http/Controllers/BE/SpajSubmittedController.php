@@ -13,71 +13,26 @@ class SpajSubmittedController extends Controller
 {
     function __construct()
     {
-        $this->middleware(['has_login','SecureHeaders', 'XSS']);
+        $this->middleware(['has_login', 'XSS']);
     }
 
-    function filterMingguSpajSubmitted(Request $request)
+    function filterHarianSpajSubmitted(Request $request)
     {
-        DB::beginTransaction();
+        $start = $request->hari_awal;
+        $end   = $request->hari_akhir;
         try {
-            $spaj = DB::connection('mysql2')->table('t_spaj')->leftJoin('t_premi', function ($join) {
-                $join->on('t_spaj.id_premi', '=', 't_premi.id')
-                ->where('t_spaj.jns_asuransi', '=',  null);
-            })->leftJoin('t_premi_pa_car', function ($join) {
-                $join->on('t_spaj.id_premi', '=', 't_premi_pa_car.id')
-                ->where('t_spaj.jns_asuransi', '=',  1);
-
-            })
-            ->select(DB::raw("SUM(t_premi.nominal) as sum, SUM(t_premi_pa_car.nominal) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEARWEEK(t_spaj.created_at) as week_name"),DB::raw('max(t_spaj.created_at) as createdAt'))
-            // ->whereBetween('t_spaj.created_at', [$request->tanggal_awal, $request->tanggal_akhir])
-            ->where('t_spaj.created_at','>=' , Carbon::today()->subDay(7))
-            ->groupBy('week_name')
-            ->orderBy('createdAt')
-            ->get();
-
-            $api[] = ['Mingguan', 'Premium'];
-            foreach ($spaj as $key => $value) {
-                $total = $value->sum += $value->sum_nominal;
-                $api[++$key] = [$value->week_name, (int)$total];
-            }
-            return response()->json(['api' => $api], 201);
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
-        DB::commit();
-
-
-    }
-
-    function filterBulanSpajSubmitted(Request $request)
-    {
-
-        DB::beginTransaction();
-
-        $start = Carbon::parse($request->tanggal_awal)->startOfMonth();
-        $end = Carbon::parse($request->tanggal_akhir)->startOfMonth();
-
-        try {
-            if (Auth::user()->remember_token) {
-                $spaj = DB::connection('mysql2')->table('t_spaj')->leftJoin('t_premi', function ($join) {
-                    $join->on('t_spaj.id_premi', '=', 't_premi.id')
-                    ->where('t_spaj.jns_asuransi', '=',  null);
-                })->leftJoin('t_premi_pa_car', function ($join) {
-                    $join->on('t_spaj.id_premi', '=', 't_premi_pa_car.id')
-                    ->where('t_spaj.jns_asuransi', '=',  1);
-
-                })
-                ->select(DB::raw("SUM(t_premi.nominal) as sum, SUM(t_premi_pa_car.nominal) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(t_spaj.created_at) as month_name"),DB::raw('max(t_spaj.created_at) as createdAt'))
-                ->whereBetween('t_spaj.created_at', [$start, $end])
-                ->groupBy('month_name')
+            if (Auth::user()->api_token) {
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
+                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
+                ->where('mst_spaj_submit.status_approve', 0)
+                ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Bulan', 'Premium'];
+                $api[] = ['Hari', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $total = $value->sum += $value->sum_nominal;
-                    $api[++$key] = [$value->month_name, (int)$total];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
                 }
                 return response()->json(['api' => $api], 201);
             } else {
@@ -97,32 +52,149 @@ class SpajSubmittedController extends Controller
         }
         DB::commit();
     }
+
+    function filterMingguSpajSubmitted(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            if (Auth::user()->api_token) {
+                $spaj = Spaj::join('mst_asuransi', 'mst_spaj_submit.asuransi', 'mst_asuransi.id')
+                ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEARWEEK(mst_spaj_submit.tgl_submit) as week_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->where('mst_spaj_submit.tgl_submit','>=' , Carbon::today()->subDay(7))
+                ->where('mst_spaj_submit.status_approve', 0)
+                ->groupBy('week_name')
+                ->orderBy('createdAt')
+                ->get();
+
+                $api[] = ['Mingguan', 'Premium'];
+                foreach ($spaj as $key => $value) {
+                    $api[++$key] = [$value->week_name, (int)$value->sum_nominal];
+                }
+                return response()->json(['api' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
+
+                return response()->json(['api' => $data], 201);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
+
+    function filterBulanSpajSubmitted(Request $request)
+    {
+        // $start = Carbon::parse($request->bulan_awal)->startOfMonth();
+        // $end = Carbon::parse($request->bulan_akhir)->startOfMonth();
+
+        $start = $request->bulan_awal;
+        $end   = $request->bulan_akhir;
+        try {
+            if (Auth::user()->api_token) {
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->where('mst_spaj_submit.status_approve', 0)
+                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') >= '".$start."'")
+                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') <= '".$end."'")
+                ->groupBy('month_name')
+                ->orderBy('createdAt')
+                ->get();
+
+                $api[] = ['Bulan', 'Premium'];
+                foreach ($spaj as $key => $value) {
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
+                }
+                return response()->json(['api' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
+
+                return response()->json(['api' => $data], 201);
+            }
+
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
+
     function filterTahunSpajSubmitted(Request $request)
     {
+        $start = $request->tahun_awal;
+        $end   = $request->tahun_akhir;
 
         DB::beginTransaction();
         try {
-            $spaj = DB::connection('mysql2')->table('t_spaj')
-            ->leftJoin('t_premi', function ($join) {
-                $join->on('t_spaj.id_premi', '=', 't_premi.id')
-                ->where('t_spaj.jns_asuransi', '=',  null);
-            })->leftJoin('t_premi_pa_car', function ($join) {
-                $join->on('t_spaj.id_premi', '=', 't_premi_pa_car.id')
-                ->where('t_spaj.jns_asuransi', '=',  1);
-            })
-            ->select(DB::raw("SUM(t_premi.nominal) as sum, SUM(t_premi_pa_car.nominal) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(t_spaj.created_at) as year_name"),DB::raw('max(t_spaj.created_at) as createdAt'))
-            ->whereBetween('t_spaj.created_at', [$request->tanggal_awal, $request->tanggal_akhir])
-            ->groupBy('year_name')
-            ->orderBy('createdAt')
-            ->get();
+            if (Auth::user()->api_token) {
+                $spaj = Spaj::where('mst_spaj_submit.status_approve', 0)
+                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%Y') >= '".$start."'")
+                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%Y') <= '".$end."'")
+                ->groupBy('year_name')
+                ->orderBy('createdAt')
+                ->get();
 
-            $api[] = ['Tahun', 'Premium'];
-            foreach ($spaj as $key => $value) {
-                $total = $value->sum += $value->sum_nominal;
-                $api[++$key] = [$value->year_name, (int)$total];
+                $api[] = ['Tahun', 'Premium'];
+                foreach ($spaj as $key => $value) {
+                    $api[++$key] = [$value->year_name, (int)$value->sum_nominal];
+                }
+
+                return response()->json(['api' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
+
+                return response()->json(['api' => $data], 201);
             }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
 
-            return response()->json(['api' => $api], 201);
+    function filterTotalSpajSubmitted(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            if (Auth::user()->api_token) {
+                $spaj = Spaj::join('mst_asuransi', 'mst_spaj_submit.asuransi', 'mst_asuransi.id')
+                ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('mst_spaj_submit.status_approve', 0)
+                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->orderBy('createdAt')
+                ->get();
+
+                $api[] = ['Premium'];
+                foreach ($spaj as $key => $value) {
+                    $api[++$key] = [(int)$value->sum_nominal];
+                }
+
+                return response()->json(['api' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
+
+                return response()->json(['api' => $data], 201);
+            }
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;

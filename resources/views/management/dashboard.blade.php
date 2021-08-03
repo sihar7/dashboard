@@ -442,4 +442,14 @@
 
 <script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
 
+<script type="text/javascript">
+    window.setTimeout("waktu()", 1000);
+
+    function waktu() {
+        var tanggal = new Date();
+        setTimeout("waktu()", 1000);
+        document.getElementById(".jam").innerHTML = tanggal.getHours() + ':' + tanggal.getMinutes() + ':' + tanggal.getSeconds();
+    }
+
+</script>
 @endpush

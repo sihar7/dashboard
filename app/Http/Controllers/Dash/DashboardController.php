@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Spaj;
-// use App\Repository\TeleRepo;
+use App\Repository\TeleRepo;
 use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
-     function __construct()
-     {
+
+    protected $tele;
+
+    function __construct(TeleRepo $tele)
+    {
+        $this->tele = $tele;
         $this->middleware(['has_login', 'XSS']);
     }
 
@@ -21,6 +25,7 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
+                $data['getReward'] = $this->tele->getRewardIndividu();
                 return view('management.dashboard');
             } else {
                 abort(404);

@@ -26,13 +26,13 @@ class LoginController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $validate = Validator::make($request->all(), [
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+        // $validate = Validator::make($request->all(), [
+        //     'g-recaptcha-response' => 'required|captcha'
+        // ]);
 
-        if ($validate->fails()) {
-            return response()->json([' message' => 5], 201);
-        }
+        // if ($validate->fails()) {
+        //     return response()->json([' message' => 5], 201);
+        // }
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         try {
             if (Auth::attempt( [ 'username' => $username, 'password' => $password ]) ) {

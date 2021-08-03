@@ -1,6 +1,7 @@
 <?php
     namespace App\Repository;
 
+    use App\Models\Spaj;
     use Illuminate\Support\Facades\DB;
     use Carbon\Carbon;
     use function PHPUnit\Framework\isNull;
@@ -8,35 +9,39 @@
 
     class TeleRepo
     {
-        function getTeleRewardPendapatan()
+        function getRewardIndividu()
         {
             try {
-                $spaj =  DB::connection('mysql2')->table('t_spaj')->join('t_user', 't_spaj.created_by', '=', 't_user.id')
-                ->select(DB::raw('count(t_spaj.created_by) as spaj_count, t_user.nama as nama_tele, t_user.id as id_user, t_spaj.created_at', DB::raw('max(spaj_count) as total_max')))
-                ->whereMonth('t_spaj.created_at', date('m'))
-                ->groupBy('t_spaj.created_by')
+                $tele = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->select(DB::raw('count(mst_spaj_submit.id_telemarketing) as spaj_count, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as id_tele, mst_spaj_submit.tgl_submit'))
+                ->where('mst_spaj_submit.status_approve', 1)
+                ->whereMonth('mst_spaj_submit.tgl_submit', date('m'))
+                ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
+                ->groupBy('mst_spaj_submit.tgl_submit')
                 ->orderBy('spaj_count', 'DESC')
-                ->first();
-
-                $premi = DB::connection('mysql2')->table('t_spaj')->leftJoin('t_premi', function ($join) {
-                    $join->on('t_spaj.id_premi', '=', 't_premi.id')
-                    ->where('t_spaj.jns_asuransi', '=',  null);
-                })->leftJoin('t_premi_pa_car', function ($join) {
-                    $join->on('t_spaj.id_premi', '=', 't_premi_pa_car.id')
-                    ->where('t_spaj.jns_asuransi', '=',  1);
-                })
-                ->select(DB::raw("SUM(t_premi.nominal) as sum, SUM(t_premi_pa_car.nominal) as sum_nominal"),DB::raw('max(t_spaj.created_at) as createdAt'))
-                ->where('t_spaj.created_by', $spaj->id_user)
                 ->get();
 
-
-                $api[] = ['nama_tele','Total Pendapatan'];
-                foreach ($premi as $key => $value) {
-                    $total = $value->sum += $value->sum_nominal;
-                    $api[++$key] = [$spaj->nama_tele, 'Rp. '.number_format($total, 0, ',', '.').''];
+                $row = [];
+                    foreach ($tele as $data) {
+                        $row['id_tele'] = $data->id_tele;
+                    $item_data = (object)$row;
                 }
 
-                return response()->json(['api' => $api], 201);
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum"))
+                ->where('status_approve', 1)
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
+                ->where('mst_spaj_submit.id_telemarketing', $item_data->id_tele)
+                ->get();
+
+                $premi = [];
+                foreach ($spaj as $item) {
+                    $premi[] = $item->sum;
+                }
+
+                $total_pendapatan = $premi;
+
+                return $total_pendapatan;
 
               } catch (ModelNotFoundException $exception) {
 

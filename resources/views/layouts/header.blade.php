@@ -7,15 +7,20 @@
                 <div class="row">
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;height: 100px;text-align: center;">
-                        <img src="{{ asset('property/arwics.png') }}" alt="">
+                        {{-- <img src="{{ asset('property/arwics.png') }}" alt=""> --}}
+                        <h1 style="color:blue">LOGO ARWICS</h1>
                     </div>
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                        <div class="row">
-                           <h6>Thuesday, 18 july 2021</h6>
+
+                            @php
+                            $tanggal = mktime(date('m'), date("d"), date('Y'));
+                            @endphp
+                           <h6> {{ \Carbon\Carbon::parse($tanggal)->isoFormat('dddd, D MMMM Y') }}</h6>
                        </div>
                        <div class="row">
-                        <h3>12 : 12 : 12</h3>
+                        <h3 class="jam"></h3>
                     </div>
                     </div>
                     @if(session('logo_asuransi'))
@@ -27,7 +32,8 @@
 
                     <div class="col col-lg-4"
                         style="margin: 0px;display: flex;justify-content: center;align-items: center;">
-                        <img src="{{ asset('property/car.png') }}" alt="">
+                        {{-- <img src="{{ asset('property/car.png') }}" alt=""> --}}
+                        <h1 style="color:blue">LOGO CAR</h1>
                     </div>
 
                     @endif
