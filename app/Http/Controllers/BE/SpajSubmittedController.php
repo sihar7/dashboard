@@ -55,22 +55,21 @@ class SpajSubmittedController extends Controller
 
     function filterMingguSpajSubmitted(Request $request)
     {
+        $start_bulan = $request->bulan_awal;
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::join('mst_asuransi', 'mst_spaj_submit.asuransi', 'mst_asuransi.id')
-                ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
-                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEARWEEK(mst_spaj_submit.tgl_submit) as week_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.tgl_submit','>=' , Carbon::today()->subDay(7))
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
+                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') >= '".$start_bulan."'")
                 ->where('mst_spaj_submit.status_approve', 0)
-                ->groupBy('week_name')
+                ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Mingguan', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->week_name, (int)$value->sum_nominal];
+                    $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
                 }
                 return response()->json(['api' => $api], 201);
             } else {

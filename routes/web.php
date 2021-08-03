@@ -28,11 +28,19 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/filterTotalSpajSubmitted', [SpajSubmittedController::class, 'filterTotalSpajSubmitted']);
         });
         Route::prefix('tele')->group(function() {
+            Route::post('/filterHarianTopTsr', [TeleController::class, 'filterHarianTopTsr']);
+            Route::get('/filterMingguTopTsr', [TeleController::class, 'filterMingguTopTsr']);
+            Route::post('/filterBulanTopTsr', [TeleController::class, 'filterBulanTopTsr']);
+            Route::post('/filterTahunTopTsr', [TeleController::class, 'filterTahunTopTsr']);
+            Route::get('/filterTotalTopTsr', [TeleController::class, 'filterTotalTopTsr']);
+        });
+        Route::prefix('policeApproved')->group(function() {
             Route::get('/filterTopTsrAll', [TeleController::class, 'filterTopTsrAll']);
             Route::get('/filterTopTsrWeekly', [TeleController::class, 'filterTopTsrWeekly']);
             Route::post('/filterTopTsrMonthly', [TeleController::class, 'filterTopTsrMonthly']);
             Route::post('/filterTopTsrYearly', [TeleController::class, 'filterTopTsrYearly']);
         });
+
 
     });
 
