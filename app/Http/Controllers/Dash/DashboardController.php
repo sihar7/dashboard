@@ -32,6 +32,7 @@ class DashboardController extends Controller
                 abort(404);
             }
         }
+
           else if($request->user()->hasRole('partner'))
         {
             if (Auth()->user()->api_token) {

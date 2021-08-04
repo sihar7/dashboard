@@ -8,10 +8,10 @@ use App\Http\Controllers\BE\TeleController;
 
 
 
-Route::post('postLogin', [LoginController::class, 'postLogin'])->middleware('throttle:60,1');
+Route::post('postlogin', [LoginController::class, 'postlogin'])->middleware('throttle:60,1');
 Route::post('logout', [LoginController::class, 'logout']);
-Route::get('loginPartner', [LoginController::class, 'loginPartner']);
-Route::get('loginManagement', [LoginController::class, 'loginManagement']);
+Route::get('loginpartner', [LoginController::class, 'loginpartner']);
+Route::get('loginmanagement', [LoginController::class, 'loginmanagement']);
 
 Route::get('/', function () {
     return view('welcome');

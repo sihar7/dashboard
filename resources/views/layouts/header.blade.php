@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="d-flex">
+        <div class="d-flex" style="background-color:#000000;position: absolute;right:10px;top:10px">
 
             <div class="dropdown d-none d-lg-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">

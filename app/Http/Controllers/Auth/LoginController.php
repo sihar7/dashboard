@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    function postLogin(Request $request)
+    function postlogin(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
         Log::info('Proses login dengan username : '.$request->username);
@@ -115,7 +115,7 @@ class LoginController extends Controller
         return $str;
     }
 
-    function loginManagement()
+    function loginmanagement()
     {
         $data['judul'] = 'Login Management';
         $data['nama'] = 'Management';
@@ -123,7 +123,7 @@ class LoginController extends Controller
         return view('auth.login', $data);
     }
 
-    function loginPartner()
+    function loginpartner()
     {
         $data['judul'] = 'Login Partner';
         $data['nama'] = 'Partner';
