@@ -28,6 +28,7 @@ class DashboardController extends Controller
                 // $data['getReward']          = $this->tele->getRewardIndividu();
                 // $data['getHistoryTele']     = $this->tele->getHistoryTele();
                 // return view('management.dashboard', $data);
+
                 return view('management.dashboard');
             } else {
                 abort(404);

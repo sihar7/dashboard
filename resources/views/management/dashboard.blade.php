@@ -7,9 +7,10 @@ DASHBOARD | ARWICS
 
 @push('css')
 
-<link href="{{ asset('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
+<link href="{{ URL::to('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
 <style>
     .telemarketing::-webkit-scrollbar {
+
         display: none;
         /* Safari and Chrome */
 
@@ -31,6 +32,7 @@ DASHBOARD | ARWICS
         padding: 0;
         padding-bottom: 10%;
     }
+
 
     .telemarketing ul li {
         background-color: #00C637;
@@ -114,7 +116,7 @@ DASHBOARD | ARWICS
             <center>
                 <h4 class="card-title">Hello !</h4></center>
                 <br>
-                <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="260" height="260" src="{{ asset('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
+                <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="260" height="260" src="{{ URL::to('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
                <div class="card-body">
                 <br><br>
                 <center>
@@ -141,6 +143,7 @@ DASHBOARD | ARWICS
                 </div>
             </div>
             <div style="width: 100%;height: 65%;overflow: auto;">
+
                 <ul>
                     <li>
                         <div
@@ -194,19 +197,23 @@ DASHBOARD | ARWICS
                 <div style="width: 80%;height: 100%;display: flex;">
                     <div style="width: 40%;height: 100%;display: flex;justify-content: center;align-items: center;">
                         Pages
+
                     </div>
                     <div style="width: 30%;height: 100%; display: flex;justify-content: center;align-items: center;">
                         <button style="background-color:transparent;border: 1px solid white;color: white;"> - </button>
                     </div>
+
                     <div style="width: 60%;display: flex;justify-content: center;align-items: center;">
                         <div
                             style="width:80%;height: 70%;background-color: transparent;border: 1px solid white;border-radius: 3px;display: flex;justify-content: center;align-items: center;">
                             1
                         </div>
+
                     </div>
                     <div style="width: 30%;height: 100; display: flex;justify-content: center;align-items: center;">
                         <button style="background-color:transparent;border: 1px solid white;color: white;"> + </button>
                     </div>
+
 
 
                 </div>
@@ -313,7 +320,77 @@ DASHBOARD | ARWICS
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                    </li>
+                    <li>
+                        <div style="height:35vh;">
+                            <div
+                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
+                                Top 1
+                            </div>
+                            <div style="width: 100%;height: 90%;padding: 3px;">
+                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
+                                    <div
+                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
+                                        <div
+                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
+                                        Bryan
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3 Closing
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3 Premi
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3000.000
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="height:35vh;">
+                            <div
+                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
+                                Top 1
+                            </div>
+                            <div style="width: 100%;height: 90%;padding: 3px;">
+                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
+                                    <div
+                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
+                                        <div
+                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
+                                        Bryan
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3 Closing
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3 Premi
+                                    </div>
+                                    <div
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                        3000.000
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </li>
                     <li>
                         <div style="height:35vh;">
@@ -519,74 +596,7 @@ DASHBOARD | ARWICS
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+
 
 
                 </ul>
@@ -1004,10 +1014,10 @@ DASHBOARD | ARWICS
 
 @push('js')
 
-<script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
-<script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
+<script src="{{ URL::to('assets/libs/chartist/chartist.min.js') }}"></script>
+<script src="{{ URL::to('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
+<script src="{{ URL::to('assets/js/pages/chartist.init.js') }}"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
@@ -1019,3 +1029,4 @@ DASHBOARD | ARWICS
 
 </script>
 @endpush
+

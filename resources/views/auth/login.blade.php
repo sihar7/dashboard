@@ -161,10 +161,15 @@
                                         icon: 'warning',
                                         title: 'User Already Login !'
                                     })
-                                } else {
+                                } else if(response.status == 5){
                                     Toast.fire({
                                         icon: 'warning',
                                         title: 'Harap Isi Captcha Terlebih Dahulu !'
+                                    })
+                                } else {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: 'Gagal Login !'
                                     })
                                 }
                             },
