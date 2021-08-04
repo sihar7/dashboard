@@ -140,14 +140,14 @@ class LoginController extends Controller
             $user->save();
 
             Auth::logout();
-            return redirect('loginManagement');
+            return redirect('loginmanagement');
         } else {
             $user = User::whereId(Auth::id())->first();
             $user->islogin = 0;
             $user->save();
 
             Auth::logout();
-            return redirect('loginPartner');
+            return redirect('loginpartner');
         }
     }
 }
