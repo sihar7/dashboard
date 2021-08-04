@@ -116,6 +116,8 @@ DASHBOARD | ARWICS
             </div>
             <div style="width: 100%;height: 65%;overflow: auto;">
             <ul>
+                @foreach($getHistoryTele as $item)
+                @if($item->islogin == 1)
                 <li>
                     <div
                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
@@ -125,7 +127,8 @@ DASHBOARD | ARWICS
                         online
                     </div>
                 </li>
-                <li>
+                @else
+                <li style="background-color: #DE0000;">
                     <div
                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                         Bryan 1
@@ -134,33 +137,8 @@ DASHBOARD | ARWICS
                         online
                     </div>
                 </li>
-                <li>
-                    <div
-                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                        Bryan 1
-                    </div>
-                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                        online
-                    </div>
-                </li>
-                <li>
-                    <div
-                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                        Bryan 1
-                    </div>
-                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                        online
-                    </div>
-                </li>
-                <li>
-                    <div
-                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                        Bryan 1
-                    </div>
-                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                        online
-                    </div>
-                </li>
+                @endif
+                @endforeach
 
             </ul>
         </div>
@@ -520,3 +498,4 @@ DASHBOARD | ARWICS
 
 </script>
 @endpush
+

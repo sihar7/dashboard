@@ -25,10 +25,9 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
-                // $data['getReward']          = $this->tele->getRewardIndividu();
-                // $data['getHistoryTele']     = $this->tele->getHistoryTele();
-                // return view('management.dashboard', $data);
-                return view('management.dashboard');
+                $data['getReward']          = $this->tele->getRewardIndividu();
+                $data['getHistoryTele']     = $this->tele->getHistoryTele();
+                return view('management.dashboard', $data);
             } else {
                 abort(404);
             }

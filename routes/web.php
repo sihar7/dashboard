@@ -26,6 +26,13 @@ Route::group(['middleware' => ['has_login']], function () {
             Route::post('/filterBulanSpajSubmitted', [SpajSubmittedController::class, 'filterBulanSpajSubmitted']);
             Route::post('/filterTahunSpajSubmitted', [SpajSubmittedController::class, 'filterTahunSpajSubmitted']);
             Route::get('/filterTotalSpajSubmitted', [SpajSubmittedController::class, 'filterTotalSpajSubmitted']);
+
+
+            Route::post('/filterHarianPremiumSubmitted', [SpajSubmittedController::class, 'filterHarianPremiumSubmitted']);
+            Route::get('/filterMingguPremiumSubmitted', [SpajSubmittedController::class, 'filterMingguPremiumSubmitted']);
+            Route::post('/filterBulanPremiumSubmitted', [SpajSubmittedController::class, 'filterBulanPremiumSubmitted']);
+            Route::post('/filterTahunPremiumSubmitted', [SpajSubmittedController::class, 'filterTahunPremiumSubmitted']);
+            Route::get('/filterTotalPremiumSubmitted', [SpajSubmittedController::class, 'filterTotalPremiumSubmitted']);
         });
         Route::prefix('tele')->group(function() {
             Route::post('/filterHarianTopTsr', [TeleController::class, 'filterHarianTopTsr']);
