@@ -125,7 +125,7 @@
                         let form = $("#formLogin").serialize();
                         $.ajax({
                             type: "post",
-                            url: `{{ url('postLogin') }}`,
+                            url: `{{ url('postlogin') }}`,
                             data: form,
                             dataType: "json",
                             beforeSend: function () {
