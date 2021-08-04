@@ -32,6 +32,7 @@
 
         ::-webkit-scrollbar {
 
+
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
@@ -40,6 +41,7 @@
     background: #FF0000;
 }
         @media only screen and (max-width: 1600px) {
+
 
             .page-content {
                 padding-top:10px!important;

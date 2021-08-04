@@ -11,6 +11,7 @@ DASHBOARD | ARWICS
 <style>
     .telemarketing::-webkit-scrollbar {
 
+
         display: none;
         /* Safari and Chrome */
 
@@ -32,6 +33,7 @@ DASHBOARD | ARWICS
         padding: 0;
         padding-bottom: 10%;
     }
+
 
 
     .telemarketing ul li {
@@ -144,11 +146,13 @@ DASHBOARD | ARWICS
             </div>
             <div style="width: 100%;height: 65%;overflow: auto;">
 
+
                 <ul>
                     <li>
                         <div
                             style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                             Bryan 1
+
                         </div>
                         <div style="width: 100%;height:40%;padding-left: 5px;">
                             online
@@ -203,11 +207,13 @@ DASHBOARD | ARWICS
                         <button style="background-color:transparent;border: 1px solid white;color: white;"> - </button>
                     </div>
 
+
                     <div style="width: 60%;display: flex;justify-content: center;align-items: center;">
                         <div
                             style="width:80%;height: 70%;background-color: transparent;border: 1px solid white;border-radius: 3px;display: flex;justify-content: center;align-items: center;">
                             1
                         </div>
+
 
                     </div>
                     <div style="width: 30%;height: 100; display: flex;justify-content: center;align-items: center;">
