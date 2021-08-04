@@ -60,14 +60,14 @@
 
     <div class="top_bar">
         <div>
-            <img src="assets/images/logo.png" style="width:150px;height:90px;object-fit: contain;" />
+            <img src="{{ asset('assets/images/logo.png') }}" style="width:150px;height:90px;object-fit: contain;" />
         </div>
 
     </div>
     <div class="row">
         <div class="col-7 col-sm-12 col-lg-7 col-left"
             style="height:88vh;justify-content:start;align-items:flex-start;display: flex;">
-            <img src="assets/images/18438811 [Converted]2-01 1.png" style="object-fit:cover;width: 90%;height: 90%;" />
+            <img src="{{ asset('assets/images/18438811 [Converted]2-01 1.png') }}" style="object-fit:cover;width: 90%;height: 90%;" />
         </div>
         <div class=" col-sm-12 col-lg-5  p-0"
             style="height:88vh;display: flex;align-items: center;justify-content: flex-end;">
