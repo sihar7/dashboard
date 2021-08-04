@@ -62,7 +62,7 @@
                 ->orderBy('mst_telemarketing.islogin', 'DESC')
                 ->orderBy('mst_telemarketing.last_login_at', 'DESC')
                 ->orderBy('mst_telemarketing.nama', 'DESC')
-                ->paginate(5);
+                ->cursorPaginate(5);
 
                 return $tele;
 

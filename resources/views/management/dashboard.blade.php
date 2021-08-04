@@ -12,12 +12,9 @@
 
 @section('content')
 
-
-
-
 <div class="row">
     <div class="col-xl-3 col-sm-6">
-        <div class="card" style="height:852px;">
+        <div class="card" style="height:852px;background-color:#222222;">
             <div class="card-body">
                 <center><h4 class="card-title">Telemarketing</h4></center>
                 <br><br>
@@ -36,14 +33,13 @@
                         @endif
                     @endforeach
                 </div>
+                {{ $getHistoryTele->links() }}
             </div>
-            {{ $getHistoryTele->links() }}
         </div>
     </div>
-
     <!-- end col -->
     <div class="col-xl-6 col-sm-6">
-        <div class="card" style="height:852px;">
+        <div class="card" style="height:852px;background-color:#222222;">
             <div class="card-body">
                 <center><h2 class="card-title">TOP 10</h2></center>
                 <center>
@@ -51,7 +47,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col-md-6">
-                                <select class="form-control" style="width:175px; height:44px;">
+                                <select class="form-control" style="width:175px; height:44px;background-color:#222222;">
                                     <option>Select</option>
                                     <option>Monthly</option>
                                     <option>Yearly</option>
@@ -60,7 +56,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="col-md-6">
-                                <select class="form-control" style="width:175px; height:44px;">
+                                <select class="form-control" style="width:175px; height:44px;background-color:#222222;">
                                     <option>Select</option>
                                     <option>All</option>
                                 </select>
@@ -77,9 +73,9 @@
                 <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <div class="card">
+                            <div class="card" >
                                 <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="100" height="100" src="{{ asset('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
-                                <div class="card-body">
+                                <div class="card-body" >
                                     <center><h4 class="card-title">Bryan  1</h4></center>
                                </div>
                                 <ul class="list-group list-group-flush">
@@ -125,7 +121,7 @@
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="card" style="height:852px;">
+        <div class="card" style="height:852px;background-color:#222222;">
             <br>
             <center>
                 <h4 class="card-title">Hello !</h4></center>
@@ -153,7 +149,7 @@
 <div class="row">
     <div class="col-xl-12">
 
-        <div class="card">
+        <div class="card" style="background-color:#222222;">
             <div class="card-body">
                 <center><h4 class="card-title mb-4">SPAJ SUBMITTED</h4></center>
 
@@ -244,7 +240,7 @@
 <div class="row">
     <div class="col-xl-12">
 
-        <div class="card">
+        <div class="card" style="background-color:#222222;">
             <div class="card-body">
                 <center><h4 class="card-title mb-4">SPAJ SUBMITTED</h4></center>
 
@@ -328,14 +324,10 @@
 </div>
 <!-- end row -->
 
-
-
-
-
 <div class="row">
     <div class="col-xl-12">
 
-        <div class="card">
+        <div class="card" style="background-color:#222222;">
             <div class="card-body">
                 <center><h4 class="card-title mb-4">SPAJ SUBMITTED</h4></center>
 
