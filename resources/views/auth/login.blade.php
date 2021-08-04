@@ -22,6 +22,9 @@
         {!! NoCaptcha::renderJs() !!}
         <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+        <style>
+
+        </style>
     </head>
 
     <body data-topbar="dark" style="background-color:#000000;">
@@ -34,7 +37,7 @@
 
                                 <h3 class="text-center mt-5 mb-4">
                                     <a href="#" class="d-block auth-logo">
-                                        <img src="{{ asset('assets/images/logo.png') }}" alt="" height="30" class="auth-logo-dark">
+                                        <img src="{{ asset('assets/images/logo.png') }}" alt=""style="width:150px;height:90px;object-fit: contain; opacity:0.5;"  class="auth-logo-dark">
                                         <img src="{{ asset('assets/images/logo.png') }}" alt="" height="30" class="auth-logo-light">
                                     </a>
                                 </h3>
@@ -116,7 +119,6 @@
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                     });
-
                     function reset() {
                         $("input").val('');
                     }
