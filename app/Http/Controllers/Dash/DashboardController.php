@@ -17,7 +17,7 @@ class DashboardController extends Controller
     function __construct(TeleRepo $tele)
     {
         $this->tele = $tele;
-        $this->middleware(['has_login', 'XSS']);
+        $this->middleware(['has_login']);
     }
 
     function index(Request $request)
@@ -25,8 +25,9 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
-                $data['getReward'] = $this->tele->getRewardIndividu();
-                return view('management.dashboard');
+                $data['getReward']          = $this->tele->getRewardIndividu();
+                $data['getHistoryTele']     = $this->tele->getHistoryTele();
+                return view('management.dashboard', $data);
             } else {
                 abort(404);
             }

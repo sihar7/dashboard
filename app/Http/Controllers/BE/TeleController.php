@@ -298,8 +298,8 @@ class TeleController extends Controller
             ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
             ->select(DB::raw('count(mst_spaj_submit.id_telemarketing) as spaj_count, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as id_tele, mst_spaj_submit.tgl_submit, mst_spaj_submit.jns_asuransi '))
             ->where('mst_spaj_submit.status_approve', 1)
-            ->where('mst_spaj_submit.tgl_submit','>=' , Carbon::today()->subDay(7))
             ->groupBy('mst_spaj_submit.id_telemarketing')
+            ->whereMonth('mst_spaj_submit.tgl_submit', date('m'))
             ->orderBy('spaj_count')
             ->limit(10)
             ->get();
@@ -315,9 +315,9 @@ class TeleController extends Controller
                 ->join('mst_asuransi', 'mst_spaj_submit.asuransi', '=', 'mst_asuransi.id')
                 ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
                 ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum"))
-                ->where('mst_spaj_submit.status_approve',1)
-                ->where('mst_spaj_submit.tgl_submit','>=' , Carbon::today()->subDay(7))
+                ->where('mst_spaj_submit.status_approve', 1)
                 ->where('mst_spaj_submit.id_telemarketing', $item_data->id_tele)
+                ->whereMonth('mst_spaj_submit.tgl_submit', date('m'))
                 ->get();
 
                 $premi = [];

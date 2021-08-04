@@ -75,11 +75,12 @@
         <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
         <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
-        @stack('js')
         <!--Morris Chart-->
         <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
         <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
 
+
+        @stack('js')
         <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
 
         <!-- App js -->

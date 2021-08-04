@@ -57,7 +57,7 @@ class LoginController extends Controller
                         if ($cek_online->id_asuransi != null && $cek_online->id_asuransi != 0) {
                             $get_asuransi = User::join('mst_asuransi', 'mst_user.id_asuransi', '=', 'mst_asuransi.id')
                             ->where('mst_user.username', $cek_online->username)
-                            ->select('mst_user.*', 'mst_asuransi.nama as nama_asuransi', 'mst_asuransi.logo as logo_asuransi', 'mst_asuransi.id as asuransi_id')->first();
+                            ->select('mst_user.*', 'mst_asuransi.nama_asuransi', 'mst_asuransi.logo as logo_asuransi', 'mst_asuransi.id as asuransi_id')->first();
 
                             $user                = User::cekUsername($username);
                             $user->last_login_at = Carbon::now()->toDateTimeString();
@@ -136,14 +136,14 @@ class LoginController extends Controller
     {
         if($request->user()->hasRole('management')) {
             $user = User::whereId(Auth::id())->first();
-            $user->status = '0';
+            $user->islogin = 0;
             $user->save();
 
             Auth::logout();
             return redirect('loginManagement');
         } else {
             $user = User::whereId(Auth::id())->first();
-            $user->status = '0';
+            $user->islogin = 0;
             $user->save();
 
             Auth::logout();

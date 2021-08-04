@@ -6,31 +6,8 @@
 
 
 @push('css')
-<style>
-@media print {
 
-    @page {size: A4 landscape;max-height:100%; max-width:100%}
-
-    /* use width if in portrait (use the smaller size to try
-       and prevent image from overflowing page... */
-    img { height: 90%; margin: 0; padding: 0; }
-
-body{width:100%;
-    background-color:black;
-    height:100%;
-    -webkit-transform: rotate(-90deg) scale(.68,.68);
-    -moz-transform:rotate(-90deg) scale(.58,.58) }    }
-
-    .card::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.card {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-</style>
+<link href="{{ asset('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -45,40 +22,25 @@ body{width:100%;
                 <center><h4 class="card-title">Telemarketing</h4></center>
                 <br><br>
                 <div class="">
-                    <div class="alert alert-success bg-success text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 1</h4>
-                        <p>Online</p>
-                    </div>
-                    <div class="alert alert-success bg-success text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 2</h4>
-                        <p>Online</p>
-                    </div>
-                    <div class="alert alert-success bg-success text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 3</h4>
-                        <p>Online</p>
-                    </div>
-
-                    <div class="alert alert-success bg-danger text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 4</h4>
-                        <p>Active 2 Days Ago</p>
-                    </div>
-                    <div class="alert alert-success bg-danger text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 5</h4>
-                        <p>Active 2 Days Ago</p>
-                    </div>
-                    <div class="alert alert-success bg-danger text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 6</h4>
-                        <p>Active 2 Days Ago</p>
-                    </div>
-                     <div class="alert alert-success bg-danger text-white" role="alert" style="height:79px;">
-                        <h4>Bryan 7</h4>
-                        <p>Active 2 Days Ago</p>
-                    </div>
-
+                    @foreach ($getHistoryTele as $item)
+                        @if($item->islogin == 1)
+                        <div class="alert alert-success bg-success text-white" role="alert" style="height:79px;">
+                            <h4>{{ $item->nama }}</h4>
+                            <p>Online</p>
+                        </div>
+                        @else
+                        <div class="alert alert-success bg-danger text-white" role="alert" style="height:79px;">
+                            <h4>{{ $item->nama }}</h4>
+                            <p>{{'Aktif'. ' '. \Carbon\Carbon::parse($item->last_login_at)->diffForHumans() }}</p>
+                        </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
+            {{ $getHistoryTele->links() }}
         </div>
     </div>
+
     <!-- end col -->
     <div class="col-xl-6 col-sm-6">
         <div class="card" style="height:852px;">
@@ -202,9 +164,28 @@ body{width:100%;
                         <div class="card text-white " style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
                             <div class="card-body">
                                 <p>Daily</p>
-                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
+                                <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;" data-bs-toggle="modal" data-bs-target=".daily-spaj">Detail</button>
                                 <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
                             </div>
+                            <div class="modal fade daily-spaj" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title mt-0">Center modal</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                            <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                         </div>
                     </div>
 
@@ -251,7 +232,8 @@ body{width:100%;
                         <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
                     </div>
                     <div class="col-6">
-                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+
+                        <div id="overlapping-bars" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -330,14 +312,14 @@ body{width:100%;
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 ">
-                        <canvas id="lineChart" height="300"></canvas>
+                    <div class="col-4 bg-info">
+                        <div id="simple-line-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
-                    <div class="col-4 ">
+                    <div class="col-4 bg-warning">
                             <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
                     </div>
-                    <div class="col-4 ">
-                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                    <div class="col-4 bg-danger">
+                        <div id="chart-with-area" class="ct-chart ct-golden-section" dir="ltr"></div>
                 </div>
                 </div>
             </div>
@@ -370,7 +352,7 @@ body{width:100%;
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-3">
                             <div class="card text-white bg-warning" style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
                                 <div class="card-body">
@@ -381,14 +363,13 @@ body{width:100%;
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-3">
                             <div class="card text-white bg-danger"  style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
                                 <div class="card-body">
                                     <p>Monthly</p>
                                     <h1>14</h1>
-                                    <b
-                                    \utton type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
+                                    <button type="button" class="btn btn-outline-light waves-effect" style="color:#fff; border-color:#fff;">Detail</button>
                                     <i class="ion ion-md-download"></i>
                                 </div>
                             </div>
@@ -423,13 +404,13 @@ body{width:100%;
                 </div>
                 <div class="row">
                     <div class="col-4 bg-info">
-                        <div id="morris-area-example" class="morris-charts morris-charts-height"></div>
+                        <div id="smil-animations" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                     <div class="col-4 bg-warning">
-                            <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="animating-donut" class="ct-chart ct-golden-section" dir="ltr"></div>
                     </div>
                     <div class="col-4 bg-danger">
-                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="stacked-bar-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
                 </div>
                 </div>
             </div>
@@ -442,13 +423,17 @@ body{width:100%;
 
 @push('js')
 
+<script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
+<script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
     function waktu() {
         var tanggal = new Date();
         setTimeout("waktu()", 1000);
-        document.getElementById(".jam").innerHTML = tanggal.getHours() + ':' + tanggal.getMinutes() + ':' + tanggal.getSeconds();
+        document.getElementById("jam").innerHTML = tanggal.getHours() + ' : ' + tanggal.getMinutes() + ' : ' + tanggal.getSeconds();
     }
 
 </script>

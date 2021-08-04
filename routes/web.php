@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['has_login', 'XSS']], function () {
+Route::group(['middleware' => ['has_login']], function () {
     Route::prefix('management')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::prefix('spaj')->group(function() {
