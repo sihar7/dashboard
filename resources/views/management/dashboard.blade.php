@@ -7,15 +7,15 @@ DASHBOARD | ARWICS
 
 @push('css')
 
-<link href="{{ asset('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
+<link href="{{ URL::to('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
 <style>
-    .telemarketing::-webkit-scrollbar { 
+    .telemarketing::-webkit-scrollbar {
     display: none;  /* Safari and Chrome */
-   
+
 }
 .telemarketing {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none; 
+    scrollbar-width: none;
     overflow: auto;
     list-style: none; /* Firefox */
     background-color: #222222;
@@ -88,7 +88,7 @@ DASHBOARD | ARWICS
             <center>
                 <h4 class="card-title">Hello !</h4></center>
                 <br>
-                <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="260" height="260" src="{{ asset('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
+                <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="260" height="260" src="{{ URL::to('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
                <div class="card-body">
                 <br><br>
                 <center>
@@ -161,7 +161,7 @@ DASHBOARD | ARWICS
                         online
                     </div>
                 </li>
-              
+
             </ul>
         </div>
             <div style="width: 95%;height: 15%;display: flex;justify-content: center;align-items: center;">
@@ -180,7 +180,7 @@ DASHBOARD | ARWICS
                         <div style="width: 30%;height: 100; display: flex;justify-content: center;align-items: center;">
                             <button style="background-color:transparent;border: 1px solid white;color: white;"> + </button>
                     </div>
-                       
+
 
                     </div>
             </div>
@@ -505,10 +505,10 @@ DASHBOARD | ARWICS
 
 @push('js')
 
-<script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
-<script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
+<script src="{{ URL::to('assets/libs/chartist/chartist.min.js') }}"></script>
+<script src="{{ URL::to('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/pages/chartist.init.js') }}"></script>
+<script src="{{ URL::to('assets/js/pages/chartist.init.js') }}"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 

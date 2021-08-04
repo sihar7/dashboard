@@ -12,15 +12,15 @@
     <link rel="shortcut icon" href="https://arwics.com/favicon.png">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/bootstrap-dark.min.css') }}" id="bootstrap-style" rel="stylesheet"
+    <link href="{{ URL::to('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::to('assets/css/bootstrap-dark.min.css') }}" id="bootstrap-style" rel="stylesheet"
         type="text/css" />
 
     <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::to('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/app-dark.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::to('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::to('assets/css/app-dark.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
     @stack('css')
 
@@ -87,23 +87,23 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
     <!--Morris Chart-->
-    <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/morris.js/morris.min.js') }}"></script>
+    <script src="{{ URL::to('assets/libs/raphael/raphael.min.js') }}"></script>
 
 
     @stack('js')
-    <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
+    <script src="{{ URL::to('assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ URL::to('assets/js/app.js') }}"></script>
 </body>
 
 </html>
