@@ -167,11 +167,15 @@ DASHBOARD | ARWICS
             </div>
             <div class="list_table text-center" style="width: 100%;">
                 <ul>
+                    @php
+                        $no = 1;
+                    @endphp
+                    @foreach ($topTsr10 as $item)
                     <li>
                         <div style="height:35vh;">
                             <div
                                 style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
+                                Top {{ $no++ }}
                             </div>
                             <div style="width: 100%;height: 90%;padding: 3px;">
                                 <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
@@ -183,335 +187,25 @@ DASHBOARD | ARWICS
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
+                                        {{ $item->nama_tele }}
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
+                                        {{ $item->spaj_count }} Closing
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
+                                        {{ $item->spaj_count }}  Premi
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
+                                        {{ "Rp " . number_format($item->total_max,0,',','.') }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top 1
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
-                                        Bryan
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3 Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        3000.000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-
-
+                    @endforeach
                 </ul>
             </div>
             <ul>
@@ -539,25 +233,25 @@ DASHBOARD | ARWICS
             <div
                 style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                 <div>Congrats Atas Pencapaianya</div>
-                <div style="font-weight: bold;">Jono</div>
+                <div style="font-weight: bold;">{{ $getTeleReward['nama'] }}</div>
             </div>
             <div
                 style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                 <div>closing</div>
-                <div style="font-weight: bold;">10 Closing</div>
+                <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Closing</div>
 
             </div>
             <div
                 style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                 <div>Premi</div>
-                <div style="font-weight: bold;">10 Premi</div>
+                <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
             </div>
+
             <div
                 style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                 <div>Pendapatan Polis</div>
-                <div style="font-weight: bold;">Rp. 10000000000000000000</div>
+                <div style="font-weight: bold;">{{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
             </div>
-
         </div>
 
     </div>
