@@ -35,7 +35,6 @@ DASHBOARD | ARWICS
     }
 
 
-
     .telemarketing ul li {
         background-color: #00C637;
         height: 50px;
@@ -68,74 +67,6 @@ DASHBOARD | ARWICS
 
 @section('content')
 
-
-<!-- <div class="row">
-    <div class="col-xl-2 col-sm-6">
-        <div class="card" style="height:45vh;" style="background-color:#222222;">
-            <div class="card-body">
-                <center><h4 class="card-title">Telemarketing</h4></center>
-                <br><br>
-            </div>
-        </div>
-    </div> -->
-
-<!-- end col -->
-<!-- <div class="col-xl-7 col-sm-6">
-        <div class="card" style="height:45vh;">
-            <div class="card-body">
-                <center><h2 class="card-title">TOP 10</h2></center>
-                <center>
-                    <br><br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="col-md-6">
-                                <select class="form-control" id="select_top10_1" style="width:175px; height:44px;background-color:#222222;">
-                                    <option value="">Select</option>
-                                    <option value="harian">Harian</option>
-                                    <option value="mingguan">Mingguan</option>
-                                    <option value="tahunan">Tahunan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="col-md-6">
-                                <select class="form-control" id="select_top10_2" style="width:175px; height:44px;background-color:#222222;">
-                                    <option>Select</option>
-                                    <option value="all">Semua</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </center>
-
-            </div>
-        </div>
-    </div> -->
-<!-- <div class="col-xl-3 col-sm-6">
-        <div class="card" style="height:45vh;">
-            <br>
-            <center>
-                <h4 class="card-title">Hello !</h4></center>
-                <br>
-                <center><img class="rounded-circle mt-4 mt-sm-0" alt="200x200" width="260" height="260" src="{{ URL::to('assets/images/users/user-4.jpg') }}" data-holder-rendered="true"></center>
-               <div class="card-body">
-                <br><br>
-                <center>
-                <p class="card-text">Congrats Atas Pencapaiannya !</p>
-                <h2 class="card-text">BRYAN ARDYAWAN</h2>
-                <br>
-                <br>
-                <br><br><br><br>
-                <h4 class="card-text">Pendapatan Polis</h4>
-                <h2 class="card-text">RP 1,432.000</h2>
-                </center>
-                <br>
-                <br>
-            </div>
-        </div>
-    </div> -->
-<!-- add -->
 <div class="row " style="height:43vh">
     <div class="col-xl-2   p-1" style="height: 43vh;">
         <div class="w-100 h-100 p-1 telemarketing">
@@ -145,56 +76,32 @@ DASHBOARD | ARWICS
                 </div>
             </div>
             <div style="width: 100%;height: 65%;overflow: auto;">
-
-
                 <ul>
+                    @foreach ($getHistoryTele as $historyTele)
+                    @if($historyTele->islogin == '1')
                     <li>
                         <div
                             style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            Bryan 1
+                            {{ $historyTele->nama }}
 
                         </div>
                         <div style="width: 100%;height:40%;padding-left: 5px;">
                             online
                         </div>
                     </li>
-                    <li>
+                    @else
+                    <li style="background-color: #DE0000">
                         <div
                             style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            Bryan 1
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            online
-                        </div>
-                    </li>
-                    <li>
-                        <div
-                            style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            Bryan 1
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            online
-                        </div>
-                    </li>
-                    <li>
-                        <div
-                            style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            Bryan 1
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            online
-                        </div>
-                    </li>
-                    <li>
-                        <div
-                            style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            Bryan 1
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            online
-                        </div>
-                    </li>
+                            {{ $historyTele->nama }}
 
+                        </div>
+                        <div style="width: 100%;height:40%;padding-left: 5px;">
+                            {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
+                        </div>
+                    </li>
+                    @endif
+                    @endforeach
                 </ul>
             </div>
             <div style="width: 95%;height: 15%;display: flex;justify-content: center;align-items: center;">
@@ -885,7 +792,7 @@ DASHBOARD | ARWICS
                         </select>
                     </div>
                     <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh;">
-                        
+
                             <select class="form-control" id="select_top10_1"
                                 style="width:175px; height:30px;background-color:#222222;">
                                 <option value="">Select</option>
