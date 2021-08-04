@@ -78,13 +78,13 @@
 
                 </div>
                 <div style="width: 100%;height: 50%;display: flex;justify-content: space-around;align-items: center;">
-                    <a href="/loginManagement"
+                    <a href="{{ url('loginmanagement') }}"
                         style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                         <div>
                             Login Management
                         </div>
                     </a>
-                    <a href="/loginPartner"
+                    <a href="{{ url('loginpartner') }}"
                     style="width: 40%;height: 30%;border-radius: 7px;border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                     <div>
                         Login Partner
