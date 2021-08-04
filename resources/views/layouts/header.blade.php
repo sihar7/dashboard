@@ -1,6 +1,6 @@
 <header id="page-topbar">
     <div
-        style="width: 100%;height: 12vh;display: flex;justify-content: center;align-items: center;background-color: black;">
+        style="width: 100%;height: 10vh;display: flex;justify-content: center;align-items: center;background-color: black;">
         <div
             style="clip-path: polygon(0 0, 100% 0, 88% 100%, 11% 100%);width:50%;height:12vh;background-color:#222222;display: flex;justify-content: center;align-items: center; ">
             <div style="width: 70%;height: 12vh;">
