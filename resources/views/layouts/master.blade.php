@@ -29,7 +29,9 @@
             background-color: black;
             padding-top: 60px!important;
         }
-
+        .main-content{
+            background-color: black
+        }
         ::-webkit-scrollbar {
 
 

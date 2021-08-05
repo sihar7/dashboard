@@ -74,6 +74,73 @@
             }
             DB::commit();
         }
+
+        function policeApprovedChart()
+        {
+            DB::beginTransaction();
+            try {
+                if (Auth::user()->api_token) {
+                    $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                    ->where('mst_spaj_submit.status_approve', 1)
+                    ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
+                    ->groupBy('month_name')
+                    ->orderBy('createdAt')
+                    ->get();
+
+                    // $api[] = ['Bulan', 'Jumlah Spaj'];
+                    // foreach ($spaj as $key => $value) {
+                    //     $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->count];
+                    // }
+
+                    return $spaj;
+
+                } else {
+                    $data = [
+                        'message' => 'Token Tidak Ditemukan',
+                        'error' => true,
+                        'code' => 403
+                    ];
+
+                    return response()->json(['api' => $data], 201);
+                }
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw $e;
+            }
+            DB::commit();
+        }
+
+        function totalPremiumChart()
+        {
+            DB::beginTransaction();
+            try {
+                if (Auth::user()->api_token) {
+                    $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                    ->where('mst_spaj_submit.status_approve', 1)
+                    ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
+                    ->groupBy('month_name')
+                    ->orderBy('sum_nominal', 'ASC')
+                    ->get();
+
+                    return $spaj;
+                } else {
+                    $data = [
+                        'message' => 'Token Tidak Ditemukan',
+                        'error' => true,
+                        'code' => 403
+                    ];
+
+                    return response()->json(['api' => $data], 201);
+                }
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw $e;
+            }
+            DB::commit();
+        }
+
+
+
     }
 
 ?>

@@ -28,11 +28,14 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
-                $data['getHistoryTele']     = $this->tele->getHistoryTele();
-                $data['topTsr10']           = $this->tele->topTsr10();
-                $data['getTeleReward']      = $this->tele->getTeleReward();
-                $data['spajSubmitted']      = $this->spaj->spajSubmitted();
-                $data['premiumSubmitted']   = $this->spaj->premiumSubmitted();
+                $data['getHistoryTele']         = $this->tele->getHistoryTele();
+                $data['topTsr10']               = $this->tele->topTsr10();
+                $data['getTeleReward']          = $this->tele->getTeleReward();
+                $data['spajSubmitted']          = $this->spaj->spajSubmitted();
+                $data['premiumSubmitted']       = $this->spaj->premiumSubmitted();
+                $data['policeApprovedChart']    = $this->spaj->policeApprovedChart();
+                $data['totalPremiumChart']      = $this->spaj->totalPremiumChart();
+
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');
             } else {

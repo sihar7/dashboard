@@ -108,41 +108,35 @@ DASHBOARD | ARWICS
                 <div style="width: 80%;height: 100%;display: flex;">
                     <div style="width: 40%;height: 100%;display: flex;justify-content: center;align-items: center;">
                         Pages
-
                     </div>
                     <div style="width: 30%;height: 100%; display: flex;justify-content: center;align-items: center;">
                         <button style="background-color:transparent;border: 1px solid white;color: white;"> - </button>
                     </div>
-
-
                     <div style="width: 60%;display: flex;justify-content: center;align-items: center;">
                         <div
                             style="width:80%;height: 70%;background-color: transparent;border: 1px solid white;border-radius: 3px;display: flex;justify-content: center;align-items: center;">
                             1
                         </div>
-
-
                     </div>
                     <div style="width: 30%;height: 100; display: flex;justify-content: center;align-items: center;">
                         <button style="background-color:transparent;border: 1px solid white;color: white;"> + </button>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
     </div>
 
-
-
     <div class="col-xl-8 p-1" style="height: 43vh;">
         <div class="w-100 h-100 " style="background-color: #222222;border-radius: 5px;">
             <div style="height: 15%;width: 100%;display: flex;justify-content: center;align-items: center;">
                 <div style="width: 30%;height: 100%;display: flex;">
+                    @php
+                        date_default_timezone_set('Asia/Jakarta');
+                        $bulan = date('Y-m-d');
+                    @endphp
                     <div
                         style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                        TOP 10 </div>
+                        TOP 10 Bulan {{ \Carbon\Carbon::parse($bulan)->isoFormat('MMMM') }}</div>
                     <div
                         style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
                         <select class="form-control" id="select_top10_1"
@@ -181,12 +175,20 @@ DASHBOARD | ARWICS
                                 <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
                                     <div
                                         style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        <div
-                                            style="width: 80px;height:80px;background-color: darkcyan;border-radius: 50%;">
+                                       @if ( $item->foto_tele == null || $item->foto_tele == '-' )
+                                       <div
+                                            style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                                            <img src="https://i.pravatar.cc/50" alt="image" />
                                         </div>
+                                        @else
+                                        <div
+                                            style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                                            <img src="{{ asset('property', $item->foto_tele) }}" alt="image" />
+                                        </div>
+                                       @endif
                                     </div>
                                     <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;">
+                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;font-size:10px;">
                                         {{ $item->nama_tele }}
                                     </div>
                                     <div
@@ -226,29 +228,33 @@ DASHBOARD | ARWICS
             </div>
             <div
                 style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
-                <div style="width: 70px;height: 70px;border-radius: 50%;background-color: orange;">
-
+                <div style="width: 60px;height: 60px;border-radius: 50%;background-color: orange;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                    @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
+                    <img src="https://i.pravatar.cc/60" alt="image" />
+                    @else
+                    <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" />
+                    @endif
                 </div>
             </div>
             <div
-                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                 <div>Congrats Atas Pencapaianya</div>
                 <div style="font-weight: bold;">{{ $getTeleReward['nama'] }}</div>
             </div>
             <div
-                style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                 <div>closing</div>
                 <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Closing</div>
 
             </div>
             <div
-                style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                 <div>Premi</div>
                 <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
             </div>
 
             <div
-                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                 <div>Pendapatan Polis</div>
                 <div style="font-weight: bold;">
                     {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
@@ -380,8 +386,135 @@ DASHBOARD | ARWICS
     </div>
 </div>
 
+<br><br>
 
+<div class="row" style="background-color: #222222;">
+    <div class="col-xl-12">
+        <div class="card" style="background-color:#222222;">
+            <div
+                style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
+                Police Approved
+            </div>
+            <div style="display: flex;justify-content: center;align-items: center;">
+                <div class="row " style="width: 80%;display:flex;justify-content: center;align-items: center;">
+                    <div class="col-lg-2 ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
+<div class="row" style="height:auto;background-color: #222222;">
+    <center>
+        <div class="row" style="display: flex;justify-content: center;align-items: center;">
+            <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
+                <div class="col-lg-3  ">
+                    <div class="card text-white "
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
+                        <div class="card-body">
+                            <p>Daily</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-warning"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
+                        <div class="card-body">
+                            <p>Weekly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="card text-white bg-danger"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
+                        <div class="card-body">
+                            <p>Monthly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-warning"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
+                        <div class="card-body">
+                            <p>Yearly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <div class="col-6" style="height: 40vh;">
+        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+            <div style="width: 50%;height: 100%; text-align: center;">
+                <div>
+                    Police Approve Chart
+                </div>
+                <div style="display: flex;margin-top: 5px;">
+                    <select class="form-control" id="select_top10_1"
+                        style="width:50%; height:34px;background-color:#222222;">
+                        <option value="">Select</option>
+                        <option value="harian">Harian</option>
+                        <option value="mingguan">Mingguan</option>
+                        <option value="tahunan">Tahunan</option>
+                    </select>
+                    <select class="form-control" id="select_top10_1"
+                        style="width:50%; height:34px;background-color:#222222;">
+                        <option value="">Select</option>
+                        <option value="harian">Harian</option>
+                        <option value="mingguan">Mingguan</option>
+                        <option value="tahunan">Tahunan</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div id="policeApprovedChart" style="height: 80%;"></div>
+    </div>
+    <div class="col-6" style="height: 40vh;">
+        <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
+            <div style="width: 50%;height: 100%; text-align: center;">
+                <div>
+                    Total Premium Chart
+                </div>
+                <div style="display: flex;margin-top: 5px;">
+                    <select class="form-control" id="select_top10_1"
+                        style="width:50%; height:34px;background-color:#222222;">
+                        <option value="">Select</option>
+                        <option value="harian">Harian</option>
+                        <option value="mingguan">Mingguan</option>
+                        <option value="tahunan">Tahunan</option>
+                    </select>
+                    <select class="form-control" id="select_top10_1"
+                        style="width:50%; height:34px;background-color:#222222;">
+                        <option value="">Select</option>
+                        <option value="harian">Harian</option>
+                        <option value="mingguan">Mingguan</option>
+                        <option value="tahunan">Tahunan</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="totalPremiumChart" style="height:80%;" dir="ltr"></div>
+    </div>
+</div>
 
 <!-- end row -->
 <div class="row mt-5">
@@ -502,13 +635,13 @@ DASHBOARD | ARWICS
                 </div>
                 <div class="row">
                     <div class="col-4 ">
-                        <div id="simple-line-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
+                        <div id="premiumTahun1Chart" dir="ltr"></div>
                     </div>
                     <div class="col-4">
-                        <div id="morris-donut-example" class="morris-charts morris-charts-height"></div>
+                        <div id="premiumPltpChart"></div>
                     </div>
                     <div class="col-4 ">
-                        <div id="chart-with-area" class="ct-chart ct-golden-section" dir="ltr"></div>
+                        <div id="premiumTotalChart" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -517,98 +650,6 @@ DASHBOARD | ARWICS
 </div>
 <!-- end row -->
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card" style="background-color:#222222;">
-            <div class="card-body">
-                <center>
-                    <h4 class="card-title mb-4">Police Approved</h4>
-                </center>
-                <center>
-                    <div class="row" style="display: flex;justify-content: center;align-items: center;">
-                        <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
-                            <div class="col-lg-3  ">
-                                <div class="card text-white "
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
-                                    <div class="card-body">
-                                        <p>Daily</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-warning"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
-                                    <div class="card-body">
-                                        <p>Weekly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-danger"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
-                                    <div class="card-body">
-                                        <p>Monthly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-warning"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
-                                    <div class="card-body">
-                                        <p>Yearly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </center>
-                <!-- end row -->
-                <div class="row text-center mt-4">
-                    <div class="col-4">
-                        <h5 class="font-size-20">$ 89425</h5>
-                        <p class="text-muted">Marketplace</p>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="font-size-20">$ 56210</h5>
-                        <p class="text-muted">Total Income</p>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="font-size-20">$ 8974</h5>
-                        <p class="text-muted">Last Month</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 bg-info">
-                        <div id="smil-animations" class="ct-chart ct-golden-section" dir="ltr"></div>
-                    </div>
-                    <div class="col-4 bg-warning">
-                        <div id="animating-donut" class="ct-chart ct-golden-section" dir="ltr"></div>
-                    </div>
-                    <div class="col-4 bg-danger">
-                        <div id="stacked-bar-chart" class="ct-chart ct-golden-section" dir="ltr"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 
@@ -636,6 +677,12 @@ DASHBOARD | ARWICS
     google.charts.load('current', { 'packages': ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(premiumChart);
+    google.charts.setOnLoadCallback(policeApprovedChart);
+    google.charts.setOnLoadCallback(totalPremiumChart);
+    google.charts.setOnLoadCallback(premiumTahun1Chart);
+    google.charts.setOnLoadCallback(premiumPltpChart);
+    google.charts.setOnLoadCallback(premiumTotalChart);
+
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -644,8 +691,7 @@ DASHBOARD | ARWICS
             @php
             foreach($spajSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
-                "', ".$spaj -> count.
-                "],";
+                "', '".(int) $spaj -> count."'],";
             }
             @endphp
         ]);
@@ -668,6 +714,7 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
+            colors: '#114EE7',
             bar: { groupWidth: "90.39px" },
             bars: 'vertical',
             isStacked: true
@@ -718,6 +765,202 @@ DASHBOARD | ARWICS
         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
+    function policeApprovedChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Jumlah Spaj'],
+
+            @php
+            foreach($policeApprovedChart as $spaj) {
+                echo "['".\Carbon\Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
+                "', '".(int) $spaj -> count."'],";
+            }
+            @endphp
+        ]);
+
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#114EE7',
+            bar: { groupWidth: "90.39px" },
+            bars: 'vertical',
+            isStacked: true
+        }
+
+        var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+    }
+
+    function totalPremiumChart()
+    {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Total Premi'],
+            @php
+            foreach($totalPremiumChart as $spaj) {
+                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
+                "', '". "Rp" . number_format($spaj -> sum_nominal, 0, ',','.').
+                "'],";
+            }
+            @endphp
+        ]);
+
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#E91140',
+            bar: { groupWidth: "90.39px" },
+            bars: 'vertical',
+            isStacked: true
+        }
+
+        var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    function premiumTahun1Chart()
+    {
+        var data = google.visualization.arrayToDataTable([
+           ['Bulan', 'Jumlah Spaj'],
+           ['Januari', '2'],
+           ['Februari', '3'],
+           ['Maret', '4']
+        ]);
+
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#114EE7',
+            bar: { groupWidth: "90.39px" },
+            bars: 'vertical',
+            isStacked: true
+        }
+
+        var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    function premiumPltpChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Total Premi'],
+            ['Januari', 'Rp. 100.000'],
+            ['Februari', 'Rp. 150.000'],
+            ['Maret', 'Rp. 200.000']
+         ]);
+
+         var options = {
+             legend: {
+                 position: 'top',
+                 maxLines: 3
+             },
+             chartArea: {
+                 backgroundColor: {
+                 fill: '#222222',
+                 fillOpacity: 0.1
+                 },
+             },
+             // Colors the entire chart area, simple version
+             // backgroundColor: '#FF0000',
+             // Colors the entire chart area, with opacity
+             backgroundColor: {
+                 fill: '#222222',
+                 fillOpacity: 0.8
+             },
+             colors: '#E91140',
+             bar: { groupWidth: "90.39px" },
+             bars: 'vertical',
+             isStacked: true
+         }
+
+         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+         chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+     function premiumTotalChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Total Premi'],
+            ['Januari', 'Rp. 100.000'],
+            ['Februari', 'Rp. 150.000'],
+            ['Maret', 'Rp. 200.000']
+         ]);
+
+         var options = {
+             legend: {
+                 position: 'top',
+                 maxLines: 3
+             },
+             chartArea: {
+                 backgroundColor: {
+                 fill: '#222222',
+                 fillOpacity: 0.1
+                 },
+             },
+             // Colors the entire chart area, simple version
+             // backgroundColor: '#FF0000',
+             // Colors the entire chart area, with opacity
+             backgroundColor: {
+                 fill: '#222222',
+                 fillOpacity: 0.8
+             },
+             colors: '#ECD11E',
+             bar: { groupWidth: "90.39px" },
+             bars: 'vertical',
+             isStacked: true
+         }
+
+         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+         chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
 
 </script>
 @endpush

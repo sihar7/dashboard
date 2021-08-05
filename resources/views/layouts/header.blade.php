@@ -11,13 +11,13 @@
                             style="width: 100px;height: 100px;object-fit: contain;" alt="">
                     </div>
                     <div class="col col-lg-4"
-                        style="margin: 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+                        style="margin: 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:10px;">
                         <div class="row">
 
                             @php
                             $tanggal = mktime(date('m'), date("d"), date('Y'));
                             @endphp
-                            <h6> {{ \Carbon\Carbon::parse($tanggal)->isoFormat('dddd, D MMMM Y') }}</h6>
+                            <div> {{ \Carbon\Carbon::parse($tanggal)->isoFormat('dddd, D MMMM Y') }}</div>
                         </div>
                         <div class="row">
                             <h3 id="jam"></h3>
@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="d-flex" style="background-color:#000000;position: absolute;right:10px;top:10px">
+        <div class="d-flex" style="background-color:transparent;position: absolute;right:10px;top:0px; height: 10vh;">
 
             <div class="dropdown d-none d-lg-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
@@ -172,3 +172,4 @@
 
 
 </header>
+

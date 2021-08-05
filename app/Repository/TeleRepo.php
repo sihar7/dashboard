@@ -13,7 +13,7 @@
         {
             try {
                 $tele = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-                ->select(DB::raw('count(mst_spaj_submit.id_telemarketing) as spaj_count, sum(mst_spaj_submit.nominal_premi) as total_max, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as id_tele, mst_spaj_submit.tgl_submit'))
+                ->select(DB::raw('count(mst_spaj_submit.id_telemarketing) as spaj_count, sum(mst_spaj_submit.nominal_premi) as total_max, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as id_tele, mst_telemarketing.foto as foto_tele, mst_spaj_submit.tgl_submit'))
                 ->where('mst_spaj_submit.status_approve', 1)
                 ->whereMonth('mst_spaj_submit.tgl_submit', date('m'))
                 ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
@@ -40,7 +40,7 @@
                 $data['total_pendapatan'] = $item->sum;;
                 $data['nama']             = $tele->nama_tele;
                 $data['count']            = $tele->spaj_count;
-
+                $data['foto_tele']        = $tele->foto_tele;
                 return $data;
 
               } catch (ModelNotFoundException $exception) {
@@ -73,7 +73,7 @@
         function topTsr10()
         {
             $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-            ->select(DB::raw('count(mst_spaj_submit.tgl_submit) as spaj_count, sum(mst_spaj_submit.nominal_premi) as total_max, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as telemarketing_id, mst_spaj_submit.tgl_submit'))
+            ->select(DB::raw('count(mst_spaj_submit.tgl_submit) as spaj_count, sum(mst_spaj_submit.nominal_premi) as total_max, mst_telemarketing.nama as nama_tele, mst_telemarketing.id as telemarketing_id, mst_telemarketing.foto as foto_tele, mst_spaj_submit.tgl_submit'))
             ->whereMonth('mst_spaj_submit.tgl_submit', date('m'))
             ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
             ->groupBy('mst_spaj_submit.id_telemarketing')
