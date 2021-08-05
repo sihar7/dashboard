@@ -350,7 +350,7 @@ DASHBOARD | ARWICS
             </div>
 
         </div>
-        <div id="morris-area-example" class="morris-charts morris-charts-height" style="height: 80%;"></div>
+        <div id="spajSubmittedChart" style="height: 80%;"></div>
     </div>
     <div class="col-6" style="height: 40vh;">
         <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
@@ -376,7 +376,7 @@ DASHBOARD | ARWICS
                 </div>
             </div>
         </div>
-        <div id="overlapping-bars" class="ct-chart ct-golden-section" style="height:80%;" dir="ltr"></div>
+        <div id="premiumSubmittedChart" style="height:80%;" dir="ltr"></div>
     </div>
 </div>
 
@@ -635,6 +635,7 @@ DASHBOARD | ARWICS
 
     google.charts.load('current', { 'packages': ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(premiumChart);
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -651,12 +652,8 @@ DASHBOARD | ARWICS
 
         var options = {
             legend: {
-                position: 'none'
-            },
-            axes: {
-                x: {
-                    0: { side: 'top', label: 'Percentage'}
-                }
+                position: 'top',
+                maxLines: 3
             },
             chartArea: {
                 backgroundColor: {
@@ -671,13 +668,55 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            bar: { groupWidth: "90%" },
-            bars: 'vertical'
+            bar: { groupWidth: "90.39px" },
+            bars: 'vertical',
+            isStacked: true
         }
 
-        var chart = new google.charts.Bar(document.getElementById('morris-area-example'));
+        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
 
+    }
+
+    function premiumChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Total Premi'],
+            @php
+            foreach($premiumSubmitted as $spaj) {
+                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
+                "', '". "Rp" . number_format($spaj -> sum_nominal, 0, ',','.').
+                "'],";
+            }
+            @endphp
+        ]);
+
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#E91140',
+            bar: { groupWidth: "90.39px" },
+            bars: 'vertical',
+            isStacked: true
+        }
+
+        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
 </script>

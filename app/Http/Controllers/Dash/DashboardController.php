@@ -32,7 +32,7 @@ class DashboardController extends Controller
                 $data['topTsr10']           = $this->tele->topTsr10();
                 $data['getTeleReward']      = $this->tele->getTeleReward();
                 $data['spajSubmitted']      = $this->spaj->spajSubmitted();
-
+                $data['premiumSubmitted']   = $this->spaj->premiumSubmitted();
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');
             } else {
