@@ -6,7 +6,6 @@ DASHBOARD | ARWICS
 
 
 @push('css')
-
 <link href="{{ URL::to('assets/libs/chartist/chartist.min.css') }}" rel="stylesheet">
 <style>
     .telemarketing::-webkit-scrollbar {
@@ -62,6 +61,7 @@ DASHBOARD | ARWICS
         margin-left: 1px;
 
     }
+
 </style>
 @endpush
 
@@ -168,7 +168,7 @@ DASHBOARD | ARWICS
             <div class="list_table text-center" style="width: 100%;">
                 <ul>
                     @php
-                        $no = 1;
+                    $no = 1;
                     @endphp
                     @foreach ($topTsr10 as $item)
                     <li>
@@ -195,7 +195,7 @@ DASHBOARD | ARWICS
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        {{ $item->spaj_count }}  Premi
+                                        {{ $item->spaj_count }} Premi
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
@@ -250,7 +250,8 @@ DASHBOARD | ARWICS
             <div
                 style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
                 <div>Pendapatan Polis</div>
-                <div style="font-weight: bold;">{{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
+                <div style="font-weight: bold;">
+                    {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
             </div>
         </div>
 
@@ -323,10 +324,6 @@ DASHBOARD | ARWICS
                     detail</div><i class="ion ion-md-download"></i>
             </div>
         </div>
-
-
-
-
     </div>
     <div class="col-5" style="height: 40vh;">
         <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
@@ -359,7 +356,7 @@ DASHBOARD | ARWICS
         <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
             <div style="width: 50%;height: 100%; text-align: center;">
                 <div>
-                    Premium Tahun 1 chart
+                    Premium Submitted Chart
                 </div>
                 <div style="display: flex;margin-top: 5px;">
                     <select class="form-control" id="select_top10_1"
@@ -392,7 +389,7 @@ DASHBOARD | ARWICS
         <div class="card" style="background-color:#222222;">
             <div class="card-body">
                 <center>
-                    <h4 class="card-title mb-4">SPAJ SUBMITTED</h4>
+                    <h4 class="card-title mb-4">PREMIUM TOTAL</h4>
                 </center>
 
                 <center>
@@ -459,7 +456,7 @@ DASHBOARD | ARWICS
                             <option value="">Select</option>
                             <option value="harian">Harian</option>
                             <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
+                            <option value="tahunan">Tahunan</ option>
                         </select>
                         <select class="form-control" id="select_top10_1"
                             style="width:175px; height:30px;background-color:#222222;">
@@ -487,20 +484,20 @@ DASHBOARD | ARWICS
                     </div>
                     <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh;">
 
-                            <select class="form-control" id="select_top10_1"
-                                style="width:175px; height:30px;background-color:#222222;">
-                                <option value="">Select</option>
-                                <option value="harian">Harian</option>
-                                <option value="mingguan">Mingguan</option>
-                                <option value="tahunan">Tahunan</option>
-                            </select>
-                            <select class="form-control" id="select_top10_1"
-                                style="width:175px; height:30px;background-color:#222222;">
-                                <option value="">Select</option>
-                                <option value="harian">Harian</option>
-                                <option value="mingguan">Mingguan</option>
-                                <option value="tahunan">Tahunan</option>
-                            </select>
+                        <select class="form-control" id="select_top10_1"
+                            style="width:175px; height:30px;background-color:#222222;">
+                            <option value="">Select</option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                        <select class="form-control" id="select_top10_1"
+                            style="width:175px; height:30px;background-color:#222222;">
+                            <option value="">Select</option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -522,13 +519,11 @@ DASHBOARD | ARWICS
 
 <div class="row">
     <div class="col-xl-12">
-
         <div class="card" style="background-color:#222222;">
             <div class="card-body">
                 <center>
-                    <h4 class="card-title mb-4">SPAJ SUBMITTED</h4>
+                    <h4 class="card-title mb-4">Police Approved</h4>
                 </center>
-
                 <center>
                     <div class="row" style="display: flex;justify-content: center;align-items: center;">
                         <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
@@ -544,7 +539,6 @@ DASHBOARD | ARWICS
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-3">
                                 <div class="card text-white bg-warning"
                                     style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
@@ -623,17 +617,68 @@ DASHBOARD | ARWICS
 
 <script src="{{ URL::to('assets/libs/chartist/chartist.min.js') }}"></script>
 <script src="{{ URL::to('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
-
 <script src="{{ URL::to('assets/js/pages/chartist.init.js') }}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
     function waktu() {
         var tanggal = new Date();
         setTimeout("waktu()", 1000);
-        document.getElementById("jam").innerHTML = tanggal.getHours() + ' : ' + tanggal.getMinutes() + ' : ' + tanggal.getSeconds();
+        document.getElementById("jam").innerHTML = tanggal.getHours() + ' : ' + tanggal.getMinutes() + ' : ' + tanggal
+            .getSeconds();
+    }
+
+    google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Jumlah Spaj'],
+
+            @php
+            foreach($spajSubmitted as $spaj) {
+                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
+                "', ".$spaj -> count.
+                "],";
+            }
+            @endphp
+        ]);
+
+        var options = {
+            legend: {
+                position: 'none'
+            },
+            axes: {
+                x: {
+                    0: { side: 'top', label: 'Percentage'}
+                }
+            },
+            chartArea: {
+                backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            bar: { groupWidth: "90%" },
+            bars: 'vertical'
+        }
+
+        var chart = new google.charts.Bar(document.getElementById('morris-area-example'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
     }
 
 </script>
 @endpush
-

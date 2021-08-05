@@ -9,7 +9,6 @@
     use App\Models\Telemarketing;
     class TeleRepo
     {
-
         function getTeleReward()
         {
             try {
