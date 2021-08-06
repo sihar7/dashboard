@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $this->spaj = $spaj;
         $this->tele = $tele;
-        $this->middleware(['has_login']);
+        $this->middleware(['has_login', 'XSS']);
     }
 
     function index(Request $request)

@@ -12,12 +12,13 @@ Route::post('postlogin', [LoginController::class, 'postlogin'])->middleware('thr
 Route::post('logout', [LoginController::class, 'logout']);
 Route::get('loginpartner', [LoginController::class, 'loginpartner']);
 Route::get('loginmanagement', [LoginController::class, 'loginmanagement']);
+Route::get('logintele', [LoginController::class, 'logintele']);
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['has_login']], function () {
+Route::group(['middleware' => ['has_login', 'XSS']], function () {
     Route::prefix('management')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::prefix('spaj')->group(function() {

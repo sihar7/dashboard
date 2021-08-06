@@ -87,6 +87,40 @@ class LoginController extends Controller
 
                         Auth::login($user, $remember_me);
                         return response()->json(['message' => 2 ], 201);
+                     } elseif( $request->user()->hasRole('telemarketing') ) {
+                        if ($cek_online->id_telemarketing != null && $cek_online->id_telemarketing != 0) {
+                            $get_asuransi = User::join('mst_telemarketing', 'mst_telemarketing.id_telemarketing', '=', 'mst_telemarketing.id')
+                            ->where('mst_user.username', $cek_online->username)
+                            ->select('mst_user.*', 'mst_telemarketing.nama as nama_tele', 'mst_telemarketing.foto as foto_tele', 'mst_telemarketing.id as tele_id')->first();
+
+                            $user                = User::cekUsername($username);
+                            $user->last_login_at = Carbon::now()->toDateTimeString();
+                            $user->last_login_ip = $request->ip();
+                            $user->islogin       = 1;
+                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->save();
+
+                            $data_session = [
+                                'nama_tele' => $get_asuransi->nama_tele,
+                                'foto_tele' => $get_asuransi->foto_tele
+                            ];
+
+                            $request->session()->put($data_session);
+                            Log::info('Berhasil Login Dengan Role Partner dan Username serta asuransi : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token . 'Asuransi' . $get_asuransi->nama_asuransi);
+
+                        } else {
+                            $user                = User::cekUsername($username);
+                            $user->last_login_at = Carbon::now()->toDateTimeString();
+                            $user->last_login_ip = $request->ip();
+                            $user->islogin       = 1;
+                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->save();
+                        }
+                        Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token);
+
+
+                        Auth::login($user, $remember_me);
+                        return response()->json(['message' => 7 ], 201);
                     }
                 } else {
                     Log::info('User Already Login : '.$request->username);
@@ -129,6 +163,15 @@ class LoginController extends Controller
         $data['nama'] = 'Partner';
 
         Session::put('url.intended',URL::previous());
+        return view('auth.login', $data);
+    }
+
+    function logintele()
+    {
+        $data['judul'] = 'Login Tele';
+        $data['nama']  = 'Telemarketing';
+
+        Session::put('url.intended', URL::previous());
         return view('auth.login', $data);
     }
 
