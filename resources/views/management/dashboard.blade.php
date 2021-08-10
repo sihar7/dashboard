@@ -62,6 +62,7 @@ DASHBOARD | ARWICS
 
     }
 
+
 </style>
 @endpush
 
@@ -149,7 +150,6 @@ DASHBOARD | ARWICS
                     </div>
                     <div
                         style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-
                         <select class="form-control" id="select_top10_2"
                             style="width:140px; height:30px;background-color:#222222;">
                             <option>Select</option>
@@ -271,7 +271,7 @@ DASHBOARD | ARWICS
         <div class="card" style="background-color:#222222;">
             <div
                 style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
-                SPAJ Submited
+                Spaj Submitted
             </div>
             <div style="display: flex;justify-content: center;align-items: center;">
                 <div class="row " style="width: 80%;display:flex;justify-content: center;align-items: center;">
@@ -283,70 +283,79 @@ DASHBOARD | ARWICS
     </div>
 
 </div>
-<div class="row" style="height:40vh;background-color: #222222;">
-    <div class="col-1"
-        style="height: 40vh;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-        <div style="width: 95px;height: 95px;background: linear-gradient(45deg, #FF00C7, #020202);;margin: 2px;">
-            <div style="width: 100%;height: 20%;text-align: center;">
-                Daily
-            </div>
-            <div
-                style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;font-size: 40px;font-weight: bold;">
-                15
-            </div>
-            <div style="display: flex;justify-content: center;align-items: center;width: 100%;">
-                <div
-                    style="width: 60px;height: 30px; border: 1px solid white;border-radius: 5px;display: flex;align-items: center;justify-content: center;margin: 3px;">
-                    detail</div><i class="ion ion-md-download"></i>
-            </div>
-        </div>
+<div class="row" style="height:auto;background-color: #222222;">
+    <center>
+        <div class="row" style="display: flex;justify-content: center;align-items: center;">
+            <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
+                <div class="col-lg-3  ">
+                    <div class="card text-white "
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
+                        <div class="card-body">
+                            <p>Daily</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-warning"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
+                        <div class="card-body">
+                            <p>Weekly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
 
-        <div style="width: 95px;height: 95px;background: linear-gradient(45deg, #0049FF, #020202);;margin: 2px;">
-            <div style="width: 100%;height: 20%;text-align: center;">
-                Daily
-            </div>
-            <div
-                style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;font-size: 40px;font-weight: bold;">
-                15
-            </div>
-            <div style="display: flex;justify-content: center;align-items: center;width: 100%;">
-                <div
-                    style="width: 60px;height: 30px; border: 1px solid white;border-radius: 5px;display: flex;align-items: center;justify-content: center;margin: 3px;">
-                    detail</div><i class="ion ion-md-download"></i>
-            </div>
-        </div>
-
-        <div style="width: 95px;height: 95px; background: linear-gradient(45deg, yellow, #020202);">
-            <div style="width: 100%;height: 20%;text-align: center;">
-                Daily
-            </div>
-            <div
-                style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;font-size: 40px;font-weight: bold;">
-                15
-            </div>
-            <div style="display: flex;justify-content: center;align-items: center;width: 100%;">
-                <div
-                    style="width: 60px;height: 30px; border: 1px solid white;border-radius: 5px;display: flex;align-items: center;justify-content: center;margin: 3px;">
-                    detail</div><i class="ion ion-md-download"></i>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-danger"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
+                        <div class="card-body">
+                            <p>Monthly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-warning"
+                        style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
+                        <div class="card-body">
+                            <p>Yearly</p>
+                            <h1>14</h1>
+                            <button type="button" class="btn btn-outline-light waves-effect"
+                                style="color:#fff; border-color:#fff;">Detail</button>
+                            <i class="ion ion-md-download"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-5" style="height: 40vh;">
+    </center>
+    <div class="col-6" style="height: 40vh;">
         <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
             <div style="width: 50%;height: 100%; text-align: center;">
                 <div>
-                    SPAJ Submited Chart
+                    Spaj Submitted Chart
                 </div>
                 <div style="display: flex;margin-top: 5px;">
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
                         <option value="tahunan">Tahunan</option>
                     </select>
+                    &nbsp;
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
@@ -354,7 +363,12 @@ DASHBOARD | ARWICS
                     </select>
                 </div>
             </div>
-
+            <a href="#"
+                style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                <div>
+                    Detail
+                </div>
+            </a>
         </div>
         <div id="spajSubmittedChart" style="height: 80%;"></div>
     </div>
@@ -366,21 +380,26 @@ DASHBOARD | ARWICS
                 </div>
                 <div style="display: flex;margin-top: 5px;">
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;color: white;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
                         <option value="tahunan">Tahunan</option>
                     </select>
-                    <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                    <select class="form-control" id="select_top10_2"
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;color: white;">
                         <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
+                        <option value="all">Semua</option>
                     </select>
                 </div>
             </div>
+
+            <a href="#"
+                style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                <div>
+                    Detail
+                </div>
+            </a>
         </div>
         <div id="premiumSubmittedChart" style="height:80%;" dir="ltr"></div>
     </div>
@@ -707,6 +726,7 @@ DASHBOARD | ARWICS
                 fillOpacity: 0.1
                 },
             },
+            responsive: true,
             // Colors the entire chart area, simple version
             // backgroundColor: '#FF0000',
             // Colors the entire chart area, with opacity
@@ -714,15 +734,24 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#114EE7',
+            speed:3000,
+            colors: '#FB6EAA',
             bar: { groupWidth: "90.39px" },
             bars: 'vertical',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max:12,
+                    min:0
+                }
+            },
+            width: '100%',
+            height: '75%',
+            responsive: true,
             isStacked: true
         }
-
         var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
-
     }
 
     function premiumChart()
@@ -731,13 +760,12 @@ DASHBOARD | ARWICS
             ['Bulan', 'Total Premi'],
             @php
             foreach($premiumSubmitted as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
-                "', '". "Rp" . number_format($spaj -> sum_nominal, 0, ',','.').
+                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', '". "Rp" . number_format($spaj->sum_nominal, 0, ',','.').
                 "'],";
             }
             @endphp
         ]);
-
         var options = {
             legend: {
                 position: 'top',
@@ -746,22 +774,28 @@ DASHBOARD | ARWICS
             chartArea: {
                 backgroundColor: {
                 fill: '#222222',
-                fillOpacity: 0.1
+                fillOpacity: 0.1,
+                width: '50%'
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#E91140',
             bar: { groupWidth: "90.39px" },
             bars: 'vertical',
-            isStacked: true
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max:12,
+                    min:0
+                }
+            },
+            width: '90.39px',
+            responsive: true,
+            colors: '#FB6EAA',
+            bars: 'vertical',
         }
-
         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
@@ -770,7 +804,6 @@ DASHBOARD | ARWICS
     {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Jumlah Spaj'],
-
             @php
             foreach($policeApprovedChart as $spaj) {
                 echo "['".\Carbon\Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
@@ -781,8 +814,9 @@ DASHBOARD | ARWICS
 
         var options = {
             legend: {
-                position: 'top',
-                maxLines: 3
+                align: 'right',
+                verticalAlign: 'middle',
+                layout: 'vertical'
             },
             chartArea: {
                 backgroundColor: {
@@ -800,7 +834,17 @@ DASHBOARD | ARWICS
             colors: '#114EE7',
             bar: { groupWidth: "90.39px" },
             bars: 'vertical',
-            isStacked: true
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max:12,
+                    min:0
+                }
+            },
+            width: '90.39px',
+            bars: 'vertical',
+            isStacked: true,
+            responsive: true
         }
 
         var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
@@ -810,7 +854,6 @@ DASHBOARD | ARWICS
 
     function totalPremiumChart()
     {
-
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Total Premi'],
             @php
@@ -840,9 +883,26 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max:100,
+                    min:0
+                }
+            },
             colors: '#E91140',
             bar: { groupWidth: "90.39px" },
             bars: 'vertical',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max:12,
+                    min:0
+                }
+            },
+            width: '90.39px',
+            bars: 'vertical',
+            responsive: true,
             isStacked: true
         }
 

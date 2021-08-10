@@ -55,10 +55,16 @@
                     ->where('mst_spaj_submit.status_approve', 0)
                     ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
                     ->groupBy('month_name')
-                    ->orderBy('sum_nominal', 'ASC')
+                    ->orderBy('createdAt')
                     ->get();
 
+                    // $api[] = ['Bulan', 'Jumlah Spaj'];
+                    // foreach ($spaj as $key => $value) {
+                    //     $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->count];
+                    // }
+
                     return $spaj;
+
                 } else {
                     $data = [
                         'message' => 'Token Tidak Ditemukan',

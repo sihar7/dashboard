@@ -10,6 +10,8 @@ use App\Models\Spaj;
 use App\Repository\TeleRepo;
 use App\Repository\SpajSubmittedRepo;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+
 class DashboardController extends Controller
 {
 
@@ -53,5 +55,23 @@ class DashboardController extends Controller
             abort(403);
         }
     }
+
+    // function indexPdf()
+    // {
+    //     return view('pdf.index');
+    // }
+
+    // function createPdf()
+    // {
+    //     $pdf = PDF::loadView('pdf.pdf');
+
+    //     $path = public_path('pdf/');
+    //     $fileName =  time().'.'. 'pdf' ;
+    //     $pdf->save($path . '/' . $fileName);
+
+    //     $pdf = public_path('pdf/'.$fileName);
+    //     set_time_limit(300);
+    //     return response()->download($pdf);
+    // }
 
 }

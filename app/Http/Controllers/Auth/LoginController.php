@@ -18,6 +18,18 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
+
+    function generateRandomString($length = 80)
+    {
+        $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $panjang_karakter = strlen($karakkter);
+        $str = '';
+        for ($i = 0; $i < $length; $i++) {
+            $str .= $karakkter[rand(0, $panjang_karakter - 1)];
+        }
+        return $str;
+    }
+
     function postlogin(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -45,7 +57,7 @@ class LoginController extends Controller
                         $user->last_login_at  = Carbon::now()->toDateTimeString();
                         $user->last_login_ip  = $request->ip();
                         $user->islogin        = 1;
-                        $user->api_token      = 'TOKEN-AUTH-'.$newtoken;
+                        $user->api_token      = 'TOKEN-MANAGEMENT-'.$newtoken;
                         $user->save();
 
                         Auth::login($user, $remember_me);
@@ -54,6 +66,7 @@ class LoginController extends Controller
                         return response()->json(['message' => 1 ], 201);
 
                     } elseif( $request->user()->hasRole('partner') ) {
+
                         if ($cek_online->id_asuransi != null && $cek_online->id_asuransi != 0) {
                             $get_asuransi = User::join('mst_asuransi', 'mst_user.id_asuransi', '=', 'mst_asuransi.id')
                             ->where('mst_user.username', $cek_online->username)
@@ -63,7 +76,7 @@ class LoginController extends Controller
                             $user->last_login_at = Carbon::now()->toDateTimeString();
                             $user->last_login_ip = $request->ip();
                             $user->islogin       = 1;
-                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->api_token     = 'PARTNER-TOKEN-'.$newtoken;
                             $user->save();
 
                             $data_session = [
@@ -79,11 +92,10 @@ class LoginController extends Controller
                             $user->last_login_at = Carbon::now()->toDateTimeString();
                             $user->last_login_ip = $request->ip();
                             $user->islogin       = 1;
-                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->api_token     = 'PARTNER-TOKEN-'.$newtoken;
                             $user->save();
                         }
                         Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token);
-
 
                         Auth::login($user, $remember_me);
                         return response()->json(['message' => 2 ], 201);
@@ -97,8 +109,14 @@ class LoginController extends Controller
                             $user->last_login_at = Carbon::now()->toDateTimeString();
                             $user->last_login_ip = $request->ip();
                             $user->islogin       = 1;
-                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->api_token     = 'TELE-TOKEN'.$newtoken;
                             $user->save();
+
+                            $tele                = DB::table('mst_telemarketing')->whereId($get_asuransi->tele_id)
+                            ->first();
+                            $tele->islogin       = 1;
+                            $tele->last_login_at = Carbon::now()->toDateTimeString();
+                            $tele->save();
 
                             $data_session = [
                                 'nama_tele' => $get_asuransi->nama_tele,
@@ -113,7 +131,7 @@ class LoginController extends Controller
                             $user->last_login_at = Carbon::now()->toDateTimeString();
                             $user->last_login_ip = $request->ip();
                             $user->islogin       = 1;
-                            $user->api_token     = 'TOKEN-AUTH-'.$newtoken;
+                            $user->api_token     = 'TELE-TOKEN-'.$newtoken;
                             $user->save();
                         }
                         Log::info('Berhasil Login Dengan Role Partner dan Username : '.$request->username . ' '  . 'Token' . ' ' . $user->api_token);
@@ -134,19 +152,6 @@ class LoginController extends Controller
           } catch (\Exception $e) {
               return response()->json([ 'error' => $e->getMessage() ]);
           }
-
-
-    }
-
-    function generateRandomString($length = 80)
-    {
-        $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $panjang_karakter = strlen($karakkter);
-        $str = '';
-        for ($i = 0; $i < $length; $i++) {
-            $str .= $karakkter[rand(0, $panjang_karakter - 1)];
-        }
-        return $str;
     }
 
     function loginmanagement()
@@ -177,20 +182,39 @@ class LoginController extends Controller
 
     function logout(Request $request)
     {
-        if($request->user()->hasRole('management')) {
+        if ( $request->user()->hasRole('management') ) {
+
             $user = User::whereId(Auth::id())->first();
             $user->islogin = 0;
             $user->save();
 
             Auth::logout();
+
             return redirect('loginmanagement');
-        } else {
+
+        } elseif ( $request->user()->hasRole('partner') ) {
+
             $user = User::whereId(Auth::id())->first();
             $user->islogin = 0;
             $user->save();
 
             Auth::logout();
+
             return redirect('loginpartner');
+
+        } elseif( $request->user()->hasRole('telemarketing') ) {
+
+            $tele = DB::table('mst_telemarketing')->where('id', Auth::id())->first();
+            $tele->islogin = 0;
+            $tele->save();
+
+            $user = User::whereId(Auth::id())->first();
+            $user->islogin = 1;
+            $user->save();
+
+            Auth::logout();
+
+            return redirect('logintele');
         }
     }
 }

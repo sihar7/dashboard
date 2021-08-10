@@ -8,6 +8,9 @@ use App\Http\Controllers\BE\TeleController;
 
 
 
+Route::get('pdf/preview', [DashboardController::class, 'indexPdf']);
+Route::get('pdf/generate', [DashboardController::class, 'createPdf']);
+
 Route::post('postlogin', [LoginController::class, 'postlogin'])->middleware('throttle:60,1');
 Route::post('logout', [LoginController::class, 'logout']);
 Route::get('loginpartner', [LoginController::class, 'loginpartner']);
