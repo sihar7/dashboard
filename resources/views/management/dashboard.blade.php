@@ -8,75 +8,17 @@ DASHBOARD | ARWICS
 @push('css')
 
 <!-- DataTables -->
-<link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
 
 <!-- Responsive datatable examples -->
-<link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-    <style>
-    .telemarketing::-webkit-scrollbar {
-        display: none;
-        /* Safari and Chrome */
-    }
+<link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet"
+    type="text/css" />
 
-    .telemarketing {
-        -ms-overflow-style: none;
-        /* Internet Explorer 10+ */
-        scrollbar-width: none;
-        overflow: auto;
-        list-style: none;
-        /* Firefox */
-        background-color: #222222;
-        border-radius: 5px;
-    }
-
-    .telemarketing ul {
-        list-style: none;
-        padding: 0;
-        padding-bottom: 10%;
-    }
-
-
-    .telemarketing ul li {
-        background-color: #00C637;
-        height: 50px;
-        margin-top: 4px;
-        border-radius: 5px;
-    }
-
-    .list_table {
-        padding: 2px;
-
-    }
-
-    .list_table ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: inline-flex;
-
-    }
-
-    .list_table ul li {
-
-        width: 100px;
-        height: 90%;
-        margin-left: 1px;
-
-    }
-
-    thead input {
-        width: 125px;
-        height: 23px;
-        left: 148px;
-        top: 78px;
-
-        border: 1px solid #ffffff;
-        box-sizing: border-box;
-        border-radius: 3px;
-
-     
-</style>
 @endpush
 
 @section('content')
@@ -145,8 +87,8 @@ DASHBOARD | ARWICS
             <div style="height: 15%;width: 100%;display: flex;justify-content: center;align-items: center;">
                 <div style="width: 30%;height: 100%;display: flex;">
                     @php
-                        date_default_timezone_set('Asia/Jakarta');
-                        $bulan = date('Y-m-d');
+                    date_default_timezone_set('Asia/Jakarta');
+                    $bulan = date('Y-m-d');
                     @endphp
                     <div
                         style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
@@ -188,8 +130,8 @@ DASHBOARD | ARWICS
                                 <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
                                     <div
                                         style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                       @if ( $item->foto_tele == null || $item->foto_tele == '-' )
-                                       <div
+                                        @if ( $item->foto_tele == null || $item->foto_tele == '-' )
+                                        <div
                                             style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
                                             <img src="https://i.pravatar.cc/50" alt="image" />
                                         </div>
@@ -198,7 +140,7 @@ DASHBOARD | ARWICS
                                             style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
                                             <img src="{{ asset('property', $item->foto_tele) }}" alt="image" />
                                         </div>
-                                       @endif
+                                        @endif
                                     </div>
                                     <div
                                         style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;font-size:10px;">
@@ -241,7 +183,8 @@ DASHBOARD | ARWICS
             </div>
             <div
                 style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
-                <div style="width: 60px;height: 60px;border-radius: 50%;background-color: orange;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                <div
+                    style="width: 60px;height: 60px;border-radius: 50%;background-color: orange;display:flex;justify-content:center;align-items:center;object-fit:contain;">
                     @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
                     <img src="https://i.pravatar.cc/60" alt="image" />
                     @else
@@ -306,7 +249,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Daily</p>
                             <h1>{{ $spajSubmittedCountDaily }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedDaily" data-bs-target=".detailSpajSubmittedDaily" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedDaily"
+                                data-bs-target=".detailSpajSubmittedDaily" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
                         </div>
@@ -318,7 +262,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Weekly</p>
                             <h1>{{ $spajSubmittedCountWeekly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedWeekly" data-bs-target=".detailSpajSubmittedWeekly" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedWeekly"
+                                data-bs-target=".detailSpajSubmittedWeekly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
@@ -331,7 +276,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Monthly</p>
                             <h1>{{ $spajSubmittedCountMonthly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedMonthly" data-bs-target=".detailSpajSubmittedMonthly" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedMonthly"
+                                data-bs-target=".detailSpajSubmittedMonthly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
@@ -343,14 +289,15 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Yearly</p>
                             <h1>{{ $spajSubmittedCountYearly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedYearly" data-bs-target=".detailSpajSubmittedYearly" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedYearly"
+                                data-bs-target=".detailSpajSubmittedYearly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
                     </div>
                 </div>
-            
-            <!-- /.modal -->
+
+                <!-- /.modal -->
             </div>
         </div>
     </center>
@@ -419,9 +366,7 @@ DASHBOARD | ARWICS
         <div id="premiumSubmittedChart" style="height:80%;" dir="ltr"></div>
     </div>
 </div>
-
-<br><br>
-
+<br>
 <div class="row" style="background-color: #222222;">
     <div class="col-xl-12">
         <div class="card" style="background-color:#222222;">
@@ -449,7 +394,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Daily</p>
                             <h1>{{ $policeApprovedCountDaily }}</h1>
-                            <button type="button" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedDaily"
+                            data-bs-target=".detailPoliceApprovedDaily" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
                         </div>
@@ -461,7 +407,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Weekly</p>
                             <h1>{{ $policeApprovedCountWeekly }}</h1>
-                            <button type="button" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
+                            data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
@@ -474,7 +421,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Monthly</p>
                             <h1>{{ $policeApprovedCountMonthly }}</h1>
-                            <button type="button" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedMonthly"
+                            data-bs-target=".detailPoliceApprovedMonthly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
@@ -486,7 +434,8 @@ DASHBOARD | ARWICS
                         <div class="card-body">
                             <p>Yearly</p>
                             <h1>{{ $policeApprovedCountYearly }}</h1>
-                            <button type="button" class="btn btn-outline-light waves-effect"
+                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedYearly"
+                            data-bs-target=".detailPoliceApprovedYearly" class="btn btn-outline-light waves-effect"
                                 style="color:#fff; border-color:#fff;">Detail</button>
                             <i class="ion ion-md-download"></i>
                         </div>
@@ -549,7 +498,7 @@ DASHBOARD | ARWICS
         <div id="totalPremiumChart" style="height:80%;" dir="ltr"></div>
     </div>
 </div>
-
+<br>
 <!-- end row -->
 <div class="row mt-5">
     <div class="col-xl-12">
@@ -684,447 +633,346 @@ DASHBOARD | ARWICS
 </div>
 <!-- end row -->
 
-            <div class="modal fade detailSpajSubmittedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="height:20%;max-width: 80%;background-color:#222222;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #222222;">
-                            <h5 class="modal-title mt-0">Detail Spaj Submitted Daily</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body" style="background-color: #222222;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <table id="example" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>No Proposal</th>
-                                                        <th>Nama</th>
-                                                        <th>Telepon</th>
-                                                        <th>Nama Produk</th>
-                                                        <th>Premi</th>
-                                                        <th>Telesales</th>
-                                                        <th>Tanggal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="modal fade detailSpajSubmittedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Spaj Submitted Daily</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="example" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <div class="modal fade detailSpajSubmittedWeekly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="height:20%;max-width: 80%;background-color:#222222;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #222222;">
-                            <h5 class="modal-title mt-0">Detail Spaj Submitted Weekly</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body" style="background-color: #222222;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <table id="exampleWeekly" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>No Proposal</th>
-                                                        <th>Nama</th>
-                                                        <th>Telepon</th>
-                                                        <th>Nama Produk</th>
-                                                        <th>Premi</th>
-                                                        <th>Telesales</th>
-                                                        <th>Tanggal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailSpajSubmittedWeekly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Spaj Submitted Weekly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="exampleWeekly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <div class="modal fade detailSpajSubmittedMonthly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="height:20%;max-width: 80%;background-color:#222222;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #222222;">
-                            <h5 class="modal-title mt-0">Detail Spaj Submitted Monthly</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body" style="background-color: #222222;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <table id="exampleMonthly" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>No Proposal</th>
-                                                        <th>Nama</th>
-                                                        <th>Telepon</th>
-                                                        <th>Nama Produk</th>
-                                                        <th>Premi</th>
-                                                        <th>Telesales</th>
-                                                        <th>Tanggal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailSpajSubmittedMonthly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Spaj Submitted Monthly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="exampleMonthly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <div class="modal fade detailSpajSubmittedYearly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="height:20%;max-width: 80%;background-color:#222222;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #222222;">
-                            <h5 class="modal-title mt-0">Detail Spaj Submitted Yearly</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body" style="background-color: #222222;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <table id="exampleYearly" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>No Proposal</th>
-                                                        <th>Nama</th>
-                                                        <th>Telepon</th>
-                                                        <th>Nama Produk</th>
-                                                        <th>Premi</th>
-                                                        <th>Telesales</th>
-                                                        <th>Tanggal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailSpajSubmittedYearly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Spaj Submitted Yearly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="exampleYearly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
+<div class="modal fade detailPoliceApprovedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Police Approved Daily</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePoliceApprovedDaily" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPoliceApprovedWeekly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Police Approved Weekly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePoliceApprovedWeekly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPoliceApprovedMonthly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Police Approved Monthly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePoliceApprovedMonthly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPoliceApprovedYearly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Police Approved Yearly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePoliceApprovedYearly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 @endsection
 
 
 @push('js')
-
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-
+{{-- Charts --}}
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+
+<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
 <!-- Datatable init js -->
 <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    function dataTableSpajSubmittedDaily()
-    {
-         // Setup - add a text input to each footer cell
-        $('#example thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" style="font-color:#fff;"/>' );
-        } );
-        var table = $('#example').dataTable({
-                initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.header() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            autoWidth:  true,
-            processing: true,
-            serverSide: true,
-            destroy: 	true,
-            responsive: true,
-            language:  {
-                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
-                sEmptyTable:    "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
-                sLengthMenu:    "Tampilkan _MENU_ Baris",
-                sZeroRecords:   "Tidak Ditemukan Data Yang Sesuai",
-                sInfo:          "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
-                sInfoEmpty:     "Menampilkan 0 Sampai 0 Dari 0 Baris",
-                sInfoFiltered:  "(disaring dari _MAX_ entri keseluruhan)",
-                sInfoPostFix:   "",
-                sSearch:        "Cari:",
-                sUrl:           "",
-                oPaginate:     {
-                    sFirst:         "Pertama",
-                    sPrevious:      "Sebelumnya",
-                    sNext:          "Selanjutnya",
-                    sLast:          "Terakhir",
-                },
-            },
-            stateSave: true,
-            order: [],
-            ajax: "{{url('management/spaj/detailSpajSubmittedDaily')}}",
-            deferRender: true,
-            columns: [
-                {data: 'DT_RowIndex',           name: 'DT_RowIndex'},
-                {data: 'no_proposal',           name: 'no_proposal'},
-                {data: 'nama',                  name: 'nama'},
-                {data: 'tlp',   		        name: 'tlp'},
-                {data: 'produk',   		        name: 'produk'},
-                {data: 'nominal_premi',   		name: 'nominal_premi'},
-                {data: 'nama_tele',   		    name: 'nama_tele'},
-                {data: 'tanggal_submit',   		name: 'tanggal_submit'},
-
-            ]
-        });
-    }
-
-    function dataTableSpajSubmittedWeekly()
-    {
-         // Setup - add a text input to each footer cell
-        $('#exampleWeekly thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" style="font-color:#fff;"/>' );
-        } );
-        var table = $('#exampleWeekly').dataTable({
-                initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.header() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            autoWidth:  true,
-            processing: true,
-            serverSide: true,
-            destroy:    true,
-            responsive: true,
-            language:  {
-                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
-                sEmptyTable:    "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
-                sLengthMenu:    "Tampilkan _MENU_ Baris",
-                sZeroRecords:   "Tidak Ditemukan Data Yang Sesuai",
-                sInfo:          "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
-                sInfoEmpty:     "Menampilkan 0 Sampai 0 Dari 0 Baris",
-                sInfoFiltered:  "(disaring dari _MAX_ entri keseluruhan)",
-                sInfoPostFix:   "",
-                sSearch:        "Cari:",
-                sUrl:           "",
-                oPaginate:     {
-                    sFirst:         "Pertama",
-                    sPrevious:      "Sebelumnya",
-                    sNext:          "Selanjutnya",
-                    sLast:          "Terakhir",
-                },
-            },
-            stateSave: true,
-            order: [],
-            ajax: "{{url('management/spaj/detailSpajSubmittedWeekly')}}",
-            deferRender: true,
-            columns: [
-                {data: 'DT_RowIndex',           name: 'DT_RowIndex'},
-                {data: 'no_proposal',           name: 'no_proposal'},
-                {data: 'nama',                  name: 'nama'},
-                {data: 'tlp',                   name: 'tlp'},
-                {data: 'produk',                name: 'produk'},
-                {data: 'nominal_premi',         name: 'nominal_premi'},
-                {data: 'nama_tele',             name: 'nama_tele'},
-                {data: 'tanggal_submit',        name: 'tanggal_submit'},
-
-            ]
-        });
-    }
-
-    function dataTableSpajSubmittedMonthly()
-    {
-         // Setup - add a text input to each footer cell
-        $('#exampleMonthly thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" style="font-color:#fff;"/>' );
-        } );
-        var table = $('#exampleMonthly').dataTable({
-                initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.header() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            autoWidth:  true,
-            processing: true,
-            serverSide: true,
-            destroy:    true,
-            responsive: true,
-            language:  {
-                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
-                sEmptyTable:    "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
-                sLengthMenu:    "Tampilkan _MENU_ Baris",
-                sZeroRecords:   "Tidak Ditemukan Data Yang Sesuai",
-                sInfo:          "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
-                sInfoEmpty:     "Menampilkan 0 Sampai 0 Dari 0 Baris",
-                sInfoFiltered:  "(disaring dari _MAX_ entri keseluruhan)",
-                sInfoPostFix:   "",
-                sSearch:        "Cari:",
-                sUrl:           "",
-                oPaginate:     {
-                    sFirst:         "Pertama",
-                    sPrevious:      "Sebelumnya",
-                    sNext:          "Selanjutnya",
-                    sLast:          "Terakhir",
-                },
-            },
-            stateSave: true,
-            order: [],
-            ajax: "{{url('management/spaj/detailSpajSubmittedMonthly')}}",
-            deferRender: true,
-            columns: [
-                {data: 'DT_RowIndex',           name: 'DT_RowIndex'},
-                {data: 'no_proposal',           name: 'no_proposal'},
-                {data: 'nama',                  name: 'nama'},
-                {data: 'tlp',                   name: 'tlp'},
-                {data: 'produk',                name: 'produk'},
-                {data: 'nominal_premi',         name: 'nominal_premi'},
-                {data: 'nama_tele',             name: 'nama_tele'},
-                {data: 'tanggal_submit',        name: 'tanggal_submit'},
-
-            ]
-        });
-    }
-    
-    function dataTableSpajSubmittedYearly()
-    {
-         // Setup - add a text input to each footer cell
-        $('#exampleYearly thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" style="font-color:#fff;"/>' );
-        } );
-        var table = $('#exampleYearly').dataTable({
-                initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.header() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            autoWidth:  true,
-            processing: true,
-            serverSide: true,
-            destroy:    true,
-            responsive: true,
-            language:  {
-                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
-                sEmptyTable:    "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
-                sLengthMenu:    "Tampilkan _MENU_ Baris",
-                sZeroRecords:   "Tidak Ditemukan Data Yang Sesuai",
-                sInfo:          "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
-                sInfoEmpty:     "Menampilkan 0 Sampai 0 Dari 0 Baris",
-                sInfoFiltered:  "(disaring dari _MAX_ entri keseluruhan)",
-                sInfoPostFix:   "",
-                sSearch:        "Cari:",
-                sUrl:           "",
-                oPaginate:     {
-                    sFirst:         "Pertama",
-                    sPrevious:      "Sebelumnya",
-                    sNext:          "Selanjutnya",
-                    sLast:          "Terakhir",
-                },
-            },
-            stateSave: true,
-            order: [],
-            ajax: "{{url('management/spaj/detailSpajSubmittedYearly')}}",
-            deferRender: true,
-            columns: [
-                {data: 'DT_RowIndex',           name: 'DT_RowIndex'},
-                {data: 'no_proposal',           name: 'no_proposal'},
-                {data: 'nama',                  name: 'nama'},
-                {data: 'tlp',                   name: 'tlp'},
-                {data: 'produk',                name: 'produk'},
-                {data: 'nominal_premi',         name: 'nominal_premi'},
-                {data: 'nama_tele',             name: 'nama_tele'},
-                {data: 'tanggal_submit',        name: 'tanggal_submit'},
-
-            ]
-        });
-    }
-    $(this).on('click', '#detailSpajSubmittedDaily', function (e) {
-        dataTableSpajSubmittedDaily();
-    });
-    $(this).on('click', '#detailSpajSubmittedWeekly', function (e) {
-        dataTableSpajSubmittedWeekly();
-    });
-    $(this).on('click', '#detailSpajSubmittedMonthly', function (e) {
-        dataTableSpajSubmittedMonthly();
-    });
-    $(this).on('click', '#detailSpajSubmittedYearly', function (e) {
-        dataTableSpajSubmittedYearly();
-    });
-    
-});
-</script>
+<script src="{{ asset('assets/js/datatable.js') }}"></script>
 
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
@@ -1136,7 +984,9 @@ $(document).ready(function() {
             .getSeconds();
     }
 
-    google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+    google.charts.load('current', {
+        'packages': ['corechart', 'bar']
+    });
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(premiumChart);
     google.charts.setOnLoadCallback(policeApprovedChart);
@@ -1152,8 +1002,9 @@ $(document).ready(function() {
 
             @php
             foreach($spajSubmitted as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
-                "', '".(int) $spaj -> count."'],";
+                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', '".(int)$spaj->count.
+                "'],";
             }
             @endphp
         ]);
@@ -1165,8 +1016,8 @@ $(document).ready(function() {
             },
             chartArea: {
                 backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.1
+                    fill: '#222222',
+                    fillOpacity: 0.1
                 },
             },
             responsive: true,
@@ -1177,15 +1028,17 @@ $(document).ready(function() {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            speed:3000,
+            speed: 3000,
             colors: '#FB6EAA',
-            bar: { groupWidth: "90.39px" },
+            bar: {
+                groupWidth: "90.39px"
+            },
             bars: 'vertical',
             hAxis: {
                 minValue: 0,
                 viewWindow: {
-                    max:12,
-                    min:0
+                    max: 12,
+                    min: 0
                 }
             },
             width: '100%',
@@ -1197,14 +1050,14 @@ $(document).ready(function() {
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-    function premiumChart()
-    {
+    function premiumChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Total Premi'],
             @php
             foreach($premiumSubmitted as $spaj) {
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '". "Rp" . number_format($spaj->sum_nominal, 0, ',','.').
+                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', '".
+                "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
                 "'],";
             }
             @endphp
@@ -1216,22 +1069,24 @@ $(document).ready(function() {
             },
             chartArea: {
                 backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.1,
-                width: '50%'
+                    fill: '#222222',
+                    fillOpacity: 0.1,
+                    width: '50%'
                 },
             },
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            bar: { groupWidth: "90.39px" },
+            bar: {
+                groupWidth: "90.39px"
+            },
             bars: 'vertical',
             hAxis: {
                 minValue: 0,
                 viewWindow: {
-                    max:12,
-                    min:0
+                    max: 12,
+                    min: 0
                 }
             },
             width: '90.39px',
@@ -1243,14 +1098,14 @@ $(document).ready(function() {
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-    function policeApprovedChart()
-    {
+    function policeApprovedChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Jumlah Spaj'],
             @php
             foreach($policeApprovedChart as $spaj) {
-                echo "['".\Carbon\Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
-                "', '".(int) $spaj -> count."'],";
+                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', '".(int) $spaj->count.
+                "'],";
             }
             @endphp
         ]);
@@ -1263,8 +1118,8 @@ $(document).ready(function() {
             },
             chartArea: {
                 backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.1
+                    fill: '#222222',
+                    fillOpacity: 0.1
                 },
             },
             // Colors the entire chart area, simple version
@@ -1275,13 +1130,15 @@ $(document).ready(function() {
                 fillOpacity: 0.8
             },
             colors: '#114EE7',
-            bar: { groupWidth: "90.39px" },
+            bar: {
+                groupWidth: "90.39px"
+            },
             bars: 'vertical',
             hAxis: {
                 minValue: 0,
                 viewWindow: {
-                    max:12,
-                    min:0
+                    max: 12,
+                    min: 0
                 }
             },
             width: '90.39px',
@@ -1295,14 +1152,14 @@ $(document).ready(function() {
 
     }
 
-    function totalPremiumChart()
-    {
+    function totalPremiumChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Total Premi'],
             @php
             foreach($totalPremiumChart as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj -> month_name) -> isoFormat('MMMM').
-                "', '". "Rp" . number_format($spaj -> sum_nominal, 0, ',','.').
+                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', '".
+                "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
                 "'],";
             }
             @endphp
@@ -1315,8 +1172,8 @@ $(document).ready(function() {
             },
             chartArea: {
                 backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.1
+                    fill: '#222222',
+                    fillOpacity: 0.1
                 },
             },
             // Colors the entire chart area, simple version
@@ -1329,18 +1186,20 @@ $(document).ready(function() {
             hAxis: {
                 minValue: 0,
                 viewWindow: {
-                    max:100,
-                    min:0
+                    max: 100,
+                    min: 0
                 }
             },
             colors: '#E91140',
-            bar: { groupWidth: "90.39px" },
+            bar: {
+                groupWidth: "90.39px"
+            },
             bars: 'vertical',
             hAxis: {
                 minValue: 0,
                 viewWindow: {
-                    max:12,
-                    min:0
+                    max: 12,
+                    min: 0
                 }
             },
             width: '90.39px',
@@ -1353,13 +1212,12 @@ $(document).ready(function() {
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-    function premiumTahun1Chart()
-    {
+    function premiumTahun1Chart() {
         var data = google.visualization.arrayToDataTable([
-           ['Bulan', 'Jumlah Spaj'],
-           ['Januari', '2'],
-           ['Februari', '3'],
-           ['Maret', '4']
+            ['Bulan', 'Jumlah Spaj'],
+            ['Januari', '2'],
+            ['Februari', '3'],
+            ['Maret', '4']
         ]);
 
         var options = {
@@ -1369,8 +1227,8 @@ $(document).ready(function() {
             },
             chartArea: {
                 backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.1
+                    fill: '#222222',
+                    fillOpacity: 0.1
                 },
             },
             // Colors the entire chart area, simple version
@@ -1381,7 +1239,9 @@ $(document).ready(function() {
                 fillOpacity: 0.8
             },
             colors: '#114EE7',
-            bar: { groupWidth: "90.39px" },
+            bar: {
+                groupWidth: "90.39px"
+            },
             bars: 'vertical',
             isStacked: true
         }
@@ -1390,80 +1250,81 @@ $(document).ready(function() {
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-    function premiumPltpChart()
-    {
+    function premiumPltpChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Total Premi'],
             ['Januari', 'Rp. 100.000'],
             ['Februari', 'Rp. 150.000'],
             ['Maret', 'Rp. 200.000']
-         ]);
+        ]);
 
-         var options = {
-             legend: {
-                 position: 'top',
-                 maxLines: 3
-             },
-             chartArea: {
-                 backgroundColor: {
-                 fill: '#222222',
-                 fillOpacity: 0.1
-                 },
-             },
-             // Colors the entire chart area, simple version
-             // backgroundColor: '#FF0000',
-             // Colors the entire chart area, with opacity
-             backgroundColor: {
-                 fill: '#222222',
-                 fillOpacity: 0.8
-             },
-             colors: '#E91140',
-             bar: { groupWidth: "90.39px" },
-             bars: 'vertical',
-             isStacked: true
-         }
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                    fill: '#222222',
+                    fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#E91140',
+            bar: {
+                groupWidth: "90.39px"
+            },
+            bars: 'vertical',
+            isStacked: true
+        }
 
-         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
-         chart.draw(data, google.charts.Bar.convertOptions(options));
+        var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-     function premiumTotalChart()
-    {
+    function premiumTotalChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', 'Total Premi'],
             ['Januari', 'Rp. 100.000'],
             ['Februari', 'Rp. 150.000'],
             ['Maret', 'Rp. 200.000']
-         ]);
+        ]);
 
-         var options = {
-             legend: {
-                 position: 'top',
-                 maxLines: 3
-             },
-             chartArea: {
-                 backgroundColor: {
-                 fill: '#222222',
-                 fillOpacity: 0.1
-                 },
-             },
-             // Colors the entire chart area, simple version
-             // backgroundColor: '#FF0000',
-             // Colors the entire chart area, with opacity
-             backgroundColor: {
-                 fill: '#222222',
-                 fillOpacity: 0.8
-             },
-             colors: '#ECD11E',
-             bar: { groupWidth: "90.39px" },
-             bars: 'vertical',
-             isStacked: true
-         }
+        var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            chartArea: {
+                backgroundColor: {
+                    fill: '#222222',
+                    fillOpacity: 0.1
+                },
+            },
+            // Colors the entire chart area, simple version
+            // backgroundColor: '#FF0000',
+            // Colors the entire chart area, with opacity
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            colors: '#ECD11E',
+            bar: {
+                groupWidth: "90.39px"
+            },
+            bars: 'vertical',
+            isStacked: true
+        }
 
-         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
-         chart.draw(data, google.charts.Bar.convertOptions(options));
+        var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
     }
-
 
 </script>
 @endpush

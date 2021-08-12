@@ -38,12 +38,18 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterTahunPremiumSubmitted', [SpajSubmittedController::class, 'filterTahunPremiumSubmitted']);
             Route::get('/filterTotalPremiumSubmitted', [SpajSubmittedController::class, 'filterTotalPremiumSubmitted']);
 
-
-            Route::get('/detailSpajSubmittedDaily', [DetailController::class, 'detailSpajSubmittedDaily']);
+            // Spaj Submitted
+            Route::get('/detailSpajSubmittedDaily', [DetailController::class, 'detailSpajSubmittedDaily'])->name('detailSpajSubmittedDaily');
             Route::get('/detailSpajSubmittedWeekly', [DetailController::class, 'detailSpajSubmittedWeekly']);
             Route::get('/detailSpajSubmittedMonthly', [DetailController::class, 'detailSpajSubmittedMonthly']);
             Route::get('/detailSpajSubmittedYearly', [DetailController::class, 'detailSpajSubmittedYearly']);
-            
+
+            // Police Approved
+            Route::get('/detailPoliceApprovedDaily', [DetailController::class, 'detailPoliceApprovedDaily']);
+            Route::get('/detailPoliceApprovedWeekly', [DetailController::class, 'detailPoliceApprovedWeekly']);
+            Route::get('/detailPoliceApprovedMonthly', [DetailController::class, 'detailPoliceApprovedMonthly']);
+            Route::get('/detailPoliceApprovedYearly', [DetailController::class, 'detailPoliceApprovedYearly']);
+
 
         });
         Route::prefix('tele')->group(function() {

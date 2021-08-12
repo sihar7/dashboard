@@ -1,0 +1,55 @@
+.telemarketing::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+.telemarketing {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    overflow: auto;
+    list-style: none;
+    /* Firefox */
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+.telemarketing ul {
+    list-style: none;
+    padding: 0;
+    padding-bottom: 10%;
+}
+
+.telemarketing ul li {
+    background-color: #00C637;
+    height: 50px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+
+.list_table {
+    padding: 2px;
+}
+
+.list_table ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.list_table ul li {
+    width: 100px;
+    height: 90%;
+    margin-left: 1px;
+}
+
+thead input {
+    width: 125px;
+    height: 23px;
+    left: 148px;
+    top: 78px;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    border-radius: 3px;
+}

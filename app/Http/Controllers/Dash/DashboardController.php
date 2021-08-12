@@ -42,14 +42,15 @@ class DashboardController extends Controller
                 $data['spajSubmittedCountWeekly']= $this->spaj->spajSubmittedCountWeekly();
                 $data['spajSubmittedCountMonthly'] = $this->spaj->spajSubmittedCountMonthly();
                 $data['spajSubmittedCountYearly'] = $this->spaj->spajSubmittedCountYearly();
-                
+
                 $data['policeApprovedCountDaily'] = $this->spaj->policeApprovedCountDaily();
                 $data['policeApprovedCountWeekly'] = $this->spaj->policeApprovedCountWeekly();
                 $data['policeApprovedCountMonthly'] = $this->spaj->policeApprovedCountMonthly();
                 $data['policeApprovedCountYearly'] = $this->spaj->policeApprovedCountYearly();
-                
 
-                
+
+
+
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');
             } else {

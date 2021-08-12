@@ -15,7 +15,7 @@ class DetailController extends Controller
         if (Auth::user()->api_token) {
             if (request()->ajax()) {
                 $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-                ->whereYear('tgl_submit', date('Y'))          
+                ->whereYear('tgl_submit', date('Y'))
                 ->whereDay('tgl_submit', date('d'))
                 ->whereMonth('tgl_submit', date('m'))
                 ->where('mst_spaj_submit.status_approve', 0)
@@ -187,52 +187,12 @@ class DetailController extends Controller
         }
     }
 
-    
-    
 
-    
-    
     function detailPremiumSubmitted(Request $request)
     {
         if (Auth::user()->api_token) {
             # code...
 
-        } else {
-
-            $data = [
-                'message' => 'Token Tidak Ditemukan',
-                'error' => true,
-                'code' => 403
-            ];
-
-            return response()->json(['api' => $data], 201);
-        }
-    }
-
-    function detailPoliceApproved(Request $request)
-    {
-        if (Auth::user()->api_token) {
-            if (request()->ajax()) {
-                $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-                ->where('mst_spaj_submit.status_approve', 1)
-                ->select(
-                    'mst_telemarketing.*',
-                    'mst_spaj_submit.*',
-                    'mst_telemarketing.nama as nama_tele'
-                    )
-                ->get();
-                return DataTables()->of($spaj)
-                ->addIndexColumn()
-                    ->addColumn('tanggal_submit', function($spaj){
-                           return Carbon::parse($spaj->tgl_submit)->isoFormat('dddd, D MMMM Y');
-                    })
-                    ->addColumn('tlp', function($spaj){
-                           return $this->sensor($spaj->tlp);
-                    })
-
-                    ->rawColumns(['tanggal_submit', 'tlp'])
-                    ->make(true);
-            }
         } else {
 
             $data = [
@@ -289,7 +249,184 @@ class DetailController extends Controller
 
     }
 
-    private function sensor($data='')
+    // Police Approved
+
+    function detailPoliceApprovedDaily(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->whereYear('tgl_submit', date('Y'))
+                ->whereDay('tgl_submit', date('d'))
+                ->whereMonth('tgl_submit', date('m'))
+                ->where('mst_spaj_submit.status_approve', 1)
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele'
+                    )
+                ->orderBy('mst_spaj_submit.tgl_submit', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('tanggal_submit', function($spaj){
+                           return Carbon::parse($spaj->tgl_submit)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($spaj){
+                           return $this->sensor($spaj->tlp);
+                    })
+                    ->addColumn('nominal_premi', function($spaj){
+                        return 'Rp. '.number_format($spaj->nominal_premi, 0, ',', '.').'';
+                    })
+                    ->rawColumns(['tanggal_submit', 'tlp', 'nominal_premi'])
+                    ->make(true);
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPoliceApprovedWeekly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('mst_spaj_submit.status_approve', 1)
+                ->where('tgl_submit', '>', Carbon::today()->subDay(6))
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele'
+                    )
+                ->orderBy('mst_spaj_submit.tgl_submit', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('tanggal_submit', function($spaj){
+                           return Carbon::parse($spaj->tgl_submit)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($spaj){
+                           return $this->sensor($spaj->tlp);
+                    })
+                    ->addColumn('nominal_premi', function($spaj){
+                        return 'Rp. '.number_format($spaj->nominal_premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tanggal_submit', 'tlp', 'nominal_premi'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPoliceApprovedMonthly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('mst_spaj_submit.status_approve', 1)
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele'
+                    )
+                ->orderBy('mst_spaj_submit.tgl_submit', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('tanggal_submit', function($spaj){
+                           return Carbon::parse($spaj->tgl_submit)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($spaj){
+                           return $this->sensor($spaj->tlp);
+                    })
+                    ->addColumn('nominal_premi', function($spaj){
+                        return 'Rp. '.number_format($spaj->nominal_premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tanggal_submit', 'tlp', 'nominal_premi'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPoliceApprovedYearly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $spaj = Spaj::join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('mst_spaj_submit.status_approve', 1)
+                ->whereYear('tgl_submit', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele'
+                    )
+                ->orderBy('mst_spaj_submit.tgl_submit', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('tanggal_submit', function($spaj){
+                           return Carbon::parse($spaj->tgl_submit)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($spaj){
+                           return $this->sensor($spaj->tlp);
+                    })
+                    ->addColumn('nominal_premi', function($spaj){
+                        return 'Rp. '.number_format($spaj->nominal_premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tanggal_submit', 'tlp', 'nominal_premi'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    private function sensor( $data = '' )
     {
         if ($data == '') {
             return "-";
