@@ -98,10 +98,16 @@
                             </div>
                         </a>
                         <br>
-                        <a href="{{ url('loginpartner') }}"
+                      <!--   <a href="{{ url('loginpartner') }}"
                             style="width: 40%;height: 50px;border-radius: 7px; text-decoration:none; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                             <div>
                                 Login Partner
+                            </div>
+                        </a> -->
+                          <a href="{{ url('loginreport') }}"
+                            style="width: 40%;height: 50px;border-radius: 7px; text-decoration:none; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                            <div>
+                                Login Report
                             </div>
                         </a>
                         <br>

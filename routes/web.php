@@ -5,17 +5,18 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dash\DashboardController;
 use App\Http\Controllers\BE\SpajSubmittedController;
 use App\Http\Controllers\BE\TeleController;
+use App\Http\Controllers\Datatable\DetailController;
 
 
-
-Route::get('pdf/preview', [DashboardController::class, 'indexPdf']);
-Route::get('pdf/generate', [DashboardController::class, 'createPdf']);
+// Route::get('pdf/preview', [DashboardController::class, 'indexPdf']);
+// Route::get('pdf/generate', [DashboardController::class, 'createPdf']);
 
 Route::post('postlogin', [LoginController::class, 'postlogin'])->middleware('throttle:60,1');
 Route::post('logout', [LoginController::class, 'logout']);
 Route::get('loginpartner', [LoginController::class, 'loginpartner']);
 Route::get('loginmanagement', [LoginController::class, 'loginmanagement']);
 Route::get('logintele', [LoginController::class, 'logintele']);
+Route::get('loginreport', [LoginController::class, 'loginreport']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,12 +32,19 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterTahunSpajSubmitted', [SpajSubmittedController::class, 'filterTahunSpajSubmitted']);
             Route::get('/filterTotalSpajSubmitted', [SpajSubmittedController::class, 'filterTotalSpajSubmitted']);
 
-
             Route::post('/filterHarianPremiumSubmitted', [SpajSubmittedController::class, 'filterHarianPremiumSubmitted']);
             Route::get('/filterMingguPremiumSubmitted', [SpajSubmittedController::class, 'filterMingguPremiumSubmitted']);
             Route::post('/filterBulanPremiumSubmitted', [SpajSubmittedController::class, 'filterBulanPremiumSubmitted']);
             Route::post('/filterTahunPremiumSubmitted', [SpajSubmittedController::class, 'filterTahunPremiumSubmitted']);
             Route::get('/filterTotalPremiumSubmitted', [SpajSubmittedController::class, 'filterTotalPremiumSubmitted']);
+
+
+            Route::get('/detailSpajSubmittedDaily', [DetailController::class, 'detailSpajSubmittedDaily']);
+            Route::get('/detailSpajSubmittedWeekly', [DetailController::class, 'detailSpajSubmittedWeekly']);
+            Route::get('/detailSpajSubmittedMonthly', [DetailController::class, 'detailSpajSubmittedMonthly']);
+            Route::get('/detailSpajSubmittedYearly', [DetailController::class, 'detailSpajSubmittedYearly']);
+            
+
         });
         Route::prefix('tele')->group(function() {
             Route::post('/filterHarianTopTsr', [TeleController::class, 'filterHarianTopTsr']);
@@ -51,6 +59,7 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterTopTsrMonthly', [TeleController::class, 'filterTopTsrMonthly']);
             Route::post('/filterTopTsrYearly', [TeleController::class, 'filterTopTsrYearly']);
         });
+
 
 
     });

@@ -30,14 +30,26 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
-                $data['getHistoryTele']         = $this->tele->getHistoryTele();
-                $data['topTsr10']               = $this->tele->topTsr10();
-                $data['getTeleReward']          = $this->tele->getTeleReward();
-                $data['spajSubmitted']          = $this->spaj->spajSubmitted();
-                $data['premiumSubmitted']       = $this->spaj->premiumSubmitted();
-                $data['policeApprovedChart']    = $this->spaj->policeApprovedChart();
-                $data['totalPremiumChart']      = $this->spaj->totalPremiumChart();
+                $data['getHistoryTele']          = $this->tele->getHistoryTele();
+                $data['topTsr10']                = $this->tele->topTsr10();
+                $data['getTeleReward']           = $this->tele->getTeleReward();
+                $data['spajSubmitted']           = $this->spaj->spajSubmitted();
+                $data['premiumSubmitted']        = $this->spaj->premiumSubmitted();
+                $data['policeApprovedChart']     = $this->spaj->policeApprovedChart();
+                $data['totalPremiumChart']       = $this->spaj->totalPremiumChart();
 
+                $data['spajSubmittedCountDaily'] = $this->spaj->spajSubmittedCountDaily();
+                $data['spajSubmittedCountWeekly']= $this->spaj->spajSubmittedCountWeekly();
+                $data['spajSubmittedCountMonthly'] = $this->spaj->spajSubmittedCountMonthly();
+                $data['spajSubmittedCountYearly'] = $this->spaj->spajSubmittedCountYearly();
+                
+                $data['policeApprovedCountDaily'] = $this->spaj->policeApprovedCountDaily();
+                $data['policeApprovedCountWeekly'] = $this->spaj->policeApprovedCountWeekly();
+                $data['policeApprovedCountMonthly'] = $this->spaj->policeApprovedCountMonthly();
+                $data['policeApprovedCountYearly'] = $this->spaj->policeApprovedCountYearly();
+                
+
+                
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');
             } else {

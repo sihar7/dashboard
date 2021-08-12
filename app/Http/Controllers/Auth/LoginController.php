@@ -139,6 +139,18 @@ class LoginController extends Controller
 
                         Auth::login($user, $remember_me);
                         return response()->json(['message' => 7 ], 201);
+                    } else if($request->user()->hasRole('report')) {
+                        $user                 = User::cekUsername($username);
+                        $user->last_login_at  = Carbon::now()->toDateTimeString();
+                        $user->last_login_ip  = $request->ip();
+                        $user->islogin        = 1;
+                        $user->api_token      = 'TOKEN-REPORT-'.$newtoken;
+                        $user->save();
+
+                        Auth::login($user, $remember_me);
+                        Log::info('Berhasil Login Dengan Role Management dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->api_token);
+
+                        return response()->json(['message' => 8 ], 201);
                     }
                 } else {
                     Log::info('User Already Login : '.$request->username);
@@ -180,6 +192,16 @@ class LoginController extends Controller
         return view('auth.login', $data);
     }
 
+    function loginreport()
+    {
+        $data['judul'] = 'Login Report';
+        $data['nama']  = 'Report';
+
+        Session::put('url.intended', URL::previous());
+        return view('auth.login', $data);
+    }
+    
+
     function logout(Request $request)
     {
         if ( $request->user()->hasRole('management') ) {
@@ -209,12 +231,22 @@ class LoginController extends Controller
             $tele->save();
 
             $user = User::whereId(Auth::id())->first();
-            $user->islogin = 1;
+            $user->islogin = 0;
             $user->save();
 
             Auth::logout();
 
             return redirect('logintele');
+        } elseif ( $request->user()->hasRole('report') ) {
+
+            $user = User::whereId(Auth::id())->first();
+            $user->islogin = 0;
+            $user->save();
+
+            Auth::logout();
+
+            return redirect('report');
+
         }
     }
 }

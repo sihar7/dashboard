@@ -24,6 +24,8 @@ class HasLogin
                 return $next($request);
             } elseif($request->user()->hasRole('telemarketing')){
                 return $next($request);
+            } elseif($request->user()->hasRole('report')) {
+                return $next($request);
             } else {
                 abort(404);
             }
