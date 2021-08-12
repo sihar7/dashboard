@@ -44,12 +44,21 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/detailSpajSubmittedMonthly', [DetailController::class, 'detailSpajSubmittedMonthly']);
             Route::get('/detailSpajSubmittedYearly', [DetailController::class, 'detailSpajSubmittedYearly']);
 
+            //Detail Submitted Chart
+            Route::get('/detailPremiumSubmitted', [DetailController::class, 'detailPremiumSubmitted']);
+            Route::get('/detailSpajSubmittedChart', [DetailController::class, 'detailSpajSubmittedChart']);
+            // End Detail
+
             // Police Approved
             Route::get('/detailPoliceApprovedDaily', [DetailController::class, 'detailPoliceApprovedDaily']);
             Route::get('/detailPoliceApprovedWeekly', [DetailController::class, 'detailPoliceApprovedWeekly']);
             Route::get('/detailPoliceApprovedMonthly', [DetailController::class, 'detailPoliceApprovedMonthly']);
             Route::get('/detailPoliceApprovedYearly', [DetailController::class, 'detailPoliceApprovedYearly']);
 
+            // Start Police Approved Chart
+            Route::get('/detailPoliceApprovedChart', [DetailController::class, 'detailPoliceApprovedChart']);
+            Route::get('/detailTotalPremiumChart', [DetailController::class, 'detailTotalPremiumChart']);
+            // End Police Approved Chart
 
         });
         Route::prefix('tele')->group(function() {
@@ -65,14 +74,10 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterTopTsrMonthly', [TeleController::class, 'filterTopTsrMonthly']);
             Route::post('/filterTopTsrYearly', [TeleController::class, 'filterTopTsrYearly']);
         });
-
-
-
     });
 
     Route::prefix('partner')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
-
 });
 

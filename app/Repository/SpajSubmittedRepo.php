@@ -17,8 +17,8 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                    ->where('mst_spaj_submit.status_approve', 0)
-                    ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
+                    ->where('status_approve', 0)
+                    ->whereYear('tgl_submit', date('Y'))
                     ->groupBy('month_name')
                     ->orderBy('createdAt')
                     ->get();
@@ -51,12 +51,11 @@
             DB::beginTransaction();
             try {
                 if (Auth::user()->api_token) {
-                    $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw
-                    ('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                    ->where('mst_spaj_submit.status_approve', 0)
-                    ->whereYear('mst_spaj_submit.tgl_submit', date('Y'))
+                    $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"),DB::raw("MONTHNAME(tgl_submit) as month_name"))
+                    ->where('status_approve', 0)
+                    ->whereYear('tgl_submit', date('Y'))
                     ->groupBy('month_name')
-                    ->orderBy('createdAt')
+                    ->orderBy('tgl_submit')
                     ->get();
 
                     // $api[] = ['Bulan', 'Jumlah Spaj'];
@@ -280,8 +279,8 @@
             }
             DB::commit();
         }
-        
-    
+
+
         function policeApprovedCountDaily()
         {
             DB::beginTransaction();
@@ -414,9 +413,9 @@
             }
             DB::commit();
         }
-        
-    
-        
+
+
+
     }
 
 ?>

@@ -187,12 +187,38 @@ class DetailController extends Controller
         }
     }
 
-
-    function detailPremiumSubmitted(Request $request)
+    // Spaj Submitted Chart
+    function detailSpajSubmittedChart(Request $request)
     {
         if (Auth::user()->api_token) {
-            # code...
+            if($request->ajax()) {
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw("YEAR(tgl_submit) as year_name"), DB::raw
+                ('max(tgl_submit) as createdAt'))
+                ->where('status_approve', 0)
+                ->whereYear('tgl_submit', date('Y'))
+                ->groupBy('month_name')
+                ->orderBy('createdAt')
+                ->get();
 
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($spaj){
+                        return Carbon::parse($spaj->month_name)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($spaj){
+                        return $spaj->year_name;
+                    })
+
+                    ->addColumn('count', function($spaj){
+                        return number_format($spaj->count, 0, ',', '.');
+                    })
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+            }
         } else {
 
             $data = [
@@ -204,6 +230,52 @@ class DetailController extends Controller
             return response()->json(['api' => $data], 201);
         }
     }
+
+    function detailPremiumSubmitted(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw("YEAR(tgl_submit) as year_name"), DB::raw
+                ('max(tgl_submit) as createdAt'))
+                ->where('status_approve', 0)
+                ->whereYear('tgl_submit', date('Y'))
+                ->groupBy('month_name')
+                ->orderBy('sum_nominal', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($spaj){
+                        return Carbon::parse($spaj->month_name)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($spaj){
+                        return $spaj->year_name;
+                    })
+
+                    ->addColumn('sum_nominal', function($spaj){
+                        return 'Rp. '.number_format($spaj->sum_nominal, 0, ',', '.').'';
+                    })
+
+
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    // End Spaj SUbmitted Chart
+
 
     function detailTotalPremium(Request $request)
     {
@@ -241,12 +313,10 @@ class DetailController extends Controller
 
     function detailPltp(Request $request)
     {
-
     }
 
     function detailPremiumTotal(Request $request)
     {
-
     }
 
     // Police Approved
@@ -425,6 +495,95 @@ class DetailController extends Controller
             return response()->json(['api' => $data], 201);
         }
     }
+
+    // Police Approved Chart
+    function detailPoliceApprovedChart(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw("YEAR(tgl_submit) as year_name"), DB::raw
+                ('max(tgl_submit) as createdAt'))
+                ->where('status_approve', 1)
+                ->whereYear('tgl_submit', date('Y'))
+                ->groupBy('month_name')
+                ->orderBy('createdAt')
+                ->get();
+
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($spaj){
+                        return Carbon::parse($spaj->month_name)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($spaj){
+                        return $spaj->year_name;
+                    })
+
+                    ->addColumn('count', function($spaj){
+                        return number_format($spaj->count, 0, ',', '.');
+                    })
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailTotalPremiumChart(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw("YEAR(tgl_submit) as year_name"), DB::raw
+                ('max(tgl_submit) as createdAt'))
+                ->where('status_approve', 1)
+                ->whereYear('tgl_submit', date('Y'))
+                ->groupBy('month_name')
+                ->orderBy('sum_nominal', 'DESC')
+                ->get();
+
+                return DataTables()->of($spaj)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($spaj){
+                        return Carbon::parse($spaj->month_name)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($spaj){
+                        return $spaj->year_name;
+                    })
+
+                    ->addColumn('sum_nominal', function($spaj){
+                        return 'Rp. '.number_format($spaj->sum_nominal, 0, ',', '.').'';
+                    })
+
+
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    // End Police Approved Chart
 
     private function sensor( $data = '' )
     {

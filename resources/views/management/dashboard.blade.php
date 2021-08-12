@@ -325,14 +325,14 @@ DASHBOARD | ARWICS
                     </select>
                 </div>
             </div>
-            <a href="#"
-                style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+            <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                data-bs-target=".detailSpajSubmittedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                 <div>
                     Detail
                 </div>
             </a>
         </div>
-        <div id="spajSubmittedChart" style="height: 80%;"></div>
+        <div id="spajSubmittedChart" style="height: 250px;"></div>
     </div>
     <div class="col-6" style="height: 40vh;">
         <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
@@ -356,14 +356,15 @@ DASHBOARD | ARWICS
                 </div>
             </div>
 
-            <a href="#"
+            <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
+            data-bs-target=".detailPremiumSubmitted"
                 style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                 <div>
                     Detail
                 </div>
             </a>
         </div>
-        <div id="premiumSubmittedChart" style="height:80%;" dir="ltr"></div>
+        <div id="premiumSubmittedChart" style="height:250px;" dir="ltr"></div>
     </div>
 </div>
 <br>
@@ -384,7 +385,7 @@ DASHBOARD | ARWICS
     </div>
 
 </div>
-<div class="row" style="height:auto;background-color: #222222;">
+<div class="row" style="background-color: #222222;">
     <center>
         <div class="row" style="display: flex;justify-content: center;align-items: center;">
             <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
@@ -452,14 +453,15 @@ DASHBOARD | ARWICS
                 </div>
                 <div style="display: flex;margin-top: 5px;">
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
                         <option value="tahunan">Tahunan</option>
                     </select>
+                    &nbsp;
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
@@ -467,9 +469,14 @@ DASHBOARD | ARWICS
                     </select>
                 </div>
             </div>
-
+            <a href="#" data-bs-toggle="modal" id="detailPoliceApprovedChart"
+                data-bs-target=".detailPoliceApprovedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                <div>
+                    Detail
+                </div>
+            </a>
         </div>
-        <div id="policeApprovedChart" style="height: 80%;"></div>
+        <div id="policeApprovedChart" style="height: 250px;"></div>
     </div>
     <div class="col-6" style="height: 40vh;">
         <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
@@ -479,14 +486,15 @@ DASHBOARD | ARWICS
                 </div>
                 <div style="display: flex;margin-top: 5px;">
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
                         <option value="tahunan">Tahunan</option>
                     </select>
+                    &nbsp;
                     <select class="form-control" id="select_top10_1"
-                        style="width:50%; height:34px;background-color:#222222;">
+                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
                         <option value="">Select</option>
                         <option value="harian">Harian</option>
                         <option value="mingguan">Mingguan</option>
@@ -494,11 +502,16 @@ DASHBOARD | ARWICS
                     </select>
                 </div>
             </div>
+            <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
+                data-bs-target=".detailTotalPremiumChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                <div>
+                    Detail
+                </div>
+            </a>
         </div>
-        <div id="totalPremiumChart" style="height:80%;" dir="ltr"></div>
+        <div id="totalPremiumChart" style="height:250px;" dir="ltr"></div>
     </div>
 </div>
-<br>
 <!-- end row -->
 <div class="row mt-5">
     <div class="col-xl-12">
@@ -794,6 +807,158 @@ DASHBOARD | ARWICS
     <!-- /.modal-dialog -->
 </div>
 
+
+{{-- Detail Chart  --}}
+
+<div class="modal fade detailPremiumSubmitted" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Submitted Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePremiumSubmitted" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailSpajSubmittedChart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Spaj Submitted Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="exampleSpajSubmittedChart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Jumlah Spaj</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+{{-- End Detail Sppj Chart --}}
+
+<div class="modal fade detailPoliceApprovedChart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Submitted Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="examplePoliceApprovedChart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailTotalPremiumChart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Total Premium Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="exampleTotalPremiumChart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Jumlah Spaj</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+{{-- End Detail Police Approved Chart --}}
+
+
 <div class="modal fade detailPoliceApprovedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
@@ -1056,16 +1221,16 @@ DASHBOARD | ARWICS
             @php
             foreach($premiumSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '".
-                "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
-                "'],";
+                "', '"."Rp".number_format($spaj->sum_nominal, 0, ',', '.')."'],";
             }
             @endphp
         ]);
         var options = {
-            legend: {
-                position: 'top',
-                maxLines: 3
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
             },
             chartArea: {
                 backgroundColor: {
@@ -1074,6 +1239,11 @@ DASHBOARD | ARWICS
                     width: '50%'
                 },
             },
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
