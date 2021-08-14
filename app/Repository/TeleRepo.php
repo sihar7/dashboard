@@ -55,12 +55,13 @@
                 ->select(
                     'mst_telemarketing.*',
                     'mst_asuransi.*',
+                    'mst_telemarketing.id as id_tele'
                 )
                 ->where('mst_telemarketing.aktif', '1')
                 ->orderBy('mst_telemarketing.islogin', 'DESC')
                 ->orderBy('mst_telemarketing.last_login_at', 'DESC')
                 ->orderBy('mst_telemarketing.nama', 'DESC')
-                ->cursorPaginate(5);
+                ->cursorPaginate(10);
 
                 return $tele;
 

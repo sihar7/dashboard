@@ -19,10 +19,674 @@ DASHBOARD | ARWICS
 <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet"
     type="text/css" />
 
+<link href="{{ asset('assets/libs/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
+<link href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
 
+<div class="row" >
+    <div class="col-xl-6 p-1" style="height: 852px;">
+        <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
+            <br>
+            <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
+                <p style="width:222px; height: 26px; top: 319px; left: 1134px; color: #fff;">Spaj Submitted</p>
+            </div>
+            <br>
+            <div style="width:100%; display: flex; justify-content: center; align-items: center; margin:0;">
+                <div class="row" style="width: 70%;display:flex;justify-content: center;align-items: center;">
+                    <div class="col-lg-3 ">
+                        <div class="card text-white "
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #EA6ACC 0%, #020202 178.11%);">
+                            <div class="card-body">
+                               <center>
+                                <p>Daily</p>
+                                <h1>{{ $spajSubmittedCountDaily }}</h1>
+                                <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedDaily"
+                                    data-bs-target=".detailSpajSubmittedDaily" class="btn btn-outline-light waves-effect"
+                                    style="color:#fff; border-color:#fff;">Detail</button>
+                                <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-warning"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #F6AE99 0.59%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Weekly</p>
+                                    <h1>{{ $spajSubmittedCountWeekly }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedWeekly"
+                                        data-bs-target=".detailSpajSubmittedWeekly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-danger"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #448695 1.4%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Monthly</p>
+                                    <h1>{{ $spajSubmittedCountMonthly }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedMonthly"
+                                        data-bs-target=".detailSpajSubmittedMonthly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-warning"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #FDE584 -0.07%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Yearly</p>
+                                    <h1>{{ $spajSubmittedCountYearly }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedYearly"
+                                        data-bs-target=".detailSpajSubmittedYearly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset>
+                </div>
+            </div>
+            <hr style="left: 51px; top: 695.34px; border-radius: 20px; border: 4px solid #ffffff; color: #ffffff;">
+            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                <div style="width: 100%;height: 100%; text-align: center;">
+                     <div class="row">
+                        <div class="col-lg-6">
+                            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <div style="width: 50%;height: 100%; text-align: center;">
+                                    <div>
+                                        Spaj Submitted Chart
+                                    </div>
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            <option value="">Select</option>
+                                            <option value="harian">Harian</option>
+                                            <option value="mingguan">Mingguan</option>
+                                            <option value="tahunan">Tahunan</option>
+                                        </select>
+                                        &nbsp;
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                    data-bs-target=".detailSpajSubmittedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                    <div>
+                                        Detail
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="spajSubmittedChart" style="height:420px; max-width: 100%;"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <div style="width: 50%;height: 100%; text-align: center;">
+                                    <div>
+                                        Premium Submitted Chart
+                                    </div>
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            <option value="">Select</option>
+                                            <option value="harian">Harian</option>
+                                            <option value="mingguan">Mingguan</option>
+                                            <option value="tahunan">Tahunan</option>
+                                        </select>
+                                        &nbsp;
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
+                                data-bs-target=".detailPremiumSubmitted"
+                                    style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    <div>
+                                        Detail
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="premiumSubmittedChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 p-1" style="height: 852px;">
+        <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
+            <br>
+            <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
+                <p style="width:222px; height: 26px; top: 319px; left: 1134px; color: #fff;">Police Approved</p>
+            </div>
+            <br>
+            <div style="width:100%; display: flex; justify-content: center; align-items: center; margin:0;">
+                <div class="row" style="width: 70%;display:flex;justify-content: center;align-items: center;">
+                    <div class="col-lg-3 ">
+                        <div class="card text-white "
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #EA6ACC 0%, #020202 178.11%);">
+                            <div class="card-body">
+                               <center>
+                                <p>Daily</p>
+                                <h1>{{ $policeApprovedCountDaily  }}</h1>
+                                <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedDaily"
+                                    data-bs-target=".detailPoliceApprovedDaily" class="btn btn-outline-light waves-effect"
+                                    style="color:#fff; border-color:#fff;">Detail</button>
+                                <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-warning"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #F6AE99 0.59%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Weekly</p>
+                                    <h1>{{ $policeApprovedCountWeekly  }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
+                                        data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-danger"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #448695 1.4%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Monthly</p>
+                                    <h1>{{ $policeApprovedCountMonthly  }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedMonthly"
+                                        data-bs-target=".detailPoliceApprovedMonthly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card text-white bg-warning"
+                            style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #FDE584 -0.07%, #020202 178.11%);">
+                            <div class="card-body">
+                                <center>
+                                    <p>Yearly</p>
+                                    <h1>{{ $policeApprovedCountYearly  }}</h1>
+                                    <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedYearly"
+                                        data-bs-target=".detailPoliceApprovedYearly" class="btn btn-outline-light waves-effect"
+                                        style="color:#fff; border-color:#fff;">Detail</button>
+                                    <i class="ion ion-md-download"></i>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset>
+                </div>
+            </div>
+            <hr style="left: 51px; top: 695.34px; border-radius: 20px; border: 4px solid #ffffff; color: #ffffff;">
+            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                <div style="width: 100%;height: 100%; text-align: center;">
+                     <div class="row">
+                        <div class="col-lg-6">
+                            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <div style="width: 50%;height: 100%; text-align: center;">
+                                    <div>
+                                        Police Approved Chart
+                                    </div>
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            <option value="">Select</option>
+                                            <option value="harian">Harian</option>
+                                            <option value="mingguan">Mingguan</option>
+                                            <option value="tahunan">Tahunan</option>
+                                        </select>
+                                        &nbsp;
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-bs-toggle="modal" id="detailPoliceApprovedChart"
+                                    data-bs-target=".detailPoliceApprovedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                    <div>
+                                        Detail
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="policeApprovedChart" style="height:420px; max-width: 100%;"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <div style="width: 50%;height: 100%; text-align: center;">
+                                    <div>
+                                        Total Premium Chart
+                                    </div>
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            <option value="">Select</option>
+                                            <option value="harian">Harian</option>
+                                            <option value="mingguan">Mingguan</option>
+                                            <option value="tahunan">Tahunan</option>
+                                        </select>
+                                        &nbsp;
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
+                                data-bs-target=".detailTotalPremiumChart"
+                                    style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    <div>
+                                        Detail
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="totalPremiumChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br>
+
+<div class="row">
+    <div class="col-xl-4 p-1" style="height:100%">
+        <div class="h-100" style="width: 100%;background-color: #222222;">
+            <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
+                        <select class="form-control" id="select_top10_1"
+                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                            <option value="">Select</option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                        &nbsp;
+                        <div>
+                            <div class="input-group">
+                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                            </div>
+                            <!-- input-group -->
+                        </div>
+                    </div>
+                    <br><br><br>
+                    <div
+                    style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
+                    <div>closing</div>
+                    <div style="font-weight: bold; height:23px; width:67px; ">{{ $getTeleReward['count'] }} Closing</div>
+                    </div>
+                    <br>
+                    <div
+                        style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
+                        <div>Premi</div>
+                        <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
+                    </div>
+                    <br>
+                    <div
+                        style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
+                        <div>Pendapatan Polis</div>
+                        <div style="font-weight: bold;">
+                            {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <br>
+                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
+                    <br><br><br>
+                    <div
+                        style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
+                        <div
+                            style="width: 60px;height: 60px;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                            @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
+                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:150px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            @else
+                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:200px; height:200px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            @endif
+                        </div>
+                    </div>
+                    <br><br><br>
+                    <div
+                        style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
+                        <div>Congrats Atas Pencapaianya</div>
+                        <div style="font-weight: bold;"><h2>{{ $getTeleReward['nama'] }}</h2></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="w-100 h-100 p-1 telemarketing">
+            <div class="row">
+                <div style="height:20%;width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <div>
+                        Telemarketing
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div style="width: 100%;height: 85%;overflow: auto;">
+                        <ul>
+                            @foreach ($getHistoryTele as $historyTele)
+                            @if($historyTele->id_tele > 0 && $historyTele->id_tele <= 5)
+                                @if($historyTele->islogin == '1')
+                                <li>
+                                    <div
+                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
+                                        {{ $historyTele->nama }}
+            
+                                    </div>
+                                    <div style="width: 100%;height:40%;padding-left: 5px;">
+                                        online
+                                    </div>
+                                </li>
+                                @else
+                                <li style="background-color: #000000">
+                                    <div
+                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
+                                        {{ $historyTele->nama }}
+            
+                                    </div>
+                                    <div style="width: 100%;height:40%;padding-left: 5px;">
+                                        {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
+                                    </div>
+                                </li>
+                                @endif
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div style="width: 100%;height: 85%;overflow: auto;">
+                        <ul>
+                            @foreach ($getHistoryTele as $historyTele)
+                            @if($historyTele->id_tele >= 6 && $historyTele->id_tele <= 10)
+                                @if($historyTele->islogin == '1')
+                                <li>
+                                    <div
+                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
+                                        {{ $historyTele->nama }}
+            
+                                    </div>
+                                    <div style="width: 100%;height:40%;padding-left: 5px;">
+                                        online
+                                    </div>
+                                </li>
+                                @else
+                                <li style="background-color: #000000">
+                                    <div
+                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
+                                        {{ $historyTele->nama }}
+            
+                                    </div>
+                                    <div style="width: 100%;height:40%;padding-left: 5px;">
+                                        {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
+                                    </div>
+                                </li>
+                                @endif
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <center>
+                    {{ $getHistoryTele->links() }}</center>
+                    <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8 p-1" style="height:652px;">
+        <div class="w-100 h-100 " style="background-color: #222222;border-radius: 5px;">
+            <div class="card-body">
+                <center>
+                    <h4 class="card-title mb-4">PREMIUM TOTAL</h4>
+                </center>
+
+                <center>
+                    <div class="row" style="display: flex;justify-content: center;align-items: center;">
+                        <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
+                            <div class="col-lg-3 ">
+                                <div class="card text-white "
+                                    style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #EA6ACC 0%, #020202 178.11%);">
+                                    <div class="card-body">
+                                       <center>
+                                        <p>Daily</p>
+                                        <h1>{{ $premiumTotalCountDaily }}</h1>
+                                        <button type="button" data-bs-toggle="modal" id="detailPremiumTotalDaily"
+                                            data-bs-target=".detailPremiumTotalDaily" class="btn btn-outline-light waves-effect"
+                                            style="color:#fff; border-color:#fff;">Detail</button>
+                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card text-white bg-warning"
+                                    style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #F6AE99 0.59%, #020202 178.11%);">
+                                    <div class="card-body">
+                                        <center>
+                                            <p>Weekly</p>
+                                            <h1>{{ $premiumTotalCountWeekly }}</h1>
+                                            <button type="button" data-bs-toggle="modal" id="detailPremiumTotalWeekly"
+                                                data-bs-target=".detailPremiumTotalWeekly" class="btn btn-outline-light waves-effect"
+                                                style="color:#fff; border-color:#fff;">Detail</button>
+                                            <i class="ion ion-md-download"></i>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card text-white bg-danger"
+                                    style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #448695 1.4%, #020202 178.11%);">
+                                    <div class="card-body">
+                                        <center>
+                                            <p>Monthly</p>
+                                            <h1>{{ $premiumTotalCountMonthly }}</h1>
+                                            <button type="button" data-bs-toggle="modal" id="detailPremiumTotalMonthly"
+                                                data-bs-target=".detailPremiumTotalMonthly" class="btn btn-outline-light waves-effect"
+                                                style="color:#fff; border-color:#fff;">Detail</button>
+                                            <i class="ion ion-md-download"></i>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card text-white bg-warning"
+                                    style="width:155px; height:158.34px; background: linear-gradient(223.77deg, #FDE584 -0.07%, #020202 178.11%);">
+                                    <div class="card-body">
+                                        <center>
+                                            <p>Yearly</p>
+                                            <h1>{{ $premiumTotalCountYearly }}</h1>
+                                            <button type="button" data-bs-toggle="modal" id="detailPremiumTotalYearly"
+                                                data-bs-target=".detailPremiumTotalYearly" class="btn btn-outline-light waves-effect"
+                                                style="color:#fff; border-color:#fff;">Detail</button>
+                                            <i class="ion ion-md-download"></i>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset>
+                        </div>
+                    </div>
+                </center>
+                <hr style="left: 51px; top: 695.34px; border-radius: 20px; border: 4px solid #ffffff; color: #ffffff;">
+
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
+                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                            <div style="width: 100%;height: 100%; text-align: center;">
+                                <div class="row">
+                                    <div>
+                                        Premium Tahun 1 Chart
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-6">
+                                        <div style="display: flex;margin-top: 5px;">
+                                            <select class="form-control" id="select_top10_1"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                <option value="">Select</option>
+                                                <option value="harian">Harian</option>
+                                                <option value="mingguan">Mingguan</option>
+                                                <option value="tahunan">Tahunan</option>
+                                            </select>
+                                            &nbsp;
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <div>
+                                            Detail
+                                        </div>
+                                    </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
+                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                            <div style="width: 100%;height: 100%; text-align: center;">
+                                <div class="row">
+                                    <div>
+                                        Premium PLTP Chart
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-6">
+                                        <div style="display: flex;margin-top: 5px;">
+                                            <select class="form-control" id="select_top10_1"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                <option value="">Select</option>
+                                                <option value="harian">Harian</option>
+                                                <option value="mingguan">Mingguan</option>
+                                                <option value="tahunan">Tahunan</option>
+                                            </select>
+                                            &nbsp;
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <div>
+                                            Detail
+                                        </div>
+                                    </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh;">
+                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                            <div style="width: 100%;height: 100%; text-align: center;">
+                                <div class="row">
+                                    <div>
+                                        Premium Total Chart
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-6">
+                                        <div style="display: flex;margin-top: 5px;">
+                                            <select class="form-control" id="select_top10_1"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                <option value="">Select</option>
+                                                <option value="harian">Harian</option>
+                                                <option value="mingguan">Mingguan</option>
+                                                <option value="tahunan">Tahunan</option>
+                                            </select>
+                                            &nbsp;
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 40px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <div>
+                                            Detail
+                                        </div>
+                                    </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-4 ">
+                        <div id="premiumTahun1Chart" dir="ltr" style="height:100%;"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="premiumPltpChart"></div>
+                    </div>
+                    <div class="col-4 ">
+                        <div id="premiumTotalChart" dir="ltr"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{{-- 
 <div class="row " style="height:43vh">
     <div class="col-xl-2   p-1" style="height: 43vh;">
         <div class="w-100 h-100 p-1 telemarketing">
@@ -219,432 +883,9 @@ DASHBOARD | ARWICS
 
     </div>
 
-</div>
+</div> --}}
 <!-- end row -->
 
-<div class="row" style="background-color: #222222;">
-    <div class="col-xl-12">
-        <div class="card" style="background-color:#222222;">
-            <div
-                style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
-                Spaj Submitted
-            </div>
-            <div style="display: flex;justify-content: center;align-items: center;">
-                <div class="row " style="width: 80%;display:flex;justify-content: center;align-items: center;">
-                    <div class="col-lg-2 ">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="row" style="height:auto;background-color: #222222;">
-    <center>
-        <div class="row" style="display: flex;justify-content: center;align-items: center;">
-            <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
-                <div class="col-lg-3  ">
-                    <div class="card text-white "
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
-                        <div class="card-body">
-                            <p>Daily</p>
-                            <h1>{{ $spajSubmittedCountDaily }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedDaily"
-                                data-bs-target=".detailSpajSubmittedDaily" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card text-white bg-warning"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
-                        <div class="card-body">
-                            <p>Weekly</p>
-                            <h1>{{ $spajSubmittedCountWeekly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedWeekly"
-                                data-bs-target=".detailSpajSubmittedWeekly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="card text-white bg-danger"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
-                        <div class="card-body">
-                            <p>Monthly</p>
-                            <h1>{{ $spajSubmittedCountMonthly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedMonthly"
-                                data-bs-target=".detailSpajSubmittedMonthly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card text-white bg-warning"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
-                        <div class="card-body">
-                            <p>Yearly</p>
-                            <h1>{{ $spajSubmittedCountYearly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedYearly"
-                                data-bs-target=".detailSpajSubmittedYearly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- /.modal -->
-            </div>
-        </div>
-    </center>
-    <div class="col-6" style="height: 40vh;">
-        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-            <div style="width: 50%;height: 100%; text-align: center;">
-                <div>
-                    Spaj Submitted Chart
-                </div>
-                <div style="display: flex;margin-top: 5px;">
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                    &nbsp;
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                </div>
-            </div>
-            <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                data-bs-target=".detailSpajSubmittedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                <div>
-                    Detail
-                </div>
-            </a>
-        </div>
-        <div id="spajSubmittedChart" style="height: 250px;"></div>
-    </div>
-    <div class="col-6" style="height: 40vh;">
-        <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
-            <div style="width: 50%;height: 100%; text-align: center;">
-                <div>
-                    Premium Submitted Chart
-                </div>
-                <div style="display: flex;margin-top: 5px;">
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;color: white;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                    <select class="form-control" id="select_top10_2"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;color: white;">
-                        <option value="">Select</option>
-                        <option value="all">Semua</option>
-                    </select>
-                </div>
-            </div>
-
-            <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
-            data-bs-target=".detailPremiumSubmitted"
-                style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                <div>
-                    Detail
-                </div>
-            </a>
-        </div>
-        <div id="premiumSubmittedChart" style="height:250px;" dir="ltr"></div>
-    </div>
-</div>
-<br>
-<div class="row" style="background-color: #222222;">
-    <div class="col-xl-12">
-        <div class="card" style="background-color:#222222;">
-            <div
-                style="width: 100%;display: flex;justify-content: center;align-items: center;margin: 0;font-size: 20px;">
-                Police Approved
-            </div>
-            <div style="display: flex;justify-content: center;align-items: center;">
-                <div class="row " style="width: 80%;display:flex;justify-content: center;align-items: center;">
-                    <div class="col-lg-2 ">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="row" style="background-color: #222222;">
-    <center>
-        <div class="row" style="display: flex;justify-content: center;align-items: center;">
-            <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
-                <div class="col-lg-3  ">
-                    <div class="card text-white "
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
-                        <div class="card-body">
-                            <p>Daily</p>
-                            <h1>{{ $policeApprovedCountDaily }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedDaily"
-                            data-bs-target=".detailPoliceApprovedDaily" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card text-white bg-warning"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
-                        <div class="card-body">
-                            <p>Weekly</p>
-                            <h1>{{ $policeApprovedCountWeekly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
-                            data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="card text-white bg-danger"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
-                        <div class="card-body">
-                            <p>Monthly</p>
-                            <h1>{{ $policeApprovedCountMonthly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedMonthly"
-                            data-bs-target=".detailPoliceApprovedMonthly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card text-white bg-warning"
-                        style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
-                        <div class="card-body">
-                            <p>Yearly</p>
-                            <h1>{{ $policeApprovedCountYearly }}</h1>
-                            <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedYearly"
-                            data-bs-target=".detailPoliceApprovedYearly" class="btn btn-outline-light waves-effect"
-                                style="color:#fff; border-color:#fff;">Detail</button>
-                            <i class="ion ion-md-download"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </center>
-    <div class="col-6" style="height: 40vh;">
-        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-            <div style="width: 50%;height: 100%; text-align: center;">
-                <div>
-                    Police Approve Chart
-                </div>
-                <div style="display: flex;margin-top: 5px;">
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                    &nbsp;
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                </div>
-            </div>
-            <a href="#" data-bs-toggle="modal" id="detailPoliceApprovedChart"
-                data-bs-target=".detailPoliceApprovedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                <div>
-                    Detail
-                </div>
-            </a>
-        </div>
-        <div id="policeApprovedChart" style="height: 250px;"></div>
-    </div>
-    <div class="col-6" style="height: 40vh;">
-        <div style="width: 100%;height: 22%;display: flex;justify-content: center;align-items: center;">
-            <div style="width: 50%;height: 100%; text-align: center;">
-                <div>
-                    Total Premium Chart
-                </div>
-                <div style="display: flex;margin-top: 5px;">
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                    &nbsp;
-                    <select class="form-control" id="select_top10_1"
-                        style="width: 127.66px;height: 44.29px;background-color:#222222;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                </div>
-            </div>
-            <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
-                data-bs-target=".detailTotalPremiumChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                <div>
-                    Detail
-                </div>
-            </a>
-        </div>
-        <div id="totalPremiumChart" style="height:250px;" dir="ltr"></div>
-    </div>
-</div>
-<!-- end row -->
-<div class="row mt-5">
-    <div class="col-xl-12">
-        <div class="card" style="background-color:#222222;">
-            <div class="card-body">
-                <center>
-                    <h4 class="card-title mb-4">PREMIUM TOTAL</h4>
-                </center>
-
-                <center>
-                    <div class="row" style="display: flex;justify-content: center;align-items: center;">
-                        <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
-                            <div class="col-lg-3  ">
-                                <div class="card text-white "
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF00C7, #020202);">
-                                    <div class="card-body">
-                                        <p>Daily</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-warning"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #0049FF, #020202);">
-                                    <div class="card-body">
-                                        <p>Weekly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-danger"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, #FF0037, #020202);">
-                                    <div class="card-body">
-                                        <p>Monthly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="card text-white bg-warning"
-                                    style="width:155px; height:158.34px; background: linear-gradient(45deg, yellow, #020202);">
-                                    <div class="card-body">
-                                        <p>Yearly</p>
-                                        <h1>14</h1>
-                                        <button type="button" class="btn btn-outline-light waves-effect"
-                                            style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </center>
-                <!-- end row -->
-                <div class="row text-center mt-4">
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</ option>
-                        </select>
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                    </div>
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                    </div>
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh;">
-
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                        <select class="form-control" id="select_top10_1"
-                            style="width:175px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 ">
-                        <div id="premiumTahun1Chart" dir="ltr"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="premiumPltpChart"></div>
-                    </div>
-                    <div class="col-4 ">
-                        <div id="premiumTotalChart" dir="ltr"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end row -->
 
 <div class="modal fade detailSpajSubmittedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
@@ -675,6 +916,18 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -715,6 +968,19 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -755,6 +1021,19 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -795,6 +1074,236 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade detailPremiumTotalDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail PremiumTotal Daily</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTotalDaily" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPremiumTotalWeekly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Total Weekly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTotalWeekly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPremiumTotalMonthly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Total Monthly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTotalMonthly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>  
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPremiumTotalYearly" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Total Yearly</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTotalYearly" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Produk</th>
+                                            <th>Premi Total</th>
+                                            <th>Telesales</th>
+                                            <th>Tahun Ke</th>
+                                            <th>Tanggal Pembayaran</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -835,6 +1344,14 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -871,6 +1388,15 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Jumlah Spaj</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -909,6 +1435,14 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -945,6 +1479,14 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Jumlah Spaj</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -988,6 +1530,18 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -1028,6 +1582,18 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -1068,6 +1634,18 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -1108,6 +1686,18 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Proposal</th>
+                                            <th>Nama</th>
+                                            <th>Telepon</th>
+                                            <th>Nama Produk</th>
+                                            <th>Premi</th>
+                                            <th>Telesales</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -1129,6 +1719,9 @@ DASHBOARD | ARWICS
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
 
+<script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+
 <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
@@ -1139,6 +1732,7 @@ DASHBOARD | ARWICS
 <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets/js/datatable.js') }}"></script>
 
+<script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
@@ -1163,7 +1757,7 @@ DASHBOARD | ARWICS
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Jumlah Spaj'],
+            ['Bulan', ''],
 
             @php
             foreach($spajSubmitted as $spaj) {
@@ -1193,7 +1787,6 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            speed: 3000,
             colors: '#FB6EAA',
             bar: {
                 groupWidth: "90.39px"
@@ -1208,8 +1801,37 @@ DASHBOARD | ARWICS
             },
             width: '100%',
             height: '75%',
-            responsive: true,
-            isStacked: true
+            isStacked: true,
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            align: 'center',
+                            verticalAlign: 'bottom',
+                            layout: 'horizontal'
+                        },
+                        yAxis: {
+                            labels: {
+                                align: 'left',
+                                x: 0,
+                                y: -5
+                            },
+                            title: {
+                                text: null
+                            }
+                        },
+                        subtitle: {
+                            text: null
+                        },
+                        credits: {
+                            enabled: false
+                        }
+                    }
+                }]
+            }
         }
         var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -1217,21 +1839,18 @@ DASHBOARD | ARWICS
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Total Premi'],
+            ['Bulan', ''],
             @php
             foreach($premiumSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '"."Rp".number_format($spaj->sum_nominal, 0, ',', '.')."'],";
+                "', '".
+                "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
+                "'],";
+
             }
             @endphp
         ]);
         var options = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
             chartArea: {
                 backgroundColor: {
                     fill: '#222222',
@@ -1260,9 +1879,38 @@ DASHBOARD | ARWICS
                 }
             },
             width: '90.39px',
-            responsive: true,
             colors: '#FB6EAA',
             bars: 'vertical',
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            align: 'center',
+                            verticalAlign: 'bottom',
+                            layout: 'horizontal'
+                        },
+                        yAxis: {
+                            labels: {
+                                align: 'left',
+                                x: 0,
+                                y: -5
+                            },
+                            title: {
+                                text: null
+                            }
+                        },
+                        subtitle: {
+                            text: null
+                        },
+                        credits: {
+                            enabled: false
+                        }
+                    }
+                }]
+            }
         }
         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -1270,7 +1918,7 @@ DASHBOARD | ARWICS
 
     function policeApprovedChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Jumlah Spaj'],
+            ['Bulan', ''],
             @php
             foreach($policeApprovedChart as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -1299,7 +1947,7 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#114EE7',
+            colors: '#FB6EAA',
             bar: {
                 groupWidth: "90.39px"
             },
@@ -1324,7 +1972,7 @@ DASHBOARD | ARWICS
 
     function totalPremiumChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Total Premi'],
+            ['Bulan', ''],
             @php
             foreach($totalPremiumChart as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -1360,7 +2008,7 @@ DASHBOARD | ARWICS
                     min: 0
                 }
             },
-            colors: '#E91140',
+            colors: '#FB6EAA',
             bar: {
                 groupWidth: "90.39px"
             },
@@ -1384,11 +2032,17 @@ DASHBOARD | ARWICS
 
     function premiumTahun1Chart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Jumlah Spaj'],
-            ['Januari', '2'],
-            ['Februari', '3'],
-            ['Maret', '4']
+            ['Bulan', ''],
+            @php
+            foreach($premiumTahun1Chart as $premiumTotal) {
+                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                "', '".
+                "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
+                "'],";
+            }
+            @endphp
         ]);
+
 
         var options = {
             legend: {
@@ -1408,11 +2062,28 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#114EE7',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 100,
+                    min: 0
+                }
+            },
+            colors: '#7BC2EC',
             bar: {
                 groupWidth: "90.39px"
             },
             bars: 'vertical',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 12,
+                    min: 0
+                }
+            },
+            width: '90.39px',
+            bars: 'vertical',
+            responsive: true,
             isStacked: true
         }
 
@@ -1422,11 +2093,17 @@ DASHBOARD | ARWICS
 
     function premiumPltpChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Total Premi'],
-            ['Januari', 'Rp. 100.000'],
-            ['Februari', 'Rp. 150.000'],
-            ['Maret', 'Rp. 200.000']
+            ['Bulan', ''],
+            @php
+            foreach($premiumPltpChart as $premiumTotal) {
+                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                "', '".
+                "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
+                "'],";
+            }
+            @endphp
         ]);
+
 
         var options = {
             legend: {
@@ -1446,11 +2123,28 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#E91140',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 100,
+                    min: 0
+                }
+            },
+            colors: '#7BC2EC',
             bar: {
                 groupWidth: "90.39px"
             },
             bars: 'vertical',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 12,
+                    min: 0
+                }
+            },
+            width: '90.39px',
+            bars: 'vertical',
+            responsive: true,
             isStacked: true
         }
 
@@ -1460,11 +2154,17 @@ DASHBOARD | ARWICS
 
     function premiumTotalChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Total Premi'],
-            ['Januari', 'Rp. 100.000'],
-            ['Februari', 'Rp. 150.000'],
-            ['Maret', 'Rp. 200.000']
+            ['Bulan', ''],
+            @php
+            foreach($premiumTotalChart as $premiumTotal) {
+                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                "', '".
+                "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
+                "'],";
+            }
+            @endphp
         ]);
+
 
         var options = {
             legend: {
@@ -1484,11 +2184,28 @@ DASHBOARD | ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            colors: '#ECD11E',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 100,
+                    min: 0
+                }
+            },
+            colors: '#7BC2EC',
             bar: {
                 groupWidth: "90.39px"
             },
             bars: 'vertical',
+            hAxis: {
+                minValue: 0,
+                viewWindow: {
+                    max: 12,
+                    min: 0
+                }
+            },
+            width: '90.39px',
+            bars: 'vertical',
+            responsive: true,
             isStacked: true
         }
 

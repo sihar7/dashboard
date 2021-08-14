@@ -103,6 +103,11 @@
 
             <script type="text/javascript">
                 $(document).ready(function () {
+
+                    function reset()
+                    {
+                        $('input').val('');
+                    }
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -178,9 +183,12 @@
                                         icon: 'error',
                                         title: 'Gagal Login !'
                                     })
+                                    
+                                    reset();
                                 }
                             },
                             complete: function () {
+                                reset();
                                 $('#button_login').removeAttr('disabled');
                                 $('#button_login').html("Log In");
                             }

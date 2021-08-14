@@ -60,6 +60,13 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/detailTotalPremiumChart', [DetailController::class, 'detailTotalPremiumChart']);
             // End Police Approved Chart
 
+            // Start Detail PremiumTotal
+            Route::get('/detailPremiumTotalDaily', [DetailController::class, 'detailPremiumTotalDaily'])->name('detailSpajSubmittedDaily');
+            Route::get('/detailPremiumTotalWeekly', [DetailController::class, 'detailPremiumTotalWeekly']);
+            Route::get('/detailPremiumTotalMonthly', [DetailController::class, 'detailPremiumTotalMonthly']);
+            Route::get('/detailPremiumTotalYearly', [DetailController::class, 'detailPremiumTotalYearly']);
+
+            // End PremiumTotal
         });
         Route::prefix('tele')->group(function() {
             Route::post('/filterHarianTopTsr', [TeleController::class, 'filterHarianTopTsr']);

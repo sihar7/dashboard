@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Spaj;
 use App\Repository\TeleRepo;
+use App\Repository\PremiumTotalRepo;
 use App\Repository\SpajSubmittedRepo;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -17,11 +18,14 @@ class DashboardController extends Controller
 
     protected $tele;
     protected $spaj;
+    protected $premiumTotal;
 
-    function __construct(TeleRepo $tele, SpajSubmittedRepo $spaj)
+    function __construct(TeleRepo $tele, SpajSubmittedRepo $spaj, PremiumTotalRepo $premiumTotal)
     {
         $this->spaj = $spaj;
         $this->tele = $tele;
+        $this->premiumTotal = $premiumTotal;
+
         $this->middleware(['has_login', 'XSS']);
     }
 
@@ -30,23 +34,42 @@ class DashboardController extends Controller
         if($request->user()->hasRole('management'))
         {
             if (Auth()->user()->api_token) {
+                // Start Tele
                 $data['getHistoryTele']          = $this->tele->getHistoryTele();
                 $data['topTsr10']                = $this->tele->topTsr10();
                 $data['getTeleReward']           = $this->tele->getTeleReward();
+                // End Tele
+
+                // Start Spaj Submitted
                 $data['spajSubmitted']           = $this->spaj->spajSubmitted();
                 $data['premiumSubmitted']        = $this->spaj->premiumSubmitted();
-                $data['policeApprovedChart']     = $this->spaj->policeApprovedChart();
-                $data['totalPremiumChart']       = $this->spaj->totalPremiumChart();
-
                 $data['spajSubmittedCountDaily'] = $this->spaj->spajSubmittedCountDaily();
                 $data['spajSubmittedCountWeekly']= $this->spaj->spajSubmittedCountWeekly();
                 $data['spajSubmittedCountMonthly'] = $this->spaj->spajSubmittedCountMonthly();
                 $data['spajSubmittedCountYearly'] = $this->spaj->spajSubmittedCountYearly();
+                // End Spaj Submitted
 
+
+                //Start Police Approved
+                $data['policeApprovedChart']     = $this->spaj->policeApprovedChart();
+                $data['totalPremiumChart']       = $this->spaj->totalPremiumChart();
                 $data['policeApprovedCountDaily'] = $this->spaj->policeApprovedCountDaily();
                 $data['policeApprovedCountWeekly'] = $this->spaj->policeApprovedCountWeekly();
                 $data['policeApprovedCountMonthly'] = $this->spaj->policeApprovedCountMonthly();
                 $data['policeApprovedCountYearly'] = $this->spaj->policeApprovedCountYearly();
+                // End Police Approved
+
+                // Start Premium Total
+                $data['premiumTahun1Chart'] = $this->premiumTotal->premiumTahun1Chart();
+                $data['premiumPltpChart'] = $this->premiumTotal->premiumPltpChart();
+                $data['premiumTotalChart'] = $this->premiumTotal->premiumTotalChart();
+
+                $data['premiumTotalCountDaily'] = $this->premiumTotal->premiumTotalCountDaily();
+                $data['premiumTotalCountWeekly'] = $this->premiumTotal->premiumTotalCountWeekly();
+                $data['premiumTotalCountMonthly'] = $this->premiumTotal->premiumTotalCountMonthly();
+                $data['premiumTotalCountYearly'] = $this->premiumTotal->premiumTotalCountYearly();
+
+                // End Premium Total
 
 
 

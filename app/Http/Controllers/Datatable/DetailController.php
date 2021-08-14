@@ -8,6 +8,7 @@ use App\Models\Spaj;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\Pltp;
 class DetailController extends Controller
 {
     function detailSpajSubmittedDaily(Request $request)
@@ -277,48 +278,6 @@ class DetailController extends Controller
     // End Spaj SUbmitted Chart
 
 
-    function detailTotalPremium(Request $request)
-    {
-        if (Auth::user()->api_token) {
-            # code...
-
-        } else {
-
-            $data = [
-                'message' => 'Token Tidak Ditemukan',
-                'error' => true,
-                'code' => 403
-            ];
-
-            return response()->json(['api' => $data], 201);
-        }
-    }
-
-    function detailPremiumTahun1(Request $request)
-    {
-        if (Auth::user()->api_token) {
-            # code...
-
-        } else {
-
-            $data = [
-                'message' => 'Token Tidak Ditemukan',
-                'error' => true,
-                'code' => 403
-            ];
-
-            return response()->json(['api' => $data], 201);
-        }
-    }
-
-    function detailPltp(Request $request)
-    {
-    }
-
-    function detailPremiumTotal(Request $request)
-    {
-    }
-
     // Police Approved
 
     function detailPoliceApprovedDaily(Request $request)
@@ -585,6 +544,195 @@ class DetailController extends Controller
     }
     // End Police Approved Chart
 
+
+    // Start Premium Total
+    function detailPremiumTotalDaily(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('trn_pltp.tgl_update', '>', Carbon::today()->subDay(6))
+                ->whereDay('trn_pltp.tgl_update', date('d'))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele',
+                    'trn_pltp.nominal_premi as premi_total',
+                    'trn_pltp.*'
+                    )
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('tgl_update', function($pltp){
+                           return Carbon::parse($pltp->tgl_update)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($pltp){
+                           return $this->sensor($pltp->tlp);
+                    })
+                    ->addColumn('premi_total', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi_total, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tgl_update', 'tlp', 'premi_total'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPremiumTotalWeekly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->where('trn_pltp.tgl_update', '>', Carbon::today()->subDay(6))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele',
+                    'trn_pltp.nominal_premi as premi_total',
+                    'trn_pltp.*'
+                    )
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('tgl_update', function($pltp){
+                           return Carbon::parse($pltp->tgl_update)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($pltp){
+                           return $this->sensor($pltp->tlp);
+                    })
+                    ->addColumn('premi_total', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi_total, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tgl_update', 'tlp', 'premi_total'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPremiumTotalMonthly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele',
+                    'trn_pltp.nominal_premi as premi_total',
+                    'trn_pltp.*'
+                    )
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('tgl_update', function($pltp){
+                           return Carbon::parse($pltp->tgl_update)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($pltp){
+                           return $this->sensor($pltp->tlp);
+                    })
+                    ->addColumn('premi_total', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi_total, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tgl_update', 'tlp', 'premi_total'])
+                    ->make(true);
+
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+
+    function detailPremiumTotalYearly(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if (request()->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->select(
+                    'mst_telemarketing.*',
+                    'mst_spaj_submit.*',
+                    'mst_telemarketing.nama as nama_tele',
+                    'trn_pltp.nominal_premi as premi_total',
+                    'trn_pltp.*'
+                    )
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('tgl_update', function($pltp){
+                           return Carbon::parse($pltp->tgl_update)->isoFormat('dddd, D MMMM Y');
+                    })
+                    ->addColumn('tlp', function($pltp){
+                           return $this->sensor($pltp->tlp);
+                    })
+                    ->addColumn('premi_total', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi_total, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['tgl_update', 'tlp', 'premi_total'])
+                    ->make(true);
+            }
+
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    // End Premium Total
     private function sensor( $data = '' )
     {
         if ($data == '') {
