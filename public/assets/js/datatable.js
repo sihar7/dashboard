@@ -1333,6 +1333,231 @@ $(document).ready(function() {
             ]
         });
     }
+
+
+    function dataTablePremiumTahun1Chart() {
+        // Setup - add a text input to each footer cell
+        $('#tablePremiumTahun1Chart thead th').each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title +
+                '" />');
+        });
+        var table = $('#tablePremiumTahun1Chart').dataTable({
+            initComplete: function() {
+                // Apply the search
+                this.api().columns().every(function() {
+                    var that = this;
+
+                    $('input', this.header()).on('keyup change clear', function() {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+            },
+            autoWidth: true,
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            responsive: true,
+            language: {
+                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
+                sEmptyTable: "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
+                sLengthMenu: "Tampilkan _MENU_ Baris",
+                sZeroRecords: "Tidak Ditemukan Data Yang Sesuai",
+                sInfo: "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
+                sInfoEmpty: "Menampilkan 0 Sampai 0 Dari 0 Baris",
+                sInfoFiltered: "(disaring dari _MAX_ entri keseluruhan)",
+                sInfoPostFix: "",
+                sSearch: "Cari:",
+                sUrl: "",
+                oPaginate: {
+                    sFirst: "Pertama",
+                    sPrevious: "Sebelumnya",
+                    sNext: "Selanjutnya",
+                    sLast: "Terakhir",
+                },
+            },
+            stateSave: true,
+            order: [],
+            ajax: "/management/spaj/detailPremiumTahun1Chart",
+            deferRender: true,
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'year_name',
+                    name: 'year_name'
+                },
+                {
+                    data: 'month_name',
+                    name: 'month_name'
+                },
+                {
+                    data: 'sum_nominal',
+                    name: 'sum_nominal'
+                },
+                {
+                    data: 'tahun_ke',
+                    name: 'tahun_ke'
+                },
+
+            ]
+        });
+    }
+
+    function dataTablePremiumPltpChart() {
+        // Setup - add a text input to each footer cell
+        $('#tablePremiumPltpChart thead th').each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title +
+                '" />');
+        });
+        var table = $('#tablePremiumPltpChart').dataTable({
+            initComplete: function() {
+                // Apply the search
+                this.api().columns().every(function() {
+                    var that = this;
+
+                    $('input', this.header()).on('keyup change clear', function() {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+            },
+            autoWidth: true,
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            responsive: true,
+            language: {
+                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
+                sEmptyTable: "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
+                sLengthMenu: "Tampilkan _MENU_ Baris",
+                sZeroRecords: "Tidak Ditemukan Data Yang Sesuai",
+                sInfo: "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
+                sInfoEmpty: "Menampilkan 0 Sampai 0 Dari 0 Baris",
+                sInfoFiltered: "(disaring dari _MAX_ entri keseluruhan)",
+                sInfoPostFix: "",
+                sSearch: "Cari:",
+                sUrl: "",
+                oPaginate: {
+                    sFirst: "Pertama",
+                    sPrevious: "Sebelumnya",
+                    sNext: "Selanjutnya",
+                    sLast: "Terakhir",
+                },
+            },
+            stateSave: true,
+            order: [],
+            ajax: "/management/spaj/detailPremiumPltpChart",
+            deferRender: true,
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'year_name',
+                    name: 'year_name'
+                },
+                {
+                    data: 'month_name',
+                    name: 'month_name'
+                },
+                {
+                    data: 'sum_nominal',
+                    name: 'sum_nominal'
+                },
+                {
+                    data: 'tahun_ke',
+                    name: 'tahun_ke'
+                },
+
+            ]
+        });
+    }
+
+    function dataTablePremiumTotalChart() {
+        // Setup - add a text input to each footer cell
+        $('#tablePremiumTotalChart thead th').each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title +
+                '" />');
+        });
+        var table = $('#tablePremiumTotalChart').dataTable({
+            initComplete: function() {
+                // Apply the search
+                this.api().columns().every(function() {
+                    var that = this;
+
+                    $('input', this.header()).on('keyup change clear', function() {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+            },
+            autoWidth: true,
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            responsive: true,
+            language: {
+                processing: '<span style="color:#fff;">Mohon Tunggu...</span><i class="fe fe-refresh fa-spin fa-3x fa-fw" style="color:#2510A3;"></i>',
+                sEmptyTable: "Tidak Ada Data Yang Tersedia Pada Tabel Ini",
+                sLengthMenu: "Tampilkan _MENU_ Baris",
+                sZeroRecords: "Tidak Ditemukan Data Yang Sesuai",
+                sInfo: "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Baris",
+                sInfoEmpty: "Menampilkan 0 Sampai 0 Dari 0 Baris",
+                sInfoFiltered: "(disaring dari _MAX_ entri keseluruhan)",
+                sInfoPostFix: "",
+                sSearch: "Cari:",
+                sUrl: "",
+                oPaginate: {
+                    sFirst: "Pertama",
+                    sPrevious: "Sebelumnya",
+                    sNext: "Selanjutnya",
+                    sLast: "Terakhir",
+                },
+            },
+            stateSave: true,
+            order: [],
+            ajax: "/management/spaj/detailPremiumTotalChart",
+            deferRender: true,
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'year_name',
+                    name: 'year_name'
+                },
+                {
+                    data: 'month_name',
+                    name: 'month_name'
+                },
+                {
+                    data: 'sum_nominal',
+                    name: 'sum_nominal'
+                },
+                {
+                    data: 'tahun_ke',
+                    name: 'tahun_ke'
+                },
+
+            ]
+        });
+    }
+
+
     // End Premium Total
 
     $(this).on('click', '#detailSpajSubmittedDaily', function(e) {
@@ -1418,6 +1643,23 @@ $(document).ready(function() {
         dataTablePremiumTotalYearly();
         $("#tablePremiumTotalYearly_filter").hide();
     });
+
+    $(this).on('click', '#detailPremiumTahun1Chart', function(e) {
+        dataTablePremiumTahun1Chart();
+        $("#tablePremiumTahun1Chart_filter").hide();
+    });
+
+    $(this).on('click', '#detailPremiumPltpChart', function(e) {
+        dataTablePremiumPltpChart();
+        $("#tablePremiumPltpChart_filter").hide();
+    });
+
+
+    $(this).on('click', '#detailPremiumTotalChart', function(e) {
+        dataTablePremiumTotalChart();
+        $("#tablePremiumTotalChart_filter").hide();
+    });
+
 
 
 

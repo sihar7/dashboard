@@ -574,8 +574,8 @@ DASHBOARD | ARWICS
 
                                     <div class="col-lg-6">
 
-                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <a href="#" data-bs-toggle="modal" id="detailPremiumTahun1Chart"
+                                        data-bs-target=".detailPremiumTahun1Chart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
                                         <div>
                                             Detail
                                         </div>
@@ -615,8 +615,8 @@ DASHBOARD | ARWICS
 
                                     <div class="col-lg-6">
 
-                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <a href="#" data-bs-toggle="modal" id="detailPremiumPltpChart"
+                                        data-bs-target=".detailPremiumPltpChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
                                         <div>
                                             Detail
                                         </div>
@@ -656,8 +656,8 @@ DASHBOARD | ARWICS
 
                                     <div class="col-lg-6">
 
-                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                                        data-bs-target=".detailSpajSubmittedChart" style="width: 100px;height: 40px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <a href="#" data-bs-toggle="modal" id="detailPremiumTotalChart"
+                                        data-bs-target=".detailPremiumTotalChart" style="width: 100px;height: 40px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
                                         <div>
                                             Detail
                                         </div>
@@ -1500,6 +1500,147 @@ DASHBOARD | ARWICS
 </div>
 {{-- End Detail Police Approved Chart --}}
 
+{{-- Start Detail Premium Total Chart --}}
+<div class="modal fade detailPremiumTahun1Chart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Tahun 1 Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTahun1Chart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPremiumPltpChart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Total Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumPltpChart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade detailPremiumTotalChart" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="height:20%;max-width: 100%;background-color:#222222;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #222222;">
+                <h5 class="modal-title mt-0">Detail Premium Total Chart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="background-color: #222222;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="tablePremiumTotalChart" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:#222222; color:#fff;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tahun</th>
+                                            <th>Bulan</th>
+                                            <th>Total Premi</th>
+                                            <th>Premi Tahun Ke</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+{{-- End Detail Premium Total Chart --}}
 
 <div class="modal fade detailPoliceApprovedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">

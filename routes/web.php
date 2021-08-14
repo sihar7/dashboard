@@ -66,6 +66,10 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/detailPremiumTotalMonthly', [DetailController::class, 'detailPremiumTotalMonthly']);
             Route::get('/detailPremiumTotalYearly', [DetailController::class, 'detailPremiumTotalYearly']);
 
+            Route::get('/detailPremiumTahun1Chart', [DetailController::class, 'detailPremiumTahun1Chart'])->name('detailSpajSubmittedDaily');
+            Route::get('/detailPremiumPltpChart', [DetailController::class, 'detailPremiumPltpChart'])->name('detailSpajSubmittedDaily');
+            Route::get('/detailPremiumTotalChart', [DetailController::class, 'detailPremiumTotalChart'])->name('detailSpajSubmittedDaily');
+            
             // End PremiumTotal
         });
         Route::prefix('tele')->group(function() {

@@ -732,6 +732,145 @@ class DetailController extends Controller
             return response()->json(['api' => $data], 201);
         }
     }
+
+    function detailPremiumTahun1Chart(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(
+                'mst_spaj_submit.*',
+                'trn_pltp.*',
+                'trn_pltp.nominal_premi as premi')
+                ->where('trn_pltp.tahun_ke', 1)
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('Y');
+                    })
+
+                    ->addColumn('sum_nominal', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    
+    function detailPremiumPltpChart(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(
+                'mst_spaj_submit.*',
+                'trn_pltp.*',
+                'trn_pltp.nominal_premi as premi')
+                ->where('trn_pltp.tahun_ke', '>', 1)
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('Y');
+                    })
+
+                    ->addColumn('sum_nominal', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+            }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    
+    function detailPremiumTotalChart(Request $request)
+    {
+        if (Auth::user()->api_token) {
+            if($request->ajax()) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(
+                'mst_spaj_submit.*',
+                'trn_pltp.*',
+                'trn_pltp.nominal_premi as premi')
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->orderBy('trn_pltp.tgl_update', 'DESC')
+                ->get();
+
+                return DataTables()->of($pltp)
+                ->addIndexColumn()
+                    ->addColumn('month_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('MMMM');
+                    })
+                    // ->addColumn('day_name', function($spaj){
+                    //     return Carbon::parse($spaj->day_name)->isoFormat('dddd');
+                    // })
+                    ->addColumn('year_name', function($pltp){
+                        return Carbon::parse($pltp->tgl_update)->isoFormat('Y');
+                    })
+
+                    ->addColumn('sum_nominal', function($pltp){
+                        return 'Rp. '.number_format($pltp->premi, 0, ',', '.').'';
+                    })
+
+                    ->rawColumns(['month_name','sum_nominal', 'year_name'])
+                    ->make(true);
+
+                }
+        } else {
+
+            $data = [
+                'message' => 'Token Tidak Ditemukan',
+                'error' => true,
+                'code' => 403
+            ];
+
+            return response()->json(['api' => $data], 201);
+        }
+    }
+    
     // End Premium Total
     private function sensor( $data = '' )
     {
