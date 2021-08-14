@@ -468,8 +468,8 @@ DASHBOARD | ARWICS
             </div>
         </div>
     </div>
-    <div class="col-xl-8 p-1" style="height:652px;">
-        <div class="w-100 h-100 " style="background-color: #222222;border-radius: 5px;">
+    <div class="col-xl-8 p-1" style="height:100%;">
+        <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
             <div class="card-body">
                 <center>
                     <h4 class="card-title mb-4">PREMIUM TOTAL</h4>
@@ -683,7 +683,93 @@ DASHBOARD | ARWICS
                 </div>
             </div>
         </div>
-        
+        <br>
+        <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
+            <div class="card-body">
+                <div style="height: 15%;width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <div style="width: 30%;height: 100%;display: flex;">
+                        @php
+                        date_default_timezone_set('Asia/Jakarta');
+                        $bulan = date('Y-m-d');
+                        @endphp
+                        <div
+                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
+                            TOP 10 Bulan {{ \Carbon\Carbon::parse($bulan)->isoFormat('MMMM') }}</div>
+                        <div
+                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
+                            <select class="form-control" id="select_top10_1"
+                                style="width:140px; height:30px;background-color:#222222;">
+                                <option value="">Select</option>
+                                <option value="harian">Harian</option>
+                                <option value="mingguan">Mingguan</option>
+                                <option value="tahunan">Tahunan</option>
+                            </select>
+                        </div>
+                        <div
+                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
+                            <select class="form-control" id="select_top10_2"
+                                style="width:140px; height:30px;background-color:#222222;">
+                                <option>Select</option>
+                                <option value="all">Semua</option>
+                            </select>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="list_table text-center" style="width: 100%;">
+                    <ul>
+                        @php
+                        $no = 1;
+                        @endphp
+                        @foreach ($topTsr10 as $item)
+                        <li>
+                            <div style="height:35vh;">
+                                <div
+                                    style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
+                                    Top {{ $no++ }}
+                                </div>
+                                <div style="width: 100%;height: 90%;padding: 3px;">
+                                    <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
+                                        <div
+                                            style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
+                                            @if ( $item->foto_tele == null || $item->foto_tele == '-' )
+                                            <div
+                                                style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                                                <img src="https://i.pravatar.cc/50" alt="image" />
+                                            </div>
+                                            @else
+                                            <div
+                                                style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
+                                                <img src="{{ asset('property', $item->foto_tele) }}" alt="image" />
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div
+                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;font-size:10px;">
+                                            {{ $item->nama_tele }}
+                                        </div>
+                                        <div
+                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                            {{ $item->spaj_count }} Closing
+                                        </div>
+                                        <div
+                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                            {{ $item->spaj_count }} Premi
+                                        </div>
+                                        <div
+                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
+                                            {{ "Rp " . number_format($item->total_max,0,',','.') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <ul>
+            </div>
+        </div>
     </div>
 </div>
 {{-- 
