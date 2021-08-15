@@ -103,66 +103,121 @@ DASHBOARD | ARWICS
                      <div class="row">
                         <div class="col-lg-6">
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <form id="formSpajSubmittedChart">
+                                    @csrf
                                 <div style="width: 50%;height: 100%; text-align: center;">
                                     <div>
                                         Spaj Submitted Chart
                                     </div>
-                                    <div style="display: flex;margin-top: 5px;">
-                                        <select class="form-control" id="select_top10_1"
+                                        <div style="display: flex;margin-top: 5px;">
+                                            <select class="form-control" name="selectDay" id="selectDaySpajChart"
                                             style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
                                             <option value="">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
+                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
-                                        </select>
-                                        &nbsp;
-                                        <div>
-                                            <div class="input-group">
-                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </select>
+                                            &nbsp;
+                                            
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
                                             </div>
-                                            <!-- input-group -->
-                                        </div>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>  
+                                            
                                     </div>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                                    data-bs-target=".detailSpajSubmittedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
-                                    <div>
-                                        Detail
+                                <div>
+                                    <div class="input-group">
+                                        <button type="submit" id="buttonSpajSubmittedChart" onclick="findDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
+                              
                                     </div>
-                                </a>
+                                    <!-- input-group -->
+                                </div>
+                                
+                                </form>
+                                &nbsp;&nbsp;
+                                <div>
+                                    <div class="input-group">
+                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                        data-bs-target=".detailSpajSubmittedChart" style="width: 120px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        <div>
+                                            Detail
+                                        </div>
+                                    </a>
+    
+                                    </div>
+                                    <!-- input-group -->
+                                </div>
+                              
                             </div>
                             <div id="spajSubmittedChart" style="height:420px; max-width: 100%;"></div>
                         </div>
                         <div class="col-lg-6">
+                        
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                                <form id="formPremiumSubmittedChart">
+                                    @csrf
                                 <div style="width: 50%;height: 100%; text-align: center;">
                                     <div>
                                         Premium Submitted Chart
                                     </div>
-                                    <div style="display: flex;margin-top: 5px;">
-                                        <select class="form-control" id="select_top10_1"
+                                        <div style="display: flex;margin-top: 5px;">
+                                            <select class="form-control" name="selectDay" id="selectDayPremiumChart"
                                             style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
                                             <option value="">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
+                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
-                                        </select>
-                                        &nbsp;
-                                        <div>
-                                            <div class="input-group">
-                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </select>
+                                            &nbsp;
+                                            
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
                                             </div>
-                                            <!-- input-group -->
-                                        </div>
+                                            <div>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>  
+                                            
                                     </div>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
-                                data-bs-target=".detailPremiumSubmitted"
-                                    style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                                    <div>
-                                        Detail
+                                <div>
+                                    <div class="input-group">
+                                        <button type="submit" id="buttonPremiumSubmittedChart" onclick="findPremiumDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
+                              
                                     </div>
-                                </a>
+                                    <!-- input-group -->
+                                </div>
+                                
+                                </form>
+                                &nbsp;&nbsp;
+                                <div>
+                                    <div class="input-group">
+                                  
+                                        <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
+                                        data-bs-target=".detailPremiumSubmitted"
+                                            style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                            <div>
+                                                Detail
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div id="premiumSubmittedChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
                         </div>
@@ -303,7 +358,7 @@ DASHBOARD | ARWICS
                                 </div>
                                 <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
                                 data-bs-target=".detailTotalPremiumChart"
-                                    style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
                                     </div>
@@ -328,19 +383,19 @@ DASHBOARD | ARWICS
                     <br>
                     <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
                         <select class="form-control" id="select_top10_1"
-                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                        &nbsp;
-                        <div>
-                            <div class="input-group">
-                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                            </div>
-                            <!-- input-group -->
+                        style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                        <option value="">Select</option>
+                        <option value="harian">Harian</option>
+                        <option value="mingguan">Mingguan</option>
+                        <option value="tahunan">Tahunan</option>
+                    </select>
+                    &nbsp;
+                    <div>
+                        <div class="input-group">
+                            <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                         </div>
+                        <!-- input-group -->
+                    </div>
                     </div>
                     <br><br><br>
                     <div
@@ -2440,5 +2495,919 @@ DASHBOARD | ARWICS
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
+</script>
+
+<script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        function findDay()
+        {
+            var eID = document.getElementById("selectDaySpajChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'harian') {   
+                $('#formSpajSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonSpajSubmittedChart').html("Memfilter...");
+                $('#buttonSpajSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterHarianSpajSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if(dayVal == 'mingguan') {
+                $('#formSpajSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonSpajSubmittedChart').html("Memfilter...");
+                $('#buttonSpajSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterMingguSpajSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if(dayVal == 'bulanan') {
+                $('#formSpajSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonSpajSubmittedChart').html("Memfilter...");
+                $('#buttonSpajSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterBulanSpajSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if(dayVal == 'tahunan') {
+                $('#formSpajSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonSpajSubmittedChart').html("Memfilter...");
+                $('#buttonSpajSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterTahunSpajSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonSpajSubmittedChart').html("Filter");
+                        $('#buttonSpajSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            }   
+        }
+        function findPremiumDay()
+        {
+            var eID = document.getElementById("selectDayPremiumChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'harian') {   
+                $('#formPremiumSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonPremiumSubmittedChart').html("Memfilter...");
+                $('#buttonPremiumSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterHarianPremiumSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if (dayVal == 'mingguan') {   
+                $('#formPremiumSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonPremiumSubmittedChart').html("Memfilter...");
+                $('#buttonPremiumSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterMingguPremiumSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if (dayVal == 'bulanan') {   
+                $('#formPremiumSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonPremiumSubmittedChart').html("Memfilter...");
+                $('#buttonPremiumSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterBulanPremiumSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            hAxis: {
+                                minValue: 0,
+                                viewWindow: {
+                                    max: 12,
+                                    min: 0
+                                }
+                            },
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } else if (dayVal == 'tahunan') {   
+                $('#formPremiumSubmittedChart').on('submit', function (e) {
+                e.preventDefault();
+                $('#buttonPremiumSubmittedChart').html("Memfilter...");
+                $('#buttonPremiumSubmittedChart').attr('disabled', true);
+                let data = $("#formSpajSubmittedChart").serialize();
+                let datax = new FormData(this);
+                // console.log(data[0].jenis_menu);
+                console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: "{{url('/management/spaj/filterTahunPremiumSubmitted')}}",
+                    data: datax,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+
+                        console.log(response.data);
+                        
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+                        var options = {
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            // Colors the entire chart area, simple version
+                            // backgroundColor: '#FF0000',
+                            // Colors the entire chart area, with opacity
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "90.39px"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            responsive: {
+                                rules: [{
+                                    condition: {
+                                        maxWidth: 500
+                                    },
+                                    chartOptions: {
+                                        legend: {
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            layout: 'horizontal'
+                                        },
+                                        yAxis: {
+                                            labels: {
+                                                align: 'left',
+                                                x: 0,
+                                                y: -5
+                                            },
+                                            title: {
+                                                text: null
+                                            }
+                                        },
+                                        subtitle: {
+                                            text: null
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        }
+                                    }
+                                }]
+                            }
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    },
+                    error: function (e) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Gagal Memfilter data !'
+                        });
+
+                        $('#buttonPremiumSubmittedChart').html("Filter");
+                        $('#buttonPremiumSubmittedChart').removeAttr('disabled');
+                    }
+                });
+
+            });
+            } 
+        }
+        
 </script>
 @endpush

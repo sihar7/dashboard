@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+        
     <!-- App favicon -->
     <link rel="shortcut icon" href="https://arwics.com/favicon.png">
 
@@ -21,6 +23,8 @@
     <!-- App Css-->
     <link href="{{ URL::to('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ URL::to('assets/css/app-dark.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
     @stack('css')
 
@@ -103,6 +107,7 @@
     <script src="{{ URL::to('assets/libs/morris.js/morris.min.js') }}"></script>
     <script src="{{ URL::to('assets/libs/raphael/raphael.min.js') }}"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     @stack('js')
     <script src="{{ URL::to('assets/js/pages/dashboard.init.js') }}"></script>
