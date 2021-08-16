@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,7 +182,7 @@
                                         icon: 'error',
                                         title: 'Gagal Login !'
                                     })
-                                    
+
                                     reset();
                                 }
                             },
