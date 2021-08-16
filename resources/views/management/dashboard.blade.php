@@ -186,6 +186,31 @@ DASHBOARD | ARWICS
                                             </div>
                                             <!-- input-group -->
                                         </div>
+
+                                        <div id="tahunDate">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 1</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYear();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 2</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+
                                     </div>
                                 </div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -2322,9 +2347,11 @@ DASHBOARD | ARWICS
 </script>
 
 <script type="text/javascript">
-
+    $("#date").hide();
     $("#rangeDate").hide();
     $("#bulanDate").hide();
+    $("#tahunDate").hide();
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2348,6 +2375,8 @@ DASHBOARD | ARWICS
             $('input').val('');
             $('#bulanAwal').val('');
             $('#bulanAkhir').val('');
+            $('#tahunAwal').val('');
+            $('#tahunAkhir').val('');
 
         }
         function loadFilter()
@@ -2414,11 +2443,12 @@ DASHBOARD | ARWICS
                 });
                 $("#date").hide();
                 $("#rangeDate").hide();
+                $("#tahunDate").hide();
             } else if(dayVal == 'select') {
-                $("#date").show();
+                $("#date").hide();
                 $("#rangeDate").hide();
                 $("#bulanDate").hide();
-
+                $("#tahunDate").hide();
                 reset();
                 google.charts.load('current', {
                     'packages': ['corechart', 'bar']
@@ -2527,11 +2557,19 @@ DASHBOARD | ARWICS
             });
                 $("#date").hide();
                 $("#rangeDate").hide();
+                $("#tahunDate").hide();
                 reset();
             } else if(dayVal == 'bulanan') {
                 $("#date").hide();
                 $("#rangeDate").hide();
                 $("#bulanDate").show();
+                $("#tahunDate").hide();
+                reset();
+            } else if(dayVal == 'tahunan') {
+                $("#date").hide();
+                $("#rangeDate").hide();
+                $("#bulanDate").hide();
+                $("#tahunDate").show();
                 reset();
             }
 
@@ -2539,7 +2577,6 @@ DASHBOARD | ARWICS
 
         function filterMonth()
         {
-
             var data = {"bulan_awal":$('#bulanAwal').val(), "bulan_akhir":$('#bulanAkhir').val()};
             $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
@@ -2577,10 +2614,10 @@ DASHBOARD | ARWICS
                             },
                             colors: '#FB6EAA',
                             bar: {
-                                groupWidth: "350px"
+                                groupWidth: "75%"
                             },
                             bars: 'vertical',
-                            width: '350px',
+                            width: '100%',
                             height: '75%',
                             isStacked: true,
                             }
@@ -2594,6 +2631,65 @@ DASHBOARD | ARWICS
                 }
             });
         }
+
+        function filterYear()
+        {
+            var data = {"tahun_awal":$('#tahunAwal').val(), "tahun_akhir":$('#tahunAkhir').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterTahunPremiumSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+
 
 </script>
 @endpush

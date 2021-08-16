@@ -120,23 +120,23 @@ class SpajSubmittedController extends Controller
 
     function filterTahunPremiumSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
+        $start = $request->tahun_awal;
+        $end   = $request->tahun_akhir;
 
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::where('mst_spaj_submit.status_approve', 0)
                 ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
+                ->whereYear('tgl_submit', $start)
+                ->OrwhereYear('tgl_submit', $end)
                 ->groupBy('year_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Tahun', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(int)$value->year_name, (int)$value->sum_nominal];
+                    $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
