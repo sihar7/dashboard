@@ -12,6 +12,7 @@ use App\Repository\PremiumTotalRepo;
 use App\Repository\SpajSubmittedRepo;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use App\Models\Bulan;
 
 class DashboardController extends Controller
 {
@@ -69,6 +70,7 @@ class DashboardController extends Controller
                 $data['premiumTotalCountMonthly'] = $this->premiumTotal->premiumTotalCountMonthly();
                 $data['premiumTotalCountYearly'] = $this->premiumTotal->premiumTotalCountYearly();
 
+                $data['bulan'] = Bulan::all();
                 // End Premium Total
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');

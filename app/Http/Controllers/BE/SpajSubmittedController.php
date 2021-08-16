@@ -18,21 +18,18 @@ class SpajSubmittedController extends Controller
 
     function filterHarianPremiumSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
-                ->where('mst_spaj_submit.status_approve', 0)
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->whereDay('tgl_submit', date('d'))
+                ->where('status_approve', 0)
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Hari', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -52,15 +49,11 @@ class SpajSubmittedController extends Controller
 
     function filterMingguPremiumSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
                 ->where('mst_spaj_submit.status_approve', 0)
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
@@ -68,7 +61,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Mingguan', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -91,22 +84,22 @@ class SpajSubmittedController extends Controller
     {
         // $start = Carbon::parse($request->bulan_awal)->startOfMonth();
         // $end = Carbon::parse($request->bulan_akhir)->startOfMonth();
-       
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
+
+        $start = $request->bulan_awal;
+        $end   = $request->bulan_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.status_approve', 0)
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->where('status_approve', 0)
+                ->whereMonth('tgl_submit', $start)
+                ->OrwhereMonth('tgl_submit', $end)
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Bulan', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -129,7 +122,7 @@ class SpajSubmittedController extends Controller
     {
         $start = $request->tgl_awal;
         $end   = $request->tgl_akhir;
-        
+
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
@@ -239,7 +232,7 @@ class SpajSubmittedController extends Controller
     {
         $start = $request->tgl_awal;
         $end   = $request->tgl_akhir;
-      
+
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
@@ -251,7 +244,7 @@ class SpajSubmittedController extends Controller
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
-                
+
 
                 $api[] = ['Mingguan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
