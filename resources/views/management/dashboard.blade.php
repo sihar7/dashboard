@@ -103,121 +103,67 @@ DASHBOARD | ARWICS
                      <div class="row">
                         <div class="col-lg-6">
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-                                <form id="formSpajSubmittedChart">
-                                    @csrf
                                 <div style="width: 50%;height: 100%; text-align: center;">
                                     <div>
                                         Spaj Submitted Chart
                                     </div>
-                                        <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" name="selectDay" id="selectDaySpajChart"
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
                                             style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
                                             <option value="">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
-                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
-                                            </select>
-                                            &nbsp;
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-                                            <div>
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="input-group">
-                                        <button type="submit" id="buttonSpajSubmittedChart" onclick="findDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
-
-                                    </div>
-                                    <!-- input-group -->
-                                </div>
-
-                                </form>
-                                &nbsp;&nbsp;
-                                <div>
-                                    <div class="input-group">
-                                        <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
-                                        data-bs-target=".detailSpajSubmittedChart" style="width: 120px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        </select>
+                                        &nbsp;
                                         <div>
-                                            Detail
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                            </div>
+                                            <!-- input-group -->
                                         </div>
-                                    </a>
-
                                     </div>
-                                    <!-- input-group -->
                                 </div>
-
+                                <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
+                                data-bs-target=".detailTotalPremiumChart"
+                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    <div>
+                                        Detail
+                                    </div>
+                                </a>
                             </div>
                             <div id="spajSubmittedChart" style="height:420px; max-width: 100%;"></div>
                         </div>
                         <div class="col-lg-6">
-
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-                                <form id="formPremiumSubmittedChart">
-                                    @csrf
                                 <div style="width: 50%;height: 100%; text-align: center;">
                                     <div>
                                         Premium Submitted Chart
                                     </div>
-                                        <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" name="selectDay" id="selectDayPremiumChart"
+                                    <div style="display: flex;margin-top: 5px;">
+                                        <select class="form-control" id="select_top10_1"
                                             style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
                                             <option value="">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
-                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
-                                            </select>
-                                            &nbsp;
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
+                                        </select>
+                                        &nbsp;
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                             </div>
-                                            <div>
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
+                                            <!-- input-group -->
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="input-group">
-                                        <button type="submit" id="buttonPremiumSubmittedChart" onclick="findPremiumDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
-
+                                <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
+                                data-bs-target=".detailTotalPremiumChart"
+                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    <div>
+                                        Detail
                                     </div>
-                                    <!-- input-group -->
-                                </div>
-
-                                </form>
-                                &nbsp;&nbsp;
-                                <div>
-                                    <div class="input-group">
-
-                                        <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
-                                        data-bs-target=".detailPremiumSubmitted"
-                                            style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
-                                            <div>
-                                                Detail
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <div id="premiumSubmittedChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
                         </div>
@@ -2135,11 +2081,11 @@ DASHBOARD | ARWICS
             @endphp
         ]);
 
+
         var options = {
             legend: {
-                align: 'right',
-                verticalAlign: 'middle',
-                layout: 'vertical'
+                position: 'top',
+                maxLines: 3
             },
             chartArea: {
                 backgroundColor: {
@@ -2147,29 +2093,19 @@ DASHBOARD | ARWICS
                     fillOpacity: 0.1
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
             colors: '#FB6EAA',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
-            bars: 'vertical',
+            width: '100%',
+            height: '75%',
             isStacked: true,
-            responsive: true
         }
 
         var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
@@ -2190,6 +2126,7 @@ DASHBOARD | ARWICS
             @endphp
         ]);
 
+
         var options = {
             legend: {
                 position: 'top',
@@ -2201,36 +2138,19 @@ DASHBOARD | ARWICS
                     fillOpacity: 0.1
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 100,
-                    min: 0
-                }
-            },
             colors: '#FB6EAA',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
-            bars: 'vertical',
-            responsive: true,
-            isStacked: true
+            width: '100%',
+            height: '75%',
+            isStacked: true,
         }
 
         var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -2250,7 +2170,6 @@ DASHBOARD | ARWICS
             @endphp
         ]);
 
-
         var options = {
             legend: {
                 position: 'top',
@@ -2262,36 +2181,19 @@ DASHBOARD | ARWICS
                     fillOpacity: 0.1
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 100,
-                    min: 0
-                }
-            },
             colors: '#7BC2EC',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
-            bars: 'vertical',
-            responsive: true,
-            isStacked: true
+            width: '100%',
+            height: '75%',
+            isStacked: true,
         }
 
         var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
@@ -2323,36 +2225,19 @@ DASHBOARD | ARWICS
                     fillOpacity: 0.1
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 100,
-                    min: 0
-                }
-            },
             colors: '#7BC2EC',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
-            bars: 'vertical',
-            responsive: true,
-            isStacked: true
+            width: '100%',
+            height: '75%',
+            isStacked: true,
         }
 
         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
@@ -2372,7 +2257,6 @@ DASHBOARD | ARWICS
             @endphp
         ]);
 
-
         var options = {
             legend: {
                 position: 'top',
@@ -2384,36 +2268,19 @@ DASHBOARD | ARWICS
                     fillOpacity: 0.1
                 },
             },
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 100,
-                    min: 0
-                }
-            },
             colors: '#7BC2EC',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
-            bars: 'vertical',
-            responsive: true,
-            isStacked: true
+            width: '100%',
+            height: '75%',
+            isStacked: true,
         }
 
         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
