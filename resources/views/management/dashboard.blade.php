@@ -119,7 +119,7 @@ DASHBOARD | ARWICS
                                             <option value="tahunan">Tahunan</option>
                                             </select>
                                             &nbsp;
-                                            
+
                                             <div>
                                                 <div class="input-group">
                                                     <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
@@ -131,18 +131,18 @@ DASHBOARD | ARWICS
                                                     <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                                 </div>
                                                 <!-- input-group -->
-                                            </div>  
-                                            
+                                            </div>
+
                                     </div>
                                 </div>
                                 <div>
                                     <div class="input-group">
                                         <button type="submit" id="buttonSpajSubmittedChart" onclick="findDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
-                              
+
                                     </div>
                                     <!-- input-group -->
                                 </div>
-                                
+
                                 </form>
                                 &nbsp;&nbsp;
                                 <div>
@@ -153,16 +153,16 @@ DASHBOARD | ARWICS
                                             Detail
                                         </div>
                                     </a>
-    
+
                                     </div>
                                     <!-- input-group -->
                                 </div>
-                              
+
                             </div>
                             <div id="spajSubmittedChart" style="height:420px; max-width: 100%;"></div>
                         </div>
                         <div class="col-lg-6">
-                        
+
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
                                 <form id="formPremiumSubmittedChart">
                                     @csrf
@@ -180,7 +180,7 @@ DASHBOARD | ARWICS
                                             <option value="tahunan">Tahunan</option>
                                             </select>
                                             &nbsp;
-                                            
+
                                             <div>
                                                 <div class="input-group">
                                                     <input type="text" placeholder="start" name="tgl_awal" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
@@ -192,23 +192,23 @@ DASHBOARD | ARWICS
                                                     <input type="text" placeholder="end" name="tgl_akhir" class="form-control"  data-date-format="yyyy-mm-dd" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                                 </div>
                                                 <!-- input-group -->
-                                            </div>  
-                                            
+                                            </div>
+
                                     </div>
                                 </div>
                                 <div>
                                     <div class="input-group">
                                         <button type="submit" id="buttonPremiumSubmittedChart" onclick="findPremiumDay()" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:3px;">Filter</button>
-                              
+
                                     </div>
                                     <!-- input-group -->
                                 </div>
-                                
+
                                 </form>
                                 &nbsp;&nbsp;
                                 <div>
                                     <div class="input-group">
-                                  
+
                                         <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
                                         data-bs-target=".detailPremiumSubmitted"
                                             style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
@@ -449,7 +449,7 @@ DASHBOARD | ARWICS
                         Telemarketing
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6">
                     <div style="width: 100%;height: 85%;overflow: auto;">
                         <ul>
@@ -460,7 +460,7 @@ DASHBOARD | ARWICS
                                     <div
                                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                                         {{ $historyTele->nama }}
-            
+
                                     </div>
                                     <div style="width: 100%;height:40%;padding-left: 5px;">
                                         online
@@ -471,7 +471,7 @@ DASHBOARD | ARWICS
                                     <div
                                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                                         {{ $historyTele->nama }}
-            
+
                                     </div>
                                     <div style="width: 100%;height:40%;padding-left: 5px;">
                                         {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
@@ -494,7 +494,7 @@ DASHBOARD | ARWICS
                                     <div
                                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                                         {{ $historyTele->nama }}
-            
+
                                     </div>
                                     <div style="width: 100%;height:40%;padding-left: 5px;">
                                         online
@@ -505,7 +505,7 @@ DASHBOARD | ARWICS
                                     <div
                                         style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
                                         {{ $historyTele->nama }}
-            
+
                                     </div>
                                     <div style="width: 100%;height:40%;padding-left: 5px;">
                                         {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
@@ -768,7 +768,7 @@ DASHBOARD | ARWICS
                                 <option value="all">Semua</option>
                             </select>
                         </div>
-    
+
                     </div>
                 </div>
                 <div class="list_table text-center" style="width: 100%;">
@@ -827,7 +827,7 @@ DASHBOARD | ARWICS
         </div>
     </div>
 </div>
-{{-- 
+{{--
 <div class="row " style="height:43vh">
     <div class="col-xl-2   p-1" style="height: 43vh;">
         <div class="w-100 h-100 p-1 telemarketing">
@@ -1378,7 +1378,7 @@ DASHBOARD | ARWICS
                                     </thead>
                                     <tbody>
                                     </tbody>
-                                    <tfoot>  
+                                    <tfoot>
                                         <tr>
                                             <th>No</th>
                                             <th>No Proposal</th>
@@ -2039,7 +2039,7 @@ DASHBOARD | ARWICS
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', ''],
+            ['Bulan', 'Jumlah Spaj'],
 
             @php
             foreach($spajSubmitted as $spaj) {
@@ -2062,58 +2062,18 @@ DASHBOARD | ARWICS
                 },
             },
             responsive: true,
-            // Colors the entire chart area, simple version
-            // backgroundColor: '#FF0000',
-            // Colors the entire chart area, with opacity
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
             colors: '#FB6EAA',
             bar: {
-                groupWidth: "90.39px"
+                groupWidth: "75%"
             },
             bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
             width: '100%',
             height: '75%',
             isStacked: true,
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            align: 'center',
-                            verticalAlign: 'bottom',
-                            layout: 'horizontal'
-                        },
-                        yAxis: {
-                            labels: {
-                                align: 'left',
-                                x: 0,
-                                y: -5
-                            },
-                            title: {
-                                text: null
-                            }
-                        },
-                        subtitle: {
-                            text: null
-                        },
-                        credits: {
-                            enabled: false
-                        }
-                    }
-                }]
-            }
         }
         var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2121,78 +2081,43 @@ DASHBOARD | ARWICS
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', ''],
+            ['Bulan', 'Premi'],
             @php
             foreach($premiumSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
                 "', '".
-                "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
+                "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
                 "'],";
 
             }
             @endphp
         ]);
+
+
         var options = {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
             chartArea: {
                 backgroundColor: {
                     fill: '#222222',
-                    fillOpacity: 0.1,
-                    width: '50%'
+                    fillOpacity: 0.1
                 },
             },
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
+            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
-            bar: {
-                groupWidth: "90.39px"
-            },
-            bars: 'vertical',
-            hAxis: {
-                minValue: 0,
-                viewWindow: {
-                    max: 12,
-                    min: 0
-                }
-            },
-            width: '90.39px',
             colors: '#FB6EAA',
+            bar: {
+                groupWidth: "75%"
+            },
             bars: 'vertical',
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            align: 'center',
-                            verticalAlign: 'bottom',
-                            layout: 'horizontal'
-                        },
-                        yAxis: {
-                            labels: {
-                                align: 'left',
-                                x: 0,
-                                y: -5
-                            },
-                            title: {
-                                text: null
-                            }
-                        },
-                        subtitle: {
-                            text: null
-                        },
-                        credits: {
-                            enabled: false
-                        }
-                    }
-                }]
-            }
+            width: '100%',
+            height: '75%',
+            isStacked: true,
         }
         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2522,7 +2447,7 @@ DASHBOARD | ARWICS
             var dayVal = eID.options[eID.selectedIndex].value;
             var daytxt = eID.options[eID.selectedIndex].text;
 
-            if (dayVal == 'harian') {   
+            if (dayVal == 'harian') {
                 $('#formSpajSubmittedChart').on('submit', function (e) {
                 e.preventDefault();
                 $('#buttonSpajSubmittedChart').html("Memfilter...");
@@ -2544,7 +2469,7 @@ DASHBOARD | ARWICS
                         $('#buttonSpajSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -2655,7 +2580,7 @@ DASHBOARD | ARWICS
                         $('#buttonSpajSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -2766,7 +2691,7 @@ DASHBOARD | ARWICS
                         $('#buttonSpajSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -2877,7 +2802,7 @@ DASHBOARD | ARWICS
                         $('#buttonSpajSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -2966,7 +2891,7 @@ DASHBOARD | ARWICS
                 });
 
             });
-            }   
+            }
         }
         function findPremiumDay()
         {
@@ -2974,7 +2899,7 @@ DASHBOARD | ARWICS
             var dayVal = eID.options[eID.selectedIndex].value;
             var daytxt = eID.options[eID.selectedIndex].text;
 
-            if (dayVal == 'harian') {   
+            if (dayVal == 'harian') {
                 $('#formPremiumSubmittedChart').on('submit', function (e) {
                 e.preventDefault();
                 $('#buttonPremiumSubmittedChart').html("Memfilter...");
@@ -2996,7 +2921,7 @@ DASHBOARD | ARWICS
                         $('#buttonPremiumSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -3085,7 +3010,7 @@ DASHBOARD | ARWICS
                 });
 
             });
-            } else if (dayVal == 'mingguan') {   
+            } else if (dayVal == 'mingguan') {
                 $('#formPremiumSubmittedChart').on('submit', function (e) {
                 e.preventDefault();
                 $('#buttonPremiumSubmittedChart').html("Memfilter...");
@@ -3107,7 +3032,7 @@ DASHBOARD | ARWICS
                         $('#buttonPremiumSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -3196,7 +3121,7 @@ DASHBOARD | ARWICS
                 });
 
             });
-            } else if (dayVal == 'bulanan') {   
+            } else if (dayVal == 'bulanan') {
                 $('#formPremiumSubmittedChart').on('submit', function (e) {
                 e.preventDefault();
                 $('#buttonPremiumSubmittedChart').html("Memfilter...");
@@ -3218,7 +3143,7 @@ DASHBOARD | ARWICS
                         $('#buttonPremiumSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -3307,7 +3232,7 @@ DASHBOARD | ARWICS
                 });
 
             });
-            } else if (dayVal == 'tahunan') {   
+            } else if (dayVal == 'tahunan') {
                 $('#formPremiumSubmittedChart').on('submit', function (e) {
                 e.preventDefault();
                 $('#buttonPremiumSubmittedChart').html("Memfilter...");
@@ -3329,7 +3254,7 @@ DASHBOARD | ARWICS
                         $('#buttonPremiumSubmittedChart').removeAttr('disabled');
 
                         console.log(response.data);
-                        
+
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
@@ -3406,8 +3331,8 @@ DASHBOARD | ARWICS
                 });
 
             });
-            } 
+            }
         }
-        
+
 </script>
 @endpush

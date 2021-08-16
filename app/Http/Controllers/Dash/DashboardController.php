@@ -70,10 +70,6 @@ class DashboardController extends Controller
                 $data['premiumTotalCountYearly'] = $this->premiumTotal->premiumTotalCountYearly();
 
                 // End Premium Total
-
-
-
-
                 return view('management.dashboard', $data);
                 // return view('management.dashboard');
             } else {

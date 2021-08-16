@@ -16,10 +16,11 @@
             DB::beginTransaction();
             try {
                 if (Auth::user()->api_token) {
-                    $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                    $spaj = Spaj::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                     ->where('status_approve', 0)
                     ->whereYear('tgl_submit', date('Y'))
                     ->groupBy('month_name')
+                    ->orderBy('count', 'ASC')
                     ->orderBy('createdAt')
                     ->get();
 
