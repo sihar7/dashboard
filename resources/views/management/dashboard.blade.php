@@ -109,8 +109,8 @@ DASHBOARD | ARWICS
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
                                         <select class="form-control" id="filterDataSubmittedChart" onchange="loadFilterSpajSubmittedChart();"
-                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                            <option value="select">Select</option>
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                            <option value="select">Select <i class="fas fa-arrow-down" style="color:#fff;"></i></option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
                                             <option value="bulanan">Bulanan</option>
@@ -125,8 +125,8 @@ DASHBOARD | ARWICS
                                         </div>
                                         <div id="rangeDateSubmittedChart">
                                             <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
-                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
                                             </div>
                                             <!-- input-group -->
                                         </div>
@@ -134,7 +134,7 @@ DASHBOARD | ARWICS
                                         <div id="bulanDateSubmittedChart">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 1</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -143,7 +143,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonthSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonthSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 2</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -157,7 +157,7 @@ DASHBOARD | ARWICS
                                         <div id="tahunDateSubmittedChart">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 1</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
@@ -166,7 +166,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYearSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYearSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 2</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
@@ -183,7 +183,7 @@ DASHBOARD | ARWICS
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
                                 data-bs-target=".detailSpajSubmittedChart"
-                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                    style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
                                     </div>
@@ -273,7 +273,7 @@ DASHBOARD | ARWICS
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
                                 data-bs-target=".detailTotalPremiumChart"
-                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
                                     </div>
@@ -2449,7 +2449,6 @@ DASHBOARD | ARWICS
             var daytxt = eID.options[eID.selectedIndex].text;
 
             if (dayVal == 'mingguan') {
-
 
                 $("#date").hide();
                 $("#rangeDate").hide();
