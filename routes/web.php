@@ -86,6 +86,14 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterBulanPoliceApproved', [PoliceApprovedController::class, 'filterBulanPoliceApproved']);
             Route::post('/filterTahunPoliceApproved', [PoliceApprovedController::class, 'filterTahunPoliceApproved']);
             Route::get('/filterTotalPoliceApproved', [PoliceApprovedController::class, 'filterTotalPoliceApproved']);
+
+
+            Route::post('/filterHarianTotalPremium', [PoliceApprovedController::class, 'filterHarianTotalPremium']);
+            Route::post('/filterMingguTotalPremium', [PoliceApprovedController::class, 'filterMingguTotalPremium']);
+            Route::post('/filterBulanTotalPremium', [PoliceApprovedController::class, 'filterBulanTotalPremium']);
+            Route::post('/filterTahunTotalPremium', [PoliceApprovedController::class, 'filterTahunTotalPremium']);
+            Route::get('/filterTotalTotalPremium', [PoliceApprovedController::class, 'filterTotalTotalPremium']);
+
         });
     });
 
