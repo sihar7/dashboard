@@ -9,7 +9,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+
     <!-- App favicon -->
     <link rel="shortcut icon" href="https://arwics.com/favicon.png">
 
@@ -111,6 +111,9 @@
 
     @stack('js')
     <script src="{{ URL::to('assets/js/pages/dashboard.init.js') }}"></script>
+
+    <script src="{{ URL::to('assets/js/pages/fontawesome.init.js') }}"></script>
+
 
     <!-- App js -->
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
