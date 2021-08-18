@@ -232,16 +232,18 @@ class PoliceApprovedController extends Controller
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->where('tgl_submit','<=',Carbon::today()->subDay(6))
                 ->whereIn('status_approve', [1])
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Jumlah Spaj'];
+                $api[] = ['Mingguan', 'Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
                 return response()->json(['data' => $api], 201);
             } else {

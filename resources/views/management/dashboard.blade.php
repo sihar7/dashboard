@@ -3003,6 +3003,8 @@ DASHBOARD | ARWICS
             });
         }
 
+        // Police Approved Module
+
         function loadFilterPoliceApprovedChart()
         {
             var eID = document.getElementById("filterDataPoliceApprovedChart");
@@ -3312,6 +3314,318 @@ DASHBOARD | ARWICS
                 }
             });
         }
+
+        function loadFilterTotalPremiumChart()
+        {
+            var eID = document.getElementById("filterDataTotalPremiumChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'mingguan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+                console.log($('#filterDataPoliceApprovedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterMingguTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+                });
+            } else if(dayVal == 'select') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+                google.charts.load('current', {
+                    'packages': ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(totalPremiumChart);
+
+
+            function totalPremiumChart() {
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Bulan', 'Jumlah Spaj'],
+                    @php
+                    foreach($totalPremiumChart as $spaj) {
+                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                        "', '".(int)$spaj->count."'],";
+
+                    }
+                    @endphp
+                ]);
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        width: '100%',
+                        height: '75%',
+                        isStacked: true,
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            } else if(dayVal == 'harian') {
+                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+                console.log($('#filterDataTotalPremiumChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterHarianTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "350px"
+                        },
+                        bars: 'vertical',
+                        width: '350px',
+                        height: '75%',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+            } else if(dayVal == 'bulanan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").show();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+            } else if(dayVal == 'tahunan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").show();
+                reset();
+            }
+
+        }
+
+        function filterMonthPoliceApprovedChart()
+        {
+            var data = {"bulan_awal":$('#bulanAwalTotalPremiumChart').val(), "bulan_akhir":$('#bulanAkhirTotalPremiumChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterBulanTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function filterYearPoliceApprovedChart()
+        {
+            var data = {"tahun_awal":$('#tahunAwalTotalPremiumChart').val(), "tahun_akhir":$('#tahunAkhirTotalPremiumChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterTahunTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+
+
 
 
 

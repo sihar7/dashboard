@@ -25,6 +25,8 @@ class SpajSubmittedController extends Controller
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
                 ->whereDay('tgl_submit', date('d'))
                 ->whereIn('status_approve', [0])
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -57,6 +59,8 @@ class SpajSubmittedController extends Controller
                 $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
                 ->whereIn('status_approve', [0])
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -198,6 +202,8 @@ class SpajSubmittedController extends Controller
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
                 ->whereDay('tgl_submit', date('d'))
                 ->whereIn('status_approve', [0])
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -230,6 +236,8 @@ class SpajSubmittedController extends Controller
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
                 ->where('tgl_submit','<=' , Carbon::today()->subDay(6))
                 ->whereIn('status_approve', [0])
+                ->whereMonth('tgl_submit', date('m'))
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
