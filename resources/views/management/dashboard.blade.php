@@ -199,7 +199,7 @@ DASHBOARD | ARWICS
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
                                         <select class="form-control" id="filterData" onchange="loadFilter();"
-                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                             <option value="select">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
@@ -215,8 +215,8 @@ DASHBOARD | ARWICS
                                         </div>
                                         <div id="rangeDate">
                                             <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
-                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
                                             </div>
                                             <!-- input-group -->
                                         </div>
@@ -224,7 +224,7 @@ DASHBOARD | ARWICS
                                         <div id="bulanDate">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwalPremiumSubmittedChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 1</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -233,7 +233,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonth();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumSubmittedChart" onchange="filterMonth();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 2</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -247,7 +247,7 @@ DASHBOARD | ARWICS
                                         <div id="tahunDate">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwalPremiumSubmittedChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 1</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
@@ -256,7 +256,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYear();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumSubmittedChart" onchange="filterYear();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 2</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
@@ -271,8 +271,8 @@ DASHBOARD | ARWICS
                                     </div>
                                 </div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
-                                data-bs-target=".detailTotalPremiumChart"
+                                <a href="#" data-bs-toggle="modal" id="detailPremiumSubmitted"
+                                data-bs-target=".detailPremiumSubmitted"
                                 style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
@@ -368,24 +368,82 @@ DASHBOARD | ARWICS
                                         Police Approved Chart
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
-                                        <select class="form-control" id="select_top10_1"
-                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                            <option value="">Select</option>
+                                        <select class="form-control" id="filterDataPoliceApprovedChart" onchange="loadFilterPoliceApprovedChart();"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                            <option value="select">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
+                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
                                         </select>
                                         &nbsp;
-                                        <div>
+                                        <div id="datePoliceApprovedChart">
                                             <div class="input-group">
                                                 <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                             </div>
                                             <!-- input-group -->
                                         </div>
+                                        <div id="rangeDatePoliceApprovedChart">
+                                            <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="bulanDatePoliceApprovedChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwalPoliceApprovedChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 1</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhirPoliceApprovedChart" onchange="filterMonthPoliceApprovedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 2</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="tahunDatePoliceApprovedChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwalPoliceApprovedChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 1</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhirPoliceApprovedChart" onchange="filterYearPoliceApprovedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 2</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+
                                     </div>
                                 </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="#" data-bs-toggle="modal" id="detailPoliceApprovedChart"
-                                    data-bs-target=".detailPoliceApprovedChart" style="width: 127.66px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                data-bs-target=".detailPoliceApprovedChart"
+                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
                                     </div>
@@ -887,205 +945,6 @@ DASHBOARD | ARWICS
         </div>
     </div>
 </div>
-{{--
-<div class="row " style="height:43vh">
-    <div class="col-xl-2   p-1" style="height: 43vh;">
-        <div class="w-100 h-100 p-1 telemarketing">
-            <div style="height:20%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                <div>
-                    Telemarketing
-                </div>
-            </div>
-            <div style="width: 100%;height: 65%;overflow: auto;">
-                <ul>
-                    @foreach ($getHistoryTele as $historyTele)
-                    @if($historyTele->islogin == '1')
-                    <li>
-                        <div
-                            style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            {{ $historyTele->nama }}
-
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            online
-                        </div>
-                    </li>
-                    @else
-                    <li style="background-color: #DE0000">
-                        <div
-                            style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                            {{ $historyTele->nama }}
-
-                        </div>
-                        <div style="width: 100%;height:40%;padding-left: 5px;">
-                            {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
-                        </div>
-                    </li>
-                    @endif
-                    @endforeach
-                </ul>
-            </div>
-            <div style="width: 95%;height: 15%;display: flex;justify-content: center;align-items: center;">
-                <div style="width: 80%;height: 100%;display: flex;">
-                    <div style="width: 40%;height: 100%;display: flex;justify-content: center;align-items: center;">
-                        Pages
-                    </div>
-                    <div style="width: 30%;height: 100%; display: flex;justify-content: center;align-items: center;">
-                        <button style="background-color:transparent;border: 1px solid white;color: white;"> - </button>
-                    </div>
-                    <div style="width: 60%;display: flex;justify-content: center;align-items: center;">
-                        <div
-                            style="width:80%;height: 70%;background-color: transparent;border: 1px solid white;border-radius: 3px;display: flex;justify-content: center;align-items: center;">
-                            1
-                        </div>
-                    </div>
-                    <div style="width: 30%;height: 100; display: flex;justify-content: center;align-items: center;">
-                        <button style="background-color:transparent;border: 1px solid white;color: white;"> + </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-8 p-1" style="height: 43vh;">
-        <div class="w-100 h-100 " style="background-color: #222222;border-radius: 5px;">
-            <div style="height: 15%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                <div style="width: 30%;height: 100%;display: flex;">
-                    @php
-                    date_default_timezone_set('Asia/Jakarta');
-                    $bulan = date('Y-m-d');
-                    @endphp
-                    <div
-                        style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                        TOP 10 Bulan {{ \Carbon\Carbon::parse($bulan)->isoFormat('MMMM') }}</div>
-                    <div
-                        style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                        <select class="form-control" id="select_top10_1"
-                            style="width:140px; height:30px;background-color:#222222;">
-                            <option value="">Select</option>
-                            <option value="harian">Harian</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="tahunan">Tahunan</option>
-                        </select>
-                    </div>
-                    <div
-                        style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                        <select class="form-control" id="select_top10_2"
-                            style="width:140px; height:30px;background-color:#222222;">
-                            <option>Select</option>
-                            <option value="all">Semua</option>
-                        </select>
-                    </div>
-
-                </div>
-            </div>
-            <div class="list_table text-center" style="width: 100%;">
-                <ul>
-                    @php
-                    $no = 1;
-                    @endphp
-                    @foreach ($topTsr10 as $item)
-                    <li>
-                        <div style="height:35vh;">
-                            <div
-                                style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                Top {{ $no++ }}
-                            </div>
-                            <div style="width: 100%;height: 90%;padding: 3px;">
-                                <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                    <div
-                                        style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                        @if ( $item->foto_tele == null || $item->foto_tele == '-' )
-                                        <div
-                                            style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                                            <img src="https://i.pravatar.cc/50" alt="image" />
-                                        </div>
-                                        @else
-                                        <div
-                                            style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                                            <img src="{{ asset('property', $item->foto_tele) }}" alt="image" />
-                                        </div>
-                                        @endif
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;font-size:10px;">
-                                        {{ $item->nama_tele }}
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        {{ $item->spaj_count }} Closing
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        {{ $item->spaj_count }} Premi
-                                    </div>
-                                    <div
-                                        style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                        {{ "Rp " . number_format($item->total_max,0,',','.') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-            <ul>
-
-        </div>
-    </div>
-    <div class="col-xl-2  p-1" style="height: 43vh;;">
-        <div class="h-100  " style="width: 90%;background-color: #222222;">
-            <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello</div>
-            <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
-                <select class="form-control" id="select_top10_1"
-                    style="width:175px; height:30px;background-color:#222222;">
-                    <option value="">Select</option>
-                    <option value="harian">Harian</option>
-                    <option value="mingguan">Mingguan</option>
-                    <option value="tahunan">Tahunan</option>
-                </select>
-            </div>
-            <div
-                style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
-                <div
-                    style="width: 60px;height: 60px;border-radius: 50%;background-color: orange;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                    @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
-                    <img src="https://i.pravatar.cc/60" alt="image" />
-                    @else
-                    <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" />
-                    @endif
-                </div>
-            </div>
-            <div
-                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                <div>Congrats Atas Pencapaianya</div>
-                <div style="font-weight: bold;">{{ $getTeleReward['nama'] }}</div>
-            </div>
-            <div
-                style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                <div>closing</div>
-                <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Closing</div>
-
-            </div>
-            <div
-                style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                <div>Premi</div>
-                <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
-            </div>
-
-            <div
-                style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                <div>Pendapatan Polis</div>
-                <div style="font-weight: bold;">
-                    {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
-            </div>
-        </div>
-
-    </div>
-
-</div> --}}
-<!-- end row -->
 
 
 <div class="modal fade detailSpajSubmittedDaily" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -2404,6 +2263,7 @@ DASHBOARD | ARWICS
 </script>
 
 <script type="text/javascript">
+
     $("#date").hide();
     $("#rangeDate").hide();
     $("#bulanDate").hide();
@@ -2414,6 +2274,10 @@ DASHBOARD | ARWICS
     $("#bulanDateSubmittedChart").hide();
     $("#tahunDateSubmittedChart").hide();
 
+    $("#datePoliceApprovedChart").hide();
+    $("#rangeDatePoliceApprovedChart").hide();
+    $("#bulanDatePoliceApprovedChart").hide();
+    $("#tahunDatePoliceApprovedChart").hide();
 
 
         $.ajaxSetup({
@@ -2441,6 +2305,12 @@ DASHBOARD | ARWICS
             $('#bulanAkhir').val('');
             $('#tahunAwal').val('');
             $('#tahunAkhir').val('');
+
+            $('#bulanAwalPremiumSubmittedChart').val('');
+            $('#bulanAkhirPremiumSubmittedChart').val('');
+            $('#tahunAwalPremiumSubmittedChart').val('');
+            $('#tahunAkhirPremiumSubmittedChart').val('');
+
         }
         function loadFilter()
         {
@@ -2646,7 +2516,7 @@ DASHBOARD | ARWICS
 
         function filterMonth()
         {
-            var data = {"bulan_awal":$('#bulanAwal').val(), "bulan_akhir":$('#bulanAkhir').val()};
+            var data = {"bulan_awal":$('#bulanAwalPremiumSubmittedChart').val(), "bulan_akhir":$('#bulanAkhirPremiumSubmittedChart').val()};
             $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
@@ -2703,7 +2573,7 @@ DASHBOARD | ARWICS
 
         function filterYear()
         {
-            var data = {"tahun_awal":$('#tahunAwal').val(), "tahun_akhir":$('#tahunAkhir').val()};
+            var data = {"tahun_awal":$('#tahunAwalPremiumSubmittedChart').val(), "tahun_akhir":$('#tahunAkhirPremiumSubmittedChart').val()};
             $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
@@ -3061,6 +2931,316 @@ DASHBOARD | ARWICS
                             isStacked: true,
                             }
                             var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function loadFilterPoliceApprovedChart()
+        {
+            var eID = document.getElementById("filterDataPoliceApprovedChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'mingguan') {
+
+                $("#datePoliceApprovedChart").hide();
+                $("#rangeDatePoliceApprovedChart").hide();
+                $("#bulanDatePoliceApprovedChart").hide();
+                $("#tahunDatePoliceApprovedChart").hide();
+                var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
+                console.log($('#filterDataPoliceApprovedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterMingguSpajSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                    var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+                });
+            } else if(dayVal == 'select') {
+                $("#datePoliceApprovedChart").hide();
+                $("#rangeDatePoliceApprovedChart").hide();
+                $("#bulanDatePoliceApprovedChart").hide();
+                $("#tahunDatePoliceApprovedChart").hide();
+                reset();
+                google.charts.load('current', {
+                    'packages': ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(policeApprovedChart);
+
+
+            function policeApprovedChart() {
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Bulan', 'Jumlah Spaj'],
+                    @php
+                    foreach($policeApprovedChart as $spaj) {
+                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                        "', '".(int)$spaj->count."'],";
+
+                    }
+                    @endphp
+                ]);
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        width: '100%',
+                        height: '75%',
+                        isStacked: true,
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            } else if(dayVal == 'harian') {
+                var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
+                console.log($('#filterDataPoliceApprovedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterHarianPoliceApproved') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "350px"
+                        },
+                        bars: 'vertical',
+                        width: '350px',
+                        height: '75%',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+                $("#datePoliceApprovedChart").hide();
+                $("#rangeDatePoliceApprovedChart").hide();
+                $("#tahunDatePoliceApprovedChart").hide();
+                reset();
+            } else if(dayVal == 'bulanan') {
+                $("#datePoliceApprovedChart").hide();
+                $("#rangeDatePoliceApprovedChart").hide();
+                $("#bulanDatePoliceApprovedChart").show();
+                $("#tahunDatePoliceApprovedChart").hide();
+                reset();
+            } else if(dayVal == 'tahunan') {
+                $("#datePoliceApprovedChart").hide();
+                $("#rangeDatePoliceApprovedChart").hide();
+                $("#bulanDatePoliceApprovedChart").hide();
+                $("#tahunDatePoliceApprovedChart").show();
+                reset();
+            }
+
+        }
+
+        function filterMonthPoliceApprovedChart()
+        {
+            var data = {"bulan_awal":$('#bulanAwalPoliceApprovedChart').val(), "bulan_akhir":$('#bulanAkhirPoliceApprovedChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterBulanPoliceApproved') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function filterYearPoliceApprovedChart()
+        {
+            var data = {"tahun_awal":$('#tahunAwalPoliceApprovedChart').val(), "tahun_akhir":$('#tahunAkhirPoliceApprovedChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterTahunPoliceApproved') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
                             chart.draw(data, google.charts.Bar.convertOptions(options));
                          }
 
