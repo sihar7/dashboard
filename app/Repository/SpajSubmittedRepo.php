@@ -187,9 +187,8 @@
             DB::beginTransaction();
             try {
                 if (Auth::user()->api_token) {
-                    $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(0)
-                    ->where('tgl_submit', '>', Carbon::today()->subDay(6))
+                    $spaj = Spaj::where('tgl_submit','<=',Carbon::today()->subDay(6))
+                    ->whereIn('status_approve', [0])
                     ->whereMonth('tgl_submit', date('m'))
                     ->count();
 
@@ -222,7 +221,7 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(0)
+                    ->whereIn('status_approve', [0])
                     ->whereMonth('tgl_submit', date('m'))
                     ->count();
 

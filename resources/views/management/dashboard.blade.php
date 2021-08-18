@@ -108,24 +108,81 @@ DASHBOARD | ARWICS
                                         Spaj Submitted Chart
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
-                                        <select class="form-control" id="select_top10_1"
+                                        <select class="form-control" id="filterDataSubmittedChart" onchange="loadFilterSpajSubmittedChart();"
                                             style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                            <option value="">Select</option>
+                                            <option value="select">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
+                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
                                         </select>
                                         &nbsp;
-                                        <div>
+                                        <div id="dateSubmittedChart">
                                             <div class="input-group">
                                                 <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                             </div>
                                             <!-- input-group -->
                                         </div>
+                                        <div id="rangeDateSubmittedChart">
+                                            <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="bulanDateSubmittedChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 1</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonthSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 2</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="tahunDateSubmittedChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 1</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYearSpajSubmittedChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 2</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+
                                     </div>
                                 </div>
-                                <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
-                                data-bs-target=".detailTotalPremiumChart"
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" data-bs-toggle="modal" id="detailSpajSubmittedChart"
+                                data-bs-target=".detailSpajSubmittedChart"
                                     style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
@@ -2352,6 +2409,13 @@ DASHBOARD | ARWICS
     $("#bulanDate").hide();
     $("#tahunDate").hide();
 
+    $("#dateSubmittedChart").hide();
+    $("#rangeDateSubmittedChart").hide();
+    $("#bulanDateSubmittedChart").hide();
+    $("#tahunDateSubmittedChart").hide();
+
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2377,7 +2441,6 @@ DASHBOARD | ARWICS
             $('#bulanAkhir').val('');
             $('#tahunAwal').val('');
             $('#tahunAkhir').val('');
-
         }
         function loadFilter()
         {
@@ -2679,6 +2742,319 @@ DASHBOARD | ARWICS
                             isStacked: true,
                             }
                             var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function loadFilterSpajSubmittedChart()
+        {
+            var eID = document.getElementById("filterDataSubmittedChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'mingguan') {
+
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#bulanDateSubmittedChart").hide();
+                $("#tahunDateSubmittedChart").hide();
+                var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
+                console.log($('#filterDataSubmittedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterMingguSpajSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                    var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+                });
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#tahunDateSubmittedChart").hide();
+            } else if(dayVal == 'select') {
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#bulanDateSubmittedChart").hide();
+                $("#tahunDateSubmittedChart").hide();
+                reset();
+                google.charts.load('current', {
+                    'packages': ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(submittedChart);
+
+
+            function submittedChart() {
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Bulan', 'Jumlah Spaj'],
+                    @php
+                    foreach($premiumSubmitted as $spaj) {
+                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                        "', '".(int)$spaj->count."'],";
+
+                    }
+                    @endphp
+                ]);
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        width: '100%',
+                        height: '75%',
+                        isStacked: true,
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            } else if(dayVal == 'harian') {
+                var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
+                console.log($('#filterDataSubmittedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterHarianSpajSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "350px"
+                        },
+                        bars: 'vertical',
+                        width: '350px',
+                        height: '75%',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#tahunDateSubmittedChart").hide();
+                reset();
+            } else if(dayVal == 'bulanan') {
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#bulanDateSubmittedChart").show();
+                $("#tahunDateSubmittedChart").hide();
+                reset();
+            } else if(dayVal == 'tahunan') {
+                $("#dateSubmittedChart").hide();
+                $("#rangeDateSubmittedChart").hide();
+                $("#bulanDateSubmittedChart").hide();
+                $("#tahunDateSubmittedChart").show();
+                reset();
+            }
+
+        }
+
+        function filterMonthSpajSubmittedChart()
+        {
+            var data = {"bulan_awal":$('#bulanAwal').val(), "bulan_akhir":$('#bulanAkhir').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterBulanSpajSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function filterYearSpajSubmittedChart()
+        {
+            var data = {"tahun_awal":$('#tahunAwal').val(), "tahun_akhir":$('#tahunAkhir').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/spaj/filterTahunSpajSubmitted') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
                             chart.draw(data, google.charts.Bar.convertOptions(options));
                          }
 

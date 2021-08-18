@@ -22,7 +22,7 @@ class SpajSubmittedController extends Controller
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
                 ->whereDay('tgl_submit', date('d'))
-                ->where('status_approve', 0)
+                ->whereIn('status_approve', [0])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -52,9 +52,9 @@ class SpajSubmittedController extends Controller
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
-                ->where('mst_spaj_submit.status_approve', 0)
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->where('tgl_submit','<=' , Carbon::today()->subDay(6))
+                ->whereIn('status_approve', [0])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -90,9 +90,9 @@ class SpajSubmittedController extends Controller
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"),DB::raw('max(tgl_submit) as createdAt'))
-                ->where('status_approve', 0)
+                ->whereIn('status_approve', [0])
                 ->whereMonth('tgl_submit', $start)
-                ->OrwhereMonth('tgl_submit', $end)
+                ->orWhereMonth('tgl_submit', $end)
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -126,10 +126,10 @@ class SpajSubmittedController extends Controller
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::where('mst_spaj_submit.status_approve', 0)
-                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->whereYear('tgl_submit', $start)
-                ->OrwhereYear('tgl_submit', $end)
+                ->orWhereYear('tgl_submit', $end)
+                ->whereIn('status_approve', [0])
                 ->groupBy('year_name')
                 ->orderBy('createdAt')
                 ->get();
@@ -164,6 +164,7 @@ class SpajSubmittedController extends Controller
                 ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
                 ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
                 ->where('mst_spaj_submit.status_approve', 0)
+
                 ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->orderBy('createdAt')
                 ->get();
@@ -194,23 +195,19 @@ class SpajSubmittedController extends Controller
 
     function filterHarianSpajSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
-                ->where('mst_spaj_submit.status_approve', 0)
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->whereDay('tgl_submit', date('d'))
+                ->whereIn('status_approve', [0])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Hari', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->count];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$spaj->count];
                 }
-
                 return response()->json(['data' => $api], 201);
             } else {
                 $data = [
@@ -220,7 +217,6 @@ class SpajSubmittedController extends Controller
                 ];
                 return response()->json(['api' => $data], 201);
             }
-
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
@@ -230,25 +226,19 @@ class SpajSubmittedController extends Controller
 
     function filterMingguSpajSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
-
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
-                ->where('mst_spaj_submit.status_approve', 0)
+                ->whereIn('status_approve', [0])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-
                 $api[] = ['Mingguan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->day_name, (int)$value->count];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -271,21 +261,22 @@ class SpajSubmittedController extends Controller
     {
         // $start = Carbon::parse($request->bulan_awal)->startOfMonth();
         // $end = Carbon::parse($request->bulan_akhir)->startOfMonth();
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
+
+        $start = $request->bulan_awal;
+        $end   = $request->bulan_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.status_approve', 0)
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->whereMonth('tgl_submit', $start)
+                ->orWhereMonth('tgl_submit', $end)
+                ->whereIn('status_approve', [0])
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Bulan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->count];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (string)$value->count];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -306,25 +297,24 @@ class SpajSubmittedController extends Controller
 
     function filterTahunSpajSubmitted(Request $request)
     {
-        $start = $request->tgl_awal;
-        $end   = $request->tgl_akhir;
+        $start = $request->tahun_awal;
+        $end   = $request->tahun_akhir;
 
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::where('mst_spaj_submit.status_approve', 0)
-                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->whereYear('tgl_submit', $start)
+                ->orWhereYear('tgl_submit', $end)
+                ->whereIn('status_approve', [0])
                 ->groupBy('year_name')
                 ->orderBy('createdAt')
                 ->get();
 
                 $api[] = ['Tahun', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->year_name, (int)$value->count];
+                    $api[++$key] = [(string)$value->year_name, (string)$value->count];
                 }
-
                 return response()->json(['data' => $api], 201);
             } else {
                 $data = [
@@ -355,9 +345,9 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Jumlah Spaj'];
+                $api[] = ['Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(int)$value->count];
+                    $api[++$key] = [(int)$value->sum_nominal];
                 }
 
                 return response()->json(['api' => $api], 201);
@@ -376,4 +366,6 @@ class SpajSubmittedController extends Controller
         }
         DB::commit();
     }
+
+
 }
