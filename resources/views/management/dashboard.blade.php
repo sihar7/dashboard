@@ -199,7 +199,7 @@ DASHBOARD | ARWICS
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
                                         <select class="form-control" id="filterData" onchange="loadFilter();"
-                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                             <option value="select">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
@@ -215,8 +215,8 @@ DASHBOARD | ARWICS
                                         </div>
                                         <div id="rangeDate">
                                             <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
-                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;"/>
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
                                             </div>
                                             <!-- input-group -->
                                         </div>
@@ -224,7 +224,7 @@ DASHBOARD | ARWICS
                                         <div id="bulanDate">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 1</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -233,7 +233,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonth();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhir" onchange="filterMonth();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Bulan 2</option>
                                                         @foreach($bulan as $item)
                                                         <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
@@ -247,7 +247,7 @@ DASHBOARD | ARWICS
                                         <div id="tahunDate">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwal" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 1</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
@@ -256,7 +256,7 @@ DASHBOARD | ARWICS
                                                 </div>
 
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYear();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhir" onchange="filterYear();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
                                                         <option value="">Tahun 2</option>
                                                         @for($year=2010; $year<=date('Y'); $year++)
                                                         <option value="{{ $year }}"> {{ $year }}</option>
