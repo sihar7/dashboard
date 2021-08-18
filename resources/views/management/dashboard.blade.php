@@ -2449,6 +2449,13 @@ DASHBOARD | ARWICS
             var daytxt = eID.options[eID.selectedIndex].text;
 
             if (dayVal == 'mingguan') {
+
+
+                $("#date").hide();
+                $("#rangeDate").hide();
+                $("#bulanDate").hide();
+                $("#tahunDate").hide();
+
                 var data = {"filterData":$('#filterData').val()};
                 console.log($('#filterData').val());
 
