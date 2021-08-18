@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dash\DashboardController;
 use App\Http\Controllers\BE\SpajSubmittedController;
 use App\Http\Controllers\BE\TeleController;
+use App\Http\Controllers\BE\PoliceApprovedController;
 use App\Http\Controllers\Datatable\DetailController;
 
 
@@ -69,7 +70,7 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/detailPremiumTahun1Chart', [DetailController::class, 'detailPremiumTahun1Chart'])->name('detailSpajSubmittedDaily');
             Route::get('/detailPremiumPltpChart', [DetailController::class, 'detailPremiumPltpChart'])->name('detailSpajSubmittedDaily');
             Route::get('/detailPremiumTotalChart', [DetailController::class, 'detailPremiumTotalChart'])->name('detailSpajSubmittedDaily');
-            
+
             // End PremiumTotal
         });
         Route::prefix('tele')->group(function() {
@@ -80,10 +81,11 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/filterTotalTopTsr', [TeleController::class, 'filterTotalTopTsr']);
         });
         Route::prefix('policeApproved')->group(function() {
-            Route::get('/filterTopTsrAll', [TeleController::class, 'filterTopTsrAll']);
-            Route::get('/filterTopTsrWeekly', [TeleController::class, 'filterTopTsrWeekly']);
-            Route::post('/filterTopTsrMonthly', [TeleController::class, 'filterTopTsrMonthly']);
-            Route::post('/filterTopTsrYearly', [TeleController::class, 'filterTopTsrYearly']);
+            Route::post('/filterHarianPoliceApproved', [PoliceApprovedController::class, 'filterHarianPoliceApproved']);
+            Route::post('/filterMingguPoliceApproved', [PoliceApprovedController::class, 'filterMingguPoliceApproved']);
+            Route::post('/filterBulanPoliceApproved', [PoliceApprovedController::class, 'filterBulanPoliceApproved']);
+            Route::post('/filterTahunPoliceApproved', [PoliceApprovedController::class, 'filterTahunPoliceApproved']);
+            Route::get('/filterTotalPoliceApproved', [PoliceApprovedController::class, 'filterTotalPoliceApproved']);
         });
     });
 

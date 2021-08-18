@@ -287,7 +287,7 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(1)
+                    ->whereIn('status_approve', [1])
                     ->whereDay('tgl_submit', date('d'))
                     ->whereMonth('tgl_submit', date('m'))
                     ->count();
@@ -321,8 +321,8 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(1)
-                    ->where('tgl_submit', '>', Carbon::today()->subDay(6))
+                    ->whereIn('status_approve', [1])
+                    ->where('tgl_submit', '<=', Carbon::today()->subDay(6))
                     ->whereMonth('tgl_submit', date('m'))
                     ->count();
 
@@ -355,7 +355,7 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(1)
+                    ->whereIn('status_approve', [1])
                     ->whereMonth('tgl_submit', date('m'))
                     ->count();
 
@@ -388,7 +388,7 @@
             try {
                 if (Auth::user()->api_token) {
                     $spaj = Spaj::whereYear('tgl_submit', date('Y'))
-                    ->whereStatusApprove(1)
+                    ->whereIn('status_approve', [1])
                     ->count();
 
                     // $api[] = ['Bulan', 'Jumlah Spaj'];

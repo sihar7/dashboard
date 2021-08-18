@@ -17,36 +17,32 @@ class PoliceApprovedController extends Controller
         $this->middleware(['has_login', 'XSS']);
     }
 
+
     function filterHarianPoliceApproved(Request $request)
     {
-        $start = $request->hari_awal;
-        $end   = $request->hari_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) >= '".$start."'")
-                ->whereRaw("DATE(mst_spaj_submit.tgl_submit) <= '".$end."'")
-                ->where('mst_spaj_submit.status_approve', 1)
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->whereDay('tgl_submit', date('d'))
+                ->whereYear('tgl_submit', date('Y'))
+                ->whereIn('status_approve', [1])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Hari', 'Premium'];
+                $api[] = ['Hari', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$spaj->count];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
                     'error' => true,
                     'code' => 403
                 ];
-
                 return response()->json(['api' => $data], 201);
             }
-
-
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
@@ -56,23 +52,22 @@ class PoliceApprovedController extends Controller
 
     function filterMingguPoliceApproved(Request $request)
     {
-        $start_bulan = $request->bulan_awal;
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(mst_spaj_submit.tgl_submit) as day_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->where('mst_spaj_submit.tgl_submit','<=' , Carbon::today()->subDay(6))
-                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') >= '".$start_bulan."'")
-                ->where('mst_spaj_submit.status_approve', 1)
+                ->whereYear('tgl_submit', date('Y'))
+                ->whereIn('status_approve', [1])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Premium'];
+                $api[] = ['Mingguan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -91,23 +86,26 @@ class PoliceApprovedController extends Controller
 
     function filterBulanPoliceApproved(Request $request)
     {
+        // $start = Carbon::parse($request->bulan_awal)->startOfMonth();
+        // $end = Carbon::parse($request->bulan_akhir)->startOfMonth();
+
         $start = $request->bulan_awal;
         $end   = $request->bulan_akhir;
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(mst_spaj_submit.tgl_submit) as month_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->where('mst_spaj_submit.status_approve', 1)
-                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%m') <= '".$end."'")
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(tgl_submit) as month_name"),DB::raw('max(tgl_submit) as createdAt'))
+                ->whereMonth('tgl_submit', $start)
+                ->orWhereMonth('tgl_submit', $end)
+                ->whereYear('tgl_submit', date('Y'))
+                ->whereIn('status_approve', [1])
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
-
-                $api[] = ['Bulan', 'Premium'];
+                $api[] = ['Bulan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (string)$value->count];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -117,8 +115,6 @@ class PoliceApprovedController extends Controller
 
                 return response()->json(['api' => $data], 201);
             }
-
-
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
@@ -134,20 +130,20 @@ class PoliceApprovedController extends Controller
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::where('mst_spaj_submit.status_approve', 1)
-                ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
-                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%Y') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(mst_spaj_submit.tgl_submit, '%Y') <= '".$end."'")
+                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                ->whereYear('tgl_submit', $start)
+                ->orWhereYear('tgl_submit', $end)
+                ->whereIn('status_approve', [1])
+                ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('year_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Premium'];
+                $api[] = ['Tahun', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [$value->year_name, (int)$value->sum_nominal];
+                    $api[++$key] = [(string)$value->year_name, (string)$value->count];
                 }
-
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -172,7 +168,7 @@ class PoliceApprovedController extends Controller
                 $spaj = Spaj::join('mst_asuransi', 'mst_spaj_submit.asuransi', 'mst_asuransi.id')
                 ->join('mst_jns_asuransi', 'mst_spaj_submit.jns_asuransi', '=', 'mst_jns_asuransi.id')
                 ->join('mst_telemarketing', 'mst_spaj_submit.id_telemarketing', '=', 'mst_telemarketing.id')
-                ->where('mst_spaj_submit.status_approve', 1)
+                ->where('mst_spaj_submit.status_approve', 0)
                 ->select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
                 ->orderBy('createdAt')
                 ->get();
