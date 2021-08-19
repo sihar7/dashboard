@@ -315,7 +315,9 @@ DASHBOARD | ARWICS
                             <div class="card-body">
                                 <center>
                                     <p>Weekly</p>
-                                    <h1>{{ $policeApprovedCountWeekly  }}</h1>
+                                    @foreach ($policeApprovedCountWeekly as $item)
+                                    <h1>{{ $item->count }}</h1>
+                                    @endforeach
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
                                         data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
@@ -458,25 +460,82 @@ DASHBOARD | ARWICS
                                         Total Premium Chart
                                     </div>
                                     <div style="display: flex;margin-top: 5px;">
-                                        <select class="form-control" id="select_top10_1"
-                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                            <option value="">Select</option>
+                                        <select class="form-control" id="filterDataTotalPremiumChart" onchange="loadFilterTotalPremiumChart();"
+                                            style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                            <option value="select">Select</option>
                                             <option value="harian">Harian</option>
                                             <option value="mingguan">Mingguan</option>
+                                            <option value="bulanan">Bulanan</option>
                                             <option value="tahunan">Tahunan</option>
                                         </select>
                                         &nbsp;
-                                        <div>
+                                        <div id="dateTotalPremiumChart">
                                             <div class="input-group">
                                                 <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                             </div>
                                             <!-- input-group -->
                                         </div>
+                                        <div id="rangeDateTotalPremiumChart">
+                                            <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="bulanDateTotalPremiumChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_awal" id="bulanAwalTotalPremiumChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 1</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="bulan_akhir" id="bulanAkhirTotalPremiumChart" onchange="filterMonthTotalPremiumChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Bulan 2</option>
+                                                        @foreach($bulan as $item)
+                                                        <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+                                        <div id="tahunDateTotalPremiumChart">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_awal" id="tahunAwalTotalPremiumChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 1</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <select class="form-control" name="tahun_akhir" id="tahunAkhirTotalPremiumChart" onchange="filterYearTotalPremiumChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                        <option value="">Tahun 2</option>
+                                                        @for($year=2010; $year<=date('Y'); $year++)
+                                                        <option value="{{ $year }}"> {{ $year }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- input-group -->
+                                        </div>
+
+
                                     </div>
                                 </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="#" data-bs-toggle="modal" id="detailTotalPremiumChart"
                                 data-bs-target=".detailTotalPremiumChart"
-                                    style="width: 120px;height: 44px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
+                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;cursor: pointer;">
                                     <div>
                                         Detail
                                     </div>
@@ -494,11 +553,11 @@ DASHBOARD | ARWICS
 <br>
 
 <div class="row">
-    <div class="col-xl-4 p-1" style="height:100%">
-        <div class="h-100" style="width: 100%;background-color: #222222;">
+    <div class="col-xl-4 p-1" style="height:57vh;">
+        <div class="h-100" style="width: 100%;background-color: #222222; border-radius:5px;">
             <div class="row">
                 <div class="col-lg-6">
-                    <br>
+                    <br><br><br>
                     <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
                         <select class="form-control" id="select_top10_1"
                         style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
@@ -536,21 +595,21 @@ DASHBOARD | ARWICS
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <br>
-                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
                     <br><br><br>
+                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
+                    <br><br><br><br>
                     <div
                         style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
                         <div
                             style="width: 60px;height: 60px;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
                             @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
-                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:150px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:300px; height:250px; left:0%; right:0%; top:0%; bottom:0%;"/>
                             @else
-                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:200px; height:200px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:300px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
                             @endif
                         </div>
                     </div>
-                    <br><br><br>
+                    <br><br><br><br><br>
                     <div
                         style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                         <div>Congrats Atas Pencapaianya</div>
@@ -561,15 +620,16 @@ DASHBOARD | ARWICS
         </div>
         <br>
         <div class="w-100 h-100 p-1 telemarketing">
+            <br>
             <div class="row">
                 <div style="height:20%;width: 100%;display: flex;justify-content: center;align-items: center;">
                     <div>
                         Telemarketing
                     </div>
                 </div>
-
-                <div class="col-lg-6">
-                    <div style="width: 100%;height: 85%;overflow: auto;">
+                <br><br>
+                <div class="col-lg-6" style="height:73vh;">
+                    <div style="width: 100%;height: 100%;overflow: auto;">
                         <ul>
                             @foreach ($getHistoryTele as $historyTele)
                             @if($historyTele->id_tele > 0 && $historyTele->id_tele <= 5)
@@ -842,7 +902,7 @@ DASHBOARD | ARWICS
                         </div>
                     </div>
                 </div>
-                <br><br>
+                <br><br><br>
                 <div class="row">
                     <div class="col-4 ">
                         <div id="premiumTahun1Chart" dir="ltr" style="height:100%;"></div>
@@ -1958,7 +2018,7 @@ DASHBOARD | ARWICS
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Jumlah Spaj'],
+            ['Bulan', ' '],
 
             @php
             foreach($spajSubmitted as $spaj) {
@@ -2000,7 +2060,7 @@ DASHBOARD | ARWICS
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Premi'],
+            ['Bulan', ' '],
             @php
             foreach($premiumSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -2279,6 +2339,11 @@ DASHBOARD | ARWICS
     $("#bulanDatePoliceApprovedChart").hide();
     $("#tahunDatePoliceApprovedChart").hide();
 
+    $("#dateTotalPremiumChart").hide();
+    $("#rangeDateTotalPremiumChart").hide();
+    $("#bulanDateTotalPremiumChart").hide();
+    $("#tahunDateTotalPremiumChart").hide();
+
 
         $.ajaxSetup({
             headers: {
@@ -2398,7 +2463,7 @@ DASHBOARD | ARWICS
             function premiumChart() {
 
                 var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Premi'],
+                    ['Bulan', ' '],
                     @php
                     foreach($premiumSubmitted as $spaj) {
                         echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -2682,7 +2747,7 @@ DASHBOARD | ARWICS
                                 groupWidth: "75%"
                             },
                             bars: 'vertical',
-                            width: '100%',
+                            width: 200,
                             height: '75%',
                             isStacked: true,
                             }
@@ -2713,7 +2778,7 @@ DASHBOARD | ARWICS
             function submittedChart() {
 
                 var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Jumlah Spaj'],
+                    ['Bulan', ' '],
                     @php
                     foreach($premiumSubmitted as $spaj) {
                         echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -2941,6 +3006,8 @@ DASHBOARD | ARWICS
             });
         }
 
+        // Police Approved Module
+
         function loadFilterPoliceApprovedChart()
         {
             var eID = document.getElementById("filterDataPoliceApprovedChart");
@@ -2995,7 +3062,8 @@ DASHBOARD | ARWICS
                                 groupWidth: "75%"
                             },
                             bars: 'vertical',
-                            width: '100%',
+                            width: 200,
+                            bars: 'vertical',
                             height: '75%',
                             isStacked: true,
                             }
@@ -3250,6 +3318,318 @@ DASHBOARD | ARWICS
                 }
             });
         }
+
+        function loadFilterTotalPremiumChart()
+        {
+            var eID = document.getElementById("filterDataTotalPremiumChart");
+            var dayVal = eID.options[eID.selectedIndex].value;
+            var daytxt = eID.options[eID.selectedIndex].text;
+
+            if (dayVal == 'mingguan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+                console.log($('#filterDataPoliceApprovedChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterMingguTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+                });
+            } else if(dayVal == 'select') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+                google.charts.load('current', {
+                    'packages': ['corechart', 'bar']
+                });
+                google.charts.setOnLoadCallback(totalPremiumChart);
+
+
+            function totalPremiumChart() {
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Bulan', 'Jumlah Spaj'],
+                    @php
+                    foreach($totalPremiumChart as $spaj) {
+                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                        "', '".(int)$spaj->count."'],";
+
+                    }
+                    @endphp
+                ]);
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        width: '100%',
+                        height: '75%',
+                        isStacked: true,
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            } else if(dayVal == 'harian') {
+                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+                console.log($('#filterDataTotalPremiumChart').val());
+
+                $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterHarianTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "350px"
+                        },
+                        bars: 'vertical',
+                        width: '350px',
+                        height: '75%',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+            } else if(dayVal == 'bulanan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").show();
+                $("#tahunDateTotalPremiumChart").hide();
+                reset();
+            } else if(dayVal == 'tahunan') {
+                $("#dateTotalPremiumChart").hide();
+                $("#rangeDateTotalPremiumChart").hide();
+                $("#bulanDateTotalPremiumChart").hide();
+                $("#tahunDateTotalPremiumChart").show();
+                reset();
+            }
+
+        }
+
+        function filterMonthPoliceApprovedChart()
+        {
+            var data = {"bulan_awal":$('#bulanAwalTotalPremiumChart').val(), "bulan_akhir":$('#bulanAkhirTotalPremiumChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterBulanTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        function filterYearPoliceApprovedChart()
+        {
+            var data = {"tahun_awal":$('#tahunAwalTotalPremiumChart').val(), "tahun_akhir":$('#tahunAkhirTotalPremiumChart').val()};
+            $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+                type:"POST",
+                url : "{{ url('management/policeApproved/filterTahunTotalPremium') }}",
+                data: JSON.stringify(data),
+                dataType:"json",
+                processData:false,
+                contentType:"application/json",
+                cache:false,
+                success:function(response){
+                        google.charts.load('current', {
+                            'packages': ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable(response.data);
+
+                        var options = {
+                            legend: {
+                                position: 'top',
+                                maxLines: 3
+                            },
+                            chartArea: {
+                                backgroundColor: {
+                                    fill: '#222222',
+                                    fillOpacity: 0.1
+                                },
+                            },
+                            responsive: true,
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.8
+                            },
+                            colors: '#FB6EAA',
+                            bar: {
+                                groupWidth: "75%"
+                            },
+                            bars: 'vertical',
+                            width: '100%',
+                            height: '75%',
+                            isStacked: true,
+                            }
+                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                         }
+
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+
+
 
 
 

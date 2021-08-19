@@ -81,12 +81,42 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::get('/filterTotalTopTsr', [TeleController::class, 'filterTotalTopTsr']);
         });
         Route::prefix('policeApproved')->group(function() {
+            Route::post('/filterHarianPremiumTahun1', [PoliceApprovedController::class, 'filterHarianPremiumTahun1']);
+            Route::post('/filterMingguPremiumTahun1', [PoliceApprovedController::class, 'filterMingguPremiumTahun1']);
+            Route::post('/filterBulanPremiumTahun1', [PoliceApprovedController::class, 'filterBulanPremiumTahun1']);
+            Route::post('/filterTahunPremiumTahun1', [PoliceApprovedController::class, 'filterTahunPremiumTahun1']);
+
+
+            Route::post('/filterHarianPltp', [PoliceApprovedController::class, 'filterHarianPltp']);
+            Route::post('/filterMingguPltp', [PoliceApprovedController::class, 'filterMingguPltp']);
+            Route::post('/filterBulanPltp', [PoliceApprovedController::class, 'filterBulanPltp']);
+            Route::post('/filterTahunPltp', [PoliceApprovedController::class, 'filterTahunPltp']);
+
+            Route::post('/filterHarianPremiumTotal', [PoliceApprovedController::class, 'filterHarianPremiumTotal']);
+            Route::post('/filterMingguPremiumTotal', [PoliceApprovedController::class, 'filterMingguPremiumTotal']);
+            Route::post('/filterBulanPremiumTotal', [PoliceApprovedController::class, 'filterBulanPremiumTotal']);
+            Route::post('/filterTahunPremiumTotal', [PoliceApprovedController::class, 'filterTahunPremiumTotal']);
+
+
+
+
+        });
+        Route::prefix('premiumTotal')->group(function() {
             Route::post('/filterHarianPoliceApproved', [PoliceApprovedController::class, 'filterHarianPoliceApproved']);
             Route::post('/filterMingguPoliceApproved', [PoliceApprovedController::class, 'filterMingguPoliceApproved']);
             Route::post('/filterBulanPoliceApproved', [PoliceApprovedController::class, 'filterBulanPoliceApproved']);
             Route::post('/filterTahunPoliceApproved', [PoliceApprovedController::class, 'filterTahunPoliceApproved']);
             Route::get('/filterTotalPoliceApproved', [PoliceApprovedController::class, 'filterTotalPoliceApproved']);
+
+
+            Route::post('/filterHarianTotalPremium', [PoliceApprovedController::class, 'filterHarianTotalPremium']);
+            Route::post('/filterMingguTotalPremium', [PoliceApprovedController::class, 'filterMingguTotalPremium']);
+            Route::post('/filterBulanTotalPremium', [PoliceApprovedController::class, 'filterBulanTotalPremium']);
+            Route::post('/filterTahunTotalPremium', [PoliceApprovedController::class, 'filterTahunTotalPremium']);
+            Route::get('/filterTotalTotalPremium', [PoliceApprovedController::class, 'filterTotalTotalPremium']);
+
         });
+
     });
 
     Route::prefix('partner')->group(function() {

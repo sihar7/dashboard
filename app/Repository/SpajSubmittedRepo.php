@@ -320,12 +320,14 @@
             DB::beginTransaction();
             try {
                 if (Auth::user()->api_token) {
-                    $spaj = Spaj::whereYear('tgl_submit', date('Y'))
+                    $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
+                    ->where('tgl_submit','<=', Carbon::today()->subDay(6))
                     ->whereIn('status_approve', [1])
-                    ->where('tgl_submit', '<=', Carbon::today()->subDay(6))
                     ->whereMonth('tgl_submit', date('m'))
-                    ->count();
-
+                    ->whereYear('tgl_submit', date('Y'))
+                    ->groupBy('day_name')
+                    ->orderBy('createdAt')
+                    ->get();
                     // $api[] = ['Bulan', 'Jumlah Spaj'];
                     // foreach ($spaj as $key => $value) {
                     //     $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->count];
