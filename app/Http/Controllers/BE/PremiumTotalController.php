@@ -18,26 +18,25 @@ class PremiumTotalController extends Controller
     }
 
     // Start Premium Tahun 1
-    function premiumTahun1Daily(Request $request)
+    function filterHarianPremiumTahun1(Request $request)
     {
-        $start = $request->hari_awal;
-        $end   = $request->hari_akhir;
         try {
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE(trn_pltp.tgl_update) >= '".$start."'")
-                ->whereRaw("DATE(trn_pltp.tgl_update) <= '".$end."'")
-                ->where('trn_pltp.tahun_ke', 1)
+                ->whereDay('trn_pltp.tgl_update', date('d'))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->whereIn('trn_pltp.tahun_ke', [1])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Hari', 'Premium'];
+                $api[] = ['Hari', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -53,26 +52,26 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function premiumTahun1Weekly(Request $request)
+    function filterMingguPremiumTahun1(Request $request)
     {
-        $start_bulan = $request->bulan_awal;
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->where('trn_pltp.tgl_update','<=' , Carbon::today()->subDay(6))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start_bulan."'")
-                ->where('trn_pltp.tahun_ke', 1)
+                ->where('trn_pltp.tgl_update','<=', Carbon::today()->subDay(6))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->whereIn('trn_pltp.tahun_ke', [1])
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Premium'];
+                $api[] = ['Mingguan', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -89,7 +88,7 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function premiumTahun1Monthly(Request $request)
+    function filterBulanPremiumTahun1(Request $request)
     {
         $start = $request->bulan_awal;
         $end   = $request->bulan_akhir;
@@ -97,18 +96,18 @@ class PremiumTotalController extends Controller
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("MONTHNAME(trn_pltp.tgl_update) as month_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') <= '".$end."'")
-                ->where('trn_pltp.tahun_ke', 1)
+                ->whereMonth('trn_pltp.tgl_update', $start)
+                ->orWhereMonth('trn_pltp.tgl_update', $end)
+                ->whereIn('trn_pltp.tahun_ke', [1])
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Bulan', 'Premium'];
+                $api[] = ['Bulan', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'),  "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -125,7 +124,7 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function premiumTahun1Yearly(Request $request)
+    function filterTahunPremiumTahun1(Request $request)
     {
         $start = $request->tahun_awal;
         $end   = $request->tahun_akhir;
@@ -135,16 +134,16 @@ class PremiumTotalController extends Controller
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("YEAR(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') <= '".$end."'")
+                ->whereYear('trn_pltp.tgl_update', $start)
+                ->orWhereYear('trn_pltp.tgl_update', $end)
+                ->whereIn('trn_pltp.tahun_ke', [1])
                 ->groupBy('year_name')
-                ->where('trn_pltp.tahun_ke', 1)
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Premium'];
+                $api[] = ['Tahun', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [$value->year_name, (int)$value->sum_nominal];
+                    $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
 
                 return response()->json(['api' => $api], 201);
@@ -167,26 +166,25 @@ class PremiumTotalController extends Controller
 
 
     // Start Pltp
-    function pltpDaily(Request $request)
+    function filterHarianPltp(Request $request)
     {
-        $start = $request->hari_awal;
-        $end   = $request->hari_akhir;
         try {
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE(trn_pltp.tgl_update) >= '".$start."'")
-                ->whereRaw("DATE(trn_pltp.tgl_update) <= '".$end."'")
-                ->where('trn_pltp.tahun_ke', '>', 1)
+                ->whereDay('trn_pltp.tgl_update', date('d'))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->where('trn_pltp.tahun_ke','>',1)
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Hari', 'Premium'];
+                $api[] = ['Hari', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -202,26 +200,26 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function pltpWeekly(Request $request)
+    function filterMingguPltp(Request $request)
     {
-        $start_bulan = $request->bulan_awal;
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->where('trn_pltp.tgl_update','<=' , Carbon::today()->subDay(6))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start_bulan."'")
-                ->where('trn_pltp.tahun_ke','>', 1)
+                ->where('trn_pltp.tgl_update','<=', Carbon::today()->subDay(6))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->where('trn_pltp.tahun_ke','>',1)
                 ->groupBy('day_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Premium'];
+                $api[] = ['Mingguan', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -238,7 +236,7 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function pltpMonthly(Request $request)
+    function filterBulanPltp(Request $request)
     {
         $start = $request->bulan_awal;
         $end   = $request->bulan_akhir;
@@ -246,18 +244,18 @@ class PremiumTotalController extends Controller
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("MONTHNAME(trn_pltp.tgl_update) as month_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') <= '".$end."'")
-                ->where('trn_pltp.tahun_ke', '>', 1)
+                ->whereMonth('trn_pltp.tgl_update', $start)
+                ->orWhereMonth('trn_pltp.tgl_update', $end)
+                ->where('trn_pltp.tahun_ke','>',1)
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Bulan', 'Premium'];
+                $api[] = ['Bulan', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'),  "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
-                return response()->json(['api' => $api], 201);
+                return response()->json(['data' => $api], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -274,7 +272,7 @@ class PremiumTotalController extends Controller
         DB::commit();
     }
 
-    function pltpYearly(Request $request)
+    function filterTahunPltp(Request $request)
     {
         $start = $request->tahun_awal;
         $end   = $request->tahun_akhir;
@@ -284,16 +282,16 @@ class PremiumTotalController extends Controller
             if (Auth::user()->api_token) {
                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("YEAR(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') >= '".$start."'")
-                ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') <= '".$end."'")
+                ->whereYear('trn_pltp.tgl_update', $start)
+                ->orWhereYear('trn_pltp.tgl_update', $end)
+                ->where('trn_pltp.tahun_ke','>',1)
                 ->groupBy('year_name')
-                ->where('trn_pltp.tahun_ke', '>' , 1)
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Premium'];
+                $api[] = ['Tahun', ' '];
                 foreach ($pltp as $key => $value) {
-                    $api[++$key] = [$value->year_name, (int)$value->sum_nominal];
+                    $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
 
                 return response()->json(['api' => $api], 201);
@@ -315,147 +313,146 @@ class PremiumTotalController extends Controller
     // End Pltp
 
     // Start Premium Total
-     function premiumTotalDaily(Request $request)
-     {
-         $start = $request->hari_awal;
-         $end   = $request->hari_akhir;
-         try {
-             if (Auth::user()->api_token) {
-                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
-                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                 ->whereRaw("DATE(trn_pltp.tgl_update) >= '".$start."'")
-                 ->whereRaw("DATE(trn_pltp.tgl_update) <= '".$end."'")
-                 ->groupBy('day_name')
-                 ->orderBy('createdAt')
-                 ->get();
+    function filterHarianPremiumTotal(Request $request)
+    {
+        try {
+            if (Auth::user()->api_token) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
+                ->whereDay('trn_pltp.tgl_update', date('d'))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->groupBy('day_name')
+                ->orderBy('createdAt')
+                ->get();
 
-                 $api[] = ['Hari', 'Premium'];
-                 foreach ($pltp as $key => $value) {
-                     $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (int)$value->sum_nominal];
-                 }
-                 return response()->json(['api' => $api], 201);
-             } else {
-                 $data = [
-                     'message' => 'Token Tidak Ditemukan',
-                     'error' => true,
-                     'code' => 403
-                 ];
-                 return response()->json(['api' => $data], 201);
-             }
-         } catch (\Exception $e) {
-             DB::rollback();
-             throw $e;
-         }
-         DB::commit();
-     }
+                $api[] = ['Hari', ' '];
+                foreach ($pltp as $key => $value) {
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                }
+                return response()->json(['data' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
+                return response()->json(['api' => $data], 201);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
 
-     function premiumTotalWeekly(Request $request)
-     {
-         $start_bulan = $request->bulan_awal;
-         DB::beginTransaction();
-         try {
-             if (Auth::user()->api_token) {
-                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
-                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                 ->where('trn_pltp.tgl_update','<=' , Carbon::today()->subDay(6))
-                 ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start_bulan."'")
-                 ->groupBy('day_name')
-                 ->orderBy('createdAt')
-                 ->get();
+    function filterMingguPremiumTotal(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            if (Auth::user()->api_token) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("DAYNAME(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
+                ->where('trn_pltp.tgl_update','<=', Carbon::today()->subDay(6))
+                ->whereMonth('trn_pltp.tgl_update', date('m'))
+                ->whereYear('trn_pltp.tgl_update', date('Y'))
+                ->groupBy('day_name')
+                ->orderBy('createdAt')
+                ->get();
 
-                 $api[] = ['Mingguan', 'Premium'];
-                 foreach ($pltp as $key => $value) {
-                     $api[++$key] = [$value->day_name, (int)$value->sum_nominal];
-                 }
-                 return response()->json(['api' => $api], 201);
-             } else {
-                 $data = [
-                     'message' => 'Token Tidak Ditemukan',
-                     'error' => true,
-                     'code' => 403
-                 ];
+                $api[] = ['Mingguan', ' '];
+                foreach ($pltp as $key => $value) {
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                }
+                return response()->json(['data' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
 
-                 return response()->json(['api' => $data], 201);
-             }
-         } catch (\Exception $e) {
-             DB::rollback();
-             throw $e;
-         }
-         DB::commit();
-     }
+                return response()->json(['api' => $data], 201);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
 
-     function premiumTotalMonthly(Request $request)
-     {
-         $start = $request->bulan_awal;
-         $end   = $request->bulan_akhir;
-         try {
-             if (Auth::user()->api_token) {
-                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
-                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("MONTHNAME(trn_pltp.tgl_update) as month_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                 ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') >= '".$start."'")
-                 ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%m') <= '".$end."'")
-                 ->groupBy('month_name')
-                 ->orderBy('createdAt')
-                 ->get();
+    function filterBulanPremiumTotal(Request $request)
+    {
+        $start = $request->bulan_awal;
+        $end   = $request->bulan_akhir;
+        try {
+            if (Auth::user()->api_token) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("MONTHNAME(trn_pltp.tgl_update) as month_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
+                ->whereMonth('trn_pltp.tgl_update', $start)
+                ->orWhereMonth('trn_pltp.tgl_update', $end)
+                ->groupBy('month_name')
+                ->orderBy('createdAt')
+                ->get();
 
-                 $api[] = ['Bulan', 'Premium'];
-                 foreach ($pltp as $key => $value) {
-                     $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (int)$value->sum_nominal];
-                 }
-                 return response()->json(['api' => $api], 201);
-             } else {
-                 $data = [
-                     'message' => 'Token Tidak Ditemukan',
-                     'error' => true,
-                     'code' => 403
-                 ];
+                $api[] = ['Bulan', ' '];
+                foreach ($pltp as $key => $value) {
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'),  "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                }
+                return response()->json(['data' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
 
-                 return response()->json(['api' => $data], 201);
-             }
-         } catch (\Exception $e) {
-             DB::rollback();
-             throw $e;
-         }
-         DB::commit();
-     }
+                return response()->json(['api' => $data], 201);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
 
-     function premiumTotalYearly(Request $request)
-     {
-         $start = $request->tahun_awal;
-         $end   = $request->tahun_akhir;
+    function filterTahunPremiumTotal(Request $request)
+    {
+        $start = $request->tahun_awal;
+        $end   = $request->tahun_akhir;
 
-         DB::beginTransaction();
-         try {
-             if (Auth::user()->api_token) {
-                 $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
-                 ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("YEAR(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
-                 ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') >= '".$start."'")
-                 ->whereRaw("DATE_FORMAT(trn_pltp.tgl_update, '%Y') <= '".$end."'")
-                 ->groupBy('year_name')
-                 ->orderBy('createdAt')
-                 ->get();
+        DB::beginTransaction();
+        try {
+            if (Auth::user()->api_token) {
+                $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
+                ->select(DB::raw("SUM(trn_pltp.nominal_premi) as sum_nominal"), DB::raw("COUNT(trn_pltp.*) as count"), DB::raw("YEAR(trn_pltp.tgl_update) as day_name"),DB::raw('max(trn_pltp.tgl_update) as createdAt'))
+                ->whereYear('trn_pltp.tgl_update', $start)
+                ->orWhereYear('trn_pltp.tgl_update', $end)
+                ->groupBy('year_name')
+                ->orderBy('createdAt')
+                ->get();
 
-                 $api[] = ['Tahun', 'Premium'];
-                 foreach ($pltp as $key => $value) {
-                     $api[++$key] = [$value->year_name, (int)$value->sum_nominal];
-                 }
+                $api[] = ['Tahun', ' '];
+                foreach ($pltp as $key => $value) {
+                    $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                }
 
-                 return response()->json(['api' => $api], 201);
-             } else {
-                 $data = [
-                     'message' => 'Token Tidak Ditemukan',
-                     'error' => true,
-                     'code' => 403
-                 ];
+                return response()->json(['api' => $api], 201);
+            } else {
+                $data = [
+                    'message' => 'Token Tidak Ditemukan',
+                    'error' => true,
+                    'code' => 403
+                ];
 
-                 return response()->json(['api' => $data], 201);
-             }
-         } catch (\Exception $e) {
-             DB::rollback();
-             throw $e;
-         }
-         DB::commit();
-     }
+                return response()->json(['api' => $data], 201);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+    }
 
     // End Premium Total
 }

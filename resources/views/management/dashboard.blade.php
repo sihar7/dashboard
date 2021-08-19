@@ -3062,7 +3062,8 @@ DASHBOARD | ARWICS
                                 groupWidth: "75%"
                             },
                             bars: 'vertical',
-                            width: '100%',
+                            width: 200,
+                            bars: 'vertical',
                             height: '75%',
                             isStacked: true,
                             }

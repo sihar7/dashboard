@@ -208,7 +208,7 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Hari', 'Premium'];
+                $api[] = ['Hari', ' '];
                 foreach ($spaj as $key => $value) {
                     $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
@@ -242,7 +242,7 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Premium'];
+                $api[] = ['Mingguan', ' '];
                 foreach ($spaj as $key => $value) {
                     $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
@@ -280,7 +280,7 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Bulan', 'Premium'];
+                $api[] = ['Bulan', ' '];
                 foreach ($spaj as $key => $value) {
                     $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
@@ -317,7 +317,7 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Premium'];
+                $api[] = ['Tahun', ' '];
                 foreach ($spaj as $key => $value) {
                     $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
                 }
