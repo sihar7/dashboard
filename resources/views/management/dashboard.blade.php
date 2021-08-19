@@ -552,7 +552,7 @@ DASHBOARD | ARWICS
 
 <div class="row">
     <div class="col-xl-4 p-1" style="height:100%">
-        <div class="h-100" style="width: 100%;background-color: #222222;">
+        <div class="h-100" style="width: 100%;background-color: #222222; border-radius:5px;">
             <div class="row">
                 <div class="col-lg-6">
                     <br>
@@ -627,7 +627,7 @@ DASHBOARD | ARWICS
                 </div>
                 <br><br>
                 <div class="col-lg-6" style="height:73vh;">
-                    <div style="width: 100%;height: 85%;overflow: auto;">
+                    <div style="width: 100%;height: 100%;overflow: auto;">
                         <ul>
                             @foreach ($getHistoryTele as $historyTele)
                             @if($historyTele->id_tele > 0 && $historyTele->id_tele <= 5)
