@@ -315,7 +315,9 @@ DASHBOARD | ARWICS
                             <div class="card-body">
                                 <center>
                                     <p>Weekly</p>
-                                    <h1>{{ $policeApprovedCountWeekly  }}</h1>
+                                    @foreach ($policeApprovedCountWeekly as $item)
+                                    <h1>{{ $item->count }}</h1>
+                                    @endforeach
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
                                         data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
@@ -2016,7 +2018,7 @@ DASHBOARD | ARWICS
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Jumlah Spaj'],
+            ['Bulan', ' '],
 
             @php
             foreach($spajSubmitted as $spaj) {
@@ -2058,7 +2060,7 @@ DASHBOARD | ARWICS
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Bulan', 'Premi'],
+            ['Bulan', ' '],
             @php
             foreach($premiumSubmitted as $spaj) {
                 echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -2461,7 +2463,7 @@ DASHBOARD | ARWICS
             function premiumChart() {
 
                 var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Premi'],
+                    ['Bulan', ' '],
                     @php
                     foreach($premiumSubmitted as $spaj) {
                         echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
@@ -2745,7 +2747,7 @@ DASHBOARD | ARWICS
                                 groupWidth: "75%"
                             },
                             bars: 'vertical',
-                            width: '100%',
+                            width: 200,
                             height: '75%',
                             isStacked: true,
                             }
@@ -2776,7 +2778,7 @@ DASHBOARD | ARWICS
             function submittedChart() {
 
                 var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Jumlah Spaj'],
+                    ['Bulan', ' '],
                     @php
                     foreach($premiumSubmitted as $spaj) {
                         echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').

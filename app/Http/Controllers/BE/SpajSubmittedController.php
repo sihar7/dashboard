@@ -65,7 +65,7 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Jumlah Spaj'];
+                $api[] = ['Mingguan', ' '];
                 foreach ($spaj as $key => $value) {
                     $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
                 }
