@@ -553,11 +553,11 @@ DASHBOARD | ARWICS
 <br>
 
 <div class="row">
-    <div class="col-xl-4 p-1" style="height:100%">
+    <div class="col-xl-4 p-1" style="height:56vh;">
         <div class="h-100" style="width: 100%;background-color: #222222; border-radius:5px;">
             <div class="row">
                 <div class="col-lg-6">
-                    <br>
+                    <br><br><br>
                     <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
                         <select class="form-control" id="select_top10_1"
                         style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
@@ -595,21 +595,21 @@ DASHBOARD | ARWICS
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <br>
-                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
                     <br><br><br>
+                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
+                    <br><br><br><br>
                     <div
                         style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
                         <div
                             style="width: 60px;height: 60px;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
                             @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
-                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:150px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:300px; height:250px; left:0%; right:0%; top:0%; bottom:0%;"/>
                             @else
-                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:200px; height:200px; left:0%; right:0%; top:0%; bottom:0%;"/>
+                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:300px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
                             @endif
                         </div>
                     </div>
-                    <br><br><br>
+                    <br><br><br><br><br>
                     <div
                         style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
                         <div>Congrats Atas Pencapaianya</div>
