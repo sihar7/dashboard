@@ -553,7 +553,7 @@ DASHBOARD | ARWICS
 <br>
 
 <div class="row">
-    <div class="col-xl-4 p-1" style="height:56vh;">
+    <div class="col-xl-4 p-1" style="height:57vh;">
         <div class="h-100" style="width: 100%;background-color: #222222; border-radius:5px;">
             <div class="row">
                 <div class="col-lg-6">
@@ -902,7 +902,7 @@ DASHBOARD | ARWICS
                         </div>
                     </div>
                 </div>
-                <br><br>
+                <br><br><br>
                 <div class="row">
                     <div class="col-4 ">
                         <div id="premiumTahun1Chart" dir="ltr" style="height:100%;"></div>
