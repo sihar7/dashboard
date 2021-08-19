@@ -320,7 +320,7 @@
             DB::beginTransaction();
             try {
                 if (Auth::user()->api_token) {
-                    $spaj = Spaj::where('tgl_submit','<=' , Carbon::today()->subDay(6))
+                    $spaj = Spaj::where('tgl_submit','<=', Carbon::today()->subDay(6))
                     ->whereIn('status_approve', [1])
                     ->whereMonth('tgl_submit', date('m'))
                     ->whereYear('tgl_submit', date('Y'))

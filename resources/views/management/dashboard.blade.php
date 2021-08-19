@@ -618,14 +618,15 @@ DASHBOARD | ARWICS
         </div>
         <br>
         <div class="w-100 h-100 p-1 telemarketing">
+            <br>
             <div class="row">
                 <div style="height:20%;width: 100%;display: flex;justify-content: center;align-items: center;">
                     <div>
                         Telemarketing
                     </div>
                 </div>
-
-                <div class="col-lg-6">
+                <br><br>
+                <div class="col-lg-6" style="height:73vh;">
                     <div style="width: 100%;height: 85%;overflow: auto;">
                         <ul>
                             @foreach ($getHistoryTele as $historyTele)

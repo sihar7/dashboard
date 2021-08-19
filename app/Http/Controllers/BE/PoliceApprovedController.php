@@ -233,7 +233,7 @@ class PoliceApprovedController extends Controller
         try {
             if (Auth::user()->api_token) {
                 $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(tgl_submit) as day_name"),DB::raw('max(tgl_submit) as createdAt'))
-                ->where('tgl_submit','<=',Carbon::today()->subDay(6))
+                ->where('tgl_submit','<=', Carbon::today()->subDay(6))
                 ->whereIn('status_approve', [1])
                 ->whereMonth('tgl_submit', date('m'))
                 ->whereYear('tgl_submit', date('Y'))
