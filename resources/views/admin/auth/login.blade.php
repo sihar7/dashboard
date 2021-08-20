@@ -52,11 +52,10 @@
                     @csrf
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="Username" name="username" id="username" required/>
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" name="password" id="password"
-                               required/>
+                        <input type="password" class="form-control" placeholder="Password" name="password" id="password" required/>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -70,7 +69,7 @@
                     <div class="row">
                         <div class="col-xs-8">
                             <div class="checkbox icheck m-l--20">
-                                <label><input type="checkbox" name="remember_me"> Remember Me</label>
+                                <label><input type="checkbox" id="remember_me" name="remember_me"> Remember Me</label>
                             </div>
                         </div>
                         <div class="col-xs-4">
@@ -206,7 +205,7 @@
                     success: function (response) {
                         $('#button_login').html("Log In");
                         $('#button_login').removeAttr('disabled');
-                        if (response.message == 1) {
+                        if (response.status == 1) {
                             Swal.fire({
                                 icon:  'success',
                                 title: 'Berhasil',

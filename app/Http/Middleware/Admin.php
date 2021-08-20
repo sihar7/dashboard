@@ -23,7 +23,7 @@ class Admin
                 abort(403);
             }
         } else {
-            return redirect('/');
+            return redirect('/admin/login');
         }
     }
 }

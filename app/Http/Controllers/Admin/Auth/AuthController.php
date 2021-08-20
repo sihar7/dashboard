@@ -59,9 +59,9 @@ class AuthController extends Controller
                         $user->save();
 
                         Auth::login($user, $remember_me);
-                        Log::info('Berhasil Login Dengan Role ADmin dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->api_token);
+                        Log::info('Berhasil Login Dengan Role Admin dan Username : '.$request->username . ' ' . 'Token' . ' ' . $user->api_token);
 
-                        return response()->json(['message' => 1 ], 201);
+                        return response()->json(['status' => 1 ], 201);
 
                     } else {
                         return response()->json(['status' => 5], 201);

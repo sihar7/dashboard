@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Dash\DashboardController;
-use App\Http\Controllers\BE\SpajSubmittedController;
-use App\Http\Controllers\BE\TeleController;
-use App\Http\Controllers\Datatable\DetailController;
+use App\Http\Controllers\Dash\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 
-Route::post('postlogin', [AuthController::class, 'postlogin'])->middleware('throttle:60,1');
+Route::post('postlogin', [AuthController::class, 'postlogin']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 Route::get('/login', function () {
@@ -16,10 +12,14 @@ Route::get('/login', function () {
 });
 
 Route::group(['middleware' => ['admin', 'XSS']], function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+
     Route::prefix('spaj')->group(function() {
     });
+
     Route::prefix('tele')->group(function() {
     });
+
     Route::prefix('account')->group(function() {
     });
 
