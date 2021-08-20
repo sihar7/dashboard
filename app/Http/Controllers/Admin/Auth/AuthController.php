@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
-    
+
     function generateRandomString($length = 80)
     {
         $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -41,15 +41,15 @@ class AuthController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return response()->json([' message' => 4], 201);
+            return response()->json(['status' => 4], 201);
         }
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         try {
             if (Auth::attempt( [ 'username' => $username, 'password' => $password ]) ) {
                 $cek_online = User::cekUsername($username);
                 $islogin = $cek_online->islogin;
-                $newtoken  = $this->generateRandomString();
                 if( $islogin == 0 || $islogin == null ) {
+                $newtoken  = $this->generateRandomString();
                     if ( $request->user()->hasRole('admin') ) {
                         $user                 = User::cekUsername($username);
                         $user->last_login_at  = Carbon::now()->toDateTimeString();
@@ -63,6 +63,8 @@ class AuthController extends Controller
 
                         return response()->json(['message' => 1 ], 201);
 
+                    } else {
+                        return response()->json(['status' => 5], 201);
                     }
                 } else {
                     Log::info('User Already Login : '.$request->username);
@@ -70,7 +72,7 @@ class AuthController extends Controller
                 }
             } else {
                 Log::info('Gagal Login : '.$request->username);
-                return response()->json( [ 'status' => 3, 'message' => 'username atau Password Salah !' ], 203 );
+                return response()->json( [ 'status' => 3, 'message' => 'Username atau Password Salah !' ], 203 );
             }
 
           } catch (\Exception $e) {

@@ -43,7 +43,7 @@ class LoginController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return response()->json([' message' => 5], 201);
+            return response()->json(['status' => 5], 201);
         }
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         try {
@@ -200,7 +200,7 @@ class LoginController extends Controller
         Session::put('url.intended', URL::previous());
         return view('auth.login', $data);
     }
-    
+
 
     function logout(Request $request)
     {

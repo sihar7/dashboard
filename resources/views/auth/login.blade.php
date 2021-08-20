@@ -100,7 +100,7 @@
         <!-- App js -->
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
-            <script type="text/javascript">
+        <script type="text/javascript">
                 $(document).ready(function () {
 
                     function reset()

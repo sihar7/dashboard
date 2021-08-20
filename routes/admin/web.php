@@ -20,6 +20,8 @@ Route::group(['middleware' => ['admin', 'XSS']], function () {
     });
     Route::prefix('tele')->group(function() {
     });
+    Route::prefix('account')->group(function() {
+    });
 
 });
 
