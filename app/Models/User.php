@@ -16,8 +16,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $guarded = [];
     protected $table = 'mst_user';
+    protected $rememberTokenName = 'api_token';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -51,5 +53,20 @@ class User extends Authenticatable
     function scopeCekUsername($query, $username)
     {
         return $query->whereRaw('username = ?', $username)->first();
+    }
+
+    function getRememberToken()
+    {
+        return 'api_token';
+    }
+
+    function setRememberToken($value)
+    {
+        $this->api_token = $value;
+    }
+
+    function getRememberTokenName()
+    {
+        return 'api_token';
     }
 }

@@ -19,5 +19,7 @@ class VerifyCsrfToken extends Middleware
         'partner/*',
         'postLogin',
         'logout',
+        'admin.*',
+        'admin/postlogin',
     ];
 }

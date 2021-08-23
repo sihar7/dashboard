@@ -4,15 +4,8 @@ namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
-use App\Models\Spaj;
-use App\Repository\TeleRepo;
-use App\Repository\PremiumTotalRepo;
-use App\Repository\SpajSubmittedRepo;
 use Illuminate\Support\Facades\Auth;
-use PDF;
-use App\Models\Bulan;
 
 class AdminDashboardController extends Controller
 {
@@ -24,8 +17,25 @@ class AdminDashboardController extends Controller
 
     function index(Request $request)
     {
-        if (session()->get('role') == 'admin' && session()->get('api_token')) {
-            return view('admin.dashboard');
+        if ($request->user()->hasRole('admin')) {
+            if (Auth()->user()->api_token) {
+
+                $data['teleCount'] = DB::table('mst_telemarketing')
+                ->whereAktif('1')
+                ->count();
+
+                $data['asuransiCount'] = DB::table('mst_asuransi')
+                ->count();
+
+                $data['spajCount'] = DB::table('mst_spaj_submit')
+                ->count();
+
+                $data['premiumCount'] = DB::table('trn_pltp')->count();
+
+                return view('admin.dashboard', $data);
+            } else {
+                abort(404);
+            }
         } else {
             abort(403);
         }

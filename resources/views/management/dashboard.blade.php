@@ -315,9 +315,7 @@ DASHBOARD | ARWICS
                             <div class="card-body">
                                 <center>
                                     <p>Weekly</p>
-                                    @foreach ($policeApprovedCountWeekly as $item)
-                                    <h1>{{ $item->count }}</h1>
-                                    @endforeach
+                                    <h1>{{ $policeApprovedCountWeekly->count() }}</h1>
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
                                         data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
@@ -788,27 +786,83 @@ DASHBOARD | ARWICS
                                     <br>
                                     <div class="col-lg-6">
                                         <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="select_top10_1"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                                <option value="">Select</option>
+                                            <select class="form-control" id="filterDataPremiumTotalTahun1Chart" onchange="loadFilterPremiumTotalTahun1Chart();"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                <option value="select">Select</option>
                                                 <option value="harian">Harian</option>
                                                 <option value="mingguan">Mingguan</option>
+                                                <option value="bulanan">Bulanan</option>
                                                 <option value="tahunan">Tahunan</option>
                                             </select>
                                             &nbsp;
-                                            <div>
+                                            <div id="datePremiumTotalTahun1Chart">
                                                 <div class="input-group">
                                                     <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                                 </div>
                                                 <!-- input-group -->
                                             </div>
+                                            <div id="rangedatePremiumTotalTahun1Chart">
+                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="bulandatePremiumTotalTahun1Chart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 1</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalTahun1Chart" onchange="filterMonthPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 2</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="tahundatePremiumTotalTahun1Chart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 1</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalTahun1Chart" onchange="filterYearPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 2</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
 
                                         <a href="#" data-bs-toggle="modal" id="detailPremiumTahun1Chart"
-                                        data-bs-target=".detailPremiumTahun1Chart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                                        data-bs-target=".detailPremiumTahun1Chart" style="width: 80px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
                                         <div>
                                             Detail
                                         </div>
@@ -829,17 +883,71 @@ DASHBOARD | ARWICS
                                     <br>
                                     <div class="col-lg-6">
                                         <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="select_top10_1"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                                <option value="">Select</option>
+                                            <select class="form-control" id="filterDataPremiumPltpChart" onchange="loadFilterPremiumPltpChart();"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                <option value="select">Select</option>
                                                 <option value="harian">Harian</option>
                                                 <option value="mingguan">Mingguan</option>
+                                                <option value="bulanan">Bulanan</option>
                                                 <option value="tahunan">Tahunan</option>
                                             </select>
                                             &nbsp;
-                                            <div>
+                                            <div id="datePremiumPltpChart">
                                                 <div class="input-group">
                                                     <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+                                            <div id="rangedatePremiumPltpChart">
+                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="bulandatePremiumPltpChart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 1</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumPltpChart" onchange="filterMonthPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 2</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="tahundatePremiumPltpChart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 1</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumPltpChart" onchange="filterYearPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 2</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <!-- input-group -->
                                             </div>
@@ -870,22 +978,77 @@ DASHBOARD | ARWICS
                                     <br>
                                     <div class="col-lg-6">
                                         <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="select_top10_1"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                                                <option value="">Select</option>
+                                            <select class="form-control" id="filterDataPremiumTotalChart" onchange="loadFilterPremiumTotalChart();"
+                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                <option value="select">Select</option>
                                                 <option value="harian">Harian</option>
                                                 <option value="mingguan">Mingguan</option>
+                                                <option value="bulanan">Bulanan</option>
                                                 <option value="tahunan">Tahunan</option>
                                             </select>
                                             &nbsp;
-                                            <div>
+                                            <div id="datePremiumTotalChart">
                                                 <div class="input-group">
                                                     <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                                 </div>
                                                 <!-- input-group -->
                                             </div>
+                                            <div id="rangedatePremiumTotalChart">
+                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="bulandatePremiumTotalChart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 1</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalChart" onchange="filterMonthPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Bulan 2</option>
+                                                            @foreach($bulan as $item)
+                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
+
+                                            <div id="tahundatePremiumTotalChart">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 1</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalChart" onchange="filterYearPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                            <option value="">Tahun 2</option>
+                                                            @for($year=2010; $year<=date('Y'); $year++)
+                                                            <option value="{{ $year }}"> {{ $year }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- input-group -->
+                                            </div>
                                         </div>
                                     </div>
+
 
                                     <div class="col-lg-6">
 
@@ -2343,6 +2506,21 @@ DASHBOARD | ARWICS
     $("#rangeDateTotalPremiumChart").hide();
     $("#bulanDateTotalPremiumChart").hide();
     $("#tahunDateTotalPremiumChart").hide();
+
+    $("#datePremiumTotalTahun1Chart").hide();
+    $("#rangedatePremiumTotalTahun1Chart").hide();
+    $("#bulandatePremiumTotalTahun1Chart").hide();
+    $("#tahundatePremiumTotalTahun1Chart").hide();
+
+    $("#datePremiumPltpChart").hide();
+    $("#rangedatePremiumPltpChart").hide();
+    $("#bulandatePremiumPltpChart").hide();
+    $("#tahundatePremiumPltpChart").hide();
+
+    $("#datePremiumTotalChart").hide();
+    $("#rangedatePremiumTotalChart").hide();
+    $("#bulandatePremiumTotalChart").hide();
+    $("#tahundatePremiumTotalChart").hide();
 
 
         $.ajaxSetup({
