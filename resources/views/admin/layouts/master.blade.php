@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,8 +49,10 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ URL::to('admin/assets/css/themes/allthemes.css') }}" rel="stylesheet" />
 
-    {{-- <!-- Demo Purpose Only -->
-    <link href="{{ URL::to('admin/assets/css/demo/setting-box.css') }}" rel="stylesheet" /> --}}
+    <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
+
+    <!-- Demo Purpose Only -->
+    {{-- <link href="{{ URL::to('admin/assets/css/demo/setting-box.css') }}" rel="stylesheet" /> --}}
 </head>
 
 <body>
@@ -181,9 +183,8 @@
     <!-- Google Analytics Code -->
     <script src="{{ URL::to('admin/assets/js/google-analytics.js') }}"></script>
 
-    <!-- Demo Purpose Only -->
-    <script src="{{ URL::to('admin/assets/js/demo.js') }}"></script>
+    {{-- <!-- Demo Purpose Only -->
+    <script src="{{ URL::to('admin/assets/js/demo.js') }}"></script> --}}
+
 </body>
-
-
 </html>

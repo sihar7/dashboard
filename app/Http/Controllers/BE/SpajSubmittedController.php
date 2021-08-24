@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Spaj;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class SpajSubmittedController extends Controller
 {
     function __construct()
@@ -28,7 +29,7 @@ class SpajSubmittedController extends Controller
                 ->whereMonth('tgl_submit', date('m'))
                 ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
-                ->orderBy('createdAt')
+                ->orderBy('createdAt', 'ASC')
                 ->get();
 
                 $api[] = ['Hari', 'Jumlah Spaj'];
@@ -62,12 +63,12 @@ class SpajSubmittedController extends Controller
                 ->whereMonth('tgl_submit', date('m'))
                 ->whereYear('tgl_submit', date('Y'))
                 ->groupBy('day_name')
-                ->orderBy('createdAt')
+                ->orderBy('createdAt', 'ASC')
                 ->get();
 
                 $api[] = ['Mingguan', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), $value->count];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -90,7 +91,7 @@ class SpajSubmittedController extends Controller
     {
         // $start = Carbon::parse($request->bulan_awal)->startOfMonth();
         // $end = Carbon::parse($request->bulan_akhir)->startOfMonth();
-
+        DB::beginTransaction();
         $start = $request->bulan_awal;
         $end   = $request->bulan_akhir;
         try {
@@ -100,12 +101,12 @@ class SpajSubmittedController extends Controller
                 ->orWhereMonth('tgl_submit', $end)
                 ->whereIn('status_approve', [0])
                 ->groupBy('month_name')
-                ->orderBy('createdAt')
+                ->orderBy('createdAt', 'ASC')
                 ->get();
 
                 $api[] = ['Bulan', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (string)$value->count];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), $value->count];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -132,17 +133,17 @@ class SpajSubmittedController extends Controller
         DB::beginTransaction();
         try {
             if (Auth::user()->api_token) {
-                $spaj = Spaj::select(DB::raw("SUM(mst_spaj_submit.nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(mst_spaj_submit.tgl_submit) as year_name"),DB::raw('max(mst_spaj_submit.tgl_submit) as createdAt'))
+                $spaj = Spaj::select(DB::raw("SUM(nominal_premi) as sum_nominal"), DB::raw("COUNT(*) as count"), DB::raw("YEAR(tgl_submit) as year_name"),DB::raw('max(tgl_submit) as createdAt'))
                 ->whereYear('tgl_submit', $start)
                 ->orWhereYear('tgl_submit', $end)
                 ->whereIn('status_approve', [0])
                 ->groupBy('year_name')
-                ->orderBy('createdAt')
+                ->orderBy('createdAt', 'ASC')
                 ->get();
 
                 $api[] = ['Tahun', 'Jumlah Spaj'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(string)$value->year_name, (string)$value->count];
+                    $api[++$key] = [(string)$value->year_name, $value->count];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -195,6 +196,7 @@ class SpajSubmittedController extends Controller
         }
         DB::commit();
     }
+
     function filterHarianPremiumSubmitted(Request $request)
     {
         try {
@@ -373,7 +375,5 @@ class SpajSubmittedController extends Controller
         }
         DB::commit();
     }
-
-
 
 }

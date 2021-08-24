@@ -3,7 +3,8 @@
 
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse">
                     <i class="material-icons">swap_vert</i>
                 </button>
                 <a href="javascript:void(0);" class="left-toggle-left-sidebar js-left-toggle-left-sidebar">
@@ -70,7 +71,8 @@
                                     <div class="col-xs-5">
                                         <form method="post" action="{{ url('admin/logout') }}">
                                             @csrf
-                                            <button type="submit" class="btn btn-default btn-sm btn-block">Log Out</button>
+                                            <button type="submit" class="btn btn-default btn-sm btn-block">Log
+                                                Out</button>
                                         </form>
                                     </div>
                                 </div>

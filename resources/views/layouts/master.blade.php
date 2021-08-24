@@ -27,7 +27,9 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
     @stack('css')
-
+    <!-- isi style kita -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
+    @livewireStyles
     <style>
         .page-content{
             background-color: black;
@@ -117,6 +119,12 @@
 
     <!-- App js -->
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
+
+    <!-- isi script kita -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    @livewireScripts
+    @livewireChartsScripts
 </body>
 
 </html>

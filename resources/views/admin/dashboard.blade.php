@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @push('mytitle')
-DASHBOARD
+    ADMIN | DASHBOARD
 @endpush
 
 @push('mycss')
@@ -40,7 +40,7 @@ DASHBOARD
                     <i class="material-icons">shopping_cart</i>
                 </div>
                 <div class="content">
-                    <div class="text">TRANSAKSI SPAJ & POLICE APPROVED</div>
+                    <div class="text">SPAJ <br> & POLICE APPROVED</div>
                     <div class="number">{{ $spajCount }}</div>
                 </div>
             </div>

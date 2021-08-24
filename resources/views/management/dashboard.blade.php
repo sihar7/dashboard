@@ -21,6 +21,7 @@ DASHBOARD | ARWICS
 
 <link href="{{ asset('assets/libs/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
 <link href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+
 @endpush
 
 @section('content')
@@ -2170,6 +2171,7 @@ DASHBOARD | ARWICS
     google.charts.load('current', {
         'packages': ['corechart', 'bar']
     });
+
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(premiumChart);
     google.charts.setOnLoadCallback(policeApprovedChart);
@@ -2178,44 +2180,34 @@ DASHBOARD | ARWICS
     google.charts.setOnLoadCallback(premiumPltpChart);
     google.charts.setOnLoadCallback(premiumTotalChart);
 
-
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Bulan', ' '],
 
             @php
             foreach($spajSubmitted as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '".(int)$spaj->count.
-                "'],";
+                // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // "', '".(int)$spaj->count.
+                // "'],";
+                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".(string)$spaj->count."],";
             }
             @endphp
         ]);
 
         var options = {
-            legend: {
-                position: 'top',
-                maxLines: 3
-            },
+
             chartArea: {
                 backgroundColor: {
                     fill: '#222222',
                     fillOpacity: 0.1
                 },
             },
-            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
             colors: '#FB6EAA',
-            bar: {
-                groupWidth: "75%"
-            },
             bars: 'vertical',
-            width: '100%',
-            height: '75%',
-            isStacked: true,
         }
         var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2226,10 +2218,12 @@ DASHBOARD | ARWICS
             ['Bulan', ' '],
             @php
             foreach($premiumSubmitted as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '".
-                "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
-                "'],";
+                // echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // "', '".
+                // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
+                // "'],";
+
+                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".$spaj->sum_nominal."],";
 
             }
             @endphp
@@ -2237,29 +2231,18 @@ DASHBOARD | ARWICS
 
 
         var options = {
-            legend: {
-                position: 'top',
-                maxLines: 3
-            },
             chartArea: {
                 backgroundColor: {
                     fill: '#222222',
                     fillOpacity: 0.1
                 },
             },
-            responsive: true,
             backgroundColor: {
                 fill: '#222222',
                 fillOpacity: 0.8
             },
             colors: '#FB6EAA',
-            bar: {
-                groupWidth: "75%"
-            },
             bars: 'vertical',
-            width: '100%',
-            height: '75%',
-            isStacked: true,
         }
         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2270,9 +2253,8 @@ DASHBOARD | ARWICS
             ['Bulan', ''],
             @php
             foreach($policeApprovedChart as $spaj) {
-                echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', '".(int) $spaj->count.
-                "'],";
+                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                "', ".$spaj->count."],";
             }
             @endphp
         ]);
@@ -2878,7 +2860,6 @@ DASHBOARD | ARWICS
             var daytxt = eID.options[eID.selectedIndex].text;
 
             if (dayVal == 'mingguan') {
-
                 $("#dateSubmittedChart").hide();
                 $("#rangeDateSubmittedChart").hide();
                 $("#bulanDateSubmittedChart").hide();
@@ -2952,47 +2933,39 @@ DASHBOARD | ARWICS
                 });
                 google.charts.setOnLoadCallback(submittedChart);
 
+                function submittedChart() {
 
-            function submittedChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Bulan', ' '],
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Bulan', ' '],
-                    @php
-                    foreach($premiumSubmitted as $spaj) {
-                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                        "', '".(int)$spaj->count."'],";
+                        @php
+                        foreach($spajSubmitted as $spaj) {
+                            // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                            // "', '".(int)$spaj->count.
+                            // "'],";
+                            echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".(string)$spaj->count."],";
+                        }
+                        @endphp
+                    ]);
 
-                    }
-                    @endphp
-                ]);
                     var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
+
                         chartArea: {
                             backgroundColor: {
                                 fill: '#222222',
                                 fillOpacity: 0.1
                             },
                         },
-                        responsive: true,
                         backgroundColor: {
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
-                        isStacked: true,
                     }
                     var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
-                }
+                    }
 
             } else if(dayVal == 'harian') {
                 var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
@@ -3805,11 +3778,6 @@ DASHBOARD | ARWICS
                 }
             });
         }
-
-
-
-
-
 
 </script>
 @endpush

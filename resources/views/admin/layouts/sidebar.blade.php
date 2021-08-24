@@ -15,20 +15,21 @@
                 SPAJ
             </li>
 
-            <li>
+            <li
+                class="{{ request()->is('admin/spaj') || request()->is('admin/policeApproved') || request()->is('admin/premiumTotal') ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">shopping_cart</i>
                     <span class="nav-label">Spaj List</span>
                 </a>
                 <ul>
-                    <li>
-                        <a href="">Spaj Submitted</a>
+                    <li class="{{ request()->is('admin/spaj') ? 'active' : ''}}">
+                        <a href="{{ url('admin/spaj') }}">Spaj Submitted</a>
                     </li>
-                    <li>
-                        <a href="">Police Approved</a>
+                    <li class="{{ request()->is('admin/policeApproved') ? 'active' : ''}}">
+                        <a href="{{ url('admin/policeApproved') }}">Police Approved</a>
                     </li>
-                    <li>
-                        <a href="">Premium Total</a>
+                    <li class="{{ request()->is('admin/premiumTotal') ? 'active' : ''}}">
+                        <a href="{{ url('admin/premiumTotal') }}">Premium Total</a>
                     </li>
 
                 </ul>
@@ -37,20 +38,21 @@
                 Master Data
             </li>
 
-            <li>
+            <li
+                class="{{ request()->is('admin/asuransi') || request()->is('admin/jenisAsuransi') || request()->is('admin/bulan') ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">assignment_turned_in</i>
                     <span class="nav-label">Master Data</span>
                 </a>
                 <ul>
-                    <li>
-                        <a href="">Asuransi</a>
+                    <li class="{{ request()->is('admin/asuransi') ? 'active' : ''}}">
+                        <a href="{{ url('admin/asuransi') }}">Asuransi</a>
                     </li>
-                    <li>
-                        <a href="">Jenis Asuransi</a>
+                    <li class="{{ request()->is('admin/jenisAsuransi') ? 'active' : ''}}">
+                        <a href="{{ url('admin/jenisAsuransi') }}">Jenis Asuransi</a>
                     </li>
-                    <li>
-                        <a href="">Bulan</a>
+                    <li class="{{ request()->is('admin/bulan') ? 'active' : ''}}">
+                        <a href="{{ url('admin/bulan') }}">Bulan</a>
                     </li>
                 </ul>
             </li>
@@ -58,27 +60,28 @@
                 Akun Data
             </li>
 
-            <li>
+            <li
+                class="{{ request()->is('admin/account/authentikasi') || request()->is('admin/account/role') || request()->is('admin/account/roleAuthentikasi') || request()->is('admin/account/changePass') ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">supervisor_account</i>
                     <span class="nav-label">Akun</span>
                 </a>
                 <ul>
-                    <li>
-                        <a href="">Data Authentikasi</a>
+                    <li class="{{ request()->is('admin/account/authentikasi') ? 'active' : ''}}">
+                        <a href="{{ url('admin/account/authentikasi') }}">Data Authentikasi</a>
                     </li>
-                    <li>
-                        <a href="">Data Role</a>
+                    <li class="{{ request()->is('admin/account/role') ? 'active' : ''}}">
+                        <a href="{{ url('admin/account/role') }}">Data Role</a>
                     </li>
-                    <li>
-                        <a href="">Data Role Authentikasi</a>
+                    <li class="{{ request()->is('admin/account/roleAuthentikasi') ? 'active' : ''}}">
+                        <a href="{{ url('admin/account/roleAuthentikasi') }}">Data Role Authentikasi</a>
                     </li>
-                    <li>
+                    <li class="{{ request()->is('admin/account/changePass') ? 'active' : ''}}">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <span>Pengaturan</span>
                         </a>
                         <ul>
-                            <li><a href="javascript:void(0);">Ganti Password</a></li>
+                            <li><a href="{{ url('admin/account/changePass') }}">Ganti Password</a></li>
                         </ul>
                     </li>
                 </ul>

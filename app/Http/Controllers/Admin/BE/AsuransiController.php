@@ -20,7 +20,7 @@ class AsuransiController extends Controller
                 $asuransi = Asuransi::where('aktif', '1')->orderBy('id', 'DESC')->get();
                 return DataTables()->of($asuransi)
                     ->addColumn('action', function ($asuransi) {
-                        return '<a href="#" class="btn btn-warning waves-effect"  data-id="'.base64_encode($asuransi['id']).'" id="buton_edit" data-toggle="modal" data-target="#editAsuransi"><i class="material-icons">mode_edit</i></a> '. '&nbsp;'.'<a href="#" data-id="'.base64_encode($asuransi['id']).'" id="buton_hapus" class="m-w-150 btn btn-raised btn-danger"><i class="material-icons">delete_forever</i></a>';
+                        return '<a href="#" class="m-w-50 btn btn-raised btn-warning"  data-id="'.base64_encode($asuransi['id']).'" id="buton_edit" data-toggle="modal" data-target="#editAsuransi"><i class="material-icons">mode_edit</i></a> '. '&nbsp;'.'<a href="#" data-id="'.base64_encode($asuransi['id']).'" id="buton_hapus" class="m-w-50 btn btn-raised btn-danger"><i class="material-icons">delete_forever</i></a>';
                     })
                     ->editColumn('logo', function($asuransi){
                         return '<img src="'.url('property/asuransi',$asuransi['logo']).'" width="90px" height="90px">';
