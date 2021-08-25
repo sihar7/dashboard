@@ -6,6 +6,8 @@ use App\Http\Controllers\Dash\DashboardController;
 use App\Http\Controllers\BE\SpajSubmittedController;
 use App\Http\Controllers\BE\TeleController;
 use App\Http\Controllers\BE\PoliceApprovedController;
+use App\Http\Controllers\BE\PremiumTotalController;
+
 use App\Http\Controllers\Datatable\DetailController;
 
 
@@ -98,21 +100,21 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
 
         });
         Route::prefix('premiumTotal')->group(function() {
-            Route::post('/filterHarianPremiumTahun1', [PoliceApprovedController::class, 'filterHarianPremiumTahun1']);
-            Route::post('/filterMingguPremiumTahun1', [PoliceApprovedController::class, 'filterMingguPremiumTahun1']);
-            Route::post('/filterBulanPremiumTahun1', [PoliceApprovedController::class, 'filterBulanPremiumTahun1']);
-            Route::post('/filterTahunPremiumTahun1', [PoliceApprovedController::class, 'filterTahunPremiumTahun1']);
+            Route::post('/filterHarianPremiumTahun1', [PremiumTotalController::class, 'filterHarianPremiumTahun1']);
+            Route::post('/filterMingguPremiumTahun1', [PremiumTotalController::class, 'filterMingguPremiumTahun1']);
+            Route::post('/filterBulanPremiumTahun1', [PremiumTotalController::class, 'filterBulanPremiumTahun1']);
+            Route::post('/filterTahunPremiumTahun1', [PremiumTotalController::class, 'filterTahunPremiumTahun1']);
 
 
-            Route::post('/filterHarianPltp', [PoliceApprovedController::class, 'filterHarianPltp']);
-            Route::post('/filterMingguPltp', [PoliceApprovedController::class, 'filterMingguPltp']);
-            Route::post('/filterBulanPltp', [PoliceApprovedController::class, 'filterBulanPltp']);
-            Route::post('/filterTahunPltp', [PoliceApprovedController::class, 'filterTahunPltp']);
+            Route::post('/filterHarianPltp', [PremiumTotalController::class, 'filterHarianPltp']);
+            Route::post('/filterMingguPltp', [PremiumTotalController::class, 'filterMingguPltp']);
+            Route::post('/filterBulanPltp', [PremiumTotalController::class, 'filterBulanPltp']);
+            Route::post('/filterTahunPltp', [PremiumTotalController::class, 'filterTahunPltp']);
 
-            Route::post('/filterHarianPremiumTotal', [PoliceApprovedController::class, 'filterHarianPremiumTotal']);
-            Route::post('/filterMingguPremiumTotal', [PoliceApprovedController::class, 'filterMingguPremiumTotal']);
-            Route::post('/filterBulanPremiumTotal', [PoliceApprovedController::class, 'filterBulanPremiumTotal']);
-            Route::post('/filterTahunPremiumTotal', [PoliceApprovedController::class, 'filterTahunPremiumTotal']);
+            Route::post('/filterHarianPremiumTotal', [PremiumTotalController::class, 'filterHarianPremiumTotal']);
+            Route::post('/filterMingguPremiumTotal', [PremiumTotalController::class, 'filterMingguPremiumTotal']);
+            Route::post('/filterBulanPremiumTotal', [PremiumTotalController::class, 'filterBulanPremiumTotal']);
+            Route::post('/filterTahunPremiumTotal', [PremiumTotalController::class, 'filterTahunPremiumTotal']);
 
 
         });
