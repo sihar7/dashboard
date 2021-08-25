@@ -3903,22 +3903,21 @@ DASHBOARD | ARWICS
 
         function loadFilterPremiumTotalTahun1Chart()
         {
-            var eID = document.getElementById("filterDataTotalPremiumChart");
+            var eID = document.getElementById("filterDataPremiumTotalTahun1Chart");
             var dayVal = eID.options[eID.selectedIndex].value;
             var daytxt = eID.options[eID.selectedIndex].text;
 
             if (dayVal == 'mingguan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").hide();
-                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
-                console.log($('#filterDataPoliceApprovedChart').val());
+                $("#datePremiumTotalTahun1Chart").hide();
+                $("#rangeDatePremiumTotalTahun1Chart").hide();
+                $("#bulanDatePremiumTotalTahun1Chart").hide();
+                $("#tahunDatePremiumTotalTahun1Chart").hide();
+                var data = {"filterDataPremiumTotalTahun1Chart":$('#filterDataPremiumTotalTahun1Chart').val()};
 
                 $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
-                url : "{{ url('management/policeApproved/filterMingguTotalPremium') }}",
+                url : "{{ url('management/premiumTotal/filterMingguPremiumTahun1') }}",
                 data: JSON.stringify(data),
                 dataType:"json",
                 processData:false,
@@ -3928,9 +3927,9 @@ DASHBOARD | ARWICS
                         google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
-                        google.charts.setOnLoadCallback(drawChart);
+                        google.charts.setOnLoadCallback(premiumTahun1Chart);
 
-                        function drawChart() {
+                        function premiumTahun1Chart() {
                         var data = google.visualization.arrayToDataTable(response.data);
 
                         var options = {
@@ -3958,7 +3957,7 @@ DASHBOARD | ARWICS
                             height: '75%',
                             isStacked: true,
                             }
-                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
                     }
 
@@ -3976,15 +3975,15 @@ DASHBOARD | ARWICS
                 google.charts.load('current', {
                     'packages': ['corechart', 'bar']
                 });
-                google.charts.setOnLoadCallback(totalPremiumChart);
+                google.charts.setOnLoadCallback(premiumTotalTahun1);
 
 
-            function totalPremiumChart() {
+            function premiumTotalTahun1() {
 
                 var data = google.visualization.arrayToDataTable([
                     ['Bulan', 'Jumlah Spaj'],
                     @php
-                    foreach($totalPremiumChart as $spaj) {
+                    foreach($premiumTahun1Chart as $spaj) {
                         echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
                         "', '".(int)$spaj->count."'],";
 
@@ -4016,18 +4015,17 @@ DASHBOARD | ARWICS
                         height: '75%',
                         isStacked: true,
                     }
-                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                    var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
                 }
 
             } else if(dayVal == 'harian') {
-                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
-                console.log($('#filterDataTotalPremiumChart').val());
+                var data = {"filterDataPremiumTotalTahun1Chart":$('#filterDataPremiumTotalTahun1Chart').val()};
 
                 $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
-                url : "{{ url('management/policeApproved/filterHarianTotalPremium') }}",
+                url : "{{ url('management/premiumTotal/filterHarianPremiumTahun1') }}",
                 data: JSON.stringify(data),
                 dataType:"json",
                 processData:false,
@@ -4067,7 +4065,7 @@ DASHBOARD | ARWICS
                         height: '75%',
                         isStacked: true,
                         }
-                        var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                        var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                         }
 
@@ -4076,21 +4074,21 @@ DASHBOARD | ARWICS
                     console.log(error);
                 }
             });
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").hide();
+                $("#datePremiumTotalTahun1Chart").hide();
+                $("#rangeDatePremiumTotalTahun1Chart").hide();
+                $("#tahunDatePremiumTotalTahun1Chart").hide();
                 reset();
             } else if(dayVal == 'bulanan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").show();
-                $("#tahunDateTotalPremiumChart").hide();
+                $("#datePremiumTotalTahun1Chart").hide();
+                $("#rangeDatePremiumTotalTahun1Chart").hide();
+                $("#bulanDatePremiumTotalTahun1Chart").show();
+                $("#tahunDatePremiumTotalTahun1Chart").hide();
                 reset();
             } else if(dayVal == 'tahunan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").show();
+                $("#datePremiumTotalTahun1Chart").hide();
+                $("#rangeDatePremiumTotalTahun1Chart").hide();
+                $("#bulanDatePremiumTotalTahun1Chart").hide();
+                $("#tahunDatePremiumTotalTahun1Chart").show();
                 reset();
             }
 
