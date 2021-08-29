@@ -30,11 +30,14 @@ class PoliceApprovedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Hari', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$spaj->count];
+
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->day_name)->isoFormat('dddd');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+                return response()->json(['data' => $row], 201);
+
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -63,11 +66,13 @@ class PoliceApprovedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Mingguan', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$value->count];
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->day_name)->isoFormat('dddd');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+                return response()->json(['data' => $row], 201);
+
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -101,11 +106,14 @@ class PoliceApprovedController extends Controller
                 ->groupBy('month_name')
                 ->orderBy('createdAt')
                 ->get();
-                $api[] = ['Bulan', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), (string)$value->count];
+
+
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->month_name)->isoFormat('MMMM');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+                return response()->json(['data' => $row], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -139,11 +147,14 @@ class PoliceApprovedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(string)$value->year_name, (string)$value->count];
+
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = $item->year_name;
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+                return response()->json(['data' => $row], 201);
+
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -316,9 +327,9 @@ class PoliceApprovedController extends Controller
                 ->orderBy('createdAt')
                 ->get();
 
-                $api[] = ['Tahun', 'Jumlah Spaj'];
+                $api[] = ['Tahun', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(string)$value->year_name, (string)$value->count];
+                    $api[++$key] = [(string)$value->year_name, $value->sum_nominal];
                 }
                 return response()->json(['data' => $api], 201);
             } else {

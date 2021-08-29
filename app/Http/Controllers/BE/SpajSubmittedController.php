@@ -32,11 +32,13 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt', 'ASC')
                 ->get();
 
-                $api[] = ['Hari', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), (string)$spaj->count];
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->day_name)->isoFormat('dddd');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+
+                return response()->json(['data' => $row], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -66,11 +68,12 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt', 'ASC')
                 ->get();
 
-                $api[] = ['Mingguan', ' '];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), $value->count];
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->day_name)->isoFormat('dddd');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+                return response()->json(['data' => $row], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -104,11 +107,14 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt', 'ASC')
                 ->get();
 
-                $api[] = ['Bulan', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), $value->count];
+
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = Carbon::parse($item->month_name)->isoFormat('MMMM');
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+
+                return response()->json(['data' => $row], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -141,11 +147,14 @@ class SpajSubmittedController extends Controller
                 ->orderBy('createdAt', 'ASC')
                 ->get();
 
-                $api[] = ['Tahun', 'Jumlah Spaj'];
-                foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(string)$value->year_name, $value->count];
+
+                $row = [];
+                foreach ($spaj as $item) {
+                    $row['label'][] = $item->year_name;
+                    $row['data'][]  = (int)$item->count;
                 }
-                return response()->json(['data' => $api], 201);
+
+                return response()->json(['data' => $row], 201);
             } else {
                 $data = [
                     'message' => 'Token Tidak Ditemukan',
@@ -177,7 +186,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(int)$value->sum_nominal];
+                    $api[++$key] = [$value->sum_nominal];
                 }
 
                 return response()->json(['api' => $api], 201);
@@ -212,7 +221,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Hari', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), $value->sum_nominal];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -246,7 +255,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Mingguan', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                    $api[++$key] = [Carbon::parse($value->day_name)->isoFormat('dddd'), $value->sum_nominal];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -284,7 +293,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Bulan', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                    $api[++$key] = [Carbon::parse($value->month_name)->isoFormat('MMMM'), $value->sum_nominal];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -321,7 +330,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Tahun', ' '];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(string)$value->year_name, "Rp".number_format((int)$value->sum_nominal, 0, ',', '.')];
+                    $api[++$key] = [(string)$value->year_name, $value->sum_nominal];
                 }
                 return response()->json(['data' => $api], 201);
             } else {
@@ -356,7 +365,7 @@ class SpajSubmittedController extends Controller
 
                 $api[] = ['Premium'];
                 foreach ($spaj as $key => $value) {
-                    $api[++$key] = [(int)$value->sum_nominal];
+                    $api[++$key] = [$value->sum_nominal];
                 }
 
                 return response()->json(['api' => $api], 201);

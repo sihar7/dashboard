@@ -124,5 +124,11 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
     Route::prefix('partner')->group(function() {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
+
+    Route::prefix('report')->group(function() {
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+    });
+
+
 });
 

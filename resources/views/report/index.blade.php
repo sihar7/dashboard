@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-DASHBOARD | ARWICS
+REPORT | DASHBOARD ARWICS
 @endpush
 
 
@@ -19,8 +19,6 @@ DASHBOARD | ARWICS
 <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet"
     type="text/css" />
 
-<link href="{{ asset('assets/libs/select2/css/select2.min.css" rel="stylesheet') }}" type="text/css" />
-<link href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
 @endpush
 
@@ -190,7 +188,12 @@ DASHBOARD | ARWICS
                                     </div>
                                 </a>
                             </div>
-                            <div id="spajSubmittedChart" style="height:420px; max-width: 100%;"></div>
+
+                            <div class="chart-container">
+                                <div class="pie-chart-container">
+                                  <canvas id="spajSubmittedChart" style="height:375px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
@@ -450,7 +453,12 @@ DASHBOARD | ARWICS
                                     </div>
                                 </a>
                             </div>
-                            <div id="policeApprovedChart" style="height:420px; max-width: 100%;"></div>
+
+                            <div class="chart-container">
+                                <div class="pie-chart-container">
+                                  <canvas id="policeApprovedChart" style="height:375px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
@@ -552,155 +560,7 @@ DASHBOARD | ARWICS
 <br>
 
 <div class="row">
-    <div class="col-xl-4 p-1" style="height:54vh;">
-        <div class="h-100" style="width: 100%;background-color: #222222; border-radius:5px;">
-            <div class="row">
-                <div class="col-lg-6">
-                    <br><br><br>
-                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">
-                        <select class="form-control" id="select_top10_1"
-                        style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 3px; border: 2px solid #ffffff;">
-                        <option value="">Select</option>
-                        <option value="harian">Harian</option>
-                        <option value="mingguan">Mingguan</option>
-                        <option value="tahunan">Tahunan</option>
-                    </select>
-                    &nbsp;
-                    <div>
-                        <div class="input-group">
-                            <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                        </div>
-                        <!-- input-group -->
-                    </div>
-                    </div>
-                    <br><br><br>
-                    <div
-                    style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                    <div>closing</div>
-                    <div style="font-weight: bold; height:23px; width:67px; ">{{ $getTeleReward['count'] }} Closing</div>
-                    </div>
-                    <br>
-                    <div
-                        style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Premi</div>
-                        <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
-                    </div>
-                    <br>
-                    <div
-                        style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Pendapatan Polis</div>
-                        <div style="font-weight: bold;">
-                            {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <br><br><br>
-                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
-                    <br><br><br><br>
-                    <div
-                        style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
-                        <div
-                            style="width: 60px;height: 60px;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                            @if ( $getTeleReward['foto_tele'] == null || $getTeleReward['foto_tele'] == '-' )
-                            <img src="https://i.pravatar.cc/60" alt="image" style="border-radius: 50%; width:300px; height:250px; left:0%; right:0%; top:0%; bottom:0%;"/>
-                            @else
-                            <img src="{{ asset('property', $getTeleReward['foto_tele']) }}" alt="image" style="border-radius: 50%; width:300px; height:150px; left:0%; right:0%; top:0%; bottom:0%;"/>
-                            @endif
-                        </div>
-                    </div>
-                    <br><br><br><br><br>
-                    <div
-                        style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Congrats Atas Pencapaianya</div>
-                        <div style="font-weight: bold;"><h2>{{ $getTeleReward['nama'] }}</h2></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="w-100 h-100 p-1 telemarketing">
-            <br>
-            <div class="row">
-                <div style="height:20%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                    <div>
-                        Telemarketing
-                    </div>
-                </div>
-                <br><br>
-                <div class="col-lg-6" style="height:73vh;">
-                    <div style="width: 100%;height: 100%;overflow: auto;">
-                        <ul>
-                            @foreach ($getHistoryTele as $historyTele)
-                            @if($historyTele->id_tele > 0 && $historyTele->id_tele <= 5)
-                                @if($historyTele->islogin == '1')
-                                <li>
-                                    <div
-                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                                        {{ $historyTele->nama }}
-
-                                    </div>
-                                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                                        online
-                                    </div>
-                                </li>
-                                @else
-                                <li style="background-color: #000000">
-                                    <div
-                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                                        {{ $historyTele->nama }}
-
-                                    </div>
-                                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                                        {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
-                                    </div>
-                                </li>
-                                @endif
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div style="width: 100%;height: 85%;overflow: auto;">
-                        <ul>
-                            @foreach ($getHistoryTele as $historyTele)
-                            @if($historyTele->id_tele >= 6 && $historyTele->id_tele <= 10)
-                                @if($historyTele->islogin == '1')
-                                <li>
-                                    <div
-                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                                        {{ $historyTele->nama }}
-
-                                    </div>
-                                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                                        online
-                                    </div>
-                                </li>
-                                @else
-                                <li style="background-color: #000000">
-                                    <div
-                                        style="height: 60%;width: 100%;display: flex;align-items: center;padding: 5px;font-weight: bold;flex-direction: row;">
-                                        {{ $historyTele->nama }}
-
-                                    </div>
-                                    <div style="width: 100%;height:40%;padding-left: 5px;">
-                                        {{'Aktif'. ' '. \Carbon\Carbon::parse($historyTele->last_login_at)->diffForHumans() }}
-                                    </div>
-                                </li>
-                                @endif
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <center>
-                    {{ $getHistoryTele->links() }}</center>
-                    <br>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-8 p-1" style="height:100%;">
+    <div class="col-xl-12 p-1" style="height:100%;">
         <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
             <div class="card-body">
                 <center>
@@ -720,7 +580,7 @@ DASHBOARD | ARWICS
                                         <button type="button" data-bs-toggle="modal" id="detailPremiumTotalDaily"
                                             data-bs-target=".detailPremiumTotalDaily" class="btn btn-outline-light waves-effect"
                                             style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                                        </center>
                                     </div>
                                 </div>
                             </div>
@@ -734,7 +594,7 @@ DASHBOARD | ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalWeekly"
                                                 data-bs-target=".detailPremiumTotalWeekly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+
                                         </center>
                                     </div>
                                 </div>
@@ -749,7 +609,7 @@ DASHBOARD | ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalMonthly"
                                                 data-bs-target=".detailPremiumTotalMonthly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+
                                         </center>
                                     </div>
                                 </div>
@@ -764,7 +624,7 @@ DASHBOARD | ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalYearly"
                                                 data-bs-target=".detailPremiumTotalYearly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+
                                         </center>
                                     </div>
                                 </div>
@@ -774,397 +634,273 @@ DASHBOARD | ARWICS
                     </div>
                 </center>
                 <hr style="left: 51px; top: 695.34px; border-radius: 20px; border: 4px solid #ffffff; color: #ffffff;">
-
-                <!-- end row -->
-                <div class="row">
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
-                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-                            <div style="width: 100%;height: 100%; text-align: center;">
-                                <div class="row">
-                                    <div>
-                                        Premium Tahun 1 Chart
-                                    </div>
-                                    <br>
-                                    <div class="col-lg-6">
-                                        <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="filterDataPremiumTotalTahun1Chart" onchange="loadFilterPremiumTotalTahun1Chart();"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                <option value="select">Select</option>
-                                                <option value="harian">Harian</option>
-                                                <option value="mingguan">Mingguan</option>
-                                                <option value="bulanan">Bulanan</option>
-                                                <option value="tahunan">Tahunan</option>
-                                            </select>
-                                            &nbsp;
-                                            <div id="datePremiumTotalTahun1Chart">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-                                            <div id="rangedatePremiumTotalTahun1Chart">
-                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                            <div id="bulandatePremiumTotalTahun1Chart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 1</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalTahun1Chart" onchange="filterMonthPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 2</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                            <div id="tahundatePremiumTotalTahun1Chart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 1</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalTahun1Chart" onchange="filterYearPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 2</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-
+                <div style="width: 100%;height: 100%; text-align: center;">
+                    <div class="row">
+                       <div class="col-lg-4">
+                           <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                               <div style="width: 50%;height: 100%; text-align: center;">
+                                   <div>
+                                       Premium Tahun 1 Chart
+                                   </div>
+                                   <div style="display: flex;margin-top: 5px;">
+                                    <select class="form-control" id="filterDataPremiumTotalTahun1Chart" onchange="loadFilterPremiumTotalTahun1Chart();"
+                                        style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                        <option value="select">Select</option>
+                                        <option value="harian">Harian</option>
+                                        <option value="mingguan">Mingguan</option>
+                                        <option value="bulanan">Bulanan</option>
+                                        <option value="tahunan">Tahunan</option>
+                                    </select>
+                                    &nbsp;
+                                    <div id="datePremiumTotalTahun1Chart">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                         </div>
+                                        <!-- input-group -->
+                                    </div>
+                                    <div id="rangedatePremiumTotalTahun1Chart">
+                                        <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                            <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                            <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                        </div>
+                                        <!-- input-group -->
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div id="bulandatePremiumTotalTahun1Chart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 1</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <a href="#" data-bs-toggle="modal" id="detailPremiumTahun1Chart"
-                                        data-bs-target=".detailPremiumTahun1Chart" style="width: 80px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
-                                        <div>
-                                            Detail
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalTahun1Chart" onchange="filterMonthPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 2</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </a>
+                                        <!-- input-group -->
+                                    </div>
+
+                                    <div id="tahundatePremiumTotalTahun1Chart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalTahun1Chart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 1</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalTahun1Chart" onchange="filterYearPremiumTotalTahun1Chart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 2</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- input-group -->
                                     </div>
 
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh">
-                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-                            <div style="width: 100%;height: 100%; text-align: center;">
-                                <div class="row">
-                                    <div>
-                                        Premium PLTP Chart
-                                    </div>
-                                    <br>
-                                    <div class="col-lg-6">
-                                        <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="filterDataPremiumPltpChart" onchange="loadFilterPremiumPltpChart();"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                <option value="select">Select</option>
-                                                <option value="harian">Harian</option>
-                                                <option value="mingguan">Mingguan</option>
-                                                <option value="bulanan">Bulanan</option>
-                                                <option value="tahunan">Tahunan</option>
-                                            </select>
-                                            &nbsp;
-                                            <div id="datePremiumPltpChart">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-                                            <div id="rangedatePremiumPltpChart">
-                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                            <div id="bulandatePremiumPltpChart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 1</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumPltpChart" onchange="filterMonthPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 2</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                            <div id="tahundatePremiumPltpChart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 1</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumPltpChart" onchange="filterYearPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 2</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
+                               </div>
+                               &nbsp;&nbsp;&nbsp;&nbsp;
+                               <a href="#" data-bs-toggle="modal" id="detailPremiumTahun1Chart"
+                               data-bs-target=".detailPremiumTahun1Chart" style="width: 80px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                               <div>
+                                   Detail
+                               </div>
+                           </a>
+                           </div>
+                           <div id="premiumTahun1Chart" style="height:420px; max-width: 100%;"></div>
+                       </div>
+                       <div class="col-lg-4">
+                           <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                               <div style="width: 50%;height: 100%; text-align: center;">
+                                   <div>
+                                    Premium PLTP Chart
+                                   </div>
+                                   <div style="display: flex;margin-top: 5px;">
+                                    <select class="form-control" id="filterDataPremiumPltpChart" onchange="loadFilterPremiumPltpChart();"
+                                        style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                        <option value="select">Select</option>
+                                        <option value="harian">Harian</option>
+                                        <option value="mingguan">Mingguan</option>
+                                        <option value="bulanan">Bulanan</option>
+                                        <option value="tahunan">Tahunan</option>
+                                    </select>
+                                    &nbsp;
+                                    <div id="datePremiumPltpChart">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
                                         </div>
+                                        <!-- input-group -->
+                                    </div>
+                                    <div id="rangedatePremiumPltpChart">
+                                        <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                            <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                            <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                        </div>
+                                        <!-- input-group -->
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div id="bulandatePremiumPltpChart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_awal" id="bulanAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 1</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                        <a href="#" data-bs-toggle="modal" id="detailPremiumPltpChart"
-                                        data-bs-target=".detailPremiumPltpChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
-                                        <div>
-                                            Detail
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumPltpChart" onchange="filterMonthPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 2</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </a>
+                                        <!-- input-group -->
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4" style="display: flex;justify-content: center;align-items: center;height: 10vh;">
-                        <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
-                            <div style="width: 100%;height: 100%; text-align: center;">
-                                <div class="row">
-                                    <div>
-                                        Premium Total Chart
-                                    </div>
-                                    <br>
-                                    <div class="col-lg-6">
-                                        <div style="display: flex;margin-top: 5px;">
-                                            <select class="form-control" id="filterDataPremiumTotalChart" onchange="loadFilterPremiumTotalChart();"
-                                                style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                <option value="select">Select</option>
-                                                <option value="harian">Harian</option>
-                                                <option value="mingguan">Mingguan</option>
-                                                <option value="bulanan">Bulanan</option>
-                                                <option value="tahunan">Tahunan</option>
-                                            </select>
-                                            &nbsp;
-                                            <div id="datePremiumTotalChart">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-                                            <div id="rangedatePremiumTotalChart">
-                                                <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
-                                                    <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                    <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
-                                                </div>
-                                                <!-- input-group -->
+                                    <div id="tahundatePremiumPltpChart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_awal" id="tahunAwalPremiumPltpChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 1</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
                                             </div>
 
-                                            <div id="bulandatePremiumTotalChart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 1</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalChart" onchange="filterMonthPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Bulan 2</option>
-                                                            @foreach($bulan as $item)
-                                                            <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
-                                            </div>
-
-                                            <div id="tahundatePremiumTotalChart">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 1</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalChart" onchange="filterYearPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
-                                                            <option value="">Tahun 2</option>
-                                                            @for($year=2010; $year<=date('Y'); $year++)
-                                                            <option value="{{ $year }}"> {{ $year }}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <!-- input-group -->
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumPltpChart" onchange="filterYearPremiumPltpChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 2</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="col-lg-6">
-
-                                        <a href="#" data-bs-toggle="modal" id="detailPremiumTotalChart"
-                                        data-bs-target=".detailPremiumTotalChart" style="width: 100px;height: 40px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
-                                        <div>
-                                            Detail
-                                        </div>
-                                    </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br><br><br>
-                <div class="row">
-                    <div class="col-4 ">
-                        <div id="premiumTahun1Chart" dir="ltr" style="height:100%;"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="premiumPltpChart"></div>
-                    </div>
-                    <div class="col-4 ">
-                        <div id="premiumTotalChart" dir="ltr"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="w-100 h-100" style="background-color: #222222;border-radius: 5px;">
-            <div class="card-body">
-                <div style="height: 15%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                    <div style="width: 30%;height: 100%;display: flex;">
-                        @php
-                        date_default_timezone_set('Asia/Jakarta');
-                        $bulan = date('Y-m-d');
-                        @endphp
-                        <div
-                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                            TOP 10 Bulan {{ \Carbon\Carbon::parse($bulan)->isoFormat('MMMM') }}</div>
-                        <div
-                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                            <select class="form-control" id="select_top10_1"
-                                style="width:140px; height:30px;background-color:#222222;">
-                                <option value="">Select</option>
-                                <option value="harian">Harian</option>
-                                <option value="mingguan">Mingguan</option>
-                                <option value="tahunan">Tahunan</option>
-                            </select>
-                        </div>
-                        <div
-                            style="width: 33%;height: 98%;margin: 1px;display: flex;justify-content: center;align-items: center;">
-                            <select class="form-control" id="select_top10_2"
-                                style="width:140px; height:30px;background-color:#222222;">
-                                <option>Select</option>
-                                <option value="all">Semua</option>
-                            </select>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="list_table text-center" style="width: 100%;">
-                    <ul>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach ($topTsr10 as $item)
-                        <li>
-                            <div style="height:35vh;">
-                                <div
-                                    style="height: 10%;width: 100%;display: flex;justify-content: center;align-items: center;">
-                                    Top {{ $no++ }}
-                                </div>
-                                <div style="width: 100%;height: 90%;padding: 3px;">
-                                    <div style="width: 100%;height: 100%;border:1px solid white;border-radius: 5px;">
-                                        <div
-                                            style="width: 100%;height: 40%;display: flex;justify-content: center;align-items: center;padding: 5px;">
-                                            @if ( $item->foto_tele == null || $item->foto_tele == '-' )
-                                            <div
-                                                style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                                                <img src="https://i.pravatar.cc/50" alt="image" />
-                                            </div>
-                                            @else
-                                            <div
-                                                style="width:50px;height:50px;background-color: darkcyan;border-radius: 50%;display:flex;justify-content:center;align-items:center;object-fit:contain;">
-                                                <img src="{{ asset('property', $item->foto_tele) }}" alt="image" />
-                                            </div>
-                                            @endif
-                                        </div>
-                                        <div
-                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;font-weight: bold;border-bottom: 1px solid white;font-size:10px;">
-                                            {{ $item->nama_tele }}
-                                        </div>
-                                        <div
-                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                            {{ $item->spaj_count }} Closing
-                                        </div>
-                                        <div
-                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                            {{ $item->spaj_count }} Premi
-                                        </div>
-                                        <div
-                                            style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;border-bottom: 1px solid white;">
-                                            {{ "Rp " . number_format($item->total_max,0,',','.') }}
-                                        </div>
+                                        <!-- input-group -->
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <ul>
+                               </div>
+                               &nbsp;&nbsp;&nbsp;&nbsp;
+                               <a href="#" data-bs-toggle="modal" id="detailPremiumPltpChart"
+                               data-bs-target=".detailPremiumPltpChart" style="width: 100px;height: 44.29px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                               <div>
+                                   Detail
+                               </div>
+                           </a>
+                           </div>
+                           <div id="premiumPltpChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
+                       </div>
+                       <div class="col-lg-4">
+                           <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
+                               <div style="width: 50%;height: 100%; text-align: center;">
+                                   <div>
+                                       Premium Total Chart
+                                   </div>
+                                   <div style="display: flex;margin-top: 5px;">
+                                    <select class="form-control" id="filterDataPremiumTotalChart" onchange="loadFilterPremiumTotalChart();"
+                                        style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                        <option value="select">Select</option>
+                                        <option value="harian">Harian</option>
+                                        <option value="mingguan">Mingguan</option>
+                                        <option value="bulanan">Bulanan</option>
+                                        <option value="tahunan">Tahunan</option>
+                                    </select>
+                                    &nbsp;
+                                    <div id="datePremiumTotalChart">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="date" class="form-control"  data-date-format="dd mm, yyyy" data-provide="datepicker" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff;">
+                                        </div>
+                                        <!-- input-group -->
+                                    </div>
+                                    <div id="rangedatePremiumTotalChart">
+                                        <div class="input-daterange input-group" data-date-format="dd M, yyyy"  data-date-autoclose="true"  data-provide="datepicker">
+                                            <input type="text" class="form-control" name="start" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                            <input type="text" class="form-control" name="end" style="width: 80px; height: 44px; border: 2px solid #ffffff; background-color: #222222; color:#ffffff; border-radius:7px;"/>
+                                        </div>
+                                        <!-- input-group -->
+                                    </div>
+
+                                    <div id="bulandatePremiumTotalChart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_awal" id="bulanAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 1</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="bulan_akhir" id="bulanAkhirPremiumTotalChart" onchange="filterMonthPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Bulan 2</option>
+                                                    @foreach($bulan as $item)
+                                                    <option value="{{ $item->id }}"> {{ $item->bulan }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- input-group -->
+                                    </div>
+
+                                    <div id="tahundatePremiumTotalChart">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_awal" id="tahunAwalPremiumTotalChart" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 1</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="tahun_akhir" id="tahunAkhirPremiumTotalChart" onchange="filterYearPremiumTotalChart();" style="width: 80px;height: 44.29px;background-color:#222222; top: 777px; left: 456px; border-radius: 7px; border: 2px solid #ffffff;">
+                                                    <option value="">Tahun 2</option>
+                                                    @for($year=2010; $year<=date('Y'); $year++)
+                                                    <option value="{{ $year }}"> {{ $year }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- input-group -->
+                                    </div>
+                                </div>
+                               </div>
+                               &nbsp;&nbsp;&nbsp;&nbsp;
+                               <a href="#" data-bs-toggle="modal" id="detailPremiumTotalChart"
+                               data-bs-target=".detailPremiumTotalChart" style="width: 100px;height: 40px;border-radius: 7px; text-decoration:none; letter-spacing: 3px; border: 2px white solid;display: flex;justify-content: center;align-items: center;font-size: 80%;color: white;">
+                               <div>
+                                   Detail
+                               </div>
+                           </a>
+                           </div>
+                           <div id="premiumTotalChart" style="height:420px; max-width: 100%;" dir="ltr"></div>
+                       </div>
+
+                    </div>
+               </div>
             </div>
         </div>
     </div>
@@ -2145,7 +1881,6 @@ DASHBOARD | ARWICS
 
 
 <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 
 <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -2157,7 +1892,6 @@ DASHBOARD | ARWICS
 <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets/js/datatable.js') }}"></script>
 
-<script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
@@ -2172,45 +1906,12 @@ DASHBOARD | ARWICS
         'packages': ['corechart', 'bar']
     });
 
-    google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(premiumChart);
-    google.charts.setOnLoadCallback(policeApprovedChart);
     google.charts.setOnLoadCallback(totalPremiumChart);
     google.charts.setOnLoadCallback(premiumTahun1Chart);
     google.charts.setOnLoadCallback(premiumPltpChart);
     google.charts.setOnLoadCallback(premiumTotalChart);
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Bulan', ' '],
-
-            @php
-            foreach($spajSubmitted as $spaj) {
-                // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                // "', '".(int)$spaj->count.
-                // "'],";
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".$spaj->count."],";
-            }
-            @endphp
-        ]);
-
-        var options = {
-            chartArea: {
-                backgroundColor: {
-                    fill: '#222222',
-                    fillOpacity: 0.1
-                },
-            },
-            backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.8
-            },
-            colors: '#FB6EAA',
-            bars: 'vertical',
-        }
-        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
@@ -2247,39 +1948,6 @@ DASHBOARD | ARWICS
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 
-    function policeApprovedChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Bulan', ''],
-            @php
-            foreach($policeApprovedChart as $spaj) {
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                "', ".$spaj->count."],";
-            }
-            @endphp
-        ]);
-
-        var options = {
-            chartArea: {
-                backgroundColor: {
-                    fill: '#222222',
-                    fillOpacity: 0.1
-                },
-            },
-            backgroundColor: {
-                fill: '#222222',
-                fillOpacity: 0.8
-            },
-            colors: '#FB6EAA',
-            bar: {
-                groupWidth: "75%"
-            },
-            bars: 'vertical',
-        }
-
-        var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-
-    }
 
     function totalPremiumChart() {
         var data = google.visualization.arrayToDataTable([
@@ -2326,10 +1994,12 @@ DASHBOARD | ARWICS
             ['Bulan', ''],
             @php
             foreach($premiumTahun1Chart as $premiumTotal) {
-                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
-                "', '".
-                "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
-                "'],";
+                // echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                // "', '".
+                // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
+                // "'],";
+                echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
         ]);
@@ -2366,7 +2036,7 @@ DASHBOARD | ARWICS
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
                 echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
-                "', ".$premiumTotal->sum_nominal."],";
+                "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
         ]);
@@ -2407,10 +2077,13 @@ DASHBOARD | ARWICS
             ['Bulan', ''],
             @php
             foreach($premiumTotalChart as $premiumTotal) {
+                // echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                // "', '".
+                // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
+                // "'],";
                 echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
-                "', '".
-                "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
-                "'],";
+                "', ".(string)$premiumTotal->sum_nominal."],";
+
             }
             @endphp
         ]);
@@ -2444,11 +2117,8 @@ DASHBOARD | ARWICS
         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
-
 </script>
-
 <script type="text/javascript">
-
     $("#date").hide();
     $("#rangeDate").hide();
     $("#bulanDate").hide();
@@ -2484,192 +2154,244 @@ DASHBOARD | ARWICS
     $("#bulandatePremiumTotalChart").hide();
     $("#tahundatePremiumTotalChart").hide();
 
+    $("#bulanDateTeleReward").hide();
+    $("#tahunDateTeleReward").hide();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 10000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-
-        function reset()
-        {
-            $('input').val('');
-            $('#bulanAwal').val('');
-            $('#bulanAkhir').val('');
-            $('#tahunAwal').val('');
-            $('#tahunAkhir').val('');
-
-            $('#bulanAwalPremiumSubmittedChart').val('');
-            $('#bulanAkhirPremiumSubmittedChart').val('');
-            $('#tahunAwalPremiumSubmittedChart').val('');
-            $('#tahunAkhirPremiumSubmittedChart').val('');
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-        function loadFilter()
-        {
-            var eID = document.getElementById("filterData");
-            var dayVal = eID.options[eID.selectedIndex].value;
-            var daytxt = eID.options[eID.selectedIndex].text;
+    });
 
-            if (dayVal == 'mingguan') {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 10000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
 
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#bulanDate").hide();
-                $("#tahunDate").hide();
+    function reset()
+    {
+        $('input').val('');
+        $('#bulanAwal').val('');
+        $('#bulanAkhir').val('');
+        $('#tahunAwal').val('');
+        $('#tahunAkhir').val('');
 
-                var data = {"filterData":$('#filterData').val()};
-                console.log($('#filterData').val());
+        $('#bulanAwalPremiumSubmittedChart').val('');
+        $('#bulanAkhirPremiumSubmittedChart').val('');
+        $('#tahunAwalPremiumSubmittedChart').val('');
+        $('#tahunAkhirPremiumSubmittedChart').val('');
+    }
 
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterMingguPremiumSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
+    function loadFilter()
+    {
+        var eID = document.getElementById("filterData");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+        if (dayVal == 'mingguan') {
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#bulanDate").hide();
+            $("#tahunDate").hide();
 
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                    var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
-                    }
+            var data = {"filterData":$('#filterData').val()};
+            console.log($('#filterData').val());
 
-                },
-                error:function(error){
-                    console.log(error);
-                }
-                });
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#tahunDate").hide();
-            } else if(dayVal == 'select') {
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#bulanDate").hide();
-                $("#tahunDate").hide();
-                reset();
-                google.charts.load('current', {
-                    'packages': ['corechart', 'bar']
-                });
-                google.charts.setOnLoadCallback(premiumChart);
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterMingguPremiumSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
 
-            function premiumChart() {
-
-                var data = google.visualization.arrayToDataTable([
-                    ['Bulan', ' '],
-                    @php
-                    foreach($premiumSubmitted as $spaj) {
-                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                        "', '".
-                        "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
-                        "'],";
-
-                    }
-                    @endphp
-                ]);
                     var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
                         chartArea: {
                             backgroundColor: {
                                 fill: '#222222',
                                 fillOpacity: 0.1
                             },
                         },
-                        responsive: true,
                         backgroundColor: {
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
                         isStacked: true,
+                        }
+                var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+            });
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#tahunDate").hide();
+        } else if(dayVal == 'select') {
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#bulanDate").hide();
+            $("#tahunDate").hide();
+            reset();
+            google.charts.load('current', {
+                'packages': ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(premiumChart);
+
+
+        function premiumChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Bulan', ' '],
+                @php
+                foreach($premiumSubmitted as $spaj) {
+                    // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    // "', '".
+                    // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
+                    // "'],";
+                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    "', ".$spaj->count."],";
+                }
+                @endphp
+            ]);
+                var options = {
+                    legend: {
+                        position: 'top',
+                        maxLines: 3
+                    },
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    responsive: true,
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#FB6EAA',
+                    bar: {
+                        groupWidth: "75%"
+                    },
+                    bars: 'vertical',
+                    width: '100%',
+                    height: '75%',
+                    isStacked: true,
+                }
+                var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+
+        } else if(dayVal == 'harian') {
+            var data = {"filterData":$('#filterData').val()};
+            console.log($('#filterData').val());
+
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterHarianPremiumSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                var options = {
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#FB6EAA',
+                    isStacked: true,
                     }
                     var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
-                }
+                    }
 
-            } else if(dayVal == 'harian') {
-                var data = {"filterData":$('#filterData').val()};
-                console.log($('#filterData').val());
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#tahunDate").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#bulanDate").show();
+            $("#tahunDate").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#date").hide();
+            $("#rangeDate").hide();
+            $("#bulanDate").hide();
+            $("#tahunDate").show();
+            reset();
+        }
 
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterHarianPremiumSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
+    }
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+    function filterMonth()
+    {
+        var data = {"bulan_awal":$('#bulanAwalPremiumSubmittedChart').val(), "bulan_akhir":$('#bulanAkhirPremiumSubmittedChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterBulanPremiumSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
 
                     var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
                         chartArea: {
                             backgroundColor: {
                                 fill: '#222222',
@@ -2682,254 +2404,42 @@ DASHBOARD | ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "350px"
-                        },
                         bars: 'vertical',
-                        width: '350px',
-                        height: '75%',
                         isStacked: true,
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                         }
 
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#tahunDate").hide();
-                reset();
-            } else if(dayVal == 'bulanan') {
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#bulanDate").show();
-                $("#tahunDate").hide();
-                reset();
-            } else if(dayVal == 'tahunan') {
-                $("#date").hide();
-                $("#rangeDate").hide();
-                $("#bulanDate").hide();
-                $("#tahunDate").show();
-                reset();
+            },
+            error:function(error){
+                console.log(error);
             }
+        });
+    }
 
-        }
+    function filterYear()
+    {
+        var data = {"tahun_awal":$('#tahunAwalPremiumSubmittedChart').val(), "tahun_akhir":$('#tahunAkhirPremiumSubmittedChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterTahunPremiumSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
-        function filterMonth()
-        {
-            var data = {"bulan_awal":$('#bulanAwalPremiumSubmittedChart').val(), "bulan_akhir":$('#bulanAkhirPremiumSubmittedChart').val()};
-            $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterBulanPremiumSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-        }
-
-        function filterYear()
-        {
-            var data = {"tahun_awal":$('#tahunAwalPremiumSubmittedChart').val(), "tahun_akhir":$('#tahunAkhirPremiumSubmittedChart').val()};
-            $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterTahunPremiumSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-        }
-
-        function loadFilterSpajSubmittedChart()
-        {
-            var eID = document.getElementById("filterDataSubmittedChart");
-            var dayVal = eID.options[eID.selectedIndex].value;
-            var daytxt = eID.options[eID.selectedIndex].text;
-
-            if (dayVal == 'mingguan') {
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#bulanDateSubmittedChart").hide();
-                $("#tahunDateSubmittedChart").hide();
-                var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
-                console.log($('#filterDataSubmittedChart').val());
-
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterMingguSpajSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: 200,
-                            height: '75%',
-                            isStacked: true,
-                            }
-                    var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
-                    }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-                });
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#tahunDateSubmittedChart").hide();
-            } else if(dayVal == 'select') {
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#bulanDateSubmittedChart").hide();
-                $("#tahunDateSubmittedChart").hide();
-                reset();
-                google.charts.load('current', {
-                    'packages': ['corechart', 'bar']
-                });
-                google.charts.setOnLoadCallback(submittedChart);
-
-                function submittedChart() {
-
-                    var data = google.visualization.arrayToDataTable([
-                        ['Bulan', ' '],
-
-                        @php
-                        foreach($spajSubmitted as $spaj) {
-                            // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                            // "', '".(int)$spaj->count.
-                            // "'],";
-                            echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".(string)$spaj->count."],";
-                        }
-                        @endphp
-                    ]);
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
 
                     var options = {
-
                         chartArea: {
                             backgroundColor: {
                                 fill: '#222222',
@@ -2942,295 +2452,885 @@ DASHBOARD | ARWICS
                         },
                         colors: '#FB6EAA',
                         bars: 'vertical',
-                    }
-                    var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
-                    }
-
-            } else if(dayVal == 'harian') {
-                var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
-                console.log($('#filterDataSubmittedChart').val());
-
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterHarianSpajSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                    var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
-                        chartArea: {
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.1
-                            },
-                        },
-                        responsive: true,
-                        backgroundColor: {
-                            fill: '#222222',
-                            fillOpacity: 0.8
-                        },
-                        colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "350px"
-                        },
-                        bars: 'vertical',
-                        width: '350px',
-                        height: '75%',
                         isStacked: true,
                         }
-                        var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
+                        var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                         }
 
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#tahunDateSubmittedChart").hide();
-                reset();
-            } else if(dayVal == 'bulanan') {
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#bulanDateSubmittedChart").show();
-                $("#tahunDateSubmittedChart").hide();
-                reset();
-            } else if(dayVal == 'tahunan') {
-                $("#dateSubmittedChart").hide();
-                $("#rangeDateSubmittedChart").hide();
-                $("#bulanDateSubmittedChart").hide();
-                $("#tahunDateSubmittedChart").show();
-                reset();
+            },
+            error:function(error){
+                console.log(error);
             }
+        });
+    }
 
-        }
+    function loadFilterSpajSubmittedChart()
+    {
+        var eID = document.getElementById("filterDataSubmittedChart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
 
-        function filterMonthSpajSubmittedChart()
-        {
-            var data = {"bulan_awal":$('#bulanAwal').val(), "bulan_akhir":$('#bulanAkhir').val()};
+        if (dayVal == 'mingguan') {
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#bulanDateSubmittedChart").hide();
+            $("#tahunDateSubmittedChart").hide();
+            var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
+            console.log($('#filterDataSubmittedChart').val());
+
             $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterBulanSpajSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterMingguSpajSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                function getMingguSubmittedChart()
+                {
+                    var cData = response.data;
+                    var ctx = $("#spajSubmittedChart");
+                        //pie chart data
+                    var data = {
+                            labels: cData.label,
+                            datasets: [{
+                                label: "Total Spaj",
+                                data: cData.data,
+                                backgroundColor: [
+                                    "#98DBC6",
+                                    "#5BC8AC",
+                                    "#E6D72A",
+                                    "#F18D9E",
+                                    "#98DBC6",
+                                    "#5BC8AC",
+                                    "#E6D72A",
+                                ],
+                                borderColor: [
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
+                                    "#222222",
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+                                ],
+                                borderWidth: [1, 1, 1, 1, 1, 1, 1]
+                            }]
+                        };
 
+                        //options
                         var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
                             responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
+                            title: {
+                                display: true,
+                                position: "top",
+                                text: "Data Spaj Submitted Minggu Ini",
+                                fontSize: 18,
                             },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
+                            legend: {
+                                display: true,
+                                position: "bottom",
+                                labels: {
+                                    fontColor: "#ffffff",
+                                    fontSize: 16
+                                }
                             }
-                            var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
+                        };
 
-                },
-                error:function(error){
-                    console.log(error);
+                        //create Pie Chart class object
+                        var chart1 = new Chart(ctx, {
+                            type: "pie",
+                            data: data,
+                            options: options
+                        });
                 }
+                getMingguSubmittedChart();
+            },
+            error:function(error){
+                console.log(error);
+            }
             });
-        }
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#tahunDateSubmittedChart").hide();
+        } else if(dayVal == 'select') {
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#bulanDateSubmittedChart").hide();
+            $("#tahunDateSubmittedChart").hide();
+            reset();
+            var cData = JSON.parse(`<?php echo $pieSpajSubmittedChart; ?>`);
+            var ctx = $("#spajSubmittedChart");
+            //pie chart data
+            var data = {
+                labels: cData.label,
+                datasets: [{
+                    label: "Total Spaj",
+                    data: cData.data,
+                    backgroundColor: [
+                        "#98DBC6",
+                        "#5BC8AC",
+                        "#E6D72A",
+                        "#F18D9E",
+                        "#98DBC6",
+                        "#5BC8AC",
+                        "#E6D72A",
+                        "#F18D9E",
+                        "#98DBC6",
+                        "#5BC8AC",
+                        "#E6D72A",
+                        "#F18D9E",
+                    ],
+                    borderColor: [
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
+                        "#222222",
 
-        function filterYearSpajSubmittedChart()
-        {
-            var data = {"tahun_awal":$('#tahunAwal').val(), "tahun_akhir":$('#tahunAkhir').val()};
+                    ],
+                    borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                }]
+            };
+
+            //options
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Data Spaj Submitted Tahun Ini",
+                    fontSize: 18,
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                        fontColor: "#ffffff",
+                        fontSize: 16
+                    }
+                }
+            };
+
+            //create Pie Chart class object
+            var chart1 = new Chart(ctx, {
+                type: "pie",
+                data: data,
+                options: options
+            });
+        } else if(dayVal == 'harian') {
+            var data = {"filterDataSubmittedChart":$('#filterDataSubmittedChart').val()};
+            console.log($('#filterDataSubmittedChart').val());
             $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterTahunSpajSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterHarianSpajSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#spajSubmittedChart");
+                //pie chart data
+                var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Spaj",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#FB6EAA",
+                        ],
+                        borderColor: [
+                            "#FB6EAA",
+                        ],
+                        borderWidth: [1]
+                    }]
+                };
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Data Spaj Submitted Hari Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
+                    }
+                };
 
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('spajSubmittedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#tahunDateSubmittedChart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#bulanDateSubmittedChart").show();
+            $("#tahunDateSubmittedChart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#dateSubmittedChart").hide();
+            $("#rangeDateSubmittedChart").hide();
+            $("#bulanDateSubmittedChart").hide();
+            $("#tahunDateSubmittedChart").show();
+            reset();
         }
 
-        // Police Approved Module
+    }
 
-        function loadFilterPoliceApprovedChart()
-        {
-            var eID = document.getElementById("filterDataPoliceApprovedChart");
-            var dayVal = eID.options[eID.selectedIndex].value;
-            var daytxt = eID.options[eID.selectedIndex].text;
+    function filterMonthSpajSubmittedChart()
+    {
+        var data = {"bulan_awal":$('#bulanAwal').val(), "bulan_akhir":$('#bulanAkhir').val()};
 
-            if (dayVal == 'mingguan') {
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterBulanSpajSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#spajSubmittedChart");
+                //pie chart data
+                var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Spaj",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
 
-                $("#datePoliceApprovedChart").hide();
-                $("#rangeDatePoliceApprovedChart").hide();
-                $("#bulanDatePoliceApprovedChart").hide();
-                $("#tahunDatePoliceApprovedChart").hide();
-                var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
-                console.log($('#filterDataPoliceApprovedChart').val());
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
 
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/spaj/filterMingguSpajSubmitted') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: 200,
-                            bars: 'vertical',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                    var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Data Spaj Submitted Bulan Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
                     }
+                };
 
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearSpajSubmittedChart()
+    {
+        var data = {"tahun_awal":$('#tahunAwal').val(), "tahun_akhir":$('#tahunAkhir').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/spaj/filterTahunSpajSubmitted') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#spajSubmittedChart");
+                //pie chart data
+                var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Spaj",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
+
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Data Spaj Submitted Tahun Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
+                    }
+                };
+
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    // Police Approved Module
+
+    function loadFilterPoliceApprovedChart()
+    {
+        var eID = document.getElementById("filterDataPoliceApprovedChart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
+
+        if (dayVal == 'mingguan') {
+            $("#datePoliceApprovedChart").hide();
+            $("#rangeDatePoliceApprovedChart").hide();
+            $("#bulanDatePoliceApprovedChart").hide();
+            $("#tahunDatePoliceApprovedChart").hide();
+            var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
+            console.log($('#filterDataPoliceApprovedChart').val());
+
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterMingguPoliceApproved') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#policeApprovedChart");
+                //pie chart data
+                var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Police Approved",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
+
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Police Approved Minggu Ini Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
+                    }
+                };
+
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+            });
+        } else if(dayVal == 'select') {
+            $("#datePoliceApprovedChart").hide();
+            $("#rangeDatePoliceApprovedChart").hide();
+            $("#bulanDatePoliceApprovedChart").hide();
+            $("#tahunDatePoliceApprovedChart").hide();
+            reset();
+            var cData = JSON.parse(`<?php echo $piePoliceApprovedChart; ?>`);
+            var ctx = $("#policeApprovedChart");
+            //pie chart data
+            var data = {
+                labels: cData.label,
+                datasets: [{
+                    label: "Total Police Approved",
+                    data: cData.data,
+                    backgroundColor: [
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                         borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                }]
+            };
+
+            //options
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Data Police Approved Tahun Ini",
+                    fontSize: 18,
                 },
-                error:function(error){
-                    console.log(error);
-                }
-                });
-            } else if(dayVal == 'select') {
-                $("#datePoliceApprovedChart").hide();
-                $("#rangeDatePoliceApprovedChart").hide();
-                $("#bulanDatePoliceApprovedChart").hide();
-                $("#tahunDatePoliceApprovedChart").hide();
-                reset();
-                google.charts.load('current', {
-                    'packages': ['corechart', 'bar']
-                });
-                google.charts.setOnLoadCallback(policeApprovedChart);
-
-
-            function policeApprovedChart() {
-
-                var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Jumlah Spaj'],
-                    @php
-                    foreach($policeApprovedChart as $spaj) {
-                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                        "', '".(int)$spaj->count."'],";
-
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                        fontColor: "#ffffff",
+                        fontSize: 16
                     }
-                    @endphp
-                ]);
+                }
+            };
+
+            //create Pie Chart class object
+            var chart1 = new Chart(ctx, {
+                type: "pie",
+                data: data,
+                options: options
+            });
+
+        } else if(dayVal == 'harian') {
+            var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
+            console.log($('#filterDataPoliceApprovedChart').val());
+
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterHarianPoliceApproved') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+            var cData = response.data;
+            var ctx = $("#policeApprovedChart");
+            //pie chart data
+            var data = {
+                labels: cData.label,
+                datasets: [{
+                    label: "Total Police",
+                    data: cData.data,
+                    backgroundColor: [
+                            "#003B46",
+                        ],
+                        borderColor: [
+                            "#222222",
+                        ],
+                         borderWidth: [1]
+                }]
+            };
+
+            //options
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Data Police Approved Hari Ini",
+                    fontSize: 18,
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                        fontColor: "#ffffff",
+                        fontSize: 16
+                    }
+                }
+            };
+
+            //create Pie Chart class object
+            var chart1 = new Chart(ctx, {
+                type: "pie",
+                data: data,
+                options: options
+            });
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+            $("#datePoliceApprovedChart").hide();
+            $("#rangeDatePoliceApprovedChart").hide();
+            $("#tahunDatePoliceApprovedChart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#datePoliceApprovedChart").hide();
+            $("#rangeDatePoliceApprovedChart").hide();
+            $("#bulanDatePoliceApprovedChart").show();
+            $("#tahunDatePoliceApprovedChart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#datePoliceApprovedChart").hide();
+            $("#rangeDatePoliceApprovedChart").hide();
+            $("#bulanDatePoliceApprovedChart").hide();
+            $("#tahunDatePoliceApprovedChart").show();
+            reset();
+        }
+
+    }
+
+    function filterMonthPoliceApprovedChart()
+    {
+        var data = {"bulan_awal":$('#bulanAwalPoliceApprovedChart').val(), "bulan_akhir":$('#bulanAkhirPoliceApprovedChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterBulanPoliceApproved') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#policeApprovedChart");
+                    //pie chart data
+                var data = {
+                        labels: cData.label,
+                        datasets: [{
+                            label: "Total Police Approved",
+                            data: cData.data,
+                            backgroundColor: [
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        }]
+                    };
+
+                    //options
+                    var options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: "Data Police Approved Bulan Ini",
+                            fontSize: 18,
+                        },
+                        legend: {
+                            display: true,
+                            position: "bottom",
+                            labels: {
+                                fontColor: "#ffffff",
+                                fontSize: 16
+                            }
+                        }
+                    };
+
+                    //create Pie Chart class object
+                    var chart1 = new Chart(ctx, {
+                        type: "pie",
+                        data: data,
+                        options: options
+                    });
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearPoliceApprovedChart()
+    {
+        var data = {"tahun_awal":$('#tahunAwalPoliceApprovedChart').val(), "tahun_akhir":$('#tahunAkhirPoliceApprovedChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterTahunPoliceApproved') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                var cData = response.data;
+                var ctx = $("#policeApprovedChart");
+                    //pie chart data
+                var data = {
+                        labels: cData.label,
+                        datasets: [{
+                            label: "Total Police Approved",
+                            data: cData.data,
+                            backgroundColor: [
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                            borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        }]
+                    };
+
+                    //options
+                    var options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            position: "top",
+                            text: "Data Police Approved Range Tahun",
+                            fontSize: 18,
+                        },
+                        legend: {
+                            display: true,
+                            position: "bottom",
+                            labels: {
+                                fontColor: "#ffffff",
+                                fontSize: 16
+                            }
+                        }
+                    };
+
+                    //create Pie Chart class object
+                    var chart1 = new Chart(ctx, {
+                        type: "pie",
+                        data: data,
+                        options: options
+                    });
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    // Total Premium
+    function loadFilterTotalPremiumChart()
+    {
+        var eID = document.getElementById("filterDataTotalPremiumChart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
+
+        if (dayVal == 'mingguan') {
+            $("#dateTotalPremiumChart").hide();
+            $("#rangeDateTotalPremiumChart").hide();
+            $("#bulanDateTotalPremiumChart").hide();
+            $("#tahunDateTotalPremiumChart").hide();
+            var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+            console.log($('#filterDataPoliceApprovedChart').val());
+
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterMingguTotalPremium') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
                     var options = {
                         legend: {
                             position: 'top',
@@ -3255,291 +3355,165 @@ DASHBOARD | ARWICS
                         width: '100%',
                         height: '75%',
                         isStacked: true,
-                    }
-                    var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
                 }
 
-            } else if(dayVal == 'harian') {
-                var data = {"filterDataPoliceApprovedChart":$('#filterDataPoliceApprovedChart').val()};
-                console.log($('#filterDataPoliceApprovedChart').val());
+            },
+            error:function(error){
+                console.log(error);
+            }
+            });
+        } else if(dayVal == 'select') {
+            $("#dateTotalPremiumChart").hide();
+            $("#rangeDateTotalPremiumChart").hide();
+            $("#bulanDateTotalPremiumChart").hide();
+            $("#tahunDateTotalPremiumChart").hide();
+            reset();
+            google.charts.load('current', {
+                'packages': ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(totalPremiumChart);
 
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/policeApproved/filterHarianPoliceApproved') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+        function totalPremiumChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Bulan', 'Jumlah Spaj'],
+                @php
+                foreach($totalPremiumChart as $spaj) {
+                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    "', '".(int)$spaj->count."'],";
 
-                    var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
-                        chartArea: {
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.1
-                            },
-                        },
-                        responsive: true,
+                }
+                @endphp
+            ]);
+                var options = {
+                    legend: {
+                        position: 'top',
+                        maxLines: 3
+                    },
+                    chartArea: {
                         backgroundColor: {
                             fill: '#222222',
-                            fillOpacity: 0.8
+                            fillOpacity: 0.1
                         },
-                        colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "350px"
-                        },
-                        bars: 'vertical',
-                        width: '350px',
-                        height: '75%',
-                        isStacked: true,
-                        }
-                        var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-                        chart.draw(data, google.charts.Bar.convertOptions(options));
-                        }
-
-                },
-                error:function(error){
-                    console.log(error);
+                    },
+                    responsive: true,
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#FB6EAA',
+                    bar: {
+                        groupWidth: "75%"
+                    },
+                    bars: 'vertical',
+                    width: '100%',
+                    height: '75%',
+                    isStacked: true,
                 }
-            });
-                $("#datePoliceApprovedChart").hide();
-                $("#rangeDatePoliceApprovedChart").hide();
-                $("#tahunDatePoliceApprovedChart").hide();
-                reset();
-            } else if(dayVal == 'bulanan') {
-                $("#datePoliceApprovedChart").hide();
-                $("#rangeDatePoliceApprovedChart").hide();
-                $("#bulanDatePoliceApprovedChart").show();
-                $("#tahunDatePoliceApprovedChart").hide();
-                reset();
-            } else if(dayVal == 'tahunan') {
-                $("#datePoliceApprovedChart").hide();
-                $("#rangeDatePoliceApprovedChart").hide();
-                $("#bulanDatePoliceApprovedChart").hide();
-                $("#tahunDatePoliceApprovedChart").show();
-                reset();
+                var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
             }
 
-        }
+        } else if(dayVal == 'harian') {
+            var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
+            console.log($('#filterDataTotalPremiumChart').val());
 
-        function filterMonthPoliceApprovedChart()
-        {
-            var data = {"bulan_awal":$('#bulanAwalPoliceApprovedChart').val(), "bulan_akhir":$('#bulanAkhirPoliceApprovedChart').val()};
             $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/policeApproved/filterBulanPoliceApproved') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterHarianTotalPremium') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
 
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-        }
-
-        function filterYearPoliceApprovedChart()
-        {
-            var data = {"tahun_awal":$('#tahunAwalPoliceApprovedChart').val(), "tahun_akhir":$('#tahunAkhirPoliceApprovedChart').val()};
-            $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/policeApproved/filterTahunPoliceApproved') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('policeApprovedChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
-
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-        }
-
-        function loadFilterTotalPremiumChart()
-        {
-            var eID = document.getElementById("filterDataTotalPremiumChart");
-            var dayVal = eID.options[eID.selectedIndex].value;
-            var daytxt = eID.options[eID.selectedIndex].text;
-
-            if (dayVal == 'mingguan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").hide();
-                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
-                console.log($('#filterDataPoliceApprovedChart').val());
-
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/policeApproved/filterMingguTotalPremium') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                        var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
-                            chartArea: {
-                                backgroundColor: {
-                                    fill: '#222222',
-                                    fillOpacity: 0.1
-                                },
-                            },
-                            responsive: true,
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.8
-                            },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
-                            bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
-                            isStacked: true,
-                            }
+                var options = {
+                    legend: {
+                        position: 'top',
+                        maxLines: 3
+                    },
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    responsive: true,
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#FB6EAA',
+                    bar: {
+                        groupWidth: "350px"
+                    },
+                    bars: 'vertical',
+                    width: '350px',
+                    height: '75%',
+                    isStacked: true,
+                    }
                     var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
                     }
 
-                },
-                error:function(error){
-                    console.log(error);
-                }
-                });
-            } else if(dayVal == 'select') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").hide();
-                reset();
-                google.charts.load('current', {
-                    'packages': ['corechart', 'bar']
-                });
-                google.charts.setOnLoadCallback(totalPremiumChart);
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+            $("#dateTotalPremiumChart").hide();
+            $("#rangeDateTotalPremiumChart").hide();
+            $("#tahunDateTotalPremiumChart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#dateTotalPremiumChart").hide();
+            $("#rangeDateTotalPremiumChart").hide();
+            $("#bulanDateTotalPremiumChart").show();
+            $("#tahunDateTotalPremiumChart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#dateTotalPremiumChart").hide();
+            $("#rangeDateTotalPremiumChart").hide();
+            $("#bulanDateTotalPremiumChart").hide();
+            $("#tahunDateTotalPremiumChart").show();
+            reset();
+        }
 
+    }
 
-            function totalPremiumChart() {
+    function filterMonthTotalPremiumChart()
+    {
+        var data = {"bulan_awal":$('#bulanAwalTotalPremiumChart').val(), "bulan_akhir":$('#bulanAkhirTotalPremiumChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterBulanTotalPremium') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Bulan', 'Jumlah Spaj'],
-                    @php
-                    foreach($totalPremiumChart as $spaj) {
-                        echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                        "', '".(int)$spaj->count."'],";
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
 
-                    }
-                    @endphp
-                ]);
                     var options = {
                         legend: {
                             position: 'top',
@@ -3562,57 +3536,6 @@ DASHBOARD | ARWICS
                         },
                         bars: 'vertical',
                         width: '100%',
-                        height: '75%',
-                        isStacked: true,
-                    }
-                    var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
-                }
-
-            } else if(dayVal == 'harian') {
-                var data = {"filterDataTotalPremiumChart":$('#filterDataTotalPremiumChart').val()};
-                console.log($('#filterDataTotalPremiumChart').val());
-
-                $.ajax({
-                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
-                type:"POST",
-                url : "{{ url('management/policeApproved/filterHarianTotalPremium') }}",
-                data: JSON.stringify(data),
-                dataType:"json",
-                processData:false,
-                contentType:"application/json",
-                cache:false,
-                success:function(response){
-                        google.charts.load('current', {
-                            'packages': ['corechart', 'bar']
-                        });
-                        google.charts.setOnLoadCallback(drawChart);
-
-                        function drawChart() {
-                        var data = google.visualization.arrayToDataTable(response.data);
-
-                    var options = {
-                        legend: {
-                            position: 'top',
-                            maxLines: 3
-                        },
-                        chartArea: {
-                            backgroundColor: {
-                                fill: '#222222',
-                                fillOpacity: 0.1
-                            },
-                        },
-                        responsive: true,
-                        backgroundColor: {
-                            fill: '#222222',
-                            fillOpacity: 0.8
-                        },
-                        colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "350px"
-                        },
-                        bars: 'vertical',
-                        width: '350px',
                         height: '75%',
                         isStacked: true,
                         }
@@ -3620,144 +3543,989 @@ DASHBOARD | ARWICS
                         chart.draw(data, google.charts.Bar.convertOptions(options));
                         }
 
-                },
-                error:function(error){
-                    console.log(error);
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearTotalPremiumChart()
+    {
+        var data = {"tahun_awal":$('#tahunAwalTotalPremiumChart').val(), "tahun_akhir":$('#tahunAkhirTotalPremiumChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/policeApproved/filterTahunTotalPremium') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        legend: {
+                            position: 'top',
+                            maxLines: 3
+                        },
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        responsive: true,
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#FB6EAA',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        width: '100%',
+                        height: '75%',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTotalTahun1Chart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    // Premium Total
+
+    function loadFilterPremiumTotalTahun1Chart()
+    {
+        var eID = document.getElementById("filterDataPremiumTotalTahun1Chart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
+
+        if (dayVal == 'mingguan') {
+            $("#datePremiumTotalTahun1Chart").hide();
+            $("#rangeDatePremiumTotalTahun1Chart").hide();
+            $("#bulandatePremiumTotalTahun1Chart").hide();
+            $("#tahundatePremiumTotalTahun1Chart").hide();
+            var data = {"filterDataPremiumTotalTahun1Chart":$('#filterDataPremiumTotalTahun1Chart').val()};
+
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterMingguPremiumTahun1') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(premiumTahun1Chart);
+
+                    function premiumTahun1Chart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                    }
+                var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
                 }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
             });
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").hide();
-                reset();
-            } else if(dayVal == 'bulanan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").show();
-                $("#tahunDateTotalPremiumChart").hide();
-                reset();
-            } else if(dayVal == 'tahunan') {
-                $("#dateTotalPremiumChart").hide();
-                $("#rangeDateTotalPremiumChart").hide();
-                $("#bulanDateTotalPremiumChart").hide();
-                $("#tahunDateTotalPremiumChart").show();
-                reset();
+        } else if(dayVal == 'select') {
+            $("#datePremiumTotalTahun1Chart").hide();
+            $("#rangeDatePremiumTotalTahun1Chart").hide();
+            $("#bulandatePremiumTotalTahun1Chart").hide();
+            $("#tahundatePremiumTotalTahun1Chart").hide();
+            reset();
+            google.charts.load('current', {
+                'packages': ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(premiumTotalTahun1);
+
+
+            function premiumTotalTahun1() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Bulan', ' '],
+                @php
+                foreach($premiumTahun1Chart as $spaj) {
+                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    "', ".$spaj->sum_nominal."],";
+
+                }
+                @endphp
+            ]);
+                var options = {
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#7BC2EC',
+                    bars: 'vertical',
+                    isStacked: true,
+                }
+                var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
             }
 
+        } else if(dayVal == 'harian') {
+            var data = {"filterDataPremiumTotalTahun1Chart":$('#filterDataPremiumTotalTahun1Chart').val()};
+            $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterHarianPremiumTahun1') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+            $("#datePremiumTotalTahun1Chart").hide();
+            $("#rangeDatePremiumTotalTahun1Chart").hide();
+            $("#tahundatePremiumTotalTahun1Chart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#datePremiumTotalTahun1Chart").hide();
+            $("#rangeDatePremiumTotalTahun1Chart").hide();
+            $("#bulandatePremiumTotalTahun1Chart").show();
+            $("#tahundatePremiumTotalTahun1Chart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#datePremiumTotalTahun1Chart").hide();
+            $("#rangeDatePremiumTotalTahun1Chart").hide();
+            $("#bulandatePremiumTotalTahun1Chart").hide();
+            $("#tahundatePremiumTotalTahun1Chart").show();
+            reset();
         }
 
-        function filterMonthPoliceApprovedChart()
-        {
-            var data = {"bulan_awal":$('#bulanAwalTotalPremiumChart').val(), "bulan_akhir":$('#bulanAkhirTotalPremiumChart').val()};
+    }
+
+    function filterMonthPremiumTotalTahun1Chart()
+    {
+        var data = {"bulan_awal":$('#bulanAwalPremiumTotalTahun1Chart').val(), "bulan_akhir":$('#bulanAkhirPremiumTotalTahun1Chart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterBulanPremiumTahun1') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearPremiumTotalTahun1Chart()
+    {
+        var data = {"tahun_awal":$('#tahunAwalPremiumTotalTahun1Chart').val(), "tahun_akhir":$('#tahunAkhirPremiumTotalTahun1Chart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterTahunPremiumTahun1') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bar: {
+                            groupWidth: "75%"
+                        },
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTahun1Chart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function loadFilterPremiumPltpChart()
+    {
+        var eID = document.getElementById("filterDataPremiumPltpChart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
+
+        if (dayVal == 'mingguan') {
+            $("#datePremiumPltpChart").hide();
+            $("#rangeDatePremiumPltpChart").hide();
+            $("#bulandatePremiumPltpChart").hide();
+            $("#tahundatePremiumPltpChart").hide();
+            var data = {"filterDataPremiumPltpChart":$('#filterDataPremiumPltpChart').val()};
+
             $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterMingguPltp') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(premiumPltpChart);
+
+                    function premiumPltpChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                    }
+                var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+            });
+        } else if(dayVal == 'select') {
+            $("#datePremiumPltpChart").hide();
+            $("#rangeDatePremiumPltpChart").hide();
+            $("#bulandatePremiumPltpChart").hide();
+            $("#tahundatePremiumPltpChart").hide();
+            reset();
+            google.charts.load('current', {
+                'packages': ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(premiumPltp);
+
+
+            function premiumPltp() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Bulan', ' '],
+                @php
+                foreach($premiumPltpChart as $spaj) {
+                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    "', ".$spaj->sum_nominal."],";
+
+                }
+                @endphp
+            ]);
+                var options = {
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#7BC2EC',
+                    bars: 'vertical',
+                    isStacked: true,
+                }
+                var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+
+        } else if(dayVal == 'harian') {
+            var data = {"#filterDataPremiumPltpChart":$('#filterDataPremiumPltpChart').val()};
+
+                $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
-                url : "{{ url('management/policeApproved/filterBulanTotalPremium') }}",
+                url : "{{ url('management/premiumTotal/filterHarianPltp') }}",
                 data: JSON.stringify(data),
                 dataType:"json",
                 processData:false,
                 contentType:"application/json",
                 cache:false,
                 success:function(response){
-                        google.charts.load('current', {
+                    google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
-                        google.charts.setOnLoadCallback(drawChart);
+                        google.charts.setOnLoadCallback(premiumPltpChart);
 
-                        function drawChart() {
+                        function premiumPltpChart() {
                         var data = google.visualization.arrayToDataTable(response.data);
 
                         var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
                             chartArea: {
                                 backgroundColor: {
                                     fill: '#222222',
                                     fillOpacity: 0.1
                                 },
                             },
-                            responsive: true,
                             backgroundColor: {
                                 fill: '#222222',
                                 fillOpacity: 0.8
                             },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
+                            colors: '#7BC2EC',
                             bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
                             isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
 
                 },
                 error:function(error){
                     console.log(error);
                 }
             });
+            $("#datePremiumPltpChart").hide();
+            $("#rangeDatePremiumPltpChart").hide();
+            $("#tahunDatePremiumPltpChart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#datePremiumPltpChart").hide();
+            $("#rangeDatePremiumPltpChart").hide();
+            $("#bulandatePremiumPltpChart").show();
+            $("#tahundatePremiumPltpChart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#datePremiumPltpChart").hide();
+            $("#rangeDatePremiumPltpChart").hide();
+            $("#bulandatePremiumPltpChart").hide();
+            $("#tahundatePremiumPltpChart").show();
+            reset();
         }
 
-        function filterYearPoliceApprovedChart()
-        {
-            var data = {"tahun_awal":$('#tahunAwalTotalPremiumChart').val(), "tahun_akhir":$('#tahunAkhirTotalPremiumChart').val()};
+    }
+
+    function filterMonthPremiumPltpChart()
+    {
+        var data = {"bulan_awal":$('#bulanAwalPremiumPltpChart').val(), "bulan_akhir":$('#bulanAkhirPremiumPltpChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterBulanPltp') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearPremiumPltpChart()
+    {
+        var data = {"tahun_awal":$('#tahunAwalPremiumPltpChart').val(), "tahun_akhir":$('#tahunAkhirPremiumPltpChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterTahunPltp') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function loadFilterPremiumTotalChart()
+    {
+        var eID = document.getElementById("filterDataPremiumTotalChart");
+        var dayVal = eID.options[eID.selectedIndex].value;
+        var daytxt = eID.options[eID.selectedIndex].text;
+
+        if (dayVal == 'mingguan') {
+            $("#datePremiumTotalChart").hide();
+            $("#rangeDatePremiumTotalChart").hide();
+            $("#bulandatePremiumTotalChart").hide();
+            $("#tahundatePremiumTotalChart").hide();
+            var data = {"filterDataPremiumTotalChart":$('#filterDataPremiumTotalChart').val()};
+
             $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterMingguPremiumTotal') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(premiumPltpChart);
+
+                    function premiumPltpChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                    }
+                var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+            });
+        } else if(dayVal == 'select') {
+            $("#datePremiumTotalChart").hide();
+            $("#rangeDatePremiumTotalChart").hide();
+            $("#bulandatePremiumTotalChart").hide();
+            $("#tahundatePremiumTotalChart").hide();
+            reset();
+            google.charts.load('current', {
+                'packages': ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(premiumPltp);
+
+
+            function premiumPltp() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Bulan', ' '],
+                @php
+                foreach($premiumPltpChart as $spaj) {
+                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    "', ".$spaj->sum_nominal."],";
+
+                }
+                @endphp
+            ]);
+                var options = {
+                    chartArea: {
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.1
+                        },
+                    },
+                    backgroundColor: {
+                        fill: '#222222',
+                        fillOpacity: 0.8
+                    },
+                    colors: '#7BC2EC',
+                    bars: 'vertical',
+                    isStacked: true,
+                }
+                var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+
+        } else if(dayVal == 'harian') {
+            var data = {"#filterDataPremiumTotalChart":$('#filterDataPremiumTotalChart').val()};
+
+                $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:"POST",
-                url : "{{ url('management/policeApproved/filterTahunTotalPremium') }}",
+                url : "{{ url('management/premiumTotal/filterHarianPremiumTotal') }}",
                 data: JSON.stringify(data),
                 dataType:"json",
                 processData:false,
                 contentType:"application/json",
                 cache:false,
                 success:function(response){
-                        google.charts.load('current', {
+                    google.charts.load('current', {
                             'packages': ['corechart', 'bar']
                         });
-                        google.charts.setOnLoadCallback(drawChart);
+                        google.charts.setOnLoadCallback(premiumPltpChart);
 
-                        function drawChart() {
+                        function premiumPltpChart() {
                         var data = google.visualization.arrayToDataTable(response.data);
 
                         var options = {
-                            legend: {
-                                position: 'top',
-                                maxLines: 3
-                            },
                             chartArea: {
                                 backgroundColor: {
                                     fill: '#222222',
                                     fillOpacity: 0.1
                                 },
                             },
-                            responsive: true,
                             backgroundColor: {
                                 fill: '#222222',
                                 fillOpacity: 0.8
                             },
-                            colors: '#FB6EAA',
-                            bar: {
-                                groupWidth: "75%"
-                            },
+                            colors: '#7BC2EC',
                             bars: 'vertical',
-                            width: '100%',
-                            height: '75%',
                             isStacked: true,
-                            }
-                            var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
-                            chart.draw(data, google.charts.Bar.convertOptions(options));
-                         }
+                    }
+                    var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    }
 
                 },
                 error:function(error){
                     console.log(error);
                 }
             });
+            $("#datePremiumTotalChart").hide();
+            $("#rangeDatePremiumTotalChart").hide();
+            $("#tahunDatePremiumTotalChart").hide();
+            reset();
+        } else if(dayVal == 'bulanan') {
+            $("#datePremiumTotalChart").hide();
+            $("#rangeDatePremiumTotalChart").hide();
+            $("#bulandatePremiumTotalChart").show();
+            $("#tahundatePremiumTotalChart").hide();
+            reset();
+        } else if(dayVal == 'tahunan') {
+            $("#datePremiumTotalChart").hide();
+            $("#rangeDatePremiumTotalChart").hide();
+            $("#bulandatePremiumTotalChart").hide();
+            $("#tahundatePremiumTotalChart").show();
+            reset();
         }
 
+    }
+
+    function filterMonthPremiumTotalChart()
+    {
+        var data = {"bulan_awal":$('#bulanAwalTotalPremiumChart').val(), "bulan_akhir":$('#bulanAkhirTotalPremiumChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterBulanPremiumTotal') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function filterYearPremiumTotalChart()
+    {
+        var data = {"tahun_awal":$('#tahunAwalPremiumTotalChart').val(), "tahun_akhir":$('#tahunAkhirPremiumTotalChart').val()};
+        $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
+            type:"POST",
+            url : "{{ url('management/premiumTotal/filterTahunPremiumTotal') }}",
+            data: JSON.stringify(data),
+            dataType:"json",
+            processData:false,
+            contentType:"application/json",
+            cache:false,
+            success:function(response){
+                    google.charts.load('current', {
+                        'packages': ['corechart', 'bar']
+                    });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response.data);
+
+                    var options = {
+                        chartArea: {
+                            backgroundColor: {
+                                fill: '#222222',
+                                fillOpacity: 0.1
+                            },
+                        },
+                        backgroundColor: {
+                            fill: '#222222',
+                            fillOpacity: 0.8
+                        },
+                        colors: '#7BC2EC',
+
+                        bars: 'vertical',
+                        isStacked: true,
+                        }
+                        var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
+                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //get the pie chart canvas
+        function getPieChartSpajSubmitted()
+        {
+               var cData = JSON.parse(`<?php echo $pieSpajSubmittedChart; ?>`);
+               var ctx = $("#spajSubmittedChart");
+                //pie chart data
+               var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Spaj",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                            "#98DBC6",
+                            "#5BC8AC",
+                            "#E6D72A",
+                            "#F18D9E",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
+
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Data Spaj Submitted Tahun Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
+                    }
+                };
+
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+        }
+
+        function getPieChartPoliceApprovedChart()
+        {
+               var cData = JSON.parse(`<?php echo $piePoliceApprovedChart; ?>`);
+               var ctx = $("#policeApprovedChart");
+                //pie chart data
+               var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Total Spaj",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                            "#003B46",
+                            "#07575B",
+                            "#66A5AD",
+                            "#C4DEFG",
+                        ],
+                        borderColor: [
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                            "#222222",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
+
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Data Police Approved Tahun Ini",
+                        fontSize: 18,
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#ffffff",
+                            fontSize: 16
+                        }
+                    }
+                };
+
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "pie",
+                    data: data,
+                    options: options
+                });
+        }
+        getPieChartPoliceApprovedChart();
+        getPieChartSpajSubmitted();
+    });
 </script>
 @endpush

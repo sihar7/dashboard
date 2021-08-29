@@ -23,13 +23,9 @@
     <!-- App Css-->
     <link href="{{ URL::to('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ URL::to('assets/css/app-dark.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
     @stack('css')
-    <!-- isi style kita -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
-    @livewireStyles
     <style>
         .page-content{
             background-color: black;
@@ -105,14 +101,9 @@
     <script src="{{ URL::to('assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ URL::to('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <!--Morris Chart-->
-    <script src="{{ URL::to('assets/libs/morris.js/morris.min.js') }}"></script>
-    <script src="{{ URL::to('assets/libs/raphael/raphael.min.js') }}"></script>
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     @stack('js')
-    <script src="{{ URL::to('assets/js/pages/dashboard.init.js') }}"></script>
 
     <script src="{{ URL::to('assets/js/pages/fontawesome.init.js') }}"></script>
 
@@ -120,11 +111,6 @@
     <!-- App js -->
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
 
-    <!-- isi script kita -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-    @livewireScripts
-    @livewireChartsScripts
 </body>
 
 </html>

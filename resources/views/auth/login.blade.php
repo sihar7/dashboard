@@ -162,6 +162,13 @@
                                         text:  'Berhasil Login Tele!',
                                     });
                                     window.location.href = `{{url('tele/dashboard')}}`;
+                                } else if (response.message == 8) {
+                                    Swal.fire({
+                                        icon:  'success',
+                                        title: 'Berhasil',
+                                        text:  'Berhasil Login Report!',
+                                    });
+                                    window.location.href = `{{url('report/dashboard')}}`;
                                 } else if (response.status == 3) {
                                     Toast.fire({
                                         icon: 'error',
