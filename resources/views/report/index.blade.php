@@ -2176,6 +2176,20 @@ REPORT | DASHBOARD ARWICS
         }
     });
 
+    var sweet_loader = '<div class="sweet_loader"><svg viewBox="0 0 140 140" width="140" height="140"><g class="outline"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="rgba(0,0,0,0.1)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g><g class="circle"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="#71BBFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dashoffset="200" stroke-dasharray="300"></path></g></svg></div>';
+
+    $(".ion-md-download").on('click', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            icon:  'https://www.boasnotas.com/img/loading2.gif',
+            title: '',
+            text:  'Loading...!',
+            buttons: false,
+            closeOnClickOutside: false,
+            timer: 3000,
+        });
+    });
+
     function reset()
     {
         $('input').val('');
