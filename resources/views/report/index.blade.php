@@ -568,6 +568,7 @@ REPORT | DASHBOARD ARWICS
                 </center>
 
                 <center>
+
                     <div class="row" style="display: flex;justify-content: center;align-items: center;">
                         <div class="row " style="width: 60%;display:flex;justify-content: center;align-items: center;">
                             <div class="col-lg-3 ">
@@ -580,7 +581,7 @@ REPORT | DASHBOARD ARWICS
                                         <button type="button" data-bs-toggle="modal" id="detailPremiumTotalDaily"
                                             data-bs-target=".detailPremiumTotalDaily" class="btn btn-outline-light waves-effect"
                                             style="color:#fff; border-color:#fff;">Detail</button>
-                                        </center>
+                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
                                     </div>
                                 </div>
                             </div>
@@ -594,7 +595,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalWeekly"
                                                 data-bs-target=".detailPremiumTotalWeekly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-
+                                            <i class="ion ion-md-download"></i>
                                         </center>
                                     </div>
                                 </div>
@@ -609,7 +610,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalMonthly"
                                                 data-bs-target=".detailPremiumTotalMonthly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-
+                                            <i class="ion ion-md-download"></i>
                                         </center>
                                     </div>
                                 </div>
@@ -624,7 +625,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalYearly"
                                                 data-bs-target=".detailPremiumTotalYearly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-
+                                            <i class="ion ion-md-download"></i>
                                         </center>
                                     </div>
                                 </div>
