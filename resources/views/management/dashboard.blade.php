@@ -2171,6 +2171,7 @@ MANAGEMENT | DASHBOARD ARWICS
 <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
 <script src="{{ asset('assets/js/datatable.js') }}"></script>
 
+
 <script type="text/javascript">
     window.setTimeout("waktu()", 1000);
 
@@ -2197,12 +2198,12 @@ MANAGEMENT | DASHBOARD ARWICS
             ['Bulan', ' '],
             @php
             foreach($premiumSubmitted as $spaj) {
-                // echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // echo "['".$spaj->month_name.
                 // "', '".
                 // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
                 // "'],";
 
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".$spaj->sum_nominal."],";
+                echo "['".$spaj->month_name."', ".$spaj->sum_nominal."],";
 
             }
             @endphp
@@ -2233,12 +2234,12 @@ MANAGEMENT | DASHBOARD ARWICS
             ['Bulan', ''],
             @php
             foreach($totalPremiumChart as $spaj) {
-                // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // echo "['".$spaj->month_name.
                 // "', '".
                 // "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
                 // "'],";
 
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                echo "['".$spaj->month_name.
                 "', ".$spaj->sum_nominal."],";
             }
             @endphp
@@ -2277,7 +2278,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
@@ -2310,11 +2311,11 @@ MANAGEMENT | DASHBOARD ARWICS
             ['Bulan', ''],
             @php
             foreach($premiumPltpChart as $premiumTotal) {
-                // echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                // echo "['".$premiumTotal->month_name.
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
@@ -2360,7 +2361,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
 
             }
@@ -2454,6 +2455,7 @@ MANAGEMENT | DASHBOARD ARWICS
         }
     });
 
+
     function reset()
     {
         $('input').val('');
@@ -2512,6 +2514,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
+                        legend: { position: "none" },
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
@@ -2546,12 +2552,11 @@ MANAGEMENT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumSubmitted as $spaj) {
-                    // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    // echo "['".$spaj->month_name.
                     // "', '".
                     // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
                     // "'],";
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                    "', ".$spaj->count."],";
+                    echo "['".$spaj->month_name."', ".$spaj->sum_nominal."],";
                 }
                 @endphp
             ]);
@@ -2617,6 +2622,10 @@ MANAGEMENT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     colors: '#FB6EAA',
                     isStacked: true,
                     }
@@ -2685,6 +2694,9 @@ MANAGEMENT | DASHBOARD ARWICS
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2732,6 +2744,9 @@ MANAGEMENT | DASHBOARD ARWICS
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -3627,12 +3642,12 @@ MANAGEMENT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
+
                         isStacked: true,
                         }
                 var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3658,11 +3673,11 @@ MANAGEMENT | DASHBOARD ARWICS
 
         function totalPremiumChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Bulan', 'Jumlah Spaj'],
+                ['Bulan', ' '],
                 @php
                 foreach($totalPremiumChart as $spaj) {
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                    "', '".(int)$spaj->count."'],";
+                    echo "['".$spaj->month_name.
+                    "', ".$spaj->sum_nominal."],";
 
                 }
                 @endphp
@@ -3684,12 +3699,10 @@ MANAGEMENT | DASHBOARD ARWICS
                         fillOpacity: 0.8
                     },
                     colors: '#FB6EAA',
-                    bar: {
-                        groupWidth: "75%"
-                    },
                     bars: 'vertical',
-                    width: '100%',
-                    height: '75%',
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     isStacked: true,
                 }
                 var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3735,12 +3748,10 @@ MANAGEMENT | DASHBOARD ARWICS
                         fillOpacity: 0.8
                     },
                     colors: '#FB6EAA',
-                    bar: {
-                        groupWidth: "350px"
-                    },
                     bars: 'vertical',
-                    width: '350px',
-                    height: '75%',
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     isStacked: true,
                     }
                     var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3810,12 +3821,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
                         isStacked: true,
                         }
                         var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3867,12 +3876,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
                         isStacked: true,
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalTahun1Chart'));
@@ -3930,6 +3937,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -3961,7 +3972,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumTahun1Chart as $spaj) {
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -3978,6 +3989,10 @@ MANAGEMENT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
@@ -4017,6 +4032,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -4081,6 +4100,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -4129,9 +4152,9 @@ MANAGEMENT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#7BC2EC',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
                         isStacked: true,
                         }
@@ -4188,6 +4211,10 @@ MANAGEMENT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -4219,7 +4246,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumPltpChart as $spaj) {
-                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -4236,6 +4263,10 @@ MANAGEMENT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
@@ -4276,6 +4307,10 @@ MANAGEMENT | DASHBOARD ARWICS
                                 fill: '#222222',
                                 fillOpacity: 0.8
                             },
+
+                            width: 300,
+                            height: 400,
+                            bar: {groupWidth: "95%"},
                             colors: '#7BC2EC',
                             bars: 'vertical',
                             isStacked: true,
@@ -4344,6 +4379,9 @@ MANAGEMENT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4392,6 +4430,9 @@ MANAGEMENT | DASHBOARD ARWICS
 
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4449,6 +4490,9 @@ MANAGEMENT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                     }
                 var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                 chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4477,7 +4521,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumPltpChart as $spaj) {
-                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -4497,6 +4541,9 @@ MANAGEMENT | DASHBOARD ARWICS
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                 }
                 var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                 chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4537,6 +4584,9 @@ MANAGEMENT | DASHBOARD ARWICS
                             colors: '#7BC2EC',
                             bars: 'vertical',
                             isStacked: true,
+                            width: 300,
+                            height: 400,
+                            bar: {groupWidth: "95%"},
                     }
                     var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4602,6 +4652,9 @@ MANAGEMENT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4650,6 +4703,9 @@ MANAGEMENT | DASHBOARD ARWICS
 
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4704,7 +4760,7 @@ MANAGEMENT | DASHBOARD ARWICS
                             "#222222",
                             "#222222",
                         ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                     }]
                 };
 
@@ -4773,7 +4829,7 @@ MANAGEMENT | DASHBOARD ARWICS
                             "#222222",
                             "#222222",
                         ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                     }]
                 };
 

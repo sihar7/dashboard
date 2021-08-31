@@ -44,7 +44,7 @@ REPORT | DASHBOARD ARWICS
                                 <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedDaily"
                                     data-bs-target=".detailSpajSubmittedDaily" class="btn btn-outline-light waves-effect"
                                     style="color:#fff; border-color:#fff;">Detail</button>
-                                <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                                <i class="ion ion-md-download reportSpajSubmittedDaily" style="width:35px; height:35px;"></i></center>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedWeekly"
                                         data-bs-target=".detailSpajSubmittedWeekly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportSpajSubmittedWeekly"></i>
                                 </center>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedMonthly"
                                         data-bs-target=".detailSpajSubmittedMonthly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportSpajSubmittedMonthly"></i>
                                 </center>
                             </div>
                         </div>
@@ -88,7 +88,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailSpajSubmittedYearly"
                                         data-bs-target=".detailSpajSubmittedYearly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportSpajSubmittedYearly"></i>
                                 </center>
                             </div>
                         </div>
@@ -309,7 +309,7 @@ REPORT | DASHBOARD ARWICS
                                 <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedDaily"
                                     data-bs-target=".detailPoliceApprovedDaily" class="btn btn-outline-light waves-effect"
                                     style="color:#fff; border-color:#fff;">Detail</button>
-                                <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                                <i class="ion ion-md-download reportPoliceApprovedDaily" style="width:35px; height:35px;"></i></center>
                             </div>
                         </div>
                     </div>
@@ -323,7 +323,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedWeekly"
                                         data-bs-target=".detailPoliceApprovedWeekly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportPoliceApprovedWeekly"></i>
                                 </center>
                             </div>
                         </div>
@@ -338,7 +338,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedMonthly"
                                         data-bs-target=".detailPoliceApprovedMonthly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportPoliceApprovedMonthly"></i>
                                 </center>
                             </div>
                         </div>
@@ -353,7 +353,7 @@ REPORT | DASHBOARD ARWICS
                                     <button type="button" data-bs-toggle="modal" id="detailPoliceApprovedYearly"
                                         data-bs-target=".detailPoliceApprovedYearly" class="btn btn-outline-light waves-effect"
                                         style="color:#fff; border-color:#fff;">Detail</button>
-                                    <i class="ion ion-md-download"></i>
+                                    <i class="ion ion-md-download reportPoliceApprovedYearly"></i>
                                 </center>
                             </div>
                         </div>
@@ -581,7 +581,7 @@ REPORT | DASHBOARD ARWICS
                                         <button type="button" data-bs-toggle="modal" id="detailPremiumTotalDaily"
                                             data-bs-target=".detailPremiumTotalDaily" class="btn btn-outline-light waves-effect"
                                             style="color:#fff; border-color:#fff;">Detail</button>
-                                        <i class="ion ion-md-download" style="width:35px; height:35px;"></i></center>
+                                        <i class="ion ion-md-download reportPremiumTotalDaily" style="width:35px; height:35px;"></i></center>
                                     </div>
                                 </div>
                             </div>
@@ -595,7 +595,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalWeekly"
                                                 data-bs-target=".detailPremiumTotalWeekly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+                                            <i class="ion ion-md-download reportPremiumTotalWeekly"></i>
                                         </center>
                                     </div>
                                 </div>
@@ -610,7 +610,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalMonthly"
                                                 data-bs-target=".detailPremiumTotalMonthly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+                                            <i class="ion ion-md-download reportPremiumTotalMonthly"></i>
                                         </center>
                                     </div>
                                 </div>
@@ -625,7 +625,7 @@ REPORT | DASHBOARD ARWICS
                                             <button type="button" data-bs-toggle="modal" id="detailPremiumTotalYearly"
                                                 data-bs-target=".detailPremiumTotalYearly" class="btn btn-outline-light waves-effect"
                                                 style="color:#fff; border-color:#fff;">Detail</button>
-                                            <i class="ion ion-md-download"></i>
+                                            <i class="ion ion-md-download reportPremiumTotalYearly"></i>
                                         </center>
                                     </div>
                                 </div>
@@ -1919,12 +1919,12 @@ REPORT | DASHBOARD ARWICS
             ['Bulan', ' '],
             @php
             foreach($premiumSubmitted as $spaj) {
-                // echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // echo "['".$spaj->month_name.
                 // "', '".
                 // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
                 // "'],";
 
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM')."', ".$spaj->sum_nominal."],";
+                echo "['".$spaj->month_name."', ".$spaj->sum_nominal."],";
 
             }
             @endphp
@@ -1955,12 +1955,12 @@ REPORT | DASHBOARD ARWICS
             ['Bulan', ''],
             @php
             foreach($totalPremiumChart as $spaj) {
-                // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                // echo "['".$spaj->month_name.
                 // "', '".
                 // "Rp".number_format($spaj->sum_nominal, 0, ',', '.').
                 // "'],";
 
-                echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                echo "['".$spaj->month_name.
                 "', ".$spaj->sum_nominal."],";
             }
             @endphp
@@ -1999,7 +1999,7 @@ REPORT | DASHBOARD ARWICS
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
@@ -2032,11 +2032,11 @@ REPORT | DASHBOARD ARWICS
             ['Bulan', ''],
             @php
             foreach($premiumPltpChart as $premiumTotal) {
-                // echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                // echo "['".$premiumTotal->month_name.
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
             }
             @endphp
@@ -2082,7 +2082,7 @@ REPORT | DASHBOARD ARWICS
                 // "', '".
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
-                echo "['".\Carbon\ Carbon::parse($premiumTotal->month_name)->isoFormat('MMMM').
+                echo "['".$premiumTotal->month_name.
                 "', ".(string)$premiumTotal->sum_nominal."],";
 
             }
@@ -2176,19 +2176,773 @@ REPORT | DASHBOARD ARWICS
         }
     });
 
-    var sweet_loader = '<div class="sweet_loader"><svg viewBox="0 0 140 140" width="140" height="140"><g class="outline"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="rgba(0,0,0,0.1)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g><g class="circle"><path d="m 70 28 a 1 1 0 0 0 0 84 a 1 1 0 0 0 0 -84" stroke="#71BBFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dashoffset="200" stroke-dasharray="300"></path></g></svg></div>';
+    $(".reportSpajSubmittedDaily").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/spajSubmittedDaily') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
 
-    $(".ion-md-download").on('click', function (e) {
-        e.preventDefault();
-        Swal.fire({
-            icon:  'https://www.boasnotas.com/img/loading2.gif',
-            title: '',
-            text:  'Loading...!',
-            buttons: false,
-            closeOnClickOutside: false,
-            timer: 3000,
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
         });
     });
+
+
+    $(".reportSpajSubmittedWeekly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/spajSubmittedWeekly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportSpajSubmittedMonthly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/spajSubmittedMonthly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportSpajSubmittedYearly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/spajSubmittedYearly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+
+
+    // Police Approved
+    $(".reportPoliceApprovedDaily").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/policeApprovedDaily') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+
+    $(".reportPoliceApprovedWeekly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/policeApprovedWeekly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportPoliceApprovedMonthly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/policeApprovedMonthly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportPoliceApprovedYearly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/policeApprovedYearly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    // Premium Total
+    $(".reportPremiumTotalDaily").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/premiumTotalDaily') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+
+    $(".reportPremiumTotalWeekly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/premiumTotalWeekly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportPremiumTotalMonthly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/premiumTotalMonthly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+    $(".reportPremiumTotalYearly").on('click', function (e) {
+    e.preventDefault();
+       $.ajax({
+            type: "get",
+            url: `{{ url('report/premiumTotalYearly') }}`,
+            dataType: "json",
+            beforeSend: function () {
+                let timerInterval
+                Swal.fire({
+                position: 'top-end',
+                title: 'Sedang Mengexport Data!',
+                html: 'Tunggu Sebentar Ya <b></b> Galama Ko.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            },
+            success: function (result) {
+                success = true;
+                if(result.error)
+                {
+                    Swal.fire(
+                        'Error',
+                        result.message,
+                        'error'
+                    );
+                } else {
+                    success = true;
+                    var $a = $("<a>");
+                    $a.attr("href",result.file);
+                    $("body").append($a);
+                    $a.attr("download",result.filename+"."+result.type);
+                    $a[0].click();
+                    $a.remove();
+                    Swal.close();
+
+                    Swal.fire(
+                        'Sukses',
+                        'Download Sukses',
+                        'success'
+                    );
+                }
+            },
+            complete: function () {
+
+            }
+        });
+    });
+
+
+
+
+
 
     function reset()
     {
@@ -2248,6 +3002,10 @@ REPORT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
+                        legend: { position: "none" },
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
@@ -2282,12 +3040,11 @@ REPORT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumSubmitted as $spaj) {
-                    // echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    // echo "['".$spaj->month_name.
                     // "', '".
                     // "Rp".number_format((int)$spaj->sum_nominal, 0, ',', '.').
                     // "'],";
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                    "', ".$spaj->count."],";
+                    echo "['".$spaj->month_name."', ".$spaj->sum_nominal."],";
                 }
                 @endphp
             ]);
@@ -2353,6 +3110,10 @@ REPORT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     colors: '#FB6EAA',
                     isStacked: true,
                     }
@@ -2421,6 +3182,9 @@ REPORT | DASHBOARD ARWICS
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -2468,6 +3232,9 @@ REPORT | DASHBOARD ARWICS
                         colors: '#FB6EAA',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumSubmittedChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -3363,12 +4130,12 @@ REPORT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
+
                         isStacked: true,
                         }
                 var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3394,11 +4161,11 @@ REPORT | DASHBOARD ARWICS
 
         function totalPremiumChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Bulan', 'Jumlah Spaj'],
+                ['Bulan', ' '],
                 @php
                 foreach($totalPremiumChart as $spaj) {
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
-                    "', '".(int)$spaj->count."'],";
+                    echo "['".$spaj->month_name.
+                    "', ".$spaj->sum_nominal."],";
 
                 }
                 @endphp
@@ -3420,12 +4187,10 @@ REPORT | DASHBOARD ARWICS
                         fillOpacity: 0.8
                     },
                     colors: '#FB6EAA',
-                    bar: {
-                        groupWidth: "75%"
-                    },
                     bars: 'vertical',
-                    width: '100%',
-                    height: '75%',
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     isStacked: true,
                 }
                 var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3471,12 +4236,10 @@ REPORT | DASHBOARD ARWICS
                         fillOpacity: 0.8
                     },
                     colors: '#FB6EAA',
-                    bar: {
-                        groupWidth: "350px"
-                    },
                     bars: 'vertical',
-                    width: '350px',
-                    height: '75%',
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     isStacked: true,
                     }
                     var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3546,12 +4309,10 @@ REPORT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
                         isStacked: true,
                         }
                         var chart = new google.charts.Bar(document.getElementById('totalPremiumChart'));
@@ -3603,12 +4364,10 @@ REPORT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#FB6EAA',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
-                        width: '100%',
-                        height: '75%',
                         isStacked: true,
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalTahun1Chart'));
@@ -3666,6 +4425,10 @@ REPORT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -3697,7 +4460,7 @@ REPORT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumTahun1Chart as $spaj) {
-                    echo "['".\Carbon\ Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -3714,6 +4477,10 @@ REPORT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
@@ -3753,6 +4520,10 @@ REPORT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -3817,6 +4588,10 @@ REPORT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -3865,9 +4640,9 @@ REPORT | DASHBOARD ARWICS
                             fillOpacity: 0.8
                         },
                         colors: '#7BC2EC',
-                        bar: {
-                            groupWidth: "75%"
-                        },
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         bars: 'vertical',
                         isStacked: true,
                         }
@@ -3924,6 +4699,10 @@ REPORT | DASHBOARD ARWICS
                             fill: '#222222',
                             fillOpacity: 0.8
                         },
+
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
@@ -3955,7 +4734,7 @@ REPORT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumPltpChart as $spaj) {
-                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -3972,6 +4751,10 @@ REPORT | DASHBOARD ARWICS
                         fill: '#222222',
                         fillOpacity: 0.8
                     },
+
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
@@ -4012,6 +4795,10 @@ REPORT | DASHBOARD ARWICS
                                 fill: '#222222',
                                 fillOpacity: 0.8
                             },
+
+                            width: 300,
+                            height: 400,
+                            bar: {groupWidth: "95%"},
                             colors: '#7BC2EC',
                             bars: 'vertical',
                             isStacked: true,
@@ -4080,6 +4867,9 @@ REPORT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4128,6 +4918,9 @@ REPORT | DASHBOARD ARWICS
 
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumPltpChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4185,6 +4978,9 @@ REPORT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                     }
                 var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                 chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4213,7 +5009,7 @@ REPORT | DASHBOARD ARWICS
                 ['Bulan', ' '],
                 @php
                 foreach($premiumPltpChart as $spaj) {
-                    echo "['".\Carbon\Carbon::parse($spaj->month_name)->isoFormat('MMMM').
+                    echo "['".$spaj->month_name.
                     "', ".$spaj->sum_nominal."],";
 
                 }
@@ -4233,6 +5029,9 @@ REPORT | DASHBOARD ARWICS
                     colors: '#7BC2EC',
                     bars: 'vertical',
                     isStacked: true,
+                    width: 300,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
                 }
                 var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                 chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4273,6 +5072,9 @@ REPORT | DASHBOARD ARWICS
                             colors: '#7BC2EC',
                             bars: 'vertical',
                             isStacked: true,
+                            width: 300,
+                            height: 400,
+                            bar: {groupWidth: "95%"},
                     }
                     var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                     chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4338,6 +5140,9 @@ REPORT | DASHBOARD ARWICS
                         colors: '#7BC2EC',
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4386,6 +5191,9 @@ REPORT | DASHBOARD ARWICS
 
                         bars: 'vertical',
                         isStacked: true,
+                        width: 300,
+                        height: 400,
+                        bar: {groupWidth: "95%"},
                         }
                         var chart = new google.charts.Bar(document.getElementById('premiumTotalChart'));
                         chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -4440,7 +5248,7 @@ REPORT | DASHBOARD ARWICS
                             "#222222",
                             "#222222",
                         ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                     }]
                 };
 
@@ -4509,7 +5317,7 @@ REPORT | DASHBOARD ARWICS
                             "#222222",
                             "#222222",
                         ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                     }]
                 };
 

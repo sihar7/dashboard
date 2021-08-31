@@ -157,7 +157,7 @@
             try {
                 if (Auth::user()->api_token) {
                     $pltp = Pltp::join('mst_spaj_submit', 'trn_pltp.id_mst_spaj', '=', 'mst_spaj_submit.id')
-                    ->where('trn_pltp.tgl_update', '>', Carbon::today()->subDay(6))
+                    ->where('trn_pltp.tgl_update', '<=', Carbon::today()->subDay(6))
                     ->whereMonth('trn_pltp.tgl_update', date('m'))
                     ->whereYear('trn_pltp.tgl_update', date('Y'))
                     ->count();
@@ -241,5 +241,3 @@
         }
 
 }
-
-?>

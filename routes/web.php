@@ -7,8 +7,10 @@ use App\Http\Controllers\BE\SpajSubmittedController;
 use App\Http\Controllers\BE\TeleController;
 use App\Http\Controllers\BE\PoliceApprovedController;
 use App\Http\Controllers\BE\PremiumTotalController;
-
 use App\Http\Controllers\Datatable\DetailController;
+use App\Http\Controllers\Export\SpajController;
+use App\Http\Controllers\Export\PoliceApprovedExController;
+use App\Http\Controllers\Export\PremiumExportController;
 
 
 // Route::get('pdf/preview', [DashboardController::class, 'indexPdf']);
@@ -26,9 +28,9 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['has_login', 'XSS']], function () {
-    Route::prefix('management')->group(function() {
+    Route::prefix('management')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
-        Route::prefix('spaj')->group(function() {
+        Route::prefix('spaj')->group(function () {
             Route::post('/filterHarianSpajSubmitted', [SpajSubmittedController::class, 'filterHarianSpajSubmitted']);
             Route::post('/filterMingguSpajSubmitted', [SpajSubmittedController::class, 'filterMingguSpajSubmitted']);
             Route::post('/filterBulanSpajSubmitted', [SpajSubmittedController::class, 'filterBulanSpajSubmitted']);
@@ -75,14 +77,14 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
 
             // End PremiumTotal
         });
-        Route::prefix('tele')->group(function() {
+        Route::prefix('tele')->group(function () {
             Route::post('/filterHarianTopTsr', [TeleController::class, 'filterHarianTopTsr']);
             Route::get('/filterMingguTopTsr', [TeleController::class, 'filterMingguTopTsr']);
             Route::post('/filterBulanTopTsr', [TeleController::class, 'filterBulanTopTsr']);
             Route::post('/filterTahunTopTsr', [TeleController::class, 'filterTahunTopTsr']);
             Route::get('/filterTotalTopTsr', [TeleController::class, 'filterTotalTopTsr']);
         });
-        Route::prefix('policeApproved')->group(function() {
+        Route::prefix('policeApproved')->group(function () {
             Route::post('/filterHarianPoliceApproved', [PoliceApprovedController::class, 'filterHarianPoliceApproved']);
             Route::post('/filterMingguPoliceApproved', [PoliceApprovedController::class, 'filterMingguPoliceApproved']);
             Route::post('/filterBulanPoliceApproved', [PoliceApprovedController::class, 'filterBulanPoliceApproved']);
@@ -95,11 +97,8 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterBulanTotalPremium', [PoliceApprovedController::class, 'filterBulanTotalPremium']);
             Route::post('/filterTahunTotalPremium', [PoliceApprovedController::class, 'filterTahunTotalPremium']);
             Route::get('/filterTotalTotalPremium', [PoliceApprovedController::class, 'filterTotalTotalPremium']);
-
-
-
         });
-        Route::prefix('premiumTotal')->group(function() {
+        Route::prefix('premiumTotal')->group(function () {
             Route::post('/filterHarianPremiumTahun1', [PremiumTotalController::class, 'filterHarianPremiumTahun1']);
             Route::post('/filterMingguPremiumTahun1', [PremiumTotalController::class, 'filterMingguPremiumTahun1']);
             Route::post('/filterBulanPremiumTahun1', [PremiumTotalController::class, 'filterBulanPremiumTahun1']);
@@ -115,20 +114,30 @@ Route::group(['middleware' => ['has_login', 'XSS']], function () {
             Route::post('/filterMingguPremiumTotal', [PremiumTotalController::class, 'filterMingguPremiumTotal']);
             Route::post('/filterBulanPremiumTotal', [PremiumTotalController::class, 'filterBulanPremiumTotal']);
             Route::post('/filterTahunPremiumTotal', [PremiumTotalController::class, 'filterTahunPremiumTotal']);
-
-
         });
-
     });
 
-    Route::prefix('partner')->group(function() {
+    Route::prefix('partner')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
 
-    Route::prefix('report')->group(function() {
+    Route::prefix('report')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/spajSubmittedDaily', [SpajController::class, 'exportSpajSubmittedDaily']);
+        Route::get('/spajSubmittedWeekly', [SpajController::class, 'exportSpajSubmittedWeekly']);
+        Route::get('/spajSubmittedMonthly', [SpajController::class, 'exportSpajSubmittedMonthly']);
+        Route::get('/spajSubmittedYearly', [SpajController::class, 'exportSpajSubmittedYearly']);
+
+
+        Route::get('/policeApprovedDaily', [PoliceApprovedExController::class, 'exportPoliceApprovedDaily']);
+        Route::get('/policeApprovedWeekly', [PoliceApprovedExController::class, 'exportPoliceApprovedWeekly']);
+        Route::get('/policeApprovedMonthly', [PoliceApprovedExController::class, 'exportPoliceApprovedMonthly']);
+        Route::get('/policeApprovedYearly', [PoliceApprovedExController::class, 'exportPoliceApprovedYearly']);
+
+
+        Route::get('/premiumTotalDaily', [PremiumExportController::class, 'exportPremiumTotalDaily']);
+        Route::get('/premiumTotalWeekly', [PremiumExportController::class, 'exportPremiumTotalWeekly']);
+        Route::get('/premiumTotalMonthly', [PremiumExportController::class, 'exportPremiumTotalMonthly']);
+        Route::get('/premiumTotalYearly', [PremiumExportController::class, 'exportPremiumTotalYearly']);
     });
-
-
 });
-
