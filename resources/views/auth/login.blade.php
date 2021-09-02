@@ -18,11 +18,22 @@
         <!-- App Css-->
         <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-        {!! NoCaptcha::renderJs() !!}
         <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
         <style>
-
+            #card-login {
+                width: 54vh;
+                height: 100%;
+                font-size: 18px;
+            }
+            .reload
+            {
+                font-family: Lucida Sans Unicode
+            }
+            input {
+                height: 5vh;
+                border-radius: 7px;
+            }
         </style>
     </head>
 
@@ -31,9 +42,8 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card overflow-hidden" style="background-color:#222222;">
+                        <div class="card overflow-hidden" id="card-login" style="background-color:#222222;">
                             <div class="card-body pt-0">
-
                                 <h3 class="text-center mt-5 mb-4">
                                     <a href="#" class="d-block auth-logo">
                                         <img src="{{ asset('assets/images/logo.png') }}" alt=""style="width:150px;height:90px;object-fit: contain; opacity:0.5;"  class="auth-logo-dark">
@@ -56,7 +66,14 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="userpassword" style="color:#ffffff;">Captcha</label>
-                                            {!! app('captcha')->display() !!}
+                                            <div class="captcha">
+                                                <span>{!! captcha_img() !!}</span>
+                                                <button type="button" style="height: 50px;" class="btn btn-danger" class="reload" id="reload">↻</button>
+                                            </div>
+                                            <br>
+                                            <div class="mb-3">
+                                            <input id="captcha" required type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                            </div>
                                         </div>
 
                                         <div class="mb-3 row mt-4">
@@ -68,7 +85,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit" id="button_login">Log In</button>
+                                                <button class="btn btn-primary w-md waves-effect waves-light" style="height: 50px; width: 200px;" type="submit" id="button_login">Log In</button>
                                             </div>
                                         </div>
                                         <div class="form-group mb-0 row">
@@ -101,6 +118,15 @@
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
         <script type="text/javascript">
+            $('#reload').click(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: `{{ route('refresh') }}`,
+                        success: function (data) {
+                            $(".captcha span").html(data.captcha);
+                        }
+                    });
+                });
                 $(document).ready(function () {
 
                     function reset()
@@ -182,7 +208,7 @@
                                 } else if(response.status == 5){
                                     Toast.fire({
                                         icon: 'warning',
-                                        title: 'Harap Isi Captcha Terlebih Dahulu !'
+                                        title: 'Captcha Salah ! Silahkan Isi Captcha Dengan Benar!'
                                     })
                                 } else {
                                     Toast.fire({
@@ -194,7 +220,6 @@
                                 }
                             },
                             complete: function () {
-                                reset();
                                 $('#button_login').removeAttr('disabled');
                                 $('#button_login').html("Log In");
                             }

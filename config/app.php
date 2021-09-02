@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Mews\Captcha\CaptchaServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
@@ -176,7 +176,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class
     ],
 
     /*
@@ -229,8 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

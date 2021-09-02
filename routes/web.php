@@ -22,7 +22,7 @@ Route::get('loginpartner', [LoginController::class, 'loginpartner']);
 Route::get('loginmanagement', [LoginController::class, 'loginmanagement']);
 Route::get('logintele', [LoginController::class, 'logintele']);
 Route::get('loginreport', [LoginController::class, 'loginreport']);
-
+Route::get('refreshCaptcha', [LoginController::class, 'refreshCaptcha'])->name('refresh');
 Route::get('/', function () {
     return view('welcome');
 });

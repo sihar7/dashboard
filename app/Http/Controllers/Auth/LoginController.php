@@ -39,12 +39,14 @@ class LoginController extends Controller
         $password = $request->password;
 
         $validate = Validator::make($request->all(), [
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+            'captcha' => 'required|captcha'],
+            ['captcha.captcha' => 'Invalid captcha code']
+        );
 
         if ($validate->fails()) {
             return response()->json(['status' => 5], 201);
         }
+
         $remember_me  = (!empty($request->remember_me)) ? TRUE : FALSE;
         try {
             if (Auth::attempt(['username' => $username, 'password' => $password])) {
@@ -99,7 +101,7 @@ class LoginController extends Controller
                         return response()->json(['message' => 2], 201);
                     } elseif ($request->user()->hasRole('telemarketing')) {
                         if ($cek_online->id_telemarketing != null && $cek_online->id_telemarketing != 0) {
-                            $get_asuransi = User::join('mst_telemarketing', 'mst_telemarketing.id_telemarketing', '=', 'mst_telemarketing.id')
+                            $get_asuransi = User::join('mst_telemarketing', 'mst_user.id_telemarketing', '=', 'mst_telemarketing.id')
                                 ->where('mst_user.username', $cek_online->username)
                                 ->select('mst_user.*', 'mst_telemarketing.nama as nama_tele', 'mst_telemarketing.foto as foto_tele', 'mst_telemarketing.id as tele_id')->first();
 
@@ -110,11 +112,10 @@ class LoginController extends Controller
                             $user->api_token     = 'TELE-TOKEN' . $newtoken;
                             $user->save();
 
-                            $tele                = DB::table('mst_telemarketing')->whereId($get_asuransi->tele_id)
-                                ->first();
-                            $tele->islogin       = 1;
-                            $tele->last_login_at = Carbon::now()->toDateTimeString();
-                            $tele->save();
+                            $tele                = DB::table('mst_telemarketing')->whereId($get_asuransi->tele_id)->update([
+                                    'islogin' => 1,
+                                    'last_login_at' => Carbon::now()->toDateTimeString()
+                                ]);
 
                             $data_session = [
                                 'nama_tele' => $get_asuransi->nama_tele,
@@ -220,9 +221,9 @@ class LoginController extends Controller
             return redirect('loginpartner');
         } elseif ($request->user()->hasRole('telemarketing')) {
 
-            $tele = DB::table('mst_telemarketing')->where('id', Auth::id())->first();
-            $tele->islogin = 0;
-            $tele->save();
+            $tele = DB::table('mst_telemarketing')->where('id', Auth::id())->update([
+                'islogin' => 0
+            ]);
 
             $user = User::whereId(Auth::id())->first();
             $user->islogin = 0;
@@ -241,5 +242,10 @@ class LoginController extends Controller
 
             return redirect('loginreport');
         }
+    }
+
+    function refreshCaptcha()
+    {
+        return response()->json(['captcha' => captcha_img()]);
     }
 }
