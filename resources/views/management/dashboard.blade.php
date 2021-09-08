@@ -188,12 +188,8 @@ MANAGEMENT | DASHBOARD ARWICS
                                     </div>
                                 </a>
                             </div>
+                            <div id="spajSubmittedChart" style="height:375px; max-width: 100%; float:left;"></div>
 
-                            <div class="chart-container">
-                                <div class="pie-chart-container">
-                                  <canvas id="spajSubmittedChart" style="height:375px; max-width: 100%;"></canvas>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div style="width: 100%;height: 20%;display: flex;justify-content: center;align-items: center;">
@@ -628,26 +624,26 @@ MANAGEMENT | DASHBOARD ARWICS
                     <br><br><br>
                     <div
                     style="width: 100%;height: 15%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                    <div>closing</div>
-                    <div style="font-weight: bold; height:23px; width:67px; ">{{ $getTeleReward['count'] }} Closing</div>
+                    <div style="font-size: 28px;">closing</div>
+                    <div style="font-size: 15px;font-weight: bold; height:23px; width:67px; ">{{ $getTeleReward['count'] }} Closing</div>
                     </div>
                     <br>
                     <div
                         style="width: 100%;height: 14%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Premi</div>
-                        <div style="font-weight: bold;">{{ $getTeleReward['count'] }} Premi</div>
+                        <div style="font-size: 28px;">Premi</div>
+                        <div style="font-weight: bold; font-size: 15px;">{{ $getTeleReward['count'] }} Premi</div>
                     </div>
                     <br>
                     <div
                         style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Pendapatan Polis</div>
-                        <div style="font-weight: bold;">
+                        <div style="font-size: 28px;">Pendapatan Polis</div>
+                        <div style="font-weight: bold; font-size:18px;">
                             {{ "Rp " . number_format($getTeleReward['total_pendapatan'],0,',','.') }}</div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <br><br><br>
-                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center;">Hello !</div>
+                    <div style="width: 100%;height: 10%;display: flex;justify-content: center;align-items: center; font-size:28px;">Hello !</div>
                     <br><br><br><br>
                     <div
                         style="width: 100%;height: 25%;display: flex;justify-content: center;align-items: center;flex-direction: column;padding: 5px;">
@@ -663,8 +659,8 @@ MANAGEMENT | DASHBOARD ARWICS
                     <br><br><br><br><br>
                     <div
                         style="width: 100%;height: 12%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size:12px;">
-                        <div>Congrats Atas Pencapaianya</div>
-                        <div style="font-weight: bold;"><h2>{{ $getTeleReward['nama'] }}</h2></div>
+                        <div style="font-size: 15px;">Congrats Atas Pencapaianya</div>
+                        <div style="font-weight: bold; font-size:28px;">{{ $getTeleReward['nama'] }}</div>
                     </div>
                 </div>
             </div>
@@ -2191,7 +2187,69 @@ MANAGEMENT | DASHBOARD ARWICS
     google.charts.setOnLoadCallback(premiumTahun1Chart);
     google.charts.setOnLoadCallback(premiumPltpChart);
     google.charts.setOnLoadCallback(premiumTotalChart);
+    google.charts.setOnLoadCallback(spajSubmittedChart);
 
+
+    function spajSubmittedChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Bulan', 'Jumlah Spaj', 'Nominal Premi'],
+            @php
+                if($spajSubmitted->count() > 0 ) {
+                    foreach($spajSubmitted as $spaj) {
+                        echo "['".$spaj->month_name."',".$spaj->count.",".$spaj->sum_nominal."],";
+                    }
+                }
+            @endphp
+        ]);
+
+          var options = {
+            legend: {
+                position: 'bottom',
+                textStyle: {
+                    color: '#dee2e6'
+                },
+            },
+            tooltip: {
+                text: 'value',
+            },
+            timeline: {
+                groupByRowLabel: true
+            },
+            curveType: 'function',
+            is3D: true,
+            chartArea: {
+                backgroundColor: {
+                    fill: '#222222',
+                    fillOpacity: 0.1
+                },
+            },
+            backgroundColor: {
+                fill: '#222222',
+                fillOpacity: 0.8
+            },
+            pieSliceText: 'label',
+            slices: {
+                0:  {offset: 0.2},
+                1:  {offset: 0.2},
+                2:  {offset: 0.2},
+                3:  {offset: 0.2},
+                4:  {offset: 0.2},
+                5:  {offset: 0.2},
+                6:  {offset: 0.2},
+                7:  {offset: 0.2},
+                8:  {offset: 0.2},
+                9:  {offset: 0.2},
+                10: {offset: 0.2},
+                11: {offset: 0.2},
+                12: {offset: 0.2}
+            },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('spajSubmittedChart'));
+
+          chart.draw(data, options);
+    }
 
     function premiumChart() {
         var data = google.visualization.arrayToDataTable([
@@ -2208,8 +2266,6 @@ MANAGEMENT | DASHBOARD ARWICS
             }
             @endphp
         ]);
-
-
         var options = {
             chartArea: {
                 backgroundColor: {
@@ -2221,6 +2277,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 fill: '#222222',
                 fillOpacity: 0.8
             },
+            is3D: true,
             colors: '#FB6EAA',
             bars: 'vertical',
         }
@@ -2279,7 +2336,7 @@ MANAGEMENT | DASHBOARD ARWICS
                 // "Rp".number_format($premiumTotal->sum_nominal, 0, ',', '.').
                 // "'],";
                 echo "['".$premiumTotal->month_name.
-                "', ".(string)$premiumTotal->sum_nominal."],";
+                "', ".$premiumTotal->sum_nominal."],";
             }
             @endphp
         ]);
@@ -4722,74 +4779,6 @@ MANAGEMENT | DASHBOARD ARWICS
 <script type="text/javascript">
     $(document).ready(function () {
         //get the pie chart canvas
-        function getPieChartSpajSubmitted()
-        {
-               var cData = JSON.parse(`<?php echo $pieSpajSubmittedChart; ?>`);
-               var ctx = $("#spajSubmittedChart");
-                //pie chart data
-               var data = {
-                    labels: cData.label,
-                    datasets: [{
-                        label: "Total Spaj",
-                        data: cData.data,
-                        backgroundColor: [
-                            "#98DBC6",
-                            "#5BC8AC",
-                            "#E6D72A",
-                            "#F18D9E",
-                            "#98DBC6",
-                            "#5BC8AC",
-                            "#E6D72A",
-                            "#F18D9E",
-                            "#98DBC6",
-                            "#5BC8AC",
-                            "#E6D72A",
-                            "#F18D9E",
-                        ],
-                        borderColor: [
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                            "#222222",
-                        ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                    }]
-                };
-
-                //options
-                var options = {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        position: "top",
-                        text: "Data Spaj Submitted Tahun Ini",
-                        fontSize: 18,
-                    },
-                    legend: {
-                        display: true,
-                        position: "bottom",
-                        labels: {
-                            fontColor: "#ffffff",
-                            fontSize: 16
-                        }
-                    }
-                };
-
-                //create Pie Chart class object
-                var chart1 = new Chart(ctx, {
-                    type: "pie",
-                    data: data,
-                    options: options
-                });
-        }
 
         function getPieChartPoliceApprovedChart()
         {
@@ -4860,7 +4849,6 @@ MANAGEMENT | DASHBOARD ARWICS
                 });
         }
         getPieChartPoliceApprovedChart();
-        getPieChartSpajSubmitted();
-    });
+      });
 </script>
 @endpush

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BE\jenisAsuransiController;
 
 Route::post('postlogin', [AuthController::class, 'postlogin']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::get('refreshCaptcha', [AuthController::class, 'refreshCaptcha'])->name('refresh');
 
 Route::get('/login', function () {
     return view('admin.auth.login');

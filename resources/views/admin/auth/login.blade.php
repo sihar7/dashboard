@@ -23,7 +23,6 @@
     <!-- iCheck Css -->
     <link href="{{ URL::to('admin/assets/plugins/iCheck/skins/square/_all.css') }}" rel="stylesheet"/>
 
-    {!! NoCaptcha::renderJs() !!}
     <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
 
     <!-- Custom Css -->
@@ -32,14 +31,6 @@
     <script src="https://cdn.jsdelivr.net/npm/css3-mediaqueries-js@1.0.0/css3-mediaqueries.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
-    <style>
-        .g-recaptcha {
-            transform:scale(0.77);
-            transform-origin:0 0;
-            -webkit-transform-origin: 0 0;
-            -webkit-transform: scale(0.77);
-        }
-    </style>
 </head>
 <body class="sign-in-page" style="background-color:#222222;">
     <div class="signin-form-area">
@@ -61,7 +52,14 @@
                     <div class="row">
                         <div class="container-fluid">
                             <div class="form-group has-feedback">
-                                {!! app('captcha')->display() !!}
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                        <button type="button" style="height: 50px;" class="btn btn-danger" class="reload" id="reload">↻</button>
+                                    </div>
+                                <br>
+                                <div class="mb-3">
+                                    <input id="captcha" required type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,12 +111,21 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript">
+        $('#reload').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: `{{ url('admin/refreshCaptcha') }}`,
+                success: function (data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
+        });
         $(document).ready(function () {
-
             function reset()
             {
                 $('input').val('');
             }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

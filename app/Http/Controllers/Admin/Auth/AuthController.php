@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
 
+
+    function refreshCaptcha()
+    {
+        return response()->json(['captcha' => captcha_img()]);
+    }
+
     function generateRandomString($length = 80)
     {
         $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -37,8 +43,9 @@ class AuthController extends Controller
         $password = $request->password;
 
         $validate = Validator::make($request->all(), [
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+            'captcha' => 'required|captcha'],
+            ['captcha.captcha' => 'Invalid captcha code']
+        );
 
         if ($validate->fails()) {
             return response()->json(['status' => 4], 201);

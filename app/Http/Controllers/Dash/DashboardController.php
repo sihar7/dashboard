@@ -143,12 +143,13 @@ class DashboardController extends Controller
                 $data['bulan'] = Bulan::all();
 
 
-                $row = [];
-                foreach ($data['spajSubmitted'] as $item) {
-                    $row['label'][] = $item->month_name;
-                    $row['data'][]  = (int)$item->count;
-                }
-                $data['pieSpajSubmittedChart'] = json_encode($row);
+
+                // $row = [];
+                // foreach ($data['spajSubmitted'] as $item) {
+                //     $row['label'][] = $item->month_name;
+                //     $row['data'][]  = (int)$item->count;
+                // }
+                // $data['pieSpajSubmittedChart'] = json_encode($row);
 
 
                 $row = [];
